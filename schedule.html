@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ภาพรวมคลินิก · Zentr Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ interactive scheduler ═══ */
+.side .nav a{cursor:pointer}
+.side .nav a.soon{opacity:.72}
+
+.ev.dim{opacity:.24;filter:saturate(.3)}
+.ev.sel{box-shadow:0 0 0 2px var(--brand),0 8px 20px -10px rgba(6,35,44,.5);z-index:6}
+.ev.cancelled{opacity:.45}
+.ev.cancelled b{text-decoration:line-through}
+.ev .st{
+  position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;
+}
+.ev .st.pending{background:var(--amber);box-shadow:0 0 0 2px rgba(255,255,255,.75)}
+.ev .st.done{background:var(--green);box-shadow:0 0 0 2px rgba(255,255,255,.75)}
+
+/* week view */
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--border)}
+.wcol{background:#fff;min-height:420px;padding:10px 9px 14px}
+.wcol.today{background:rgba(46,107,230,.045)}
+.wcol h4{font-size:12px;font-weight:600;display:flex;align-items:baseline;gap:6px}
+.wcol h4 span{font-size:11px;color:var(--muted);font-weight:400}
+.wcol .cnt{
+  margin-left:auto;font-size:10.5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);color:var(--muted);
+}
+.wcol.today h4{color:var(--brand)}
+.wev{
+  margin-top:7px;padding:6px 8px;border-radius:8px;border-left:3px solid;
+  font-size:11.5px;line-height:1.35;cursor:pointer;transition:transform .1s;
+}
+.wev:hover{transform:translateX(2px)}
+.wev b{display:block;font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wev .tm{font-family:"IBM Plex Mono",monospace;font-size:10px;opacity:.75}
+.wmore{margin-top:7px;font-size:11px;color:var(--muted);text-align:center}
+
+/* month view */
+.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--border)}
+.mhead{background:#F7F9FA;padding:9px 0;text-align:center;font-size:11.5px;color:var(--muted);font-weight:500}
+.mcell{background:#fff;min-height:98px;padding:8px 9px;cursor:pointer;transition:background .15s}
+.mcell:hover{background:#F7F9FA}
+.mcell.out{background:#FAFBFC;color:var(--faint)}
+.mcell.today{box-shadow:inset 0 0 0 2px var(--brand)}
+.mcell .d{font-size:12.5px;font-weight:500}
+.mcell.today .d{color:var(--brand);font-weight:600}
+.mcell .qty{margin-top:6px;font-size:11px;color:var(--muted)}
+.mbars{display:flex;gap:2px;margin-top:6px}
+.mbars i{height:4px;border-radius:2px;flex:1}
+
+/* drawer */
+.scrim{
+  position:fixed;inset:0;background:rgba(6,35,44,.34);
+  opacity:0;pointer-events:none;transition:opacity .22s;z-index:40;
+}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:382px;max-width:92vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border)}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:96px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+/* toast */
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{
+  background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;
+  cursor:pointer;padding:0 0 0 4px;
+}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.stat-line{display:flex;gap:16px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.stat-line b{color:var(--text);font-weight:600}
+
+.emptyday{padding:60px 20px;text-align:center;color:var(--faint);font-size:13.5px}
+
+
+/* ═══ modal + form ═══ */
+.modal{
+  position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.modal.on{opacity:1;pointer-events:auto}
+.modal .mbg{position:absolute;inset:0;background:rgba(6,35,44,.4)}
+.mbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.98);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.modal.on .mbox{transform:none}
+.mhead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative}
+.mhead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.mhead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.mhead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.mhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.mbody{padding:18px 22px;overflow-y:auto;flex:1}
+.mfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.mfoot .left{margin-right:auto}
+
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fgrid .full{grid-column:1/-1}
+.fld label{
+  display:block;font-size:11.5px;letter-spacing:.02em;color:var(--muted);
+  margin-bottom:6px;font-weight:500;
+}
+.fld label i{color:var(--rose);font-style:normal;margin-left:2px}
+.fld input,.fld select,.fld textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.fld textarea{height:74px;padding:10px 12px;resize:vertical;line-height:1.5}
+.fld select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.fld input:focus,.fld select:focus,.fld textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.fld.bad input,.fld.bad select{border-color:var(--rose)}
+.fmsg{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.fld.bad .fmsg{display:block}
+.fnote{
+  margin-top:14px;padding:11px 13px;border-radius:10px;
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+  font-size:12.5px;color:#7A5410;line-height:1.6;display:none;
+}
+.fnote.on{display:block}
+
+/* ═══ tabs inside a panel ═══ */
+.ptabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin:-2px 0 16px}
+.ptabs button{
+  padding:9px 13px;border:0;background:none;font:inherit;font-size:13px;color:var(--muted);
+  cursor:pointer;border-bottom:2px solid transparent;transition:.15s;
+}
+.ptabs button:hover{color:var(--text)}
+.ptabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.ppane{display:none}
+.ppane.on{display:block}
+
+/* ═══ tooth chart (odontogram) ═══ */
+.odo{display:grid;gap:9px;margin:4px 0 2px}
+.odo .arch{display:flex;gap:3px;justify-content:center;flex-wrap:nowrap}
+.odo .gap{width:9px;flex:none}
+.tth{
+  width:20px;flex:none;text-align:center;cursor:pointer;
+}
+.tth .b{
+  height:24px;border-radius:4px 4px 7px 7px;border:1px solid var(--border);
+  background:#fff;transition:.15s;
+}
+.tth .n{font-family:"IBM Plex Mono",monospace;font-size:8.5px;color:var(--faint);margin-top:3px;display:block}
+.tth:hover .b{border-color:var(--brand)}
+.tth.filled .b{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.tth.caries .b{background:rgba(245,178,63,.32);border-color:#E0951E}
+.tth.crown  .b{background:rgba(122,90,240,.24);border-color:#7A5AF0}
+.tth.missing .b{background:repeating-linear-gradient(135deg,#EFF2F4,#EFF2F4 3px,#DCE2E5 3px,#DCE2E5 6px);border-style:dashed}
+.tth.implant .b{background:rgba(210,80,75,.22);border-color:#D2504B}
+.odolegend{display:flex;gap:13px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--muted)}
+.odolegend div{display:flex;align-items:center;gap:6px}
+.odolegend i{width:11px;height:11px;border-radius:3px;border:1px solid var(--border);display:block}
+
+/* ═══ timeline ═══ */
+.tl{position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1.5px;background:var(--border)}
+.tl .it{position:relative;padding:0 0 16px}
+.tl .it::before{
+  content:"";position:absolute;left:-21px;top:5px;width:9px;height:9px;border-radius:50%;
+  background:#fff;border:2px solid var(--brand);
+}
+.tl .it.old::before{border-color:var(--border)}
+.tl .d{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint)}
+.tl b{display:block;font-size:13.5px;font-weight:500;margin-top:2px}
+.tl span{font-size:12.5px;color:var(--muted)}
+
+/* ═══ misc ═══ */
+.chip{
+  display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;background:var(--paper);color:var(--muted);
+}
+.chip.ortho{background:rgba(122,90,240,.11);color:#7A5AF0}
+.chip.ssoc{background:rgba(46,158,99,.11);color:#2E9E63}
+.chip.owe{background:rgba(210,80,75,.10);color:#D2504B}
+.chip.new{background:rgba(46,107,230,.10);color:#2E6BE6}
+
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.sum .card{padding:16px}
+.sum .lab{font-size:12.5px;color:var(--muted)}
+.sum .val{font-size:25px;font-weight:600;letter-spacing:-.02em;margin-top:5px}
+.sum .val small{font-size:13px;font-weight:400;color:var(--muted);margin-left:3px}
+.sum .sub2{font-size:11.5px;color:var(--faint);margin-top:5px}
+
+.tbl tbody tr{cursor:pointer}
+.tbl .pill2{
+  display:inline-block;padding:3px 9px;border-radius:7px;font-size:11.5px;font-weight:500;
+}
+.p-paid{background:rgba(46,158,99,.11);color:#2E9E63}
+.p-part{background:rgba(245,178,63,.16);color:#A9761B}
+.p-owe{background:rgba(210,80,75,.10);color:#D2504B}
+.p-void{background:var(--paper);color:var(--muted);text-decoration:line-through}
+
+.money{font-family:"IBM Plex Mono",monospace;font-weight:500}
+.pay-methods{display:grid;gap:10px}
+.pay-methods .m{display:flex;align-items:center;gap:11px;font-size:13px}
+.pay-methods .m .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.pay-methods .m .bar i{display:block;height:100%;border-radius:3px}
+.pay-methods .m b{font-family:"IBM Plex Mono",monospace;font-size:12.5px;width:74px;text-align:right}
+.pay-methods .m span:first-of-type{width:92px;color:var(--muted)}
+
+.inst{display:grid;gap:8px}
+.inst .r{
+  display:flex;align-items:center;gap:11px;padding:9px 11px;
+  border:1px solid var(--border);border-radius:10px;font-size:13px;
+}
+.inst .r.paid{background:rgba(46,158,99,.05);border-color:rgba(46,158,99,.28)}
+.inst .r.late{background:rgba(210,80,75,.05);border-color:rgba(210,80,75,.32)}
+.inst .r .no{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);width:44px;flex:none}
+.inst .r .dt{font-size:12px;color:var(--muted);flex:1}
+.inst .r .am{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px}
+
+@media (max-width:900px){
+  .fgrid{grid-template-columns:1fr}
+  .sum{grid-template-columns:1fr}
+  .odo{overflow-x:auto}
+  .odo .arch{min-width:660px}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="#" class="soon" data-label="กล่องข้อความ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill">14</span></a>
+      <a href="schedule.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><nav class="nav">
+      <a href="#" class="soon" data-label="รายงาน"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="#" class="soon" data-label="ตั้งค่า"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot"><div class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div></div>
+  </aside>
+  <main>
+    <header class="top">
+      <div><h1>ตารางนัดหมาย</h1><div class="sub" id="subline"></div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหาคนไข้ HN หรือหัตถการ"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+
+    <div class="toolbar">
+      <div class="datenav">
+        <button class="navbtn" id="prev" aria-label="ก่อนหน้า"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+        <div class="today-lbl" id="dateLabel"></div>
+        <button class="navbtn" id="next" aria-label="ถัดไป"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+        <button class="btn" id="today" style="height:32px;margin-left:6px">วันนี้</button>
+      </div>
+
+      <div class="seg" id="viewSeg">
+        <button class="on" data-view="day">วัน</button>
+        <button data-view="week">สัปดาห์</button>
+        <button data-view="month">เดือน</button>
+      </div>
+
+      <div class="seg" id="groupSeg">
+        <button class="on" data-group="chair">แยกตามเก้าอี้</button>
+        <button data-group="doctor">แยกตามทันตแพทย์</button>
+      </div>
+
+      <div class="filters">
+        <button class="fchip on" data-doc="d1"><span class="sw" style="background:#2E6BE6"></span>ทพญ.นภา</button>
+        <button class="fchip on" data-doc="d2"><span class="sw" style="background:#D2504B"></span>ทพ.ประวิทย์</button>
+        <button class="fchip on" data-doc="d3"><span class="sw" style="background:#7A5AF0"></span>ทพ.กิตติ</button>
+        <button class="fchip on" data-doc="d4"><span class="sw" style="background:#2E9E63"></span>ทพญ.อรอนงค์</button>
+        <button class="fchip" id="allDocs">ทั้งหมด</button>
+        <button class="btn solid" id="newAppt" style="height:32px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>นัดใหม่</button>
+      </div>
+    </div>
+
+    <div class="sched">
+      <div id="board"></div>
+      <aside class="rail" id="rail"></aside>
+    </div>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="รายละเอียดนัดหมาย">
+  <div class="dhead" style="position:relative">
+    <button class="x" id="dClose" aria-label="ปิด"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 id="dTitle" style="font-size:18px;font-weight:600;letter-spacing:-.015em"></h2>
+    <div id="dSub" class="mono" style="font-size:12.5px;color:var(--muted);margin-top:4px"></div>
+  </div>
+  <div class="dbody" id="dBody"></div>
+  <div class="dfoot" id="dFoot"></div>
+</aside>
+
+<div class="modal" id="apptModal">
+  <div class="mbg" data-close></div>
+  <div class="mbox" role="dialog" aria-modal="true">
+    <div class="mhead">
+      <button class="x" data-close aria-label="ปิด"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <h2 id="mTitle">นัดหมายใหม่</h2><p id="mSub">กรอกข้อมูลคนไข้และเลือกเวลาที่ต้องการ</p>
+    </div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="fld"><label for="fName">ชื่อคนไข้ <i>*</i></label>
+          <input id="fName" type="text" placeholder="เช่น สมชาย ใจดี"><div class="fmsg">กรุณากรอกชื่อคนไข้</div></div>
+        <div class="fld"><label for="fHn">HN / เบอร์โทร</label>
+          <input id="fHn" type="text" placeholder="HN 24-001 หรือ Walk-in"></div>
+        <div class="fld full"><label for="fProc">หัตถการ <i>*</i></label>
+          <select id="fProc"></select><div class="fmsg">กรุณาเลือกหัตถการ</div></div>
+        <div class="fld"><label for="fChair">เก้าอี้ <i>*</i></label><select id="fChair"></select></div>
+        <div class="fld"><label for="fDoc">ทันตแพทย์ <i>*</i></label><select id="fDoc"></select></div>
+        <div class="fld"><label for="fDate">วันที่ <i>*</i></label><input id="fDate" type="date"></div>
+        <div class="fld"><label for="fTime">เวลาเริ่ม <i>*</i></label><select id="fTime"></select></div>
+        <div class="fld"><label for="fDur">ระยะเวลา (นาที) <i>*</i></label><select id="fDur"></select></div>
+        <div class="fld"><label for="fCh">ช่องทางจอง</label><select id="fCh">
+          <option>LINE</option><option>Facebook</option><option>Instagram</option>
+          <option>โทรศัพท์</option><option>Walk-in</option></select></div>
+      </div>
+      <div class="fnote" id="fNote"></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn danger" id="mDelete" style="display:none">ลบนัดหมาย</button>
+      <button class="btn left" id="mFind">หาเวลาว่างถัดไป</button>
+      <button class="btn" data-close>ยกเลิก</button>
+      <button class="btn solid" id="mSave">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+const IC={bell:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>`,chart:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>`,braces:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>`};
+/* ═══════════════ ข้อมูลตั้งต้น ═══════════════ */
+const CHAIRS = [
+  {id:'c1', name:'เก้าอี้ 1', kind:'ทันตกรรมทั่วไป',     color:'#2E6BE6', cls:'e-blue'},
+  {id:'c2', name:'เก้าอี้ 2', kind:'ศัลยกรรม / รากเทียม', color:'#D2504B', cls:'e-rose'},
+  {id:'c3', name:'เก้าอี้ 3', kind:'จัดฟัน',              color:'#7A5AF0', cls:'e-violet'},
+  {id:'c4', name:'เก้าอี้ 4', kind:'รักษาราก / ปริทันต์',  color:'#2E9E63', cls:'e-green'},
+];
+const DOCS = [
+  {id:'d1', name:'ทพญ.นภา',     color:'#2E6BE6', cls:'e-blue',   chairs:['c1']},
+  {id:'d2', name:'ทพ.ประวิทย์', color:'#D2504B', cls:'e-rose',   chairs:['c2','c4']},
+  {id:'d3', name:'ทพ.กิตติ',    color:'#7A5AF0', cls:'e-violet', chairs:['c3']},
+  {id:'d4', name:'ทพญ.อรอนงค์', color:'#2E9E63', cls:'e-green',  chairs:['c4']},
+];
+const PROCS = {
+  c1:[['ขูดหินปูน + ตรวจฟัน',45,'ปกส.'],['อุดฟัน 2 ซี่',45,''],['ฟอกสีฟัน',60,''],
+      ['เคลือบฟลูออไรด์ (เด็ก)',30,''],['ตรวจฟัน + X-ray',45,''],['ขูดหินปูน',45,'ปกส.']],
+  c2:[['ผ่าฟันคุด ซี่ 38',75,''],['ปรึกษารากเทียม',45,''],['ฝังรากเทียม ซี่ 46',90,''],
+      ['ถอนฟัน 2 ซี่',45,''],['ผ่าฟันคุด ซี่ 48',75,''],['ใส่ครอบฟันบนรากเทียม',60,'']],
+  c3:[['ปรับเครื่องมือจัดฟัน',30,''],['สแกนช่องปาก Invisalign',45,''],['ติดเครื่องมือจัดฟัน',45,''],
+      ['ตรวจรีเทนเนอร์',30,''],['ถอดเครื่องมือ + พิมพ์ปาก',45,''],['เปลี่ยนชุดอุปกรณ์ใส',30,'']],
+  c4:[['รักษารากฟัน 1/3',75,''],['รักษารากฟัน 2/3',75,''],['รักษารากฟัน 3/3',60,''],
+      ['เกลารากฟัน ปริทันต์',60,''],['ครอบฟันเซรามิก',60,''],['ตรวจติดตามหลังรักษาราก',30,'']],
+};
+const FIRST = ['กัลยา','ณัฐพล','ธัญญา','สุดารัตน์','อธิป','วีรภัทร','ณิชา','กฤตย์','ปรียา','มานพ',
+  'พิมพ์ชนก','สมหญิง','ธนิดา','ปิยะ','สุชาติ','นภัสวรรณ','อารยา','ชนกันต์','เกรียงไกร','ธีรดา',
+  'พัชรี','ภาณุพงศ์','จารุวรรณ','เอกชัย','วรรณดี','กฤษณะ','ชัยวัฒน์','ศิริพร','เบส','ญาดา'];
+const LAST = ['ปัญญาดี','คงทอง','มงคลชัย','ทองสุข','วัฒนกุล','สุขใจ','บุญมั่น','เจริญสุข','ระวีวรรณ','ศรีสุข',
+  'แสงทอง','ภู่ระหงษ์','ดำรงค์','อินทร์แก้ว','พูลผล','สงวนศักดิ์'];
+
+/* ═══════════════ เครื่องมือช่วย ═══════════════ */
+const OPEN = 9*60, CLOSE = 20*60, PXMIN = 64/60;      // 09:00–20:00, 64px ต่อชั่วโมง
+const pad = n => String(n).padStart(2,'0');
+const hhmm = m => pad(Math.floor(m/60)) + ':' + pad(m%60);
+const toMin = s => (+s.slice(0,2))*60 + (+s.slice(3));
+const key = d => d.toISOString().slice(0,10);
+const TODAY = new Date(2026,7,17);                     // 17 ส.ค. 2569
+const TH_DAY = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const TH_DAY_S = ['อา','จ','อ','พ','พฤ','ศ','ส'];
+const TH_MON = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = d => `${TH_DAY[d.getDay()]} ${d.getDate()} ${TH_MON[d.getMonth()]} ${d.getFullYear()+543}`;
+const thShort = d => `${d.getDate()} ${TH_MON[d.getMonth()]}`;
+const sameDay = (a,b) => key(a)===key(b);
+const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
+
+// สุ่มแบบกำหนดเมล็ด เพื่อให้ข้อมูลของแต่ละวันคงที่ทุกครั้งที่เปิด
+function rng(seed){ let s = seed>>>0; return () => (s = (s*1664525 + 1013904223)>>>0) / 4294967296; }
+const hash = s => { let h=2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h,16777619); } return h>>>0; };
+
+/* ═══════════════ สร้างตารางนัด ═══════════════ */
+const cache = new Map();
+let SEQ = 1;
+
+function buildDay(date){
+  const k = key(date);
+  if (cache.has(k)) return cache.get(k);
+
+  const list = [];
+  const dow = date.getDay();
+  if (dow === 0){ cache.set(k, list); return list; }          // อาทิตย์ปิดทำการ
+
+  const r = rng(hash(k));
+  for (const chair of CHAIRS){
+    const pool = PROCS[chair.id];
+    let t = OPEN + Math.floor(r()*3)*15;
+
+    // พักกลางวัน 12:00–13:00
+    while (t < CLOSE - 30){
+      if (t >= 12*60 && t < 13*60){ t = 13*60; continue; }
+
+      if (r() < 0.22){ t += 15 + Math.floor(r()*4)*15; continue; }   // ช่องว่าง
+
+      const [name, mins, note] = pool[Math.floor(r()*pool.length)];
+      if (t + mins > CLOSE) break;
+      // เคสต้องจบก่อนพักเที่ยง ไม่งั้นเลื่อนไปเริ่มบ่าย
+      if (t < 12*60 && t + mins > 12*60){ t = 13*60; continue; }
+
+      const doc = DOCS.filter(d => d.chairs.includes(chair.id))[
+        chair.id === 'c4' ? Math.floor(r()*2) : 0
+      ] || DOCS.find(d => d.chairs.includes(chair.id));
+
+      const pt = FIRST[Math.floor(r()*FIRST.length)] + ' ' + LAST[Math.floor(r()*LAST.length)];
+      const roll = r();
+      list.push({
+        id: 'a'+(SEQ++), date:k, chair:chair.id, doctor:doc.id,
+        patient: pt,
+        hn: 'HN ' + (22 + Math.floor(r()*3)) + '-' + pad(Math.floor(r()*900)+100),
+        phone: '08' + Math.floor(r()*9) + '-' + (1000+Math.floor(r()*8999)) + '-' + Math.floor(r()*90+10),
+        proc: name, start: t, end: t+mins, note,
+        status: roll < 0.12 ? 'pending' : 'confirmed',
+        channel: ['LINE','Facebook','Instagram','โทรศัพท์','Walk-in'][Math.floor(r()*5)],
+        byAI: r() < 0.62,
+      });
+      t += mins + (r() < 0.35 ? 15 : 0);
+    }
+  }
+  // ปิดสถานะเป็น "เสร็จแล้ว" สำหรับคิวที่ผ่านไปแล้วของวันนี้
+  if (sameDay(date, TODAY)) list.forEach(a => { if (a.end < 10*60+42) a.status = 'done'; });
+  cache.set(k, list);
+  return list;
+}
+
+/* ═══════════════ สถานะหน้าจอ ═══════════════ */
+const S = {
+  date: new Date(TODAY),
+  view: 'day',                 // day | week | month
+  group: 'chair',              // chair | doctor
+  docs: new Set(DOCS.map(d=>d.id)),
+  q: '',
+  sel: null,
+};
+const PENDING = [
+  {id:'p1', name:'เบส ธนกฤต',   detail:'ปวดฟันกรามล่างขวา · ขอเข้าวันนี้',        note:'เคสฉุกเฉิน · มีช่อง 17:30 เก้าอี้ 4'},
+  {id:'p2', name:'วีรภัทร สุขใจ', detail:'ขอเลื่อนปรับเครื่องมือ → สัปดาห์หน้า',   note:'AI เสนอ 2 ช่วง · รอยืนยัน'},
+  {id:'p3', name:'อธิป วัฒนกุล',  detail:'นัดผ่าตัดฝังรากเทียม ก.ย.',              note:'รอตอบรับแผนการรักษา 148,000 ฿'},
+];
+
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const visible = a => S.docs.has(a.doctor) && a.status !== 'cancelled';
+const matches = a => !S.q ||
+  (a.patient + ' ' + a.hn + ' ' + a.proc).toLowerCase().includes(S.q.toLowerCase());
+
+/* ═══════════════ แจ้งเตือน ═══════════════ */
+let toastSeq = 0;
+function toast(msg, undo){
+  const id = 't'+(++toastSeq);
+  const el = document.createElement('div');
+  el.className = 'toast'; el.id = id;
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3200);
+}
+
+/* ═══════════════ มุมมองรายวัน ═══════════════ */
+function renderDay(){
+  const list = buildDay(S.date);
+  const cols = S.group === 'chair'
+    ? CHAIRS.map(c => ({...c, items: list.filter(a => a.chair === c.id)}))
+    : DOCS.map(d => ({id:d.id, name:d.name, kind:'ทันตแพทย์', color:d.color,
+                      items: list.filter(a => a.doctor === d.id)}));
+
+  const shown = cols.map(c => c.items.filter(visible));
+  const total = shown.flat().length;
+  if (!total){
+    return `<div class="board"><div class="emptyday">
+      ${S.date.getDay()===0 ? 'วันอาทิตย์ คลินิกปิดทำการ' : 'ไม่มีนัดหมายที่ตรงกับตัวกรอง'}
+    </div></div>`;
+  }
+
+  const HRS = (CLOSE-OPEN)/60;
+  const hrCells = Array.from({length:HRS}, () => '<div class="hr"></div>').join('');
+  const gutter  = Array.from({length:HRS}, (_,i) => `<div class="hr">${pad(9+i)}:00</div>`).join('');
+
+  const heads = cols.map((c,i) => {
+    const mins = shown[i].reduce((s,a) => s + (a.end-a.start), 0);
+    const load = Math.round(mins / (CLOSE-OPEN) * 100);
+    return `<div class="rh"><b>${esc(c.name)}</b><span>${esc(c.kind)}</span>
+      <div class="load"><i style="width:${load}%;background:${c.color}"></i></div></div>`;
+  }).join('');
+
+  const body = cols.map((c,i) => {
+    const halves = Array.from({length:HRS}, (_,h) =>
+      `<div class="half" style="top:${h*64+32}px"></div>`).join('');
+    const evs = c.items.filter(visible).map(a => {
+      const cls = (S.group==='chair' ? CHAIRS : DOCS).find(x => x.id===c.id)?.cls
+               || DOCS.find(d => d.id===a.doctor).cls;
+      const doc = DOCS.find(d => d.id===a.doctor);
+      const sub = S.group==='chair' ? doc.name : CHAIRS.find(x=>x.id===a.chair).name;
+      const h = (a.end-a.start)*PXMIN - 4;
+      return `<div class="ev ${cls}${matches(a)?'':' dim'}${S.sel===a.id?' sel':''}"
+        data-id="${a.id}" tabindex="0" role="button"
+        style="top:${(a.start-OPEN)*PXMIN}px;height:${h}px">
+        ${a.status!=='confirmed' ? `<span class="st ${a.status}"></span>` : ''}
+        <b>${esc(a.patient)}</b><span>${esc(a.proc)} · ${esc(sub)}</span>
+        ${h > 42 ? `<div class="tm">${hhmm(a.start)}–${hhmm(a.end)}</div>` : ''}
+      </div>`;
+    }).join('');
+    return `<div class="col">${hrCells}${halves}${evs}</div>`;
+  }).join('');
+
+  const nowBar = sameDay(S.date, TODAY)
+    ? `<div class="nowbar" style="top:${(10*60+42-OPEN)*PXMIN}px"></div>` : '';
+
+  return `<div class="board">
+    <div class="res-head"><div class="rh"></div>${heads}</div>
+    <div class="grid-body"><div class="gutter">${gutter}</div>${body}${nowBar}</div>
+  </div>`;
+}
+
+/* ═══════════════ มุมมองรายสัปดาห์ ═══════════════ */
+function renderWeek(){
+  const mon = addDays(S.date, -((S.date.getDay()+6)%7));
+  const cols = Array.from({length:7}, (_,i) => {
+    const d = addDays(mon, i);
+    const items = buildDay(d).filter(visible).sort((a,b) => a.start-b.start);
+    const show = items.slice(0,7);
+    const evs = show.map(a => {
+      const c = CHAIRS.find(x => x.id===a.chair);
+      return `<div class="wev ${c.cls}${matches(a)?'':' dim'}" data-id="${a.id}"
+        style="border-color:${c.color}">
+        <div class="tm">${hhmm(a.start)}</div><b>${esc(a.patient)}</b>${esc(a.proc)}</div>`;
+    }).join('');
+    return `<div class="wcol${sameDay(d,TODAY)?' today':''}">
+      <h4>${TH_DAY_S[d.getDay()]} <span>${thShort(d)}</span>
+        <span class="cnt">${items.length}</span></h4>
+      ${items.length ? evs : '<div class="wmore">ไม่มีนัด</div>'}
+      ${items.length>7 ? `<div class="wmore">+ อีก ${items.length-7} คิว</div>` : ''}
+    </div>`;
+  }).join('');
+  return `<div class="board"><div class="week">${cols}</div></div>`;
+}
+
+/* ═══════════════ มุมมองรายเดือน ═══════════════ */
+function renderMonth(){
+  const first = new Date(S.date.getFullYear(), S.date.getMonth(), 1);
+  const start = addDays(first, -((first.getDay()+6)%7));
+  const heads = ['จ','อ','พ','พฤ','ศ','ส','อา'].map(d => `<div class="mhead">${d}</div>`).join('');
+  const cells = Array.from({length:42}, (_,i) => {
+    const d = addDays(start, i);
+    const items = buildDay(d).filter(visible);
+    const out = d.getMonth() !== S.date.getMonth();
+    const bars = CHAIRS.map(c => {
+      const n = items.filter(a => a.chair===c.id).length;
+      return `<i style="background:${n ? c.color : '#EDF1F7'};opacity:${n?Math.min(1,.35+n/8):1}"></i>`;
+    }).join('');
+    return `<div class="mcell${out?' out':''}${sameDay(d,TODAY)?' today':''}" data-date="${key(d)}">
+      <div class="d">${d.getDate()}</div>
+      <div class="qty">${items.length ? items.length+' คิว' : (d.getDay()===0?'ปิด':'—')}</div>
+      ${items.length ? `<div class="mbars">${bars}</div>` : ''}
+    </div>`;
+  }).join('');
+  return `<div class="board"><div class="month">${heads}${cells}</div></div>`;
+}
+
+/* ═══════════════ แผงขวา ═══════════════ */
+function renderRail(){
+  const list = buildDay(S.date).filter(visible);
+  const cols = S.group==='chair' ? CHAIRS : DOCS;
+  const util = cols.map(c => {
+    const items = list.filter(a => (S.group==='chair' ? a.chair : a.doctor) === c.id);
+    const load = Math.round(items.reduce((s,a)=>s+(a.end-a.start),0) / (CLOSE-OPEN) * 100);
+    return `<div class="u"><span>${esc(c.name)}</span>
+      <div class="bar"><i style="width:${load}%;background:${c.color}"></i></div><b>${load}%</b></div>`;
+  }).join('');
+
+  const pend = PENDING.length ? PENDING.map(p => `
+    <div class="pend" data-pend="${p.id}">
+      <div class="ini">${esc(p.name[0])}</div>
+      <div class="bd"><b>${esc(p.name)}</b><span>${esc(p.detail)}</span>
+        <span style="color:var(--faint)">${esc(p.note)}</span>
+        <div class="btns">
+          <button class="tiny ok" data-act="confirm">ยืนยัน</button>
+          <button class="tiny" data-act="offer">เสนอเวลาอื่น</button>
+        </div>
+      </div>
+    </div>`).join('') : '<div class="empty">ไม่มีรายการรอยืนยัน</div>';
+
+  const ortho = list.filter(a => a.chair==='c3').length;
+  const ai = list.filter(a => a.byAI).length;
+
+  return `
+    <div class="card">
+      <header>${IC.bell}<h2>รอยืนยัน</h2><span class="act">${PENDING.length} รายการ</span></header>
+      ${pend}
+    </div>
+    <div class="card">
+      <header>${IC.chart}<h2>อัตราใช้${S.group==='chair'?'เก้าอี้':'เวลาแพทย์'}</h2></header>
+      <div class="util">${util}</div>
+      <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.7">
+        คำนวณจากเวลาที่ถูกจองเทียบกับเวลาเปิดทำการ 11 ชั่วโมง ไม่รวมเวลาเตรียมและฆ่าเชื้อระหว่างเคส
+      </p>
+    </div>
+    <div class="card">
+      <header>${IC.braces}<h2>สรุปวันนี้</h2></header>
+      <div class="stat-line">
+        <div>คิวจัดฟัน <b>${ortho}</b></div>
+        <div>AI จองให้ <b>${ai}</b></div>
+        <div>รวม <b>${list.length}</b> คิว</div>
+      </div>
+      <p style="margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.7">
+        คลิกที่นัดหมายเพื่อดูรายละเอียด ยืนยัน เลื่อน หรือยกเลิก
+      </p>
+    </div>`;
+}
+
+/* ═══════════════ วาดหน้าจอ ═══════════════ */
+function render(){
+  const list = buildDay(S.date).filter(visible);
+  const free = Math.max(0, Math.round((CHAIRS.length*(CLOSE-OPEN) -
+    list.reduce((s,a)=>s+(a.end-a.start),0))/60));
+
+  $('#dateLabel').innerHTML = S.view==='month'
+    ? `<b>${TH_MON[S.date.getMonth()]} ${S.date.getFullYear()+543}</b><span>มุมมองรายเดือน</span>`
+    : `<b>${thDate(S.date)}</b><span>${sameDay(S.date,TODAY)?'วันนี้ · ':''}เปิด 09:00–20:00</span>`;
+
+  $('#subline').textContent = S.view==='day'
+    ? `สาขาอารีย์ · ${list.length} คิว · เก้าอี้ว่างรวม ${free} ชั่วโมง`
+    : `สาขาอารีย์ · มุมมอง${S.view==='week'?'รายสัปดาห์':'รายเดือน'}`;
+
+  $('#board').innerHTML =
+    S.view==='day' ? renderDay() : S.view==='week' ? renderWeek() : renderMonth();
+  $('#rail').innerHTML = renderRail();
+
+  $$('#groupSeg button').forEach(b => b.disabled = S.view!=='day');
+  $('#groupSeg').style.opacity = S.view==='day' ? 1 : .45;
+}
+
+/* ═══════════════ ลิ้นชักรายละเอียด ═══════════════ */
+function openDrawer(id){
+  const a = [...cache.values()].flat().find(x => x.id===id);
+  if (!a) return;
+  S.sel = id;
+  const doc = DOCS.find(d => d.id===a.doctor);
+  const chair = CHAIRS.find(c => c.id===a.chair);
+  const st = {confirmed:'ยืนยันแล้ว', pending:'รอยืนยัน', done:'เสร็จสิ้น', cancelled:'ยกเลิกแล้ว'}[a.status];
+  const stColor = {confirmed:'var(--green)', pending:'#A9761B', done:'var(--muted)', cancelled:'var(--rose)'}[a.status];
+
+  $('#dTitle').textContent = a.patient;
+  $('#dSub').textContent = `${a.hn} · ${a.phone}`;
+  $('#dBody').innerHTML = `
+    <div class="drow"><div class="k">หัตถการ</div><div class="v">${esc(a.proc)}</div></div>
+    <div class="drow"><div class="k">วันเวลา</div><div class="v">${thDate(new Date(a.date))}<br>
+      <span class="mono">${hhmm(a.start)}–${hhmm(a.end)}</span>
+      <span style="color:var(--muted)"> (${a.end-a.start} นาที)</span></div></div>
+    <div class="drow"><div class="k">ทันตแพทย์</div><div class="v">${esc(doc.name)}</div></div>
+    <div class="drow"><div class="k">เก้าอี้</div><div class="v">${esc(chair.name)} · ${esc(chair.kind)}</div></div>
+    <div class="drow"><div class="k">สถานะ</div><div class="v" style="color:${stColor};font-weight:600">${st}</div></div>
+    <div class="drow"><div class="k">ช่องทางจอง</div><div class="v">${esc(a.channel)}
+      ${a.byAI ? '<span class="ssoc" style="margin-left:6px">AI จองให้</span>' : ''}</div></div>
+    ${a.note ? `<div class="drow"><div class="k">หมายเหตุ</div><div class="v">
+      <span class="ssoc">ใช้สิทธิประกันสังคม</span></div></div>` : ''}`;
+
+  $('#dFoot').innerHTML = a.status === 'cancelled'
+    ? `<button class="btn wide" data-act="restore">กู้คืนนัดหมาย</button>`
+    : `${a.status==='pending' ? '<button class="btn solid wide" data-act="confirm">ยืนยันนัดหมาย</button>' : ''}
+       <div class="pair">
+         <button class="btn" data-act="edit">แก้ไขนัดหมาย</button>
+         <button class="btn" data-act="move">เลื่อน 1 ชม.</button>
+       </div>
+       <div class="pair">
+         <button class="btn" data-act="chat">ทักหาคนไข้</button>
+         <button class="btn" data-act="cancel">ยกเลิกนัด</button>
+       </div>
+       <button class="btn danger wide" data-act="delete">ลบนัดหมายถาวร</button>`;
+
+  $('#drawer').classList.add('on');
+  $('#scrim').classList.add('on');
+  render();
+}
+function closeDrawer(){
+  S.sel = null;
+  $('#drawer').classList.remove('on');
+  $('#scrim').classList.remove('on');
+  render();
+}
+
+/* ═══════════════ การกระทำ ═══════════════ */
+function act(kind){
+  const a = [...cache.values()].flat().find(x => x.id===S.sel);
+  if (!a) return;
+  if (kind==='confirm'){ a.status='confirmed'; toast(`ยืนยันนัดของ ${a.patient} แล้ว`); openDrawer(a.id); }
+  if (kind==='cancel'){
+    const prev = a.status; a.status='cancelled';
+    toast(`ยกเลิกนัดของ ${a.patient} แล้ว`, () => {
+      a.status=prev;
+      if (S.sel===a.id) openDrawer(a.id); else render();
+      toast('กู้คืนนัดหมายแล้ว');
+    });
+    closeDrawer();
+  }
+  if (kind==='restore'){ a.status='confirmed'; toast('กู้คืนนัดหมายแล้ว'); openDrawer(a.id); }
+  if (kind==='move'){
+    const slot = a.start + 60 <= CLOSE-(a.end-a.start) ? a.start+60 : a.start-60;
+    const from = hhmm(a.start), prevS=a.start, prevE=a.end;
+    a.start = slot; a.end = slot + (prevE-prevS);
+    toast(`เลื่อนจาก ${from} เป็น ${hhmm(a.start)}`, () => {
+      a.start=prevS; a.end=prevE;
+      if (S.sel===a.id) openDrawer(a.id); else render();
+      toast('ย้อนกลับเวลาเดิมแล้ว');
+    });
+    openDrawer(a.id);
+  }
+  if (kind==='chat'){ toast(`เปิดแชท ${a.channel} กับ ${a.patient}`); }
+  if (kind==='edit'){ openModal(a); }
+  if (kind==='delete'){ removeAppt(a); }
+}
+
+/* ═══════════════ ผูกอีเวนต์ ═══════════════ */
+function bind(){
+  // เลื่อนวัน / สัปดาห์ / เดือน
+  $('#prev').onclick = () => { step(-1); };
+  $('#next').onclick = () => { step(1); };
+  $('#today').onclick = () => { S.date = new Date(TODAY); render(); toast('กลับมาที่วันนี้'); };
+  function step(n){
+    S.date = S.view==='month'
+      ? new Date(S.date.getFullYear(), S.date.getMonth()+n, 1)
+      : addDays(S.date, S.view==='week' ? 7*n : n);
+    render();
+  }
+
+  // มุมมอง
+  $$('#viewSeg button').forEach(b => b.onclick = () => {
+    $$('#viewSeg button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); S.view = b.dataset.view; render();
+  });
+  $$('#groupSeg button').forEach(b => b.onclick = () => {
+    $$('#groupSeg button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); S.group = b.dataset.group; render();
+  });
+
+  // ตัวกรองแพทย์
+  $$('.fchip[data-doc]').forEach(b => b.onclick = () => {
+    const id = b.dataset.doc;
+    if (S.docs.has(id) && S.docs.size===1) return;           // ต้องเหลืออย่างน้อยหนึ่งคน
+    S.docs.has(id) ? S.docs.delete(id) : S.docs.add(id);
+    b.classList.toggle('on', S.docs.has(id));
+    render();
+  });
+  $('#allDocs').onclick = () => {
+    DOCS.forEach(d => S.docs.add(d.id));
+    $$('.fchip[data-doc]').forEach(b => b.classList.add('on'));
+    render(); toast('แสดงทันตแพทย์ทุกท่าน');
+  };
+
+  // ค้นหา
+  $('#q').oninput = e => { S.q = e.target.value.trim(); render(); };
+
+  // คลิกในกระดาน
+  $('#board').addEventListener('click', e => {
+    const ev = e.target.closest('.ev,.wev');
+    if (ev) return openDrawer(ev.dataset.id);
+    const cell = e.target.closest('.mcell');
+    if (cell){
+      S.date = new Date(cell.dataset.date + 'T00:00:00');
+      S.view = 'day';
+      $$('#viewSeg button').forEach(x => x.classList.toggle('on', x.dataset.view==='day'));
+      render();
+    }
+  });
+  $('#board').addEventListener('keydown', e => {
+    if ((e.key==='Enter'||e.key===' ') && e.target.classList.contains('ev')){
+      e.preventDefault(); openDrawer(e.target.dataset.id);
+    }
+  });
+
+  // แผงขวา
+  $('#rail').addEventListener('click', e => {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const row = btn.closest('[data-pend]');
+    const p = PENDING.find(x => x.id===row.dataset.pend);
+    if (btn.dataset.act==='confirm'){
+      const i = PENDING.indexOf(p); PENDING.splice(i,1);
+      toast(`ยืนยันนัดของ ${p.name} แล้ว`, () => { PENDING.splice(i,0,p); render(); });
+      render();
+    } else {
+      toast(`ส่งตัวเลือกเวลาใหม่ให้ ${p.name} แล้ว`);
+    }
+  });
+
+  // ลิ้นชัก
+  $('#dFoot').addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (b) act(b.dataset.act);
+  });
+  $('#dClose').onclick = closeDrawer;
+  $('#scrim').onclick = closeDrawer;
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
+
+  // เมนูที่ยังไม่มีหน้า
+  $$('.nav a.soon').forEach(a => a.onclick = e => {
+    e.preventDefault(); toast(`หน้า "${a.dataset.label}" อยู่ระหว่างพัฒนา`);
+  });
+
+  // ปุ่มบนแถบหัว
+  $('#bell').onclick = () => toast(`มี ${PENDING.length} นัดหมายรอยืนยัน`);
+  $('#newAppt').onclick = () => toast('เปิดฟอร์มสร้างนัดหมายใหม่');
+}
+
+bind();
+render();
+
+/* ═══════════════ เพิ่ม / แก้ไข / ลบนัดหมาย ═══════════════ */
+const PROC_ALL = Object.entries(PROCS).flatMap(([cid,list]) =>
+  list.map(([name,mins]) => ({name, mins, chair:cid})));
+
+let editing = null;                       // null = สร้างใหม่
+
+function fillSelects(){
+  $('#fProc').innerHTML = CHAIRS.map(c =>
+    `<optgroup label="${c.kind}">` +
+    PROCS[c.id].map(([n,m]) => `<option value="${n}" data-chair="${c.id}" data-min="${m}">${n}</option>`).join('') +
+    '</optgroup>').join('');
+  $('#fChair').innerHTML = CHAIRS.map(c => `<option value="${c.id}">${c.name} · ${c.kind}</option>`).join('');
+  $('#fDoc').innerHTML   = DOCS.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+  const times = [];
+  for (let t = OPEN; t <= CLOSE - 15; t += 15) times.push(`<option value="${t}">${hhmm(t)}</option>`);
+  $('#fTime').innerHTML = times.join('');
+  $('#fDur').innerHTML = [15,30,45,60,75,90,120].map(m => `<option value="${m}">${m} นาที</option>`).join('');
+}
+
+function openModal(appt){
+  editing = appt || null;
+  $('#mTitle').textContent = appt ? 'แก้ไขนัดหมาย' : 'นัดหมายใหม่';
+  $('#mSub').textContent   = appt ? `${appt.patient} · ${appt.hn}` : 'กรอกข้อมูลคนไข้และเลือกเวลาที่ต้องการ';
+  $('#mDelete').style.display = appt ? '' : 'none';
+  $$('#apptModal .fld').forEach(f => f.classList.remove('bad'));
+  $('#fNote').classList.remove('on');
+
+  $('#fName').value  = appt ? appt.patient : '';
+  $('#fHn').value    = appt ? appt.hn : '';
+  $('#fProc').value  = appt ? appt.proc : $('#fProc').options[0].value;
+  $('#fChair').value = appt ? appt.chair : 'c1';
+  $('#fDoc').value   = appt ? appt.doctor : 'd1';
+  $('#fDate').value  = appt ? appt.date : key(S.date);
+  $('#fTime').value  = appt ? String(Math.round(appt.start/15)*15) : String(OPEN);
+  $('#fDur').value   = appt ? String(Math.max(15, appt.end - appt.start)) : '45';
+  $('#fCh').value    = appt ? appt.channel : 'LINE';
+
+  $('#apptModal').classList.add('on');
+  setTimeout(() => $('#fName').focus(), 60);
+}
+function closeModal(){ $('#apptModal').classList.remove('on'); editing = null; }
+
+// เลือกหัตถการแล้วเดาเก้าอี้และระยะเวลาให้อัตโนมัติ
+function onProcChange(){
+  const o = $('#fProc').selectedOptions[0]; if (!o) return;
+  $('#fChair').value = o.dataset.chair;
+  $('#fDur').value = o.dataset.min;
+  syncDoc();
+}
+// เก้าอี้กับแพทย์ต้องสอดคล้องกัน
+function syncDoc(){
+  const cid = $('#fChair').value;
+  const ok = DOCS.filter(d => d.chairs.includes(cid));
+  if (!ok.some(d => d.id === $('#fDoc').value)) $('#fDoc').value = ok[0].id;
+}
+
+/* ตรวจว่าเวลานี้จองได้จริงหรือไม่ */
+function conflicts(v, ignoreId){
+  const out = [];
+  if (v.start < OPEN || v.end > CLOSE)
+    out.push(`นอกเวลาทำการ (เปิด ${hhmm(OPEN)}–${hhmm(CLOSE)})`);
+  if (v.start < 13*60 && v.end > 12*60)
+    out.push('คร่อมช่วงพักกลางวัน 12:00–13:00');
+  if (new Date(v.date+'T00:00:00').getDay() === 0)
+    out.push('วันอาทิตย์คลินิกปิดทำการ');
+
+  const day = buildDay(new Date(v.date+'T00:00:00'));
+  for (const a of day){
+    if (a.id === ignoreId || a.status === 'cancelled') continue;
+    const overlap = v.start < a.end && a.start < v.end;
+    if (!overlap) continue;
+    if (a.chair === v.chair)
+      out.push(`${CHAIRS.find(c=>c.id===v.chair).name} ไม่ว่าง — ${a.patient} ${hhmm(a.start)}–${hhmm(a.end)}`);
+    if (a.doctor === v.doctor)
+      out.push(`${DOCS.find(d=>d.id===v.doctor).name} ติดเคสอื่น — ${a.patient} ${hhmm(a.start)}–${hhmm(a.end)}`);
+  }
+  return [...new Set(out)];
+}
+
+function readForm(){
+  const start = +$('#fTime').value, dur = +$('#fDur').value;
+  return {
+    patient: $('#fName').value.trim(),
+    hn: $('#fHn').value.trim() || 'Walk-in',
+    proc: $('#fProc').value,
+    chair: $('#fChair').value,
+    doctor: $('#fDoc').value,
+    date: $('#fDate').value,
+    start, end: start + dur,
+    channel: $('#fCh').value,
+  };
+}
+
+function save(){
+  const v = readForm();
+  let bad = false;
+  const mark = (sel, cond) => {
+    const f = $(sel).closest('.fld');
+    f.classList.toggle('bad', cond);
+    if (cond) bad = true;
+  };
+  mark('#fName', !v.patient);
+  mark('#fProc', !v.proc);
+  mark('#fDate', !v.date);
+  if (bad){ $('#fNote').classList.remove('on'); return; }
+
+  const cf = conflicts(v, editing ? editing.id : null);
+  if (cf.length){
+    $('#fNote').innerHTML = 'จองเวลานี้ไม่ได้:<br>• ' + cf.join('<br>• ');
+    $('#fNote').classList.add('on');
+    return;
+  }
+
+  if (editing){
+    const before = {...editing};
+    Object.assign(editing, v);
+    const a = editing;
+    // ถ้าย้ายวัน ต้องย้ายไปอยู่ในรายการของวันใหม่
+    if (before.date !== v.date){
+      const from = cache.get(before.date); if (from) from.splice(from.indexOf(a), 1);
+      buildDay(new Date(v.date+'T00:00:00')).push(a);
+    }
+    closeModal();
+    S.date = new Date(v.date+'T00:00:00');
+    render();
+    toast(`บันทึกการแก้ไขนัดของ ${a.patient} แล้ว`, () => {
+      if (before.date !== a.date){
+        const cur = cache.get(a.date); if (cur) cur.splice(cur.indexOf(a), 1);
+        buildDay(new Date(before.date+'T00:00:00')).push(a);
+      }
+      Object.assign(a, before);
+      S.date = new Date(before.date+'T00:00:00');
+      render();
+    });
+    if (S.sel === a.id) openDrawer(a.id);
+  } else {
+    const a = {
+      id: 'a'+(SEQ++), ...v,
+      phone: '08x-xxxx-xx', note: '', status: 'confirmed', byAI: false,
+    };
+    buildDay(new Date(v.date+'T00:00:00')).push(a);
+    closeModal();
+    S.date = new Date(v.date+'T00:00:00');
+    render();
+    toast(`สร้างนัดของ ${a.patient} ${hhmm(a.start)}–${hhmm(a.end)} แล้ว`, () => {
+      const list = cache.get(a.date); list.splice(list.indexOf(a), 1); render();
+    });
+  }
+}
+
+function removeAppt(a){
+  const list = cache.get(a.date);
+  const i = list.indexOf(a);
+  list.splice(i, 1);
+  closeModal(); closeDrawer(); render();
+  toast(`ลบนัดของ ${a.patient} แล้ว`, () => { list.splice(i, 0, a); render(); });
+}
+
+/* ผูกอีเวนต์ของฟอร์ม */
+fillSelects();
+$('#fProc').onchange = onProcChange;
+$('#fChair').onchange = syncDoc;
+$('#mSave').onclick = save;
+$('#mDelete').onclick = () => { if (editing) removeAppt(editing); };
+$$('#apptModal [data-close]').forEach(el => el.onclick = closeModal);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && $('#apptModal').classList.contains('on')) closeModal();
+});
+$('#newAppt').onclick = () => openModal(null);
+
+/* หาเวลาว่างถัดไปที่จองได้จริง — ไล่จากวันที่เลือกไปข้างหน้าสูงสุด 30 วัน */
+function findSlot(){
+  const dur = +$('#fDur').value;
+  const base = new Date($('#fDate').value + 'T00:00:00');
+  const from = +$('#fTime').value;
+  for (let dd = 0; dd < 30; dd++){
+    const day = addDays(base, dd);
+    if (day.getDay() === 0) continue;
+    for (let t = (dd === 0 ? from : OPEN); t <= CLOSE - dur; t += 15){
+      const v = {...readForm(), date: key(day), start: t, end: t + dur};
+      if (!conflicts(v, editing ? editing.id : null).length){
+        $('#fDate').value = v.date;
+        $('#fTime').value = String(t);
+        $('#fNote').classList.remove('on');
+        toast(`ช่องว่างถัดไป: ${thDate(day)} ${hhmm(t)}–${hhmm(t+dur)}`);
+        return true;
+      }
+    }
+  }
+  $('#fNote').innerHTML = 'ไม่พบช่องว่างภายใน 30 วันข้างหน้าสำหรับเงื่อนไขนี้ ลองเปลี่ยนเก้าอี้ ทันตแพทย์ หรือลดระยะเวลา';
+  $('#fNote').classList.add('on');
+  return false;
+}
+$('#mFind').onclick = findSlot;
+
+
+</script>
+</body>
+</html>
