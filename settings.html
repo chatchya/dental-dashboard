@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ตั้งค่า · Zentr Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตั้งค่า ═══ */
+.wrap{padding:20px 26px 40px;display:grid;gap:16px;max-width:1080px}
+
+.frow{
+  display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px;
+  padding:15px 0;border-top:1px solid var(--border);align-items:start;
+}
+.frow:first-child{border-top:0;padding-top:2px}
+.frow .lb b{display:block;font-size:13.5px;font-weight:500}
+.frow .lb span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
+.frow .fd{display:grid;gap:9px}
+
+.inp{
+  width:100%;height:38px;padding:0 12px;font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;transition:.15s;
+}
+.inp:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+textarea.inp{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;min-height:78px}
+select.inp{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 11px center;padding-right:34px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+.sw{
+  position:relative;width:40px;height:23px;border-radius:99px;flex:none;
+  background:var(--border);border:0;cursor:pointer;transition:background .18s;padding:0;
+}
+.sw::after{
+  content:"";position:absolute;top:2.5px;left:2.5px;width:18px;height:18px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(6,35,44,.3);transition:transform .18s;
+}
+.sw.on{background:var(--brand)}
+.sw.on::after{transform:translateX(17px)}
+.togg{display:flex;align-items:flex-start;gap:11px;padding:11px 0}
+.togg+.togg{border-top:1px solid var(--border)}
+.togg .bd{flex:1;min-width:0}
+.togg .bd b{display:block;font-size:13px;font-weight:500}
+.togg .bd span{display:block;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5}
+
+.hoursrow{display:grid;grid-template-columns:96px 1fr auto;gap:11px;align-items:center;padding:9px 0}
+.hoursrow+.hoursrow{border-top:1px solid var(--border)}
+.hoursrow .day{font-size:13px;font-weight:500}
+.hoursrow .times{display:flex;align-items:center;gap:8px;font-size:13px}
+.hoursrow .times .inp{width:96px;height:34px;text-align:center;font-family:"IBM Plex Mono",monospace}
+.hoursrow.off .times{opacity:.4;pointer-events:none}
+.hoursrow .cl{font-size:12.5px;color:var(--faint)}
+
+.staff{display:flex;align-items:center;gap:12px;padding:12px 0}
+.staff+.staff{border-top:1px solid var(--border)}
+.staff .bd{flex:1;min-width:0}
+.staff .bd b{display:block;font-size:13.5px;font-weight:500}
+.staff .bd span{display:block;font-size:11.5px;color:var(--muted)}
+.staff .role{flex:none}
+
+.chrow{display:flex;align-items:center;gap:12px;padding:13px 0}
+.chrow+.chrow{border-top:1px solid var(--border)}
+.chrow .ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700;flex:none}
+.chrow .bd{flex:1;min-width:0}
+.chrow .bd b{display:block;font-size:13.5px;font-weight:500}
+.chrow .bd span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.dotst{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500}
+.dotst i{width:7px;height:7px;border-radius:50%;display:block}
+.ok-c{color:var(--green)}.off-c{color:var(--faint)}
+
+.pricerow{display:grid;grid-template-columns:minmax(0,1fr) 132px 132px;gap:11px;align-items:center;padding:10px 0}
+.pricerow+.pricerow{border-top:1px solid var(--border)}
+.pricerow .nm{font-size:13px}
+.pricerow .nm span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.pricerow .inp{height:34px;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+
+.savebar{
+  position:sticky;bottom:0;display:flex;align-items:center;gap:12px;
+  padding:13px 18px;margin-top:4px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--border);border-radius:var(--r-md);
+}
+.savebar .st{font-size:12.5px;color:var(--muted);margin-right:auto}
+.savebar .st b{color:var(--amber)}
+
+@media (max-width:900px){
+  .wrap{padding:16px 16px 30px}
+  .frow{grid-template-columns:1fr;gap:10px}
+  .pricerow{grid-template-columns:1fr 100px 100px}
+  .two{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
+      <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><nav class="nav">
+      <a href="reports.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="settings.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot"><div class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div></div>
+  </aside>
+  <main>
+    <header class="top">
+      <div><h1>ตั้งค่า</h1><div class="sub">ตั้งค่าคลินิก ทีมงาน ค่าบริการ และช่องทางติดต่อ</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหาการตั้งค่า"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+    <div class="tabs" id="tabs">
+      <button class="on" data-t="clinic">คลินิก</button>
+      <button data-t="hours">เวลาทำการ</button>
+      <button data-t="team">ทีมงาน<span class="n">6</span></button>
+      <button data-t="price">ค่าบริการ</button>
+      <button data-t="channel">ช่องทาง &amp; AI</button>
+      <button data-t="notify">การแจ้งเตือน</button>
+    </div>
+
+    <div class="wrap">
+      <!-- ───── คลินิก ───── -->
+      <div class="pane on" data-p="clinic">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <h2>ข้อมูลสาขา</h2></header>
+
+          <div class="frow">
+            <div class="lb"><b>ชื่อคลินิก</b><span>ชื่อที่แสดงบนใบเสร็จและข้อความถึงคนไข้</span></div>
+            <div class="fd"><input class="inp" value="คลินิกทันตกรรม Zentr สาขาอารีย์"></div>
+          </div>
+          <div class="frow">
+            <div class="lb"><b>เลขที่ใบอนุญาต</b><span>สถานพยาบาลประเภทที่ไม่รับผู้ป่วยค้างคืน</span></div>
+            <div class="fd"><input class="inp mono" value="10101-2565-0884"></div>
+          </div>
+          <div class="frow">
+            <div class="lb"><b>ที่อยู่</b><span>ใช้ในใบเสร็จและลิงก์แผนที่ที่ส่งให้คนไข้</span></div>
+            <div class="fd"><textarea class="inp">88/12 ถนนพหลโยธิน ซอยอารีย์ 4 แขวงสามเสนใน เขตพญาไท กรุงเทพฯ 10400</textarea></div>
+          </div>
+          <div class="frow">
+            <div class="lb"><b>ติดต่อ</b><span>เบอร์โทรและอีเมลของสาขา</span></div>
+            <div class="fd"><div class="two">
+              <input class="inp mono" value="02-115-8899">
+              <input class="inp" value="aree@zentr.dental">
+            </div></div>
+          </div>
+          <div class="frow">
+            <div class="lb"><b>เลขประจำตัวผู้เสียภาษี</b><span>พิมพ์ลงใบเสร็จ/ใบกำกับภาษี</span></div>
+            <div class="fd"><div class="two">
+              <input class="inp mono" value="0105565008841">
+              <select class="inp"><option>ออกใบกำกับภาษีเต็มรูปแบบ</option><option>ใบเสร็จรับเงินอย่างเดียว</option></select>
+            </div></div>
+          </div>
+          <div class="frow">
+            <div class="lb"><b>จำนวนเก้าอี้ทำฟัน</b><span>ใช้จัดตารางนัดหมายและคำนวณอัตราการใช้งาน</span></div>
+            <div class="fd"><div class="two">
+              <select class="inp"><option>4 เก้าอี้</option><option>3 เก้าอี้</option><option>5 เก้าอี้</option><option>6 เก้าอี้</option></select>
+              <select class="inp"><option>ช่วงนัดละ 30 นาที</option><option>ช่วงนัดละ 15 นาที</option><option>ช่วงนัดละ 60 นาที</option></select>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ───── เวลาทำการ ───── -->
+      <div class="pane" data-p="hours">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+            <h2>เวลาเปิด–ปิด</h2><span class="act" style="cursor:default">ใช้กับการจองออนไลน์</span></header>
+          <div id="hours"></div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>
+            <h2>วันหยุดพิเศษ</h2></header>
+          <div id="holidays"></div>
+          <button class="btn" id="addHol" style="margin-top:12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>เพิ่มวันหยุด</button>
+        </div>
+      </div>
+
+      <!-- ───── ทีมงาน ───── -->
+      <div class="pane" data-p="team">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h2>ผู้ใช้งานและสิทธิ์</h2>
+            <button class="mini solid" id="invite" style="margin-left:auto">เชิญผู้ใช้ใหม่</button></header>
+          <div id="staff"></div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <h2>ความปลอดภัย</h2></header>
+          <div id="sec"></div>
+        </div>
+      </div>
+
+      <!-- ───── ค่าบริการ ───── -->
+      <div class="pane" data-p="price">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>
+            <h2>ค่าบริการมาตรฐาน</h2><span class="act" style="cursor:default">ใช้เป็นค่าตั้งต้นตอนสร้างแผนการรักษา</span></header>
+          <div class="pricerow" style="border:0;padding-bottom:4px">
+            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">หัตถการ</div>
+            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);text-align:right">ราคาเริ่มต้น</div>
+            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);text-align:right">ราคาสูงสุด</div>
+          </div>
+          <div id="prices"></div>
+        </div>
+      </div>
+
+      <!-- ───── ช่องทาง & AI ───── -->
+      <div class="pane" data-p="channel">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+            <h2>ช่องทางที่เชื่อมต่อ</h2></header>
+          <div id="channels"></div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg>
+            <h2>ผู้ช่วย AI ตอบข้อความ</h2></header>
+          <div id="ai"></div>
+          <div class="frow" style="margin-top:4px">
+            <div class="lb"><b>ระดับความมั่นใจขั้นต่ำ</b><span>ต่ำกว่านี้ AI จะร่างคำตอบไว้ให้เจ้าหน้าที่ตรวจก่อนส่ง</span></div>
+            <div class="fd"><select class="inp"><option>75% (แนะนำ)</option><option>60%</option><option>85%</option><option>ให้เจ้าหน้าที่ตรวจทุกข้อความ</option></select></div>
+          </div>
+          <div class="frow">
+            <div class="lb"><b>เรื่องที่ห้าม AI ตอบเอง</b><span>ส่งต่อให้เจ้าหน้าที่ทันทีเสมอ</span></div>
+            <div class="fd"><textarea class="inp">เคสปวดฉุกเฉิน · การวินิจฉัยอาการ · การให้คำแนะนำเรื่องยา · ข้อร้องเรียน · การคืนเงิน</textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ───── การแจ้งเตือน ───── -->
+      <div class="pane" data-p="notify">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>
+            <h2>แจ้งเตือนคนไข้</h2></header>
+          <div id="patNoti"></div>
+          <div class="frow" style="margin-top:4px">
+            <div class="lb"><b>ข้อความเตือนนัดหมาย</b><span>ใช้ตัวแปร {ชื่อ} {วันที่} {เวลา} {ทันตแพทย์} ได้</span></div>
+            <div class="fd"><textarea class="inp">สวัสดีค่ะคุณ{ชื่อ} คลินิกทันตกรรม Zentr ขอแจ้งเตือนนัดหมายวันที่ {วันที่} เวลา {เวลา} น. กับ {ทันตแพทย์} ค่ะ หากไม่สะดวกรบกวนแจ้งล่วงหน้า 1 วันนะคะ</textarea></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h2>แจ้งเตือนทีมงาน</h2></header>
+          <div id="teamNoti"></div>
+        </div>
+      </div>
+
+      <div class="savebar">
+        <span class="st" id="saveSt">ยังไม่มีการแก้ไข</span>
+        <button class="btn" id="reset">ย้อนกลับ</button>
+        <button class="btn solid" id="save">บันทึกการตั้งค่า</button>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ ตั้งค่า ═══════════════ */
+
+/* ── ตัวช่วยร่วมของทุกหน้า ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => Number(n).toLocaleString('en-US');
+const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
+const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
+const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
+const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+let dirty = 0;
+function touch(){ dirty++; $('#saveSt').innerHTML = `<b>แก้ไขแล้ว ${dirty} รายการ</b> · ยังไม่ได้บันทึก`; }
+
+/* ── สวิตช์ ── */
+function toggles(host, list){
+  host.innerHTML = list.map((t,i) => `
+    <div class="togg">
+      <div class="bd"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div>
+      <button class="sw${t[2] ? ' on' : ''}" data-i="${i}" role="switch" aria-checked="${!!t[2]}" aria-label="${esc(t[0])}"></button>
+    </div>`).join('');
+  host.querySelectorAll('.sw').forEach(b => b.onclick = () => {
+    const on = b.classList.toggle('on');
+    b.setAttribute('aria-checked', on);
+    touch();
+    toast((on ? 'เปิด' : 'ปิด') + ' — ' + list[+b.dataset.i][0]);
+  });
+}
+
+/* ── เวลาทำการ ── */
+const DAYS = [['จันทร์','09:00','20:00',1],['อังคาร','09:00','20:00',1],['พุธ','09:00','20:00',1],
+              ['พฤหัสบดี','09:00','20:00',1],['ศุกร์','09:00','20:00',1],
+              ['เสาร์','09:00','18:00',1],['อาทิตย์','10:00','17:00',1]];
+$('#hours').innerHTML = DAYS.map((d,i) => `
+  <div class="hoursrow${d[3] ? '' : ' off'}" data-i="${i}">
+    <span class="day">${d[0]}</span>
+    <span class="times"><input class="inp mono" value="${d[1]}"> ถึง <input class="inp mono" value="${d[2]}">
+      <span class="cl">พักกลางวัน 12:30–13:30</span></span>
+    <button class="sw${d[3] ? ' on' : ''}" role="switch" aria-checked="${!!d[3]}" aria-label="เปิดทำการ${d[0]}"></button>
+  </div>`).join('');
+$$('#hours .sw').forEach(b => b.onclick = () => {
+  const on = b.classList.toggle('on');
+  b.closest('.hoursrow').classList.toggle('off', !on);
+  b.setAttribute('aria-checked', on); touch();
+});
+$$('#hours .inp').forEach(i => i.onchange = touch);
+
+const HOL = [['12 ส.ค. 2569','วันแม่แห่งชาติ'],['23 ต.ค. 2569','วันปิยมหาราช'],
+             ['31 ธ.ค. 2569 – 2 ม.ค. 2570','หยุดปีใหม่']];
+$('#holidays').innerHTML = HOL.map(h => `
+  <div class="hoursrow">
+    <span class="day mono" style="font-size:12px">${esc(h[0].split(' ').slice(0,2).join(' '))}</span>
+    <span class="times" style="font-size:12.5px;color:var(--muted)">${esc(h[1])} · ${esc(h[0])}</span>
+    <button class="mini" data-del="${esc(h[1])}">ลบ</button>
+  </div>`).join('');
+$$('#holidays [data-del]').forEach(b => b.onclick = () => { touch(); toast('ลบวันหยุด ' + b.dataset.del + ' แล้ว'); });
+$('#addHol').onclick = () => toast('เปิดฟอร์มเพิ่มวันหยุด — เดโม');
+
+/* ── ทีมงาน ── */
+const STAFF = [
+  ['ชัชชญา ธนกิจ','chatchaya@zentr.dental','เจ้าของ / ผู้ดูแลระบบ','#2E6BE6'],
+  ['ทพญ.นภา ชูเกียรติ','napha@zentr.dental','ทันตแพทย์','#2E9E63'],
+  ['ทพ.ประวิทย์ สุขสันต์','prawit@zentr.dental','ทันตแพทย์','#2E9E63'],
+  ['ทพ.กิตติ อารีย์วงศ์','kitti@zentr.dental','ทันตแพทย์ (จัดฟัน)','#2E9E63'],
+  ['ทพญ.อรอนงค์ พิพัฒน์','onanong@zentr.dental','ทันตแพทย์','#2E9E63'],
+  ['สุนิสา แก้วใส','sunisa@zentr.dental','ผู้ช่วยทันตแพทย์ / เคาน์เตอร์','#7A5AF0'],
+];
+$('#staff').innerHTML = STAFF.map(s => `
+  <div class="staff">
+    <div class="ini">${esc(initial(s[0].replace(/^ทพญ?\./,'')))}</div>
+    <div class="bd"><b>${esc(s[0])}</b><span class="mono">${esc(s[1])}</span></div>
+    <span class="role chip" style="background:${s[3]}1A;color:${s[3]}">${esc(s[2])}</span>
+    <button class="mini" data-edit="${esc(s[0])}">แก้ไขสิทธิ์</button>
+  </div>`).join('');
+$$('#staff [data-edit]').forEach(b => b.onclick = () => toast('แก้ไขสิทธิ์ของ ' + b.dataset.edit + ' — เดโม'));
+$('#invite').onclick = () => toast('ส่งคำเชิญเข้าใช้งาน — เดโม');
+
+toggles($('#sec'), [
+  ['ยืนยันตัวตนสองขั้น (2FA)','บังคับสำหรับบัญชีที่เข้าถึงข้อมูลการเงิน',1],
+  ['ล็อกหน้าจออัตโนมัติ','ล็อกหลังไม่มีการใช้งาน 15 นาที',1],
+  ['บันทึกประวัติการเข้าถึงข้อมูลคนไข้','เก็บ log ว่าใครเปิดดูประวัติคนไข้รายใดบ้าง',1],
+  ['อนุญาตให้เข้าถึงจากนอกคลินิก','เปิดให้ทีมงานเข้าระบบจากเครือข่ายภายนอก',0],
+]);
+
+/* ── ค่าบริการ ── */
+const PRICES = [
+  ['ตรวจฟัน + ปรึกษา','ครั้งละ',500,800],
+  ['ขูดหินปูน + ขัดฟัน','ครั้งละ',1200,1800],
+  ['อุดฟันเรซิน','ต่อซี่',800,2500],
+  ['ถอนฟัน','ต่อซี่',800,3500],
+  ['ผ่าฟันคุด','ต่อซี่',3500,6500],
+  ['รักษารากฟัน','ต่อซี่',6500,12000],
+  ['ครอบฟันเซรามิก','ต่อซี่',12000,22000],
+  ['วีเนียร์เซรามิก','ต่อซี่',15000,20000],
+  ['รากเทียม (รวมครอบฟัน)','ต่อซี่',45000,62000],
+  ['ฟอกสีฟันที่คลินิก','ครั้งละ',8900,8900],
+  ['จัดฟันโลหะ','ทั้งเคส',75000,95000],
+  ['จัดฟันใส Invisalign','ทั้งเคส',89000,165000],
+];
+$('#prices').innerHTML = PRICES.map(p => `
+  <div class="pricerow">
+    <div class="nm">${esc(p[0])}<span>${esc(p[1])}</span></div>
+    <input class="inp" value="${money(p[2])}">
+    <input class="inp" value="${money(p[3])}">
+  </div>`).join('');
+$$('#prices .inp').forEach(i => i.onchange = () => { touch(); });
+
+/* ── ช่องทาง ── */
+const CHS = [
+  ['LINE','LINE Official Account','@zentr.aree · เชื่อมต่อแล้ว · ผู้ติดตาม 4,182 คน','#06C755',1],
+  ['FB','Facebook Page','Zentr Dental อารีย์ · เชื่อมต่อแล้ว','#1877F2',1],
+  ['IG','Instagram','@zentr.dental · เชื่อมต่อแล้ว','linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)',1],
+  ['WEB','เว็บแชทบนหน้าเว็บไซต์','ฝังอยู่ที่ zentr.dental/aree','#12414F',1],
+  ['SMS','SMS แจ้งเตือน','ยังไม่ได้เชื่อมต่อผู้ให้บริการ','#65787F',0],
+];
+$('#channels').innerHTML = CHS.map((c,i) => `
+  <div class="chrow">
+    <div class="ic" style="background:${c[3]}">${c[0]}</div>
+    <div class="bd"><b>${esc(c[1])}</b><span>${esc(c[2])}</span></div>
+    <span class="dotst ${c[4] ? 'ok-c' : 'off-c'}"><i style="background:${c[4] ? 'var(--green)' : 'var(--border)'}"></i>${c[4] ? 'ใช้งานอยู่' : 'ยังไม่เชื่อมต่อ'}</span>
+    <button class="mini${c[4] ? '' : ' solid'}" data-ch="${i}">${c[4] ? 'ตั้งค่า' : 'เชื่อมต่อ'}</button>
+  </div>`).join('');
+$$('#channels [data-ch]').forEach(b => b.onclick = () => toast(CHS[+b.dataset.ch][1] + ' — เดโม'));
+
+toggles($('#ai'), [
+  ['ให้ AI ตอบข้อความอัตโนมัติ','ตอบคำถามทั่วไป ราคา และเวลาทำการได้เอง',1],
+  ['ให้ AI เสนอเวลานัดหมาย','ดึงคิวว่างจากตารางจริงมาเสนอให้คนไข้',1],
+  ['ให้ AI ตอบนอกเวลาทำการ','ตอบต่อเนื่องช่วง 20:00–09:00 น.',1],
+  ['ให้ AI ปิดการขายแผนการรักษา','ส่งใบเสนอราคาและลิงก์ชำระเงินเองได้',0],
+]);
+
+/* ── การแจ้งเตือน ── */
+toggles($('#patNoti'), [
+  ['เตือนนัดหมายล่วงหน้า 1 วัน','ส่งทางไลน์เวลา 18:00 น. ของวันก่อนนัด',1],
+  ['เตือนซ้ำเช้าวันนัด','ส่งเวลา 08:00 น. ของวันนัด',1],
+  ['ติดตามหลังการรักษา','ส่งข้อความถามอาการหลังผ่าตัด 1 วัน',1],
+  ['เตือนตรวจฟันทุก 6 เดือน','ส่งอัตโนมัติเมื่อครบกำหนด',1],
+  ['แจ้งยอดค้างชำระ','ส่งเมื่อเลยกำหนด 7 วัน',1],
+  ['อวยพรวันเกิด','ส่งพร้อมส่วนลดขูดหินปูน 20%',0],
+]);
+toggles($('#teamNoti'), [
+  ['ข้อความใหม่จากคนไข้','แจ้งเตือนทันทีที่หน้าจอ',1],
+  ['เคสปวดฉุกเฉิน','แจ้งเตือนพิเศษ + เสียงเตือน',1],
+  ['คิวรอเกิน 20 นาที','เตือนเจ้าหน้าที่หน้าเคาน์เตอร์',1],
+  ['งานแล็บเลยกำหนดรับ','แจ้งเตือนตอนเช้าของทุกวัน',1],
+  ['สรุปยอดประจำวัน','ส่งเข้าอีเมลเวลา 20:30 น.',1],
+]);
+
+/* ── แท็บ + บันทึก ── */
+$$('#tabs button').forEach(b => b.onclick = () => {
+  $$('#tabs button').forEach(o => o.classList.toggle('on', o === b));
+  $$('.pane').forEach(p => p.classList.toggle('on', p.dataset.p === b.dataset.t));
+});
+$$('.inp').forEach(i => i.addEventListener('change', touch));
+$('#save').onclick = () => {
+  if (!dirty) return toast('ยังไม่มีการแก้ไข');
+  const n = dirty; dirty = 0; $('#saveSt').textContent = 'บันทึกล่าสุด 17 ส.ค. 2569 10:42 น.';
+  toast('บันทึกการตั้งค่า ' + n + ' รายการแล้ว');
+};
+$('#reset').onclick = () => {
+  if (!dirty) return toast('ยังไม่มีการแก้ไข');
+  dirty = 0; $('#saveSt').textContent = 'ย้อนกลับเป็นค่าที่บันทึกไว้ล่าสุดแล้ว';
+  toast('ยกเลิกการแก้ไขทั้งหมดแล้ว');
+};
+$('#bell').onclick = () => toast('ไม่มีการแจ้งเตือนใหม่');
+</script>
+</body>
+</html>
+

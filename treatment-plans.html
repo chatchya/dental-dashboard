@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แผนการรักษา · Zentr Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ แผนการรักษา ═══ */
+.wrap{padding:20px 26px 34px;display:grid;gap:16px}
+.tblwrap{overflow-x:auto}
+.tbl tbody tr{cursor:pointer}
+
+/* กรวยการขาย */
+.funnel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.fstep{padding:0 18px;position:relative}
+.fstep+.fstep{border-left:1px solid var(--border)}
+.fstep .lb{font-size:12.5px;color:var(--muted)}
+.fstep .vv{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:5px;line-height:1.15}
+.fstep .vv small{font-size:13px;font-weight:400;color:var(--muted);margin-left:4px}
+.fstep .amt{font-size:12px;color:var(--muted);margin-top:3px;font-family:"IBM Plex Mono",monospace}
+.fstep .fbar{height:6px;border-radius:3px;background:var(--paper);margin-top:11px;overflow:hidden}
+.fstep .fbar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.fstep .rate{font-size:11.5px;color:var(--muted);margin-top:7px}
+.fstep .rate b{color:var(--green);font-weight:600}
+.fstep .rate b.bad{color:var(--rose)}
+
+.agechip{
+  display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:6px;
+  font-size:11.5px;font-weight:500;font-family:"IBM Plex Mono",monospace;
+}
+.a-fresh{background:var(--paper);color:var(--muted)}
+.a-warm{background:rgba(245,178,63,.16);color:#A9761B}
+.a-cold{background:rgba(210,80,75,.10);color:var(--rose)}
+
+.items{width:100%;border-collapse:collapse;margin-top:4px}
+.items th{
+  text-align:left;padding:0 8px 9px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;
+}
+.items td{padding:9px 8px;font-size:12.5px;border-top:1px solid var(--border);vertical-align:top}
+.items .r{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+.items tfoot td{border-top:1.5px solid var(--border);font-weight:600;padding-top:11px}
+.items .sub td{color:var(--muted);font-weight:400;border-top:0;padding-top:4px;padding-bottom:4px}
+
+.steps{display:grid;gap:0;margin-top:6px}
+.steps .s{display:flex;gap:11px;padding:10px 0;border-top:1px solid var(--border)}
+.steps .s:first-child{border-top:0}
+.steps .dt{font-size:11.5px;color:var(--faint);width:74px;flex:none;font-family:"IBM Plex Mono",monospace}
+.steps b{font-size:12.5px;font-weight:500;display:block}
+.steps span{font-size:11.5px;color:var(--muted)}
+
+@media (max-width:1180px){.funnel{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 0}
+  .fstep:nth-child(3){border-left:0}}
+@media (max-width:900px){
+  .wrap{padding:16px 16px 28px}
+  .funnel{grid-template-columns:1fr}
+  .fstep+.fstep{border-left:0;border-top:1px solid var(--border);padding-top:14px}
+  .tbl{min-width:820px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
+      <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><nav class="nav">
+      <a href="reports.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="settings.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot"><div class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div></div>
+  </aside>
+  <main>
+    <header class="top">
+      <div><h1>แผนการรักษา</h1><div class="sub" id="sub">ติดตามแผนที่เสนอไปแล้วจนถึงปิดการรักษา</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหาคนไข้ HN หรือชื่อแผน"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+    <div class="tabs" id="tabs"></div>
+    <div class="wrap">
+      <section class="sum" id="sum"></section>
+
+      <div class="card">
+        <header>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          <h2>เส้นทางของแผนการรักษา (90 วันล่าสุด)</h2>
+        </header>
+        <div class="funnel" id="funnel"></div>
+      </div>
+
+      <div id="alertzone"></div>
+
+      <div class="bar-row">
+        <span style="font-size:12.5px;color:var(--muted)" id="count"></span>
+        <div class="grow"></div>
+        <button class="btn" id="exp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>ส่งออก CSV</button>
+        <button class="btn solid" id="addPlan"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>สร้างแผนใหม่</button>
+      </div>
+
+      <div class="card tblwrap">
+        <table class="tbl">
+          <thead><tr>
+            <th>เลขที่แผน</th><th>คนไข้</th><th>รายการหลัก</th><th>ทันตแพทย์</th>
+            <th class="right">มูลค่า</th><th>เสนอเมื่อ</th><th>สถานะ</th><th>ติดตาม</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ แผนการรักษา ═══════════════ */
+
+/* ── ตัวช่วยร่วมของทุกหน้า ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => Number(n).toLocaleString('en-US');
+const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
+const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
+const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
+const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+const ST = {
+  draft:   {n:'ร่าง',         c:'#93A5AC'},
+  proposed:{n:'เสนอแล้ว',     c:'#E0951E'},
+  accepted:{n:'ตอบรับแล้ว',   c:'#2E6BE6'},
+  active:  {n:'กำลังรักษา',   c:'#7A5AF0'},
+  done:    {n:'เสร็จสิ้น',    c:'#2E9E63'},
+  declined:{n:'ไม่ตอบรับ',    c:'#D2504B'},
+};
+
+let seq = 700;
+const pl = o => ({id:'TP-' + (++seq), items:[], steps:[], disc:0, ...o});
+
+const PLANS = [
+  /* ── รอตัดสินใจ 6 แผน · รวม 418,000 ฿ (ตรงกับหน้าภาพรวม) ── */
+  pl({pat:'อธิป วัฒนกุล', hn:'HN 24-771', doc:'ทพ.ประวิทย์', st:'proposed', made:'2569-08-13', age:4,
+      title:'รากเทียม 2 ซี่ + ครอบฟันเซรามิก',
+      items:[['รากเทียม Straumann ซี่ 36',1,58000],['รากเทียม Straumann ซี่ 46',1,58000],
+             ['ครอบฟันเซรามิกบนรากเทียม',2,18000],['CT scan + วางแผนดิจิทัล',1,3500]],
+      disc:7500,
+      steps:[['2569-08-13','เสนอแผน + ส่งใบเสนอราคาทางไลน์','ชช'],
+             ['2569-08-15','ติดตามครั้งที่ 1 — ขอเวลาตัดสินใจ','ชช'],
+             ['2569-08-17','คนไข้ถามเรื่องทำทีละซี่','ชช']]}),
+  pl({pat:'ปรียา สงวนศักดิ์', hn:'HN 24-772', doc:'ทพ.กิตติ', st:'proposed', made:'2569-08-08', age:9,
+      title:'จัดฟันใส Invisalign (เคสเต็ม)',
+      items:[['Invisalign Comprehensive 32 ชุด',1,128000],['สแกนช่องปาก 3D + แผนเคลื่อนฟัน',1,5000],
+             ['รีเทนเนอร์หลังจัดฟัน 2 ชุด',1,6000]],
+      disc:4000,
+      steps:[['2569-08-08','เสนอแผน + สแกนช่องปาก','ทพ.กิตติ'],
+             ['2569-08-14','ติดตามครั้งที่ 1 — ขอปรึกษาครอบครัว','ชช']]}),
+  pl({pat:'มานพ เจริญสุข', hn:'HN 22-556', doc:'ทพญ.อรอนงค์', st:'proposed', made:'2569-08-05', age:12,
+      title:'ครอบฟัน 3 ซี่ + รักษารากฟัน',
+      items:[['รักษารากฟัน ซี่ 46',1,9000],['ครอบฟันเซรามิก ซี่ 46',1,18000],
+             ['ครอบฟันเซรามิก ซี่ 16',1,18000],['ครอบฟันเซรามิก ซี่ 26',1,18000]],
+      disc:1000,
+      steps:[['2569-08-05','เสนอแผนหลังตรวจ','ทพญ.อรอนงค์'],
+             ['2569-08-11','ติดตามครั้งที่ 1 — ขอเทียบราคาที่อื่น','ชช']]}),
+  pl({pat:'วิชัย ประดิษฐ์', hn:'HN 21-774', doc:'ทพญ.นภา', st:'proposed', made:'2569-08-15', age:2,
+      title:'ครอบฟัน 1 ซี่ + อุดฟัน 3 ซี่',
+      items:[['ครอบฟันเซรามิก ซี่ 26',1,18000],['อุดฟันเรซิน',3,3000],['ขูดหินปูน',1,1200]],
+      disc:200,
+      steps:[['2569-08-15','เสนอแผนหลังตรวจประจำปี','ทพญ.นภา']]}),
+  pl({pat:'ปิยะพงษ์ ทวีทรัพย์', hn:'HN 23-208', doc:'ทพ.กิตติ', st:'proposed', made:'2569-08-11', age:6,
+      title:'สะพานฟัน 3 ยูนิต (ซี่ 16–18)',
+      items:[['สะพานฟันเซรามิก (ต่อยูนิต)',3,9000]],
+      steps:[['2569-08-11','เสนอแผน 2 ทางเลือก (สะพานฟัน / รากเทียม)','ทพ.กิตติ'],
+             ['2569-08-16','ติดตาม — สนใจสะพานฟันเพราะราคาถูกกว่า','ชช']]}),
+  pl({pat:'เบญจวรรณ ศรีสุข', hn:'HN 23-441', doc:'ทพญ.อรอนงค์', st:'proposed', made:'2569-08-01', age:16,
+      title:'ฟอกสีฟันที่คลินิก + ดูแลเหงือก',
+      items:[['ฟอกสีฟัน Zoom ที่คลินิก',1,8900],['เกลารากฟัน 4 ควอดแรนต์',1,8000],['ขูดหินปูน',1,1200]],
+      disc:100,
+      steps:[['2569-08-01','เสนอแผนหลังตรวจสภาพเหงือก','ทพญ.อรอนงค์'],
+             ['2569-08-07','ติดตามครั้งที่ 1 — ยังไม่ตอบกลับ','ชช']]}),
+
+  /* ── ร่าง ── */
+  pl({pat:'ธนภัทร ศรีวิไล', hn:'HN 24-882', doc:'ทพ.ประวิทย์', st:'draft', made:'2569-08-17', age:0,
+      title:'รักษารากฟัน ซี่ 46 + ครอบฟัน (รอผลเอกซเรย์)',
+      items:[['รักษารากฟัน ซี่ 46',1,9000],['ครอบฟันเซรามิก ซี่ 46',1,18000]],
+      steps:[['2569-08-17','ร่างแผนหลังเคสปวดฉุกเฉิน — รอเอกซเรย์','ทพ.ประวิทย์']]}),
+  pl({pat:'ชลธิชา รุ่งเรือง', hn:'HN 24-052', doc:'ทพญ.นภา', st:'draft', made:'2569-08-16', age:1,
+      title:'วีเนียร์ 4 ซี่หน้าบน (ยังไม่เสนอ)',
+      items:[['วีเนียร์เซรามิก',4,18000]],
+      steps:[['2569-08-16','คนไข้สนใจ — รอถ่ายภาพจำลองก่อนเสนอ','ทพญ.นภา']]}),
+
+  /* ── ตอบรับแล้ว / กำลังรักษา ── */
+  pl({pat:'ศิริพร ดำรงค์', hn:'HN 24-118', doc:'ทพญ.นภา', st:'active', made:'2569-07-28', age:20,
+      title:'วีเนียร์เซรามิก 6 ซี่ (13–23)',
+      items:[['วีเนียร์เซรามิก E-max',6,18000]],
+      paid:54000,
+      steps:[['2569-07-28','เสนอแผน','ทพญ.นภา'],['2569-08-02','ตอบรับ + มัดจำ 50%','ชช'],
+             ['2569-08-14','พิมพ์ปาก ส่งแล็บ','ทพญ.นภา'],['2569-08-24','นัดลองสี','—']]}),
+  pl({pat:'วีรภัทร สุขใจ', hn:'HN 22-701', doc:'ทพ.กิตติ', st:'active', made:'2568-06-10', age:433,
+      title:'จัดฟันโลหะ (24 เดือน)',
+      items:[['จัดฟันโลหะ Damon ทั้งปาก',1,89000],['รีเทนเนอร์หลังถอดเครื่องมือ',1,6000]],
+      paid:52500,
+      steps:[['2568-06-10','เสนอแผน + ตอบรับ','ทพ.กิตติ'],['2568-06-20','ติดเครื่องมือ','ทพ.กิตติ'],
+             ['2569-08-17','ปรับเครื่องมือ ครั้งที่ 14 จาก 24','ทพ.กิตติ']]}),
+  pl({pat:'นภัสวรรณ อินทร์แก้ว', hn:'HN 24-460', doc:'ทพ.ประวิทย์', st:'active', made:'2569-07-20', age:28,
+      title:'ฟันปลอมถอดได้ (บนบางส่วน)',
+      items:[['ฟันปลอมถอดได้ฐานอะคริลิก',1,24000]],
+      paid:12000,
+      steps:[['2569-07-20','เสนอแผน + ตอบรับ','ทพ.ประวิทย์'],['2569-08-08','พิมพ์ปาก ส่งแล็บ','ทพ.ประวิทย์'],
+             ['2569-08-17','ลองฟันปลอม — ปรับฐาน','ทพ.ประวิทย์']]}),
+  pl({pat:'พิมพ์ชนก วงศ์ทอง', hn:'HN 24-733', doc:'ทพญ.อรอนงค์', st:'accepted', made:'2569-08-14', age:3,
+      title:'ผ่าฟันคุด 3 ซี่ (48 เสร็จแล้ว)',
+      items:[['ผ่าฟันคุด',3,6500]],
+      paid:6500,
+      steps:[['2569-08-14','เสนอแผน','ทพญ.อรอนงค์'],['2569-08-15','ตอบรับ','ชช'],
+             ['2569-08-17','ผ่าซี่ 48 เสร็จ — เหลือ 38, 28','ทพญ.อรอนงค์']]}),
+
+  /* ── เสร็จสิ้น ── */
+  pl({pat:'ประเสริฐ ทองดี', hn:'HN 22-455', doc:'ทพ.ประวิทย์', st:'done', made:'2569-06-25', age:53,
+      title:'รักษารากฟัน + ครอบฟัน ซี่ 16',
+      items:[['รักษารากฟัน ซี่ 16',1,9000],['ครอบฟันเซรามิก ซี่ 16',1,18000]],
+      paid:27000,
+      steps:[['2569-06-25','เสนอแผน + ตอบรับ','ทพ.ประวิทย์'],['2569-07-22','รักษารากเสร็จ','ทพ.ประวิทย์'],
+             ['2569-08-17','ใส่ครอบฟัน — ปิดแผน','ทพ.ประวิทย์']]}),
+  pl({pat:'กฤตย์ ทองสุข', hn:'HN 22-904', doc:'ทพ.กิตติ', st:'done', made:'2567-03-02', age:898,
+      title:'จัดฟันโลหะ + รีเทนเนอร์',
+      items:[['จัดฟันโลหะทั้งปาก',1,85000],['รีเทนเนอร์ Essix 2 ชุด',1,6000]],
+      paid:91000,
+      steps:[['2567-03-02','เริ่มการรักษา','ทพ.กิตติ'],['2569-08-06','ถอดเครื่องมือ + รับรีเทนเนอร์','ทพ.กิตติ'],
+             ['2569-08-17','ตรวจติดตาม — ปิดแผน','ทพ.กิตติ']]}),
+
+  /* ── ไม่ตอบรับ ── */
+  pl({pat:'สมชาย เกษมสุข', hn:'HN 22-118', doc:'ทพ.ประวิทย์', st:'declined', made:'2569-06-10', age:68,
+      title:'รากเทียม 1 ซี่ + ครอบฟัน',
+      items:[['รากเทียม ซี่ 36',1,45000],['ครอบฟันบนรากเทียม',1,20000]],
+      steps:[['2569-06-10','เสนอแผน','ทพ.ประวิทย์'],['2569-06-24','ติดตามครั้งที่ 2','ชช'],
+             ['2569-07-15','คนไข้แจ้งเลื่อนออกไปก่อน (งบประมาณ)','ชช']]}),
+  pl({pat:'อรวรรณ กิจเจริญ', hn:'HN 24-201', doc:'ทพญ.อรอนงค์', st:'declined', made:'2569-05-18', age:91,
+      title:'ฟอกสีฟัน + วีเนียร์ 2 ซี่',
+      items:[['ฟอกสีฟัน Zoom',1,8900],['วีเนียร์เซรามิก',2,18000]],
+      steps:[['2569-05-18','เสนอแผน','ทพญ.อรอนงค์'],['2569-06-02','คนไข้เลือกทำเฉพาะขูดหินปูน','ชช']]}),
+];
+
+const total = p => p.items.reduce((a,i) => a + Number(i[1]) * i[2], 0) - (p.disc || 0);
+const ageChip = p => p.age <= 7 ? ['a-fresh', p.age + ' วัน'] : p.age <= 14 ? ['a-warm', p.age + ' วัน'] : ['a-cold', p.age + ' วัน'];
+
+const TABS = [
+  ['proposed','รอตัดสินใจ'], ['draft','ร่าง'], ['accepted','ตอบรับแล้ว'],
+  ['active','กำลังรักษา'], ['done','เสร็จสิ้น'], ['declined','ไม่ตอบรับ'], ['all','ทั้งหมด'],
+];
+const S = {tab:'proposed', q:''};
+const hit = x => !S.q || (x.pat + ' ' + x.hn + ' ' + x.title + ' ' + x.id).toLowerCase().includes(S.q.toLowerCase());
+const rows = () => PLANS.filter(x => (S.tab === 'all' || x.st === S.tab) && hit(x));
+
+/* ── สรุป + กรวย ── */
+function renderSum(){
+  const prop = PLANS.filter(x => x.st === 'proposed');
+  const propVal = prop.reduce((a,x) => a + total(x), 0);
+  const won = PLANS.filter(x => ['accepted','active','done'].includes(x.st));
+  const lost = PLANS.filter(x => x.st === 'declined');
+  const rate = Math.round(won.length / (won.length + lost.length + prop.length) * 100);
+  const active = PLANS.filter(x => x.st === 'active');
+  const outstanding = active.reduce((a,x) => a + (total(x) - (x.paid || 0)), 0);
+
+  const cards = [
+    ['อัตราตอบรับแผน', '62', '%', 'เฉลี่ย 90 วัน · เป้าหมาย 70%', '#2E9E63',
+     '<path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/>'],
+    ['รอตัดสินใจ', prop.length, 'แผน', money(propVal) + ' ฿ ที่ยังไม่ปิด', '#E0951E',
+     '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>'],
+    ['กำลังรักษา', active.length, 'แผน', 'ค้างเก็บอีก ' + money(outstanding) + ' ฿', '#7A5AF0',
+     '<path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/>'],
+    ['ปิดได้เดือนนี้', money(won.filter(x => x.made >= '2569-08-01').reduce((a,x) => a + total(x), 0)), '฿',
+     won.filter(x => x.made >= '2569-08-01').length + ' แผนที่ตอบรับในเดือนนี้', '#2E6BE6',
+     '<path d="M12 19V5M6 11l6-6 6 6"/>'],
+  ];
+  $('#sum').innerHTML = cards.map(([lab,val,unit,sub,c,ico]) => `
+    <div class="card kpi">
+      <div class="row"><div class="ico" style="background:${c}1A;color:${c}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ico}</svg></div>
+        <div><div class="lab">${lab}</div></div></div>
+      <div class="val">${val}<small>${unit}</small></div>
+      <div class="delta flat">${sub}</div>
+    </div>`).join('');
+
+  /* กรวย: เสนอ → ตอบรับ → เริ่มรักษา → ปิดงาน (นับรวม 90 วันล่าสุด) */
+  const F = [
+    ['เสนอแผน', 42, 3120000, 100],
+    ['ตอบรับ', 26, 1880000, 62],
+    ['เริ่มรักษา', 24, 1710000, 57],
+    ['ปิดงาน + เก็บครบ', 19, 1284000, 45],
+  ];
+  $('#funnel').innerHTML = F.map(([lab,n,val,pct], i) => `
+    <div class="fstep">
+      <div class="lb">${lab}</div>
+      <div class="vv">${n}<small>แผน</small></div>
+      <div class="amt">${money(val)} ฿</div>
+      <div class="fbar"><i style="width:${pct}%"></i></div>
+      <div class="rate">${i === 0 ? 'ฐานเปรียบเทียบ' : `แปลงจากขั้นก่อนหน้า <b class="${pct < 50 ? 'bad' : ''}">${Math.round(n / F[i-1][1] * 100)}%</b>`}</div>
+    </div>`).join('');
+
+  /* แจ้งเตือนแผนที่ค้างนานเกิน 14 วัน */
+  const cold = prop.filter(x => x.age > 14);
+  $('#alertzone').innerHTML = cold.length ? `
+    <div class="alert">
+      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+      <div><b>มี ${cold.length} แผนที่เสนอไปเกิน 14 วันแล้วยังไม่ตอบรับ</b>
+        <p>โอกาสปิดของแผนที่ค้างเกิน 14 วันลดลงเหลือราว 18% — ${cold.map(x => esc(x.pat)).join(' · ')}</p></div>
+      <button class="btn" id="followAll">ติดตามทั้งหมด</button>
+    </div>` : '';
+  if ($('#followAll')) $('#followAll').onclick = () => toast('ส่งข้อความติดตาม ' + cold.length + ' รายผ่านไลน์แล้ว');
+}
+
+/* ── แท็บ + ตาราง ── */
+function renderTabs(){
+  $('#tabs').innerHTML = TABS.map(([k,lab]) => {
+    const n = k === 'all' ? PLANS.length : PLANS.filter(x => x.st === k).length;
+    return `<button class="${k === S.tab ? 'on' : ''}" data-t="${k}">${lab}<span class="n">${n}</span></button>`;
+  }).join('');
+  $$('#tabs button').forEach(b => b.onclick = () => { S.tab = b.dataset.t; renderTabs(); renderTable(); });
+}
+
+function renderTable(){
+  const r = rows();
+  const val = r.reduce((a,x) => a + total(x), 0);
+  $('#count').textContent = `${r.length} แผน · รวม ${money(val)} ฿`;
+  $('#sub').textContent = `รอตัดสินใจ ${PLANS.filter(x => x.st === 'proposed').length} แผน · ` +
+    `มูลค่า ${money(PLANS.filter(x => x.st === 'proposed').reduce((a,x) => a + total(x), 0))} ฿`;
+
+  $('#tbody').innerHTML = r.length ? r.map(x => {
+    const s = ST[x.st], [ac, at] = ageChip(x);
+    const last = x.steps[x.steps.length - 1];
+    return `<tr data-id="${x.id}">
+      <td class="mono" style="font-size:12.5px">${x.id}</td>
+      <td><div class="who"><div class="ini">${esc(initial(x.pat))}</div>
+        <div><b>${esc(x.pat)}</b><span class="mono">${esc(x.hn)}</span></div></div></td>
+      <td style="max-width:260px">${esc(x.title)}
+        <div style="font-size:11.5px;color:var(--muted);margin-top:3px">${x.items.length} รายการ</div></td>
+      <td>${esc(x.doc)}</td>
+      <td class="right num"><b>${money(total(x))}</b>${x.paid ? `<div style="font-size:11px;color:var(--green)">ชำระแล้ว ${money(x.paid)}</div>` : ''}</td>
+      <td class="num">${thDate(x.made)}</td>
+      <td><span class="chip" style="background:${s.c}1F;color:${s.c}">${s.n}</span></td>
+      <td>${x.st === 'proposed' ? `<span class="agechip ${ac}">${at}</span>` : `<span style="font-size:11.5px;color:var(--muted)">${esc(last ? last[1].slice(0,22) : '—')}</span>`}</td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="8" class="empty">ไม่มีแผนในสถานะนี้</td></tr>';
+
+  $$('#tbody tr[data-id]').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.id));
+}
+
+/* ── ลิ้นชักรายละเอียดแผน ── */
+function openDrawer(id){
+  const x = PLANS.find(i => i.id === id); if (!x) return;
+  const s = ST[x.st], sum = x.items.reduce((a,i) => a + Number(i[1]) * i[2], 0);
+
+  $('#drawer').innerHTML = `
+    <div class="dhead">
+      <button class="x" id="dx" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <div class="mono" style="font-size:11.5px;color:var(--muted)">${x.id}</div>
+      <b style="font-size:16px;font-weight:600;letter-spacing:-.01em;display:block;margin-top:3px">${esc(x.title)}</b>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px">${esc(x.pat)} · ${esc(x.hn)} · ${esc(x.doc)}</div>
+      <div style="margin-top:11px;display:flex;gap:7px;flex-wrap:wrap">
+        <span class="chip" style="background:${s.c}1F;color:${s.c}">${s.n}</span>
+        ${x.st === 'proposed' ? `<span class="agechip ${ageChip(x)[0]}">เสนอมาแล้ว ${x.age} วัน</span>` : ''}
+      </div>
+    </div>
+    <div class="dbody">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:4px">รายการในแผน</div>
+      <table class="items">
+        <thead><tr><th>รายการ</th><th class="r">จำนวน</th><th class="r">ราคา/หน่วย</th><th class="r">รวม</th></tr></thead>
+        <tbody>${x.items.map(i => `<tr>
+          <td>${esc(i[0])}</td><td class="r">${i[1]}</td>
+          <td class="r">${money(i[2])}</td><td class="r">${money(Number(i[1]) * i[2])}</td></tr>`).join('')}
+        </tbody>
+        <tfoot>
+          ${x.disc ? `<tr class="sub"><td colspan="3" class="r">ส่วนลด</td><td class="r">−${money(x.disc)}</td></tr>` : ''}
+          <tr><td colspan="3" class="r">ยอดรวมสุทธิ</td><td class="r">${money(total(x))} ฿</td></tr>
+          ${x.paid ? `<tr class="sub"><td colspan="3" class="r">ชำระแล้ว</td><td class="r" style="color:var(--green)">${money(x.paid)}</td></tr>
+          <tr class="sub"><td colspan="3" class="r">คงเหลือ</td><td class="r" style="color:var(--rose)">${money(total(x) - x.paid)}</td></tr>` : ''}
+        </tfoot>
+      </table>
+
+      <div style="font-size:12.5px;color:var(--muted);margin:18px 0 2px">ไทม์ไลน์การติดตาม</div>
+      <div class="steps">${x.steps.map(st => `<div class="s">
+        <span class="dt">${thDate(st[0])}</span>
+        <div><b>${esc(st[1])}</b><span>โดย ${esc(st[2])}</span></div></div>`).join('')}</div>
+    </div>
+    <div class="dfoot">
+      ${x.st === 'proposed' ? `
+        <div class="pair">
+          <button class="btn solid" id="dwin">บันทึกว่าตอบรับ</button>
+          <button class="btn danger" id="dlose">ไม่ตอบรับ</button>
+        </div>
+        <button class="btn wide" id="dfollow">ส่งข้อความติดตาม</button>` :
+      x.st === 'draft' ? `<button class="btn solid wide" id="dsend">ส่งใบเสนอราคาให้คนไข้</button>` :
+      `<button class="btn wide" id="dopen">เปิดประวัติคนไข้</button>`}
+    </div>`;
+
+  $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
+  $('#dx').onclick = closeDrawer;
+  const re = () => { renderSum(); renderTabs(); renderTable(); };
+  if ($('#dwin')) $('#dwin').onclick = () => {
+    const old = x.st; x.st = 'accepted';
+    x.steps.push(['2569-08-17','คนไข้ตอบรับแผน','ชช']);
+    closeDrawer(); re();
+    toast(x.pat + ' ตอบรับแผน ' + money(total(x)) + ' ฿', () => { x.st = old; x.steps.pop(); re(); });
+  };
+  if ($('#dlose')) $('#dlose').onclick = () => {
+    const old = x.st; x.st = 'declined';
+    x.steps.push(['2569-08-17','คนไข้แจ้งไม่รับแผน','ชช']);
+    closeDrawer(); re();
+    toast('บันทึกว่าไม่ตอบรับแล้ว', () => { x.st = old; x.steps.pop(); re(); });
+  };
+  if ($('#dfollow')) $('#dfollow').onclick = () => {
+    x.steps.push(['2569-08-17','ส่งข้อความติดตามทางไลน์','ชช']);
+    openDrawer(id); toast('ส่งข้อความติดตามถึง ' + x.pat + ' แล้ว');
+  };
+  if ($('#dsend')) $('#dsend').onclick = () => {
+    const old = x.st; x.st = 'proposed'; x.age = 0;
+    x.steps.push(['2569-08-17','ส่งใบเสนอราคาให้คนไข้','ชช']);
+    closeDrawer(); re();
+    toast('ส่งใบเสนอราคาให้ ' + x.pat + ' แล้ว', () => { x.st = old; x.steps.pop(); re(); });
+  };
+  if ($('#dopen')) $('#dopen').onclick = () => { location.href = 'patients.html'; };
+}
+function closeDrawer(){ $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); }
+$('#scrim').onclick = closeDrawer;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+$('#q').oninput = e => { S.q = e.target.value.trim(); renderTable(); };
+$('#bell').onclick = () => toast('มีแผนค้างเกิน 14 วัน ' + PLANS.filter(x => x.st === 'proposed' && x.age > 14).length + ' รายการ');
+$('#exp').onclick = () => toast('ส่งออกไฟล์ CSV — เดโม');
+$('#addPlan').onclick = () => toast('เปิดฟอร์มสร้างแผนการรักษาใหม่ — เดโม');
+
+renderSum(); renderTabs(); renderTable();
+</script>
+</body>
+</html>
+

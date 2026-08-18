@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>กล่องข้อความ · Zentr Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ กล่องข้อความรวม ═══ */
+.side .nav a{cursor:pointer}
+.side .nav a.soon{opacity:.72}
+
+.inbox-top{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.inbox-top .sla{
+  display:flex;align-items:center;gap:7px;margin-left:auto;
+  font-size:12.5px;color:var(--muted);
+}
+.inbox-top .sla b{color:var(--rose);font-weight:600;font-family:"IBM Plex Mono",monospace}
+.livedot{
+  width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;
+  animation:blip 2s ease-in-out infinite;
+}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+
+/* ── 3-pane shell ── */
+.inbox-main{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+.inbox{
+  display:grid;grid-template-columns:334px minmax(0,1fr) 300px;
+  gap:16px;padding:18px 26px 22px;align-items:stretch;
+  flex:1;min-height:0;
+}
+.pane{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  display:flex;flex-direction:column;overflow:hidden;
+  height:100%;min-height:0;
+}
+.pane-h{
+  display:flex;align-items:center;gap:9px;flex:none;
+  padding:13px 15px;border-bottom:1px solid var(--border);
+}
+.pane-h h2{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.pane-h .n{font-size:12px;color:var(--muted);margin-left:auto}
+.pane-b{overflow-y:auto;flex:1;min-height:0}
+
+/* ── conversation list ── */
+.conv{
+  display:flex;gap:11px;padding:12px 15px;cursor:pointer;
+  border-left:3px solid transparent;
+  transition:background .14s,border-color .14s;
+}
+.conv+.conv{border-top:1px solid var(--border)}
+.conv:hover{background:#F7F9FA}
+.conv.on{background:rgba(46,107,230,.055);border-left-color:var(--brand)}
+.conv .av{position:relative;flex:none}
+.conv .ini{width:36px;height:36px;border-radius:11px}
+.conv .badge{
+  position:absolute;right:-3px;bottom:-3px;
+  width:16px;height:16px;border-radius:5px;
+  display:grid;place-items:center;color:#fff;
+  font-size:7.5px;font-weight:700;letter-spacing:.02em;
+  border:1.5px solid #fff;
+}
+.badge.line{background:var(--line)}
+.badge.fb{background:var(--fb)}
+.badge.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.badge.web{background:var(--ink-700)}
+.conv .bd{flex:1;min-width:0}
+.conv .r1{display:flex;align-items:baseline;gap:7px}
+.conv .r1 b{font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conv .r1 time{
+  margin-left:auto;flex:none;font-size:11px;color:var(--faint);
+  font-family:"IBM Plex Mono",monospace;
+}
+.conv .sn{
+  font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.conv.unread .r1 b{font-weight:600}
+.conv.unread .sn{color:var(--text)}
+.conv .r3{display:flex;align-items:center;gap:6px;margin-top:7px;flex-wrap:wrap}
+.dotn{
+  min-width:17px;height:17px;padding:0 5px;border-radius:99px;flex:none;
+  display:grid;place-items:center;background:var(--rose);color:#fff;
+  font-size:10.5px;font-weight:600;
+}
+.wait{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-weight:500;font-family:"IBM Plex Mono",monospace;
+}
+.wait.ok{color:var(--faint)}
+.wait.warn{color:#A9761B}
+.wait.bad{color:var(--rose)}
+
+.mtag{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 7px;border-radius:6px;font-size:10.5px;font-weight:500;
+}
+.m-emg{background:rgba(210,80,75,.11);color:var(--rose)}
+.m-price{background:rgba(245,178,63,.16);color:#A9761B}
+.m-book{background:rgba(46,107,230,.10);color:var(--brand)}
+.m-move{background:rgba(122,90,240,.11);color:var(--violet)}
+.m-info{background:var(--paper);color:var(--muted)}
+.m-ai{background:rgba(56,198,220,.14);color:#12798A}
+.m-done{background:rgba(46,158,99,.11);color:var(--green)}
+.m-new{background:rgba(122,90,240,.11);color:var(--violet)}
+
+.listempty{padding:46px 22px;text-align:center;color:var(--faint);font-size:13px;line-height:1.7}
+
+/* ── thread ── */
+.th-h{
+  display:flex;align-items:center;gap:11px;flex:none;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+}
+.th-h .ini{width:36px;height:36px;border-radius:11px}
+.th-h .who b{font-size:14px;font-weight:600;display:block;letter-spacing:-.01em}
+.th-h .who span{font-size:11.5px;color:var(--muted)}
+.th-h .acts{margin-left:auto;display:flex;gap:7px;flex:none}
+
+.th-b{
+  overflow-y:auto;flex:1;min-height:0;padding:18px 20px;
+  background:
+    radial-gradient(520px 320px at 12% 0%, rgba(56,198,220,.05), transparent 62%),
+    #FBFCFD;
+}
+.daysep{
+  display:flex;align-items:center;gap:10px;margin:6px 0 16px;
+  font-size:11px;color:var(--faint);
+}
+.daysep::before,.daysep::after{content:"";flex:1;height:1px;background:var(--border)}
+
+.bub{max-width:74%;margin-bottom:12px;display:flex;flex-direction:column;gap:4px}
+.bub .txt{
+  padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.6;
+  white-space:pre-wrap;word-break:break-word;
+}
+.bub .meta{font-size:10.5px;color:var(--faint);font-family:"IBM Plex Mono",monospace}
+.bub.in{margin-right:auto;align-items:flex-start}
+.bub.in .txt{background:#fff;border:1px solid var(--border);border-bottom-left-radius:5px}
+.bub.out{margin-left:auto;align-items:flex-end}
+.bub.out .txt{
+  background:linear-gradient(160deg,var(--brand),var(--brand-dark));color:#fff;
+  border-bottom-right-radius:5px;
+}
+.bub.out.bot .txt{
+  background:linear-gradient(160deg,#17A8C0,#12798A);
+}
+.bub .meta .by{color:var(--muted)}
+.bub.sys{max-width:100%;align-items:center;margin:2px 0 14px}
+.bub.sys .txt{
+  background:var(--paper);border:1px dashed var(--border);color:var(--muted);
+  font-size:11.5px;padding:6px 12px;border-radius:99px;
+}
+.bub .att{
+  display:flex;align-items:center;gap:9px;padding:9px 12px;margin-top:3px;
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  font-size:12.5px;color:var(--text);
+}
+.bub .att svg{color:var(--brand);flex:none}
+.bub .att span{color:var(--muted);font-size:11.5px}
+
+/* ── AI draft ── */
+.draft{
+  flex:none;margin:0 14px 12px;padding:12px 14px;
+  border:1px solid rgba(56,198,220,.45);border-radius:var(--r-md);
+  background:linear-gradient(150deg,rgba(56,198,220,.10),rgba(46,107,230,.05));
+}
+.draft .dh{display:flex;align-items:center;gap:7px;font-size:11.5px;color:#12798A;font-weight:600}
+.draft .dh .conf{
+  margin-left:auto;font-family:"IBM Plex Mono",monospace;font-weight:500;
+  font-size:11px;color:var(--muted);
+}
+.draft p{font-size:13px;line-height:1.65;margin-top:8px;color:var(--text);white-space:pre-wrap}
+.draft .db{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
+
+/* ── composer ── */
+.comp{flex:none;border-top:1px solid var(--border);padding:11px 14px 13px;background:#fff}
+.canned{display:flex;gap:6px;overflow-x:auto;padding-bottom:9px}
+.canned button{
+  flex:none;padding:5px 11px;border-radius:99px;border:1px dashed var(--border);
+  background:#fff;font:inherit;font-size:11.5px;color:var(--muted);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.canned button:hover{border-style:solid;border-color:var(--brand);color:var(--brand)}
+.compbox{
+  display:flex;align-items:flex-end;gap:9px;
+  border:1px solid var(--border);border-radius:var(--r-md);padding:8px 9px 8px 12px;
+  transition:border-color .15s,box-shadow .15s;background:#fff;
+}
+.compbox:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.11)}
+.compbox textarea{
+  flex:1;border:0;outline:none;resize:none;font:inherit;font-size:13.5px;
+  line-height:1.6;max-height:132px;color:var(--text);background:none;
+}
+.compbox textarea::placeholder{color:#AFBFC5}
+.sendbtn{
+  width:36px;height:36px;flex:none;border:0;border-radius:10px;cursor:pointer;
+  display:grid;place-items:center;color:#fff;transition:.15s;
+  background:var(--brand);
+}
+.sendbtn:hover{background:var(--brand-dark)}
+.sendbtn:disabled{background:#C6D2D7;cursor:not-allowed}
+.comp .hint{
+  display:flex;align-items:center;gap:6px;margin-top:8px;
+  font-size:11px;color:var(--faint);
+}
+.comp .hint b{color:var(--muted);font-weight:500}
+.comp .hint .sp{margin-left:auto}
+
+.closed-note{
+  flex:none;padding:14px 16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);
+  background:#FAFBFC;
+}
+.closed-note svg{color:var(--green);flex:none}
+
+/* ── right rail ── */
+.ctx{display:grid;gap:14px;align-content:start;max-height:100%;overflow-y:auto}
+.ctx .card{padding:15px}
+.ctx .card>header{margin-bottom:11px}
+.ctx .card h2{font-size:13.5px}
+.pcard{display:flex;align-items:center;gap:11px}
+.pcard .ini{width:40px;height:40px;border-radius:12px;font-size:14px}
+.pcard b{font-size:14px;font-weight:600;display:block;letter-spacing:-.01em}
+.pcard span{font-size:11.5px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+.facts{display:grid;gap:9px;margin-top:13px;font-size:12.5px}
+.facts div{display:flex;gap:10px;align-items:baseline}
+.facts .k{color:var(--muted);width:74px;flex:none}
+.facts .v{flex:1;color:var(--text)}
+.facts .v b{font-weight:600}
+.qa{display:grid;gap:7px}
+.qa button{
+  display:flex;align-items:center;gap:9px;width:100%;
+  padding:9px 11px;border:1px solid var(--border);border-radius:10px;background:#fff;
+  font:inherit;font-size:12.5px;color:var(--text);cursor:pointer;transition:.15s;text-align:left;
+}
+.qa button:hover{border-color:var(--brand);color:var(--brand);background:rgba(46,107,230,.04)}
+.qa button svg{flex:none;color:var(--muted)}
+.qa button:hover svg{color:var(--brand)}
+.hist{display:grid;gap:0}
+.hist div{display:flex;gap:9px;padding:9px 0;font-size:12.5px;align-items:baseline}
+.hist div+div{border-top:1px solid var(--border)}
+.hist .d{color:var(--faint);font-size:11px;font-family:"IBM Plex Mono",monospace;width:52px;flex:none}
+.hist .t{flex:1;color:var(--muted)}
+.railempty{font-size:12.5px;color:var(--faint);text-align:center;padding:30px 10px;line-height:1.7}
+
+/* ── responsive ── */
+@media (max-width:1320px){
+  .inbox{grid-template-columns:300px minmax(0,1fr)}
+  .ctx{display:none}
+}
+@media (max-width:1000px){
+  .inbox-main{height:auto;overflow:visible}
+  .inbox{grid-template-columns:1fr;padding:14px 16px 20px}
+  .pane{height:auto;max-height:none}
+  .pane.list{max-height:340px}
+  .pane.th{min-height:560px}
+  .inbox-top{position:static;padding:11px 16px}
+  .inbox-top .sla{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="inbox.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
+      <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><nav class="nav">
+      <a href="reports.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="settings.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot"><div class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div></div>
+  </aside>
+  <main class="inbox-main">
+    <header class="top">
+      <div><h1>กล่องข้อความ</h1><div class="sub" id="topsub">สาขาอารีย์ · รวมทุกช่องทางไว้ที่เดียว</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหาชื่อ HN หรือข้อความ"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+
+    <div class="inbox-top">
+      <div class="seg" id="segs">
+        <button class="on" data-s="open">ค้างตอบ</button>
+        <button data-s="wait">รอเจ้าหน้าที่</button>
+        <button data-s="ai">AI จัดการแล้ว</button>
+        <button data-s="mine">ของฉัน</button>
+        <button data-s="done">ปิดแล้ว</button>
+        <button data-s="all">ทั้งหมด</button>
+      </div>
+      <div class="filters" style="margin-left:4px" id="chs">
+        <button class="fchip on" data-c="all">ทุกช่องทาง<span class="chcount" data-n="all"></span></button>
+        <button class="fchip" data-c="line"><span class="sw" style="background:#06C755"></span>LINE<span class="chcount" data-n="line"></span></button>
+        <button class="fchip" data-c="fb"><span class="sw" style="background:#1877F2"></span>Facebook<span class="chcount" data-n="fb"></span></button>
+        <button class="fchip" data-c="ig"><span class="sw" style="background:#E1306C"></span>Instagram<span class="chcount" data-n="ig"></span></button>
+        <button class="fchip" data-c="web"><span class="sw" style="background:#12414F"></span>เว็บแชท<span class="chcount" data-n="web"></span></button>
+      </div>
+      <div class="sla"><span class="livedot"></span>ค้างนานสุด <b id="worst">—</b> · เป้าหมายตอบภายใน 5 นาที</div>
+    </div>
+
+    <div class="inbox">
+      <div class="pane list">
+        <div class="pane-h">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          <h2>บทสนทนา</h2><span class="n" id="cnt"></span>
+        </div>
+        <div class="pane-b" id="list"></div>
+      </div>
+
+      <div class="pane th" id="th"></div>
+
+      <aside class="ctx" id="ctx"></aside>
+    </div>
+  </main>
+</div>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ กล่องข้อความรวม ═══════════════ */
+const CH = {
+  line:{n:'LINE OA',      s:'LINE', cls:'line'},
+  fb:  {n:'Facebook',     s:'FB',   cls:'fb'},
+  ig:  {n:'Instagram',    s:'IG',   cls:'ig'},
+  web: {n:'เว็บแชทคลินิก', s:'WEB',  cls:'web'},
+};
+const TAGS = {
+  emg:  {t:'ปวดฉุกเฉิน',   c:'m-emg'},
+  price:{t:'สอบถามราคา',   c:'m-price'},
+  book: {t:'ขอนัดหมาย',    c:'m-book'},
+  move: {t:'ขอเลื่อนนัด',  c:'m-move'},
+  info: {t:'สอบถามทั่วไป', c:'m-info'},
+  plan: {t:'ติดตามแผนรักษา', c:'m-new'},
+};
+
+/* คนไข้ที่ผูกกับบทสนทนา — ข้อมูลชุดเดียวกับหน้าอื่นในระบบ */
+const P = {
+  'HN 24-882':{name:'ธนภัทร ศรีวิไล', age:'32 ปี', right:'เงินสด', doc:'ทพ.ประวิทย์',
+    next:'—', plan:null, bal:0,
+    hist:[['12 ส.ค.','อุดฟัน 2 ซี่'],['3 มี.ค.','ขูดหินปูน + ตรวจฟัน']]},
+  'HN 23-119':{name:'สุพรรษา ใจงาม', age:'28 ปี', right:'ประกันสังคม', doc:'ทพญ.นภา',
+    next:'—', plan:null, bal:0,
+    hist:[['14 ก.พ.','ขูดหินปูน (สิทธิ ปกส.)'],['9 ก.ย. 68','อุดฟัน 1 ซี่']]},
+  'HN 22-455':{name:'ประเสริฐ ทองดี', age:'54 ปี', right:'ประกันกลุ่ม AIA', doc:'ทพ.ประวิทย์',
+    next:'2 ก.ย. 10:00', plan:null, bal:0,
+    hist:[['5 ส.ค.','ครอบฟัน ซี่ 16'],['22 ก.ค.','รักษาราก ครั้งที่ 3']]},
+  'HN 24-201':{name:'อรวรรณ กิจเจริญ', age:'41 ปี', right:'เงินสด', doc:'ทพญ.อรอนงค์',
+    next:'20 ส.ค. 09:30', plan:null, bal:4500,
+    hist:[['6 ส.ค.','ถอนฟัน ซี่ 26'],['18 ก.ค.','ตรวจฟันประจำปี']]},
+  'HN 24-733':{name:'พิมพ์ชนก วงศ์ทอง', age:'26 ปี', right:'เงินสด', doc:'ทพญ.นภา',
+    next:'—', plan:null, bal:0,
+    hist:[['16 ส.ค.','ถอนฟันคุด ซี่ 48']]},
+  'HN 24-118':{name:'ศิริพร ดำรงค์', age:'35 ปี', right:'เงินสด', doc:'ทพญ.นภา',
+    next:'24 ส.ค. 13:00', plan:'วีเนียร์ 6 ซี่ · 108,000 ฿', bal:54000,
+    hist:[['14 ส.ค.','พิมพ์ปาก ส่งแล็บ'],['2 ส.ค.','ปรึกษา + ถ่ายภาพ']]},
+  'HN 23-556':{name:'กัลยา ปิ่นทอง', age:'38 ปี', right:'ประกันสังคม', doc:'ทพญ.นภา',
+    next:'17 ส.ค. 09:00', plan:null, bal:0,
+    hist:[['17 ส.ค.','ขูดหินปูน + ตรวจฟัน'],['20 ก.พ.','อุดฟัน ซี่ 36']]},
+  'HN 22-701':{name:'วีรภัทร สุขใจ', age:'19 ปี', right:'เงินสด', doc:'ทพ.กิตติ',
+    next:'17 ส.ค. 09:30', plan:'จัดฟันโลหะ · เดือนที่ 14', bal:6500,
+    hist:[['17 ก.ค.','ปรับเครื่องมือ ครั้งที่ 13'],['19 มิ.ย.','ปรับเครื่องมือ ครั้งที่ 12']]},
+  'HN 24-771':{name:'อธิป วัฒนกุล', age:'47 ปี', right:'เงินสด', doc:'ทพ.ประวิทย์',
+    next:'19 ส.ค. 11:00', plan:'รากเทียม 2 ซี่ + ครอบฟัน · 148,000 ฿', bal:0,
+    hist:[['13 ส.ค.','เสนอแผนการรักษา'],['13 ส.ค.','CT scan + ปรึกษา']]},
+  'HN 24-772':{name:'ปรียา สงวนศักดิ์', age:'24 ปี', right:'เงินสด', doc:'ทพ.กิตติ',
+    next:'—', plan:'จัดฟันใส Invisalign · 135,000 ฿', bal:0,
+    hist:[['8 ส.ค.','เสนอแผน + สแกนช่องปาก'],['1 ส.ค.','ปรึกษาครั้งแรก']]},
+  'HN 23-330':{name:'สุชาติ พูลทรัพย์', age:'45 ปี', right:'เงินสด', doc:'ทพญ.อรอนงค์',
+    next:'25 ส.ค. 14:00', plan:null, bal:0,
+    hist:[['16 ส.ค.','พิมพ์ปากทำเฝือกสบฟัน']]},
+};
+
+/* บทสนทนา — เวลาเป็น "นาทีที่ผ่านมา" นับจาก 10:42 น. ของวันนี้ */
+const C = [
+  {id:'m1', ch:'line', who:'คุณเบส', hn:'HN 24-882', tag:'emg', st:'wait', mins:3, unread:2,
+   msgs:[
+     {f:'in', t:'10:38', x:'ปวดฟันกรามล่างขวามากตั้งแต่เมื่อคืนครับ กินยาแก้ปวดแล้วก็ยังปวดตุบ ๆ อยู่'},
+     {f:'in', t:'10:39', x:'วันนี้เข้าไปหาหมอได้ไหมครับ'},
+     {f:'sys', x:'ระบบจัดเป็นเคสปวดฉุกเฉิน · แจ้งเจ้าหน้าที่หน้าเคาน์เตอร์แล้ว 10:39'},
+   ],
+   draft:{c:86, x:'คุณเบสค่ะ วันนี้คลินิกกันช่วงเวลาไว้สำหรับเคสปวดฉุกเฉิน 2 ช่วงค่ะ — 13:30 น. และ 16:00 น. กับ ทพ.ประวิทย์\nสะดวกช่วงไหนคะ เดี๋ยวจองให้เลยค่ะ ระหว่างนี้ทานยาแก้ปวดต่อได้ตามฉลาก และเลี่ยงเคี้ยวข้างที่ปวดนะคะ'}},
+
+  {id:'m2', ch:'web', who:'ธนกร อภิรักษ์', hn:null, tag:'price', st:'wait', mins:21, unread:1,
+   msgs:[
+     {f:'in', t:'10:21', x:'สอบถามค่าผ่าฟันคุดครับ ต้องเอกซเรย์ก่อนไหม แล้วใช้เวลากี่วันถึงหายบวม'},
+   ],
+   draft:{c:74, x:'สวัสดีค่ะ ค่าผ่าฟันคุดที่คลินิกอยู่ที่ 3,500–6,500 บาทต่อซี่ ขึ้นกับความยากของฟันค่ะ\nต้องเอกซเรย์ก่อนทุกเคส (ค่าฟิล์ม 300 บาท / OPG 800 บาท) เพื่อดูตำแหน่งรากและเส้นประสาทค่ะ\nทั่วไปบวมมากวันที่ 2–3 แล้วยุบภายใน 5–7 วันค่ะ'}},
+
+  {id:'m3', ch:'line', who:'คุณแนน', hn:'HN 23-119', tag:'book', st:'wait', mins:14, unread:1,
+   msgs:[
+     {f:'in', t:'10:28', x:'อยากนัดขูดหินปูนวันเสาร์นี้ค่ะ ยังมีคิวไหมคะ ใช้สิทธิประกันสังคมด้วยค่ะ'},
+   ],
+   draft:{c:91, x:'คุณแนนค่ะ วันเสาร์ที่ 22 ส.ค. ยังว่าง 11:00 และ 15:30 น. ค่ะ\nสิทธิประกันสังคมใช้ได้เลย ไม่ต้องสำรองจ่าย วงเงิน 900 บาท/ปี พกบัตรประชาชนมาใบเดียวค่ะ'}},
+
+  {id:'m4', ch:'ig', who:'@mint.chch', hn:null, tag:'price', st:'wait', mins:12, unread:1,
+   msgs:[
+     {f:'in', t:'10:30', x:'ฟอกสีฟันราคาเท่าไหร่คะ ทำครั้งเดียวเห็นผลเลยไหม'},
+   ],
+   draft:{c:83, x:'สวัสดีค่ะ ฟอกสีฟันที่คลินิกมี 2 แบบค่ะ\n• ฟอกที่คลินิก (Zoom) 8,900 บาท เห็นผลทันทีหลังทำ ขาวขึ้นเฉลี่ย 4–6 เฉด\n• ชุดฟอกกลับบ้าน 5,500 บาท ใช้เอง 10–14 วัน\nแนะนำขูดหินปูนก่อนฟอก 1 ครั้งเพื่อให้สีติดสม่ำเสมอค่ะ'}},
+
+  {id:'m5', ch:'fb', who:'ประเสริฐ ทองดี', hn:'HN 22-455', tag:'info', st:'wait', mins:9, unread:1,
+   msgs:[
+     {f:'in', t:'10:33', x:'ขอใบเสร็จย้อนหลังของเดือนที่แล้วเพื่อเบิกประกันได้ไหมครับ'},
+   ],
+   draft:null},
+
+  {id:'m6', ch:'line', who:'คุณอร', hn:'HN 24-201', tag:'move', st:'wait', mins:7, unread:1,
+   msgs:[
+     {f:'in', t:'10:35', x:'ขอเลื่อนนัดวันที่ 20 ส.ค. เช้า เป็นช่วงบ่ายได้ไหมคะ ติดประชุมพอดี'},
+   ],
+   draft:{c:88, x:'คุณอรค่ะ วันที่ 20 ส.ค. ช่วงบ่ายเหลือ 14:00 และ 16:30 น. กับ ทพญ.อรอนงค์ ค่ะ\nยืนยันช่วงไหนดีคะ เดี๋ยวย้ายนัดให้เลยค่ะ'}},
+
+  {id:'m7', ch:'ig', who:'@tonny_bkk', hn:null, tag:'price', st:'wait', mins:5, unread:1,
+   msgs:[
+     {f:'in', t:'10:37', x:'รากเทียมมีผ่อน 0% ไหมครับ กี่เดือน'},
+   ],
+   draft:{c:79, x:'สวัสดีค่ะ รากเทียมผ่อน 0% ได้ 6 หรือ 10 เดือน ผ่านบัตรเครดิต KBank / SCB / BBL ค่ะ\nราคารวมครอบฟันเริ่มต้น 45,000 บาท/ซี่ (ระบบ Straumann 62,000 บาท/ซี่)\nนัดปรึกษาและเอกซเรย์ประเมินกระดูกฟรีค่ะ'}},
+
+  {id:'m8', ch:'line', who:'คุณพิม', hn:'HN 24-733', tag:'info', st:'wait', mins:2, unread:1,
+   msgs:[
+     {f:'out', t:'เมื่อวาน 17:20', x:'ถอนฟันคุดเรียบร้อยนะคะ กัดผ้าก๊อซแน่น ๆ 1 ชั่วโมง งดบ้วนน้ำแรง ๆ และงดดูดหลอด 24 ชม. ค่ะ', by:'ชช'},
+     {f:'in', t:'10:40', x:'หลังถอนฟันกินยาแก้ปวดพร้อมยาปฏิชีวนะได้ไหมคะ แล้วแผลมีเลือดซึมนิดหน่อยปกติไหม'},
+   ],
+   draft:{c:81, x:'คุณพิมค่ะ ทานพร้อมกันได้ค่ะ แนะนำทานหลังอาหารทันที และทานยาปฏิชีวนะให้ครบตามจำนวน\nเลือดซึมจาง ๆ ใน 24 ชม.แรกถือว่าปกติค่ะ ถ้าเลือดไหลไม่หยุดเกิน 1 ชม. หรือบวมมากขึ้นวันที่ 3 รบกวนแจ้งกลับมานะคะ'}},
+
+  {id:'m9', ch:'ig', who:'@ploy_dent', hn:null, tag:'price', st:'ai', mins:11, unread:0,
+   msgs:[
+     {f:'in', t:'10:29', x:'จัดฟันใสราคาเท่าไหร่คะ ผ่อนได้ไหม'},
+     {f:'bot', t:'10:29', x:'สวัสดีค่ะ จัดฟันใส Invisalign ที่คลินิกเริ่มต้น 89,000 บาท (เคสง่าย ~20 ชุด) ถึง 165,000 บาท (เคสเต็ม)\nผ่อน 0% ได้ 10 เดือนผ่านบัตรเครดิต หรือแบ่งจ่ายตามงวดการรักษาได้ค่ะ'},
+     {f:'bot', t:'10:29', x:'สนใจนัดสแกนช่องปากประเมินเคสฟรีไหมคะ ใช้เวลาประมาณ 45 นาทีค่ะ'},
+     {f:'sys', x:'AI ตอบอัตโนมัติ · ความมั่นใจ 92% · ยังไม่มีคำถามใหม่'},
+   ],
+   draft:null},
+
+  {id:'m10', ch:'line', who:'คุณกัลยา', hn:'HN 23-556', tag:'info', st:'ai', mins:18, unread:0,
+   msgs:[
+     {f:'in', t:'10:24', x:'ใช้สิทธิประกันสังคมขูดหินปูนต้องเตรียมอะไรบ้างคะ'},
+     {f:'bot', t:'10:24', x:'คุณกัลยาค่ะ ใช้แค่บัตรประชาชนใบเดียวค่ะ ไม่ต้องสำรองจ่าย\nสิทธิทันตกรรมประกันสังคมวงเงิน 900 บาท/ปี ครอบคลุมขูดหินปูน อุดฟัน ถอนฟัน และผ่าฟันคุดค่ะ\nปีนี้คุณกัลยายังไม่ได้ใช้สิทธิเลยค่ะ'},
+     {f:'in', t:'10:26', x:'ขอบคุณค่ะ เดี๋ยวเจอกันตอน 9 โมงนะคะ'},
+     {f:'bot', t:'10:26', x:'ได้เลยค่ะ แล้วพบกันวันนี้ 09:00 น. กับ ทพญ.นภา ค่ะ 😊'},
+   ],
+   draft:null},
+
+  {id:'m11', ch:'fb', who:'วีรภัทร สุขใจ', hn:'HN 22-701', tag:'move', st:'ai', mins:25, unread:0,
+   msgs:[
+     {f:'in', t:'10:17', x:'ขอเลื่อนนัดปรับเครื่องมือเป็นสัปดาห์หน้าได้ไหมครับ'},
+     {f:'bot', t:'10:17', x:'ได้ค่ะ นัดเดิมวันนี้ 09:30 น. กับ ทพ.กิตติ นะคะ\nสัปดาห์หน้ามีคิวว่าง 2 ช่วงค่ะ — จันทร์ 24 ส.ค. 17:00 น. หรือ พุธ 26 ส.ค. 10:30 น.\nสะดวกช่วงไหนคะ'},
+     {f:'sys', x:'AI เสนอเวลาใหม่ 2 ช่วง · รอคนไข้ยืนยัน 25 นาที'},
+   ],
+   draft:{c:70, x:'คุณวีรภัทรคะ รบกวนยืนยันเวลานัดใหม่ด้วยนะคะ ถ้าไม่สะดวกทั้งสองช่วง แจ้งวันที่สะดวกมาได้เลยค่ะ\n(นัดปรับเครื่องมือไม่ควรห่างเกิน 6 สัปดาห์นะคะ)'}},
+
+  {id:'m12', ch:'line', who:'คุณศิริพร', hn:'HN 24-118', tag:'info', st:'ai', mins:42, unread:0,
+   msgs:[
+     {f:'in', t:'10:00', x:'วีเนียร์ที่พิมพ์ปากไปแล้ว ต้องมาลองสีก่อนไหมคะ'},
+     {f:'bot', t:'10:00', x:'คุณศิริพรค่ะ เคสของคุณศิริพรแล็บนัดลองสีก่อนเผาจริงค่ะ\nนัดถัดไปคือ 24 ส.ค. 13:00 น. จะได้ลองสีและรูปทรงก่อน ถ้าพอใจแล้วแล็บถึงจะเผาชิ้นงานจริงค่ะ'},
+     {f:'in', t:'10:03', x:'โอเคค่ะ ขอบคุณค่ะ'},
+   ],
+   draft:null},
+
+  {id:'m13', ch:'line', who:'อธิป วัฒนกุล', hn:'HN 24-771', tag:'plan', st:'mine', mins:64, unread:0,
+   msgs:[
+     {f:'out', t:'เมื่อวาน 15:10', x:'คุณอธิปครับ ส่งแผนการรักษารากเทียม 2 ซี่ + ครอบฟันเซรามิก ให้ทางไลน์แล้วนะครับ ยอดรวม 148,000 บาท', by:'ชช'},
+     {f:'in', t:'09:38', x:'ดูแล้วครับ อยากทราบว่าถ้าทำทีละซี่ได้ไหม แล้วราคาต่างกันมากไหมครับ'},
+     {f:'out', t:'09:44', x:'ทำแยกได้ครับ แต่ทำพร้อมกันจะประหยัดค่าผ่าตัดและจำนวนครั้งที่ต้องมาคลินิกครับ ถ้าแยกซี่ ยอดรวมจะอยู่ที่ประมาณ 158,000 บาท', by:'ชช'},
+     {f:'in', t:'09:52', x:'ขอคิดดูอีกนิดนะครับ วันที่ 19 ผมเข้าไปตามนัดครับ'},
+     {f:'sys', x:'ผูกกับแผนการรักษา #TP-24-771 · ค้างตัดสินใจ 4 วัน'},
+   ],
+   draft:null},
+
+  {id:'m14', ch:'fb', who:'ปรียา สงวนศักดิ์', hn:'HN 24-772', tag:'plan', st:'mine', mins:126, unread:0,
+   msgs:[
+     {f:'in', t:'08:36', x:'ขอปรึกษาที่บ้านก่อนนะคะ เดี๋ยวสัปดาห์นี้จะให้คำตอบค่ะ'},
+     {f:'out', t:'08:41', x:'ได้เลยค่ะคุณปรียา ไม่ต้องรีบตัดสินใจนะคะ ราคาที่เสนอไว้ล็อกให้ถึงสิ้นเดือนนี้ค่ะ หากมีคำถามเพิ่มเติมทักมาได้ตลอดค่ะ', by:'ชช'},
+     {f:'sys', x:'ผูกกับแผนการรักษา #TP-24-772 · ค้างตัดสินใจ 9 วัน'},
+   ],
+   draft:null},
+
+  {id:'m15', ch:'line', who:'คุณสุชาติ', hn:'HN 23-330', tag:'info', st:'done', mins:1180, unread:0,
+   msgs:[
+     {f:'in', t:'เมื่อวาน 15:02', x:'เฝือกสบฟันที่พิมพ์ไปเมื่อวานเสร็จเมื่อไหร่ครับ'},
+     {f:'bot', t:'เมื่อวาน 15:02', x:'แล็บนัดส่งกลับ 23 ส.ค. ค่ะ ทางคลินิกนัดคุณสุชาติมาลองใส่วันที่ 25 ส.ค. 14:00 น. ค่ะ'},
+     {f:'in', t:'เมื่อวาน 15:05', x:'รับทราบครับ ขอบคุณครับ'},
+     {f:'sys', x:'ปิดเคสโดย ชช · เมื่อวาน 15:06'},
+   ],
+   draft:null},
+
+  {id:'m16', ch:'ig', who:'@jibjib_p', hn:null, tag:'info', st:'done', mins:1320, unread:0,
+   msgs:[
+     {f:'in', t:'เมื่อวาน 12:40', x:'คลินิกมีที่จอดรถไหมคะ'},
+     {f:'bot', t:'เมื่อวาน 12:40', x:'มีค่ะ จอดในอาคารได้ 12 คัน ประทับตราฟรี 3 ชั่วโมงค่ะ ถ้าเต็มมีลานจอดข้างอาคารเพิ่มอีก 20 คันค่ะ'},
+     {f:'sys', x:'ปิดอัตโนมัติ · ไม่มีข้อความต่อภายใน 6 ชั่วโมง'},
+   ],
+   draft:null},
+
+  {id:'m17', ch:'web', who:'สมชาย เกษมสุข', hn:null, tag:'info', st:'done', mins:2760, unread:0,
+   msgs:[
+     {f:'in', t:'15 ส.ค. 11:05', x:'ขอใบรับรองแพทย์สำหรับลาหยุดหลังผ่าฟันคุดครับ'},
+     {f:'out', t:'15 ส.ค. 11:22', x:'ได้ค่ะ เตรียมให้แล้ว รับได้ที่เคาน์เตอร์ตอนมาตามนัด หรือให้ส่งไฟล์ PDF ทางอีเมลก็ได้ค่ะ', by:'ชช'},
+     {f:'in', t:'15 ส.ค. 11:30', x:'ขอทางอีเมลครับ ขอบคุณครับ'},
+     {f:'sys', x:'ส่งไฟล์ใบรับรองแพทย์แล้ว · ปิดเคสโดย ชช'},
+   ],
+   draft:null},
+];
+
+const CANNED = [
+  ['ทักทาย','สวัสดีค่ะ คลินิกทันตกรรม Zentr สาขาอารีย์ ยินดีให้บริการค่ะ 😊'],
+  ['ขอข้อมูล','รบกวนขอชื่อ–นามสกุล และเบอร์โทรศัพท์ เพื่อลงทะเบียนนัดหมายด้วยค่ะ'],
+  ['เวลาทำการ','คลินิกเปิดทุกวัน 09:00–20:00 น. ค่ะ (หยุดวันนักขัตฤกษ์)'],
+  ['แผนที่','คลินิกอยู่ปากซอยอารีย์ 4 เดินจาก BTS อารีย์ ทางออก 3 ประมาณ 350 เมตรค่ะ'],
+  ['สิทธิ ปกส.','สิทธิประกันสังคมใช้ได้ 900 บาท/ปี ไม่ต้องสำรองจ่าย พกบัตรประชาชนมาใบเดียวค่ะ'],
+  ['ยืนยันนัด','ยืนยันนัดเรียบร้อยค่ะ ระบบจะส่งข้อความเตือนอีกครั้งก่อนถึงวันนัด 1 วันค่ะ'],
+];
+
+/* ── helpers ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => n.toLocaleString('en-US');
+const byId = id => C.find(x => x.id === id);
+const OPEN = x => x.st !== 'done';
+
+/* อักษรย่อ — ตัดคำนำหน้าและสระหน้า (เ แ โ ใ ไ) ออกก่อน เพื่อให้ได้พยัญชนะตัวแรก */
+function initial(name){
+  const s = name.replace(/^(คุณ|@)/, '');
+  return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0];
+}
+
+function ago(m){
+  if (m < 60) return m + ' นาที';
+  if (m < 1440) return Math.round(m/60) + ' ชม.';
+  const d = Math.round(m/1440);
+  return d === 1 ? 'เมื่อวาน' : d + ' วันก่อน';
+}
+function waitClass(m){ return m >= 15 ? 'bad' : m >= 5 ? 'warn' : 'ok'; }
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+const S = {seg:'open', ch:'all', q:'', sel:'m1'};
+
+const SEGS = {
+  open: x => OPEN(x),
+  wait: x => x.st === 'wait',
+  ai:   x => x.st === 'ai',
+  mine: x => x.st === 'mine',
+  done: x => x.st === 'done',
+  all:  () => true,
+};
+const hit = x => !S.q || (x.who + ' ' + (x.hn||'') + ' ' + x.msgs.map(m=>m.x).join(' ')).toLowerCase().includes(S.q.toLowerCase());
+const visible = () => C.filter(x => SEGS[S.seg](x) && (S.ch === 'all' || x.ch === S.ch) && hit(x));
+
+/* ── รายการบทสนทนา ── */
+function renderList(){
+  const rows = visible();
+  $('#cnt').textContent = rows.length + ' รายการ';
+
+  $('#list').innerHTML = rows.length ? rows.map(x => {
+    const ch = CH[x.ch], tg = TAGS[x.tag];
+    const last = x.msgs[x.msgs.length - 1];
+    const shown = last.f === 'sys' ? (x.msgs.filter(m => m.f !== 'sys').slice(-1)[0] || last) : last;
+    const sn = shown.x;
+    const pre = shown.f === 'out' ? 'คุณ: ' : shown.f === 'bot' ? 'AI: ' : '';
+    return `<div class="conv${x.id === S.sel ? ' on' : ''}${x.unread ? ' unread' : ''}" data-id="${x.id}">
+      <div class="av"><div class="ini">${esc(initial(x.who))}</div>
+        <span class="badge ${ch.cls}">${ch.s}</span></div>
+      <div class="bd">
+        <div class="r1"><b>${esc(x.who)}</b><time>${ago(x.mins)}</time></div>
+        <div class="sn">${esc(pre + sn)}</div>
+        <div class="r3">
+          <span class="mtag ${tg.c}">${tg.t}</span>
+          ${x.st === 'ai' ? '<span class="mtag m-ai">AI ตอบแล้ว</span>' : ''}
+          ${x.st === 'mine' ? '<span class="mtag m-book">ฉันดูแลอยู่</span>' : ''}
+          ${x.st === 'done' ? '<span class="mtag m-done">ปิดแล้ว</span>' : ''}
+          ${x.st === 'wait' ? `<span class="wait ${waitClass(x.mins)}">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+            ${ago(x.mins)}</span>` : ''}
+          ${x.unread ? `<span class="dotn" style="margin-left:auto">${x.unread}</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('') : `<div class="listempty">ไม่มีบทสนทนาในเงื่อนไขนี้<br>ลองเปลี่ยนช่องทางหรือคำค้นดูนะครับ</div>`;
+
+  $$('#list .conv').forEach(el => el.onclick = () => {
+    S.sel = el.dataset.id;
+    const x = byId(S.sel); x.unread = 0;
+    renderAll();
+  });
+}
+
+/* ── หน้าต่างสนทนา ── */
+function renderThread(){
+  const x = byId(S.sel);
+  const th = $('#th');
+  if (!x){ th.innerHTML = '<div class="listempty" style="margin:auto">เลือกบทสนทนาทางซ้ายเพื่อเริ่มตอบ</div>'; return; }
+
+  const ch = CH[x.ch], tg = TAGS[x.tag], p = x.hn ? P[x.hn] : null;
+
+  const body = x.msgs.map(m => {
+    if (m.f === 'sys') return `<div class="bub sys"><div class="txt">${esc(m.x)}</div></div>`;
+    const who = m.f === 'in' ? esc(x.who) : m.f === 'bot' ? 'ผู้ช่วย AI' : esc(m.by || 'ชช');
+    return `<div class="bub ${m.f === 'in' ? 'in' : 'out'}${m.f === 'bot' ? ' bot' : ''}">
+      <div class="txt">${esc(m.x)}</div>
+      <div class="meta"><span class="by">${who}</span> · ${esc(m.t)}</div>
+    </div>`;
+  }).join('');
+
+  const draft = x.draft && x.st !== 'done' ? `
+    <div class="draft">
+      <div class="dh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg>
+        ร่างคำตอบจากผู้ช่วย AI
+        <span class="conf">ความมั่นใจ ${x.draft.c}%</span>
+      </div>
+      <p>${esc(x.draft.x)}</p>
+      <div class="db">
+        <button class="mini solid" id="useSend">ส่งเลย</button>
+        <button class="mini" id="useEdit">แก้ไขก่อนส่ง</button>
+        <button class="mini" id="useDrop">ไม่ใช้ร่างนี้</button>
+      </div>
+    </div>` : '';
+
+  const foot = x.st === 'done' ? `
+    <div class="closed-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      ปิดเคสแล้ว — เปิดใหม่ได้หากคนไข้ทักเข้ามาอีกครั้ง
+      <button class="mini" id="reopen" style="margin-left:auto">เปิดเคสอีกครั้ง</button>
+    </div>` : `
+    <div class="comp">
+      <div class="canned">${CANNED.map((c,i) => `<button data-i="${i}">${esc(c[0])}</button>`).join('')}</div>
+      <div class="compbox">
+        <textarea id="msg" rows="1" placeholder="พิมพ์ข้อความถึง${esc(x.who)}… (Enter เพื่อส่ง / Shift+Enter ขึ้นบรรทัดใหม่)"></textarea>
+        <button class="sendbtn" id="send" aria-label="ส่งข้อความ" disabled>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 16-8-6 16-2.5-6.5L4 12Z"/></svg>
+        </button>
+      </div>
+      <div class="hint">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        ตอบผ่าน <b>${ch.n}</b>${p ? ' · ผูกกับ ' + esc(x.hn) : ' · ยังไม่ได้ผูกกับคนไข้'}
+        <span class="sp"></span>
+      </div>
+    </div>`;
+
+  th.innerHTML = `
+    <div class="th-h">
+      <div class="ini">${esc(initial(x.who))}</div>
+      <div class="who"><b>${esc(x.who)}</b>
+        <span>${ch.n}${p ? ' · ' + esc(p.name) + ' · ' + esc(x.hn) : ' · ยังไม่เป็นคนไข้'}</span></div>
+      <div class="acts">
+        <span class="mtag ${tg.c}" style="align-self:center">${tg.t}</span>
+        <button class="mini" id="assign">มอบหมาย</button>
+        ${x.st !== 'done' ? '<button class="mini" id="close">ปิดเคส</button>' : ''}
+      </div>
+    </div>
+    <div class="th-b" id="thb">
+      <div class="daysep">${x.mins >= 1440 ? 'ก่อนหน้านี้' : 'วันนี้ · 17 สิงหาคม 2569'}</div>
+      ${body}
+    </div>
+    ${draft}
+    ${foot}`;
+
+  const thb = $('#thb'); thb.scrollTop = thb.scrollHeight;
+  wireThread(x);
+}
+
+function wireThread(x){
+  const ta = $('#msg'), send = $('#send');
+  if (ta){
+    const grow = () => { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 132) + 'px'; };
+    const sync = () => { send.disabled = !ta.value.trim(); grow(); };
+    ta.oninput = sync;
+    ta.onkeydown = e => {
+      if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); doSend(x, ta.value); }
+    };
+    send.onclick = () => doSend(x, ta.value);
+    $$('.canned button').forEach(b => b.onclick = () => {
+      ta.value = (ta.value ? ta.value.trim() + '\n' : '') + CANNED[+b.dataset.i][1];
+      ta.focus(); sync();
+    });
+    ta.focus();
+  }
+  if ($('#useSend')) $('#useSend').onclick = () => {
+    if (!x.draft) return;
+    const d = x.draft; x.draft = null;
+    x.msgs.push({f:'bot', t:nowTime(), x:d.x});
+    x.st = 'ai'; x.mins = 0;
+    renderAll(); toast('ส่งร่างของ AI แล้ว');
+  };
+  if ($('#useEdit')) $('#useEdit').onclick = () => {
+    const ta2 = $('#msg'); if (!ta2 || !x.draft) return;
+    ta2.value = x.draft.x; ta2.focus();
+    ta2.dispatchEvent(new Event('input'));
+    ta2.setSelectionRange(ta2.value.length, ta2.value.length);
+  };
+  if ($('#useDrop')) $('#useDrop').onclick = () => {
+    if (!x.draft) return;
+    const d = x.draft; x.draft = null; renderAll();
+    toast('ซ่อนร่างของ AI แล้ว', () => { x.draft = d; renderAll(); });
+  };
+  if ($('#close')) $('#close').onclick = () => {
+    const prev = x.st; x.st = 'done'; x.draft = null;
+    x.msgs.push({f:'sys', x:'ปิดเคสโดย ชช · ' + nowTime()});
+    renderAll();
+    toast('ปิดเคส ' + x.who + ' แล้ว', () => { x.st = prev; x.msgs.pop(); renderAll(); });
+  };
+  if ($('#reopen')) $('#reopen').onclick = () => {
+    x.st = 'mine'; S.seg = 'open';
+    $$('#segs button').forEach(b => b.classList.toggle('on', b.dataset.s === 'open'));
+    renderAll(); toast('เปิดเคสอีกครั้ง · มอบหมายให้คุณแล้ว');
+  };
+  if ($('#assign')) $('#assign').onclick = () => {
+    x.st = 'mine'; renderAll(); toast('มอบหมายให้ ชช (คุณ) แล้ว');
+  };
+}
+
+function nowTime(){
+  const d = new Date();
+  return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+}
+
+function doSend(x, val){
+  const t = val.trim(); if (!t) return;
+  x.msgs.push({f:'out', t:nowTime(), x:t, by:'ชช'});
+  x.draft = null; x.unread = 0; x.mins = 0;
+  if (x.st !== 'done') x.st = 'mine';
+  renderAll();
+  toast('ส่งข้อความทาง ' + CH[x.ch].n + ' แล้ว');
+}
+
+/* ── แถบข้อมูลคนไข้ ── */
+function renderCtx(){
+  const x = byId(S.sel); if (!x) { $('#ctx').innerHTML = ''; return; }
+  const p = x.hn ? P[x.hn] : null;
+
+  const card = (title, icon, inner) => `<div class="card"><header>${icon}<h2>${title}</h2></header>${inner}</div>`;
+  const icoUser = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+  const icoBolt = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg>';
+  const icoHist = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>';
+
+  const who = p ? `
+    <div class="pcard">
+      <div class="ini">${esc(p.name[0])}</div>
+      <div><b>${esc(p.name)}</b><span>${esc(x.hn)}</span></div>
+    </div>
+    <div class="facts">
+      <div><span class="k">อายุ / สิทธิ</span><span class="v">${esc(p.age)} · ${esc(p.right)}</span></div>
+      <div><span class="k">แพทย์ประจำ</span><span class="v">${esc(p.doc)}</span></div>
+      <div><span class="k">นัดถัดไป</span><span class="v">${p.next === '—' ? '<span style="color:var(--faint)">ยังไม่มีนัด</span>' : '<b>' + esc(p.next) + '</b>'}</span></div>
+      ${p.plan ? `<div><span class="k">แผนที่ค้าง</span><span class="v">${esc(p.plan)}</span></div>` : ''}
+      ${p.bal ? `<div><span class="k">ยอดค้างชำระ</span><span class="v owe">${money(p.bal)} ฿</span></div>` : ''}
+    </div>` : `
+    <div class="railempty">ยังไม่ได้ผูกกับประวัติคนไข้<br>
+      <button class="mini solid" id="linkPat" style="margin-top:12px">สร้างประวัติคนไข้ใหม่</button>
+    </div>`;
+
+  const acts = `<div class="qa">
+    <button data-a="จองนัดหมายให้คนไข้"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>จองนัดหมาย</button>
+    <button data-a="ส่งตารางเวลาว่าง 7 วันข้างหน้า"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>ส่งเวลาว่าง</button>
+    <button data-a="ส่งใบเสนอราคา"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>ส่งใบเสนอราคา</button>
+    <button data-a="ส่งลิงก์ชำระเงิน"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ส่งลิงก์ชำระเงิน</button>
+    <button data-a="โอนเคสให้ทันตแพทย์"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>โอนให้ทันตแพทย์</button>
+  </div>`;
+
+  const hist = p ? card('ประวัติล่าสุด', icoHist,
+    `<div class="hist">${p.hist.map(h => `<div><span class="d">${esc(h[0])}</span><span class="t">${esc(h[1])}</span></div>`).join('')}</div>`) : '';
+
+  $('#ctx').innerHTML = card('ข้อมูลคนไข้', icoUser, who) + card('ทำต่อได้เลย', icoBolt, acts) + hist;
+
+  $$('#ctx .qa button').forEach(b => b.onclick = () => toast(b.dataset.a + ' — เดโม'));
+  if ($('#linkPat')) $('#linkPat').onclick = () => toast('เปิดฟอร์มสร้างประวัติคนไข้ — เดโม');
+}
+
+/* ── สรุปหัวหน้าจอ ── */
+function renderTop(){
+  const open = C.filter(OPEN).length;
+  const waits = C.filter(x => x.st === 'wait');
+  const worst = waits.length ? Math.max(...waits.map(x => x.mins)) : 0;
+
+  $('#topsub').textContent = `สาขาอารีย์ · ค้างตอบ ${open} เคส · รอเจ้าหน้าที่ ${waits.length} · AI จัดการแล้ว ${C.filter(x=>x.st==='ai').length}`;
+  $('#worst').textContent = worst ? ago(worst) : 'ไม่มี';
+  $('#worst').style.color = worst >= 15 ? 'var(--rose)' : worst >= 5 ? '#A9761B' : 'var(--green)';
+
+  const scope = C.filter(x => SEGS[S.seg](x));
+  $$('#chs .chcount').forEach(el => {
+    const k = el.dataset.n;
+    el.textContent = k === 'all' ? scope.length : scope.filter(x => x.ch === k).length;
+  });
+
+  const pill = $('#navpill');
+  if (pill) pill.textContent = open;
+}
+
+function renderAll(){ renderTop(); renderList(); renderThread(); renderCtx(); }
+
+/* ── ตัวกรอง ── */
+$$('#segs button').forEach(b => b.onclick = () => {
+  $$('#segs button').forEach(o => o.classList.toggle('on', o === b));
+  S.seg = b.dataset.s;
+  const rows = visible();
+  if (rows.length && !rows.some(x => x.id === S.sel)) S.sel = rows[0].id;
+  renderAll();
+});
+$$('#chs .fchip').forEach(b => b.onclick = () => {
+  $$('#chs .fchip').forEach(o => o.classList.toggle('on', o === b));
+  S.ch = b.dataset.c;
+  const rows = visible();
+  if (rows.length && !rows.some(x => x.id === S.sel)) S.sel = rows[0].id;
+  renderAll();
+});
+$('#q').oninput = e => {
+  S.q = e.target.value.trim();
+  const rows = visible();
+  if (rows.length && !rows.some(x => x.id === S.sel)) S.sel = rows[0].id;
+  renderList(); renderThread(); renderCtx();
+};
+$('#bell').onclick = () => toast('มีเคสปวดฉุกเฉิน 1 รายการรอตอบ');
+$$('.nav a.soon').forEach(a => a.onclick = e => {
+  e.preventDefault();
+  toast('หน้า “' + a.dataset.label + '” อยู่ระหว่างพัฒนา');
+});
+
+renderAll();
+</script>
+</body>
+</html>
+

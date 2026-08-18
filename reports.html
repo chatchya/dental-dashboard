@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>รายงาน · Zentr Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ รายงาน ═══ */
+.wrap{padding:20px 26px 34px;display:grid;gap:16px}
+.rtop{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.rtop .note{font-size:12px;color:var(--muted);margin-left:auto}
+
+.c2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.c3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.gridline{stroke:var(--border);stroke-width:1}
+.axtx{font-size:10.5px;fill:var(--faint);font-family:"IBM Plex Mono",monospace}
+.axlb{font-size:11px;fill:var(--muted)}
+.vlab{font-size:11px;fill:var(--text);font-weight:600;font-family:"IBM Plex Mono",monospace}
+.bar{transition:opacity .12s}
+.chart:hover .bar{opacity:.5}
+.chart .bar:hover{opacity:1}
+.dot{stroke:#fff;stroke-width:2}
+.tgt{stroke:var(--faint);stroke-width:1.5;stroke-dasharray:4 4}
+.tgtlb{font-size:10.5px;fill:var(--muted)}
+
+.tip{
+  position:absolute;pointer-events:none;opacity:0;transition:opacity .12s;
+  background:var(--ink-900);color:#EAF3F5;border-radius:9px;padding:8px 11px;
+  font-size:12px;line-height:1.5;white-space:nowrap;z-index:5;
+  box-shadow:0 10px 24px -12px rgba(6,35,44,.8);transform:translate(-50%,-118%);
+}
+.tip.on{opacity:1}
+.tip b{font-family:"IBM Plex Mono",monospace;font-weight:600;display:block;font-size:13px}
+.tip i{font-style:normal;color:#8FB3BC}
+
+/* แท่งแนวนอน */
+.hb{display:grid;gap:11px}
+.hb .row{display:grid;grid-template-columns:118px minmax(0,1fr) 88px;gap:11px;align-items:center;font-size:12.5px}
+.hb .row .lb{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb .row .tr{height:9px;border-radius:5px;background:var(--paper);overflow:hidden}
+.hb .row .tr i{display:block;height:100%;border-radius:5px}
+.hb .row .vv{text-align:right;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px}
+.hb .row .vv small{display:block;font-size:10.5px;font-weight:400;color:var(--muted);font-family:"IBM Plex Sans Thai",sans-serif}
+.hb .row:hover .lb{color:var(--text)}
+
+.legendrow{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:11.5px;color:var(--muted)}
+.legendrow div{display:flex;align-items:center;gap:6px}
+.legendrow i{width:9px;height:9px;border-radius:3px;display:block}
+
+.hero{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.hero .n{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1}
+.hero .n small{font-size:14px;font-weight:400;color:var(--muted);margin-left:4px}
+.hero .d{font-size:12.5px;padding-bottom:3px}
+
+.tbl td .share{height:6px;border-radius:3px;background:var(--paper);overflow:hidden;margin-top:5px;width:120px}
+.tbl td .share i{display:block;height:100%;border-radius:3px}
+
+@media (max-width:1180px){.c3{grid-template-columns:1fr}.c2{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .rtop{position:static;padding:11px 16px}
+  .wrap{padding:16px 16px 28px}
+  .hb .row{grid-template-columns:96px minmax(0,1fr) 74px}
+  .tbl{min-width:720px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
+      <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><nav class="nav">
+      <a href="reports.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="settings.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot"><div class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div></div>
+  </aside>
+  <main>
+    <header class="top">
+      <div><h1>รายงาน</h1><div class="sub">ภาพรวมผลประกอบการและคุณภาพงานของคลินิก</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหารายงาน"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+    <div class="rtop">
+      <div class="seg" id="range">
+        <button data-r="30">30 วัน</button>
+        <button class="on" data-r="90">90 วัน</button>
+        <button data-r="365">12 เดือน</button>
+      </div>
+      <button class="btn" id="exp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>ส่งออกรายงาน</button>
+      <span class="note" id="note"></span>
+    </div>
+
+    <div class="wrap">
+      <section class="sum" id="sum"></section>
+
+      <div class="card">
+        <header>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          <h2>รายได้รายเดือน</h2>
+          <span class="act" style="cursor:default" id="revNote"></span>
+        </header>
+        <div class="hero" id="revHero"></div>
+        <div class="chart" id="revChart" style="margin-top:14px"><div class="tip"></div></div>
+      </div>
+
+      <section class="c2">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <h2>รายได้ตามกลุ่มหัตถการ</h2></header>
+          <div class="hb" id="byCat"></div>
+        </div>
+
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h2>คนไข้ใหม่ตามช่องทาง</h2></header>
+          <div class="hb" id="byCh"></div>
+        </div>
+      </section>
+
+      <section class="c2">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5"/></svg>
+            <h2>อัตราตอบรับแผนการรักษา</h2><span class="act" style="cursor:default">เป้าหมาย 70%</span></header>
+          <div class="chart" id="accChart"><div class="tip"></div></div>
+        </div>
+
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>
+            <h2>อัตราคนไข้ไม่มาตามนัด</h2><span class="act" style="cursor:default">เป้าหมาย ≤ 5%</span></header>
+          <div class="chart" id="nsChart"><div class="tip"></div></div>
+        </div>
+      </section>
+
+      <section class="c2">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>
+            <h2>การใช้เก้าอี้ทำฟัน</h2></header>
+          <div class="hb" id="chairUse"></div>
+          <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6">
+            คิดจากชั่วโมงที่มีคนไข้จริงเทียบกับชั่วโมงเปิดทำการ (11 ชม./วัน × 90 วัน)
+          </p>
+        </div>
+
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>
+            <h2>คุณภาพงานแล็บ</h2></header>
+          <div class="hb" id="labQ"></div>
+          <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6" id="labNote"></p>
+        </div>
+      </section>
+
+      <div class="card">
+        <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <h2>ผลงานรายทันตแพทย์</h2><span class="act" style="cursor:default">90 วันล่าสุด</span></header>
+        <div style="overflow-x:auto">
+          <table class="tbl">
+            <thead><tr><th>ทันตแพทย์</th><th class="right">คนไข้</th><th class="right">ชั่วโมงทำงาน</th>
+              <th class="right">รายได้</th><th class="right">เฉลี่ย/ชม.</th><th>อัตราตอบรับแผน</th></tr></thead>
+            <tbody id="docBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          <h2>หัตถการที่ทำรายได้สูงสุด</h2><span class="act" style="cursor:default">90 วันล่าสุด</span></header>
+        <div style="overflow-x:auto">
+          <table class="tbl">
+            <thead><tr><th>หัตถการ</th><th class="right">จำนวน</th><th class="right">รายได้รวม</th>
+              <th class="right">เฉลี่ย/ครั้ง</th><th>สัดส่วนรายได้</th></tr></thead>
+            <tbody id="txBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ รายงาน ═══════════════ */
+
+/* ── ตัวช่วยร่วมของทุกหน้า ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => Number(n).toLocaleString('en-US');
+const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
+const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
+const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
+const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+/* ลำดับสีสำหรับข้อมูลเชิงหมวดหมู่ — ผ่านการตรวจ CVD แล้ว ห้ามสลับลำดับ */
+const CAT = ['#2E6BE6','#2E9E63','#7A5AF0','#E0951E','#199FB4','#D2504B'];
+
+const REV = [
+  ['ก.ย. 68',3920000],['ต.ค. 68',4100000],['พ.ย. 68',4280000],['ธ.ค. 68',4650000],
+  ['ม.ค. 69',4420000],['ก.พ. 69',4580000],['มี.ค. 69',4860000],['เม.ย. 69',4210000],
+  ['พ.ค. 69',4740000],['มิ.ย. 69',5020000],['ก.ค. 69',5280000],['ส.ค. 69',3050000],
+];
+const ACC  = [['มี.ค.',54],['เม.ย.',57],['พ.ค.',59],['มิ.ย.',61],['ก.ค.',60],['ส.ค.',62]];
+const NS   = [['มี.ค.',8.4],['เม.ย.',7.9],['พ.ค.',7.2],['มิ.ย.',6.8],['ก.ค.',7.1],['ส.ค.',6.2]];
+const CATS = [['จัดฟัน',4180000],['ครอบฟัน / สะพานฟัน',3260000],['รากเทียม',2740000],
+              ['ทันตกรรมทั่วไป',1980000],['ศัลยกรรมช่องปาก',1240000],['ทันตกรรมความงาม',890000]];
+const CHS  = [['LINE OA',62,'#06C755'],['แนะนำบอกต่อ',55,'#2E6BE6'],['Facebook',38,'#1877F2'],
+              ['Instagram',34,'#E1306C'],['Walk-in',27,'#65787F'],['Google Maps',18,'#E0951E']];
+const CHAIR = [['เก้าอี้ 1',78],['เก้าอี้ 2',71],['เก้าอี้ 3',84],['เก้าอี้ 4',63]];
+const LABQ = [['เดนทัลอาร์ต แล็บ',94,3],['สยามเซรามิก แล็บ',81,11],['ออร์โธเทค แล็บ',97,2]];
+const DOCS = [
+  ['ทพญ.นภา',    412, 486, 3820000, 62],
+  ['ทพ.ประวิทย์', 336, 452, 4260000, 58],
+  ['ทพ.กิตติ',   298, 428, 3510000, 71],
+  ['ทพญ.อรอนงค์', 354, 441, 2700000, 55],
+];
+const TXS = [
+  ['จัดฟัน (ค่างวด + เริ่มเคส)', 268, 4180000],
+  ['ครอบฟันเซรามิก', 132, 2376000],
+  ['รากเทียม', 46, 2740000],
+  ['อุดฟัน', 388, 892000],
+  ['ขูดหินปูน / ขัดฟัน', 522, 736000],
+  ['ผ่าฟันคุด / ถอนฟัน', 174, 1010000],
+  ['รักษารากฟัน', 78, 702000],
+  ['ฟอกสีฟัน / วีเนียร์', 62, 890000],
+];
+
+const mB = n => (n / 1000000).toFixed(2) + ' ล้าน';
+
+/* ── กราฟแท่งแนวตั้ง (ชุดข้อมูลเดียว — ไม่ต้องมีคำอธิบายสี) ── */
+function barChart(host, data, fmt){
+  const W = 720, H = 210, PL = 46, PR = 12, PT = 14, PB = 26;
+  const iw = W - PL - PR, ih = H - PT - PB;
+  const mx = Math.max(...data.map(d => d[1])) * 1.08;
+  const bw = Math.min(38, iw / data.length - 8);
+  const ticks = 4;
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟแท่ง">`;
+  for (let i = 0; i <= ticks; i++){
+    const y = PT + ih - ih * i / ticks;
+    s += `<line class="gridline" x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" opacity="${i ? .55 : 1}"/>`;
+    s += `<text class="axtx" x="${PL - 8}" y="${y + 3.5}" text-anchor="end">${fmt(mx * i / ticks, true)}</text>`;
+  }
+  data.forEach((d, i) => {
+    const x = PL + iw * (i + .5) / data.length - bw / 2;
+    const h = Math.max(2, ih * d[1] / mx);
+    const y = PT + ih - h;
+    const lastRow = i === data.length - 1;
+    s += `<rect class="bar" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}"
+            rx="4" fill="${lastRow ? '#199FB4' : '#2E6BE6'}" data-i="${i}"><title>${esc(d[0])}: ${fmt(d[1])}</title></rect>`;
+    s += `<text class="axlb" x="${(x + bw / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(d[0].split(' ')[0])}</text>`;
+  });
+  /* ป้ายค่าตัวสุดท้าย — ป้ายเฉพาะจุดที่สำคัญ ไม่ติดทุกแท่ง */
+  const li = data.length - 1, lx = PL + iw * (li + .5) / data.length;
+  const lh = ih * data[li][1] / mx;
+  s += `<text class="vlab" x="${lx.toFixed(1)}" y="${(PT + ih - lh - 7).toFixed(1)}" text-anchor="middle">${fmt(data[li][1])}</text>`;
+  s += '</svg>';
+  host.insertAdjacentHTML('afterbegin', s);
+  hoverBars(host, data, fmt);
+}
+
+function hoverBars(host, data, fmt){
+  const tip = host.querySelector('.tip');
+  host.querySelectorAll('.bar').forEach(r => {
+    r.addEventListener('mouseenter', () => {
+      const d = data[+r.dataset.i], b = r.getBoundingClientRect(), h = host.getBoundingClientRect();
+      tip.innerHTML = `<i>${esc(d[0])}</i><b>${fmt(d[1])}</b>`;
+      tip.style.left = (b.left - h.left + b.width / 2) + 'px';
+      tip.style.top = (b.top - h.top) + 'px';
+      tip.classList.add('on');
+    });
+    r.addEventListener('mouseleave', () => tip.classList.remove('on'));
+  });
+}
+
+/* ── กราฟเส้น (ชุดเดียว + เส้นเป้าหมาย) ── */
+function lineChart(host, data, opt){
+  const W = 520, H = 190, PL = 38, PR = 16, PT = 14, PB = 26;
+  const iw = W - PL - PR, ih = H - PT - PB;
+  const lo = opt.min, hi = opt.max;
+  const X = i => PL + iw * i / (data.length - 1);
+  const Y = v => PT + ih - ih * (v - lo) / (hi - lo);
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opt.label)}">`;
+  for (let i = 0; i <= 4; i++){
+    const v = lo + (hi - lo) * i / 4, y = Y(v);
+    s += `<line class="gridline" x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" opacity="${i ? .55 : 1}"/>`;
+    s += `<text class="axtx" x="${PL - 8}" y="${y + 3.5}" text-anchor="end">${opt.fmtAxis(v)}</text>`;
+  }
+  if (opt.target != null){
+    const ty = Y(opt.target);
+    s += `<line class="tgt" x1="${PL}" y1="${ty}" x2="${W - PR}" y2="${ty}"/>`;
+    s += `<text class="tgtlb" x="${W - PR}" y="${ty - 6}" text-anchor="end">เป้าหมาย ${opt.fmtAxis(opt.target)}</text>`;
+  }
+  const pts = data.map((d,i) => `${X(i).toFixed(1)},${Y(d[1]).toFixed(1)}`).join(' ');
+  s += `<polyline points="${pts}" fill="none" stroke="${opt.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+  data.forEach((d,i) => {
+    s += `<circle class="dot bar" cx="${X(i).toFixed(1)}" cy="${Y(d[1]).toFixed(1)}" r="4.5" fill="${opt.color}" data-i="${i}"><title>${esc(d[0])}: ${opt.fmt(d[1])}</title></circle>`;
+    s += `<text class="axlb" x="${X(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(d[0])}</text>`;
+  });
+  const li = data.length - 1;
+  s += `<text class="vlab" x="${X(li).toFixed(1)}" y="${(Y(data[li][1]) - 11).toFixed(1)}" text-anchor="end">${opt.fmt(data[li][1])}</text>`;
+  s += '</svg>';
+  host.insertAdjacentHTML('afterbegin', s);
+  hoverBars(host, data, opt.fmt);
+}
+
+/* ── แท่งแนวนอนพร้อมป้ายค่า (ป้ายทุกแถว = การเข้ารหัสสำรองของสี) ── */
+function hbars(host, rows, opt){
+  const mx = Math.max(...rows.map(r => r.v));
+  const tot = rows.reduce((a,r) => a + r.v, 0);
+  host.innerHTML = rows.map(r => `
+    <div class="row" title="${esc(r.lb)}: ${opt.fmt(r.v)}">
+      <span class="lb">${esc(r.lb)}</span>
+      <span class="tr"><i style="width:${Math.max(3, Math.round(r.v / mx * 100))}%;background:${r.c}"></i></span>
+      <span class="vv">${opt.fmt(r.v)}${opt.share ? `<small>${Math.round(r.v / tot * 100)}%</small>` : r.sub ? `<small>${r.sub}</small>` : ''}</span>
+    </div>`).join('');
+}
+
+/* ── สรุปหัวรายงาน ── */
+const y0 = REV.slice(-4, -1).reduce((a,r) => a + r[1], 0);          /* พ.ค.–ก.ค. */
+const yPrev = REV.slice(-7, -4).reduce((a,r) => a + r[1], 0);       /* ก.พ.–เม.ย. */
+const growth = Math.round((y0 - yPrev) / yPrev * 1000) / 10;
+
+const cards = [
+  ['รายได้ 90 วัน', mB(y0), '฿', (growth >= 0 ? '+' : '') + growth + '% เทียบ 90 วันก่อนหน้า', '#2E6BE6',
+   '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/>', growth >= 0 ? 'up' : 'down'],
+  ['คนไข้ใหม่', CHS.reduce((a,c) => a + c[1], 0), 'ราย', 'จาก 6 ช่องทาง · LINE นำ 27%', '#7A5AF0',
+   '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>', 'flat'],
+  ['อัตราตอบรับแผน', ACC[ACC.length-1][1], '%', 'ดีขึ้นจาก 54% เมื่อ 6 เดือนก่อน', '#2E9E63',
+   '<path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/>', 'up'],
+  ['ไม่มาตามนัด', NS[NS.length-1][1], '%', 'ยังสูงกว่าเป้าหมาย 5%', '#D2504B',
+   '<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/>', 'down'],
+];
+$('#sum').innerHTML = cards.map(([lab,val,unit,sub,c,ico,dir]) => `
+  <div class="card kpi">
+    <div class="row"><div class="ico" style="background:${c}1A;color:${c}">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ico}</svg></div>
+      <div><div class="lab">${lab}</div></div></div>
+    <div class="val">${val}<small>${unit}</small></div>
+    <div class="delta ${dir}">${sub}</div>
+  </div>`).join('');
+
+/* รายได้ */
+const rev12 = REV.reduce((a,r) => a + r[1], 0);
+$('#revHero').innerHTML = `<div class="n">${mB(REV[REV.length-2][1])}<small>฿ (ก.ค. 69)</small></div>
+  <div class="d up">+${Math.round((REV[10][1] - REV[9][1]) / REV[9][1] * 1000) / 10}% จากเดือนก่อน</div>`;
+$('#revNote').textContent = 'รวม 12 เดือน ' + mB(rev12) + ' ฿';
+barChart($('#revChart'), REV, (v, axis) => axis ? (v / 1000000).toFixed(1) + 'ล' : money(Math.round(v)) + ' ฿');
+$('#note').textContent = 'ข้อมูลถึง 17 ส.ค. 2569 10:42 น. · ส.ค. เป็นตัวเลขระหว่างเดือน';
+
+/* กลุ่มหัตถการ */
+hbars($('#byCat'), CATS.map(([lb,v],i) => ({lb, v, c:CAT[i % CAT.length]})), {fmt:v => mB(v), share:true});
+
+/* ช่องทางคนไข้ใหม่ */
+hbars($('#byCh'), CHS.map(([lb,v,c]) => ({lb, v, c})), {fmt:v => v + ' ราย', share:true});
+
+/* อัตราตอบรับ / ไม่มาตามนัด */
+lineChart($('#accChart'), ACC, {min:40, max:80, target:70, color:'#2E9E63', label:'อัตราตอบรับแผน',
+  fmt:v => v + '%', fmtAxis:v => Math.round(v) + '%'});
+lineChart($('#nsChart'), NS, {min:0, max:12, target:5, color:'#D2504B', label:'อัตราไม่มาตามนัด',
+  fmt:v => v + '%', fmtAxis:v => Math.round(v) + '%'});
+
+/* การใช้เก้าอี้ */
+hbars($('#chairUse'), CHAIR.map(([lb,v]) => ({lb, v, c: v >= 80 ? '#D2504B' : v >= 70 ? '#2E9E63' : '#E0951E',
+  sub: v >= 80 ? 'เต็มเกินไป' : v >= 70 ? 'กำลังดี' : 'ยังว่าง'})), {fmt:v => v + '%'});
+
+/* คุณภาพงานแล็บ */
+hbars($('#labQ'), LABQ.map(([lb,ontime,remake]) => ({lb, v:ontime, c: ontime >= 90 ? '#2E9E63' : '#E0951E',
+  sub:'แก้งาน ' + remake + '%'})), {fmt:v => v + '%'});
+$('#labNote').innerHTML = 'ตัวเลขคืออัตราส่งงานตรงเวลา — <b style="color:var(--text)">สยามเซรามิก แล็บ</b> ต่ำกว่าเกณฑ์ทั้งเรื่องตรงเวลาและอัตราแก้งาน ควรทบทวนสัดส่วนงานที่ส่ง';
+
+/* ผลงานทันตแพทย์ */
+$('#docBody').innerHTML = DOCS.map(([n,pat,hr,rev,acc]) => `
+  <tr>
+    <td><div class="who"><div class="ini">${esc(n.replace(/^ทพญ?\./,'')[0])}</div><div><b>${esc(n)}</b></div></div></td>
+    <td class="right num">${pat}</td>
+    <td class="right num">${hr}</td>
+    <td class="right num"><b>${money(rev)}</b></td>
+    <td class="right num">${money(Math.round(rev / hr))}</td>
+    <td class="usebar"><span>${acc}%</span><div class="prog"><i class="${acc < 60 ? 'warn' : ''}" style="width:${acc}%"></i></div></td>
+  </tr>`).join('');
+
+/* หัตถการทำรายได้สูงสุด */
+const txTot = TXS.reduce((a,t) => a + t[2], 0);
+$('#txBody').innerHTML = [...TXS].sort((a,b) => b[2] - a[2]).map(([n,q,rev],i) => `
+  <tr>
+    <td><b style="font-weight:500">${esc(n)}</b></td>
+    <td class="right num">${money(q)}</td>
+    <td class="right num"><b>${money(rev)}</b></td>
+    <td class="right num">${money(Math.round(rev / q))}</td>
+    <td><div style="font-size:12px;color:var(--muted)">${Math.round(rev / txTot * 100)}%</div>
+      <div class="share"><i style="width:${Math.round(rev / txTot * 100)}%;background:${CAT[i % CAT.length]}"></i></div></td>
+  </tr>`).join('');
+
+$$('#range button').forEach(b => b.onclick = () => {
+  $$('#range button').forEach(o => o.classList.toggle('on', o === b));
+  toast('ตัวเลขในรายงานอ้างอิงช่วง ' + b.textContent + ' — เดโม');
+});
+$('#exp').onclick = () => toast('ส่งออกรายงาน PDF — เดโม');
+$('#bell').onclick = () => toast('อัตราไม่มาตามนัดยังสูงกว่าเป้าหมาย');
+</script>
+</body>
+</html>
+

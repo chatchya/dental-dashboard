@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คนไข้ · Zentr Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ทะเบียนคนไข้ ═══ */
+.wrap{padding:20px 26px 34px;display:grid;gap:16px}
+.tbl tbody tr{cursor:pointer}
+.tblwrap{overflow-x:auto}
+.tel{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+.dot-tag{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted)}
+.dot-tag i{width:7px;height:7px;border-radius:50%;display:block}
+
+.dtabs{display:flex;gap:2px;padding:0 22px;border-bottom:1px solid var(--border);flex:none}
+.dtabs button{
+  padding:11px 13px;border:0;background:none;font:inherit;font-size:13px;color:var(--muted);
+  cursor:pointer;border-bottom:2px solid transparent;transition:.15s;
+}
+.dtabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.dpane{display:none}
+.dpane.on{display:block}
+
+.tcwrap{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-top:4px}
+.tcleg{display:grid;gap:6px;font-size:11.5px;color:var(--muted)}
+.tcleg div{display:flex;align-items:center;gap:7px}
+.tcleg i{width:11px;height:13px;border-radius:2px 2px 4px 4px;display:block;border:1px solid var(--border);background:var(--paper)}
+.arch{display:grid;gap:4px}
+.arch .rw{display:flex;gap:2px}
+.arch .gap{width:7px}
+
+.alertbox{
+  display:flex;gap:10px;padding:11px 13px;border-radius:var(--r-md);margin-bottom:14px;
+  background:rgba(210,80,75,.07);border:1px solid rgba(210,80,75,.3);
+  font-size:12.5px;color:#7E2B28;line-height:1.55;
+}
+.alertbox svg{flex:none;margin-top:1px;color:var(--rose)}
+.tline{display:grid;gap:0}
+.tline .it{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--border)}
+.tline .it:first-child{border-top:0}
+.tline .dt{font-size:11.5px;color:var(--faint);width:74px;flex:none;font-family:"IBM Plex Mono",monospace}
+.tline b{font-size:13px;font-weight:500;display:block}
+.tline span{font-size:11.5px;color:var(--muted)}
+.tline .amt{margin-left:auto;font-size:12.5px;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
+      <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><nav class="nav">
+      <a href="reports.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="settings.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot"><div class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div></div>
+  </aside>
+  <main>
+    <header class="top">
+      <div><h1>คนไข้</h1><div class="sub" id="sub">ทะเบียนคนไข้ทั้งหมดของสาขาอารีย์</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหาชื่อ HN หรือเบอร์โทร"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+    <div class="wrap">
+      <section class="sum" id="sum"></section>
+
+      <div class="bar-row">
+        <button class="fchip on" data-f="all">ทั้งหมด</button>
+        <button class="fchip" data-f="new">คนไข้ใหม่ 30 วัน</button>
+        <button class="fchip" data-f="appt">มีนัดล่วงหน้า</button>
+        <button class="fchip" data-f="owe">ค้างชำระ</button>
+        <button class="fchip" data-f="recall">ถึงกำหนดตรวจ 6 เดือน</button>
+        <button class="fchip" data-f="ortho">กำลังจัดฟัน</button>
+        <div class="grow"></div>
+        <span style="font-size:12.5px;color:var(--muted)" id="count"></span>
+        <button class="btn solid" id="addPat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>เพิ่มคนไข้</button>
+      </div>
+
+      <div class="card tblwrap">
+        <table class="tbl">
+          <thead><tr>
+            <th>HN</th><th>ชื่อ–สกุล</th><th>อายุ</th><th>สิทธิการรักษา</th>
+            <th>มาครั้งล่าสุด</th><th>นัดถัดไป</th><th class="right">ยอดค้าง</th><th>สถานะ</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ ทะเบียนคนไข้ ═══════════════ */
+
+/* ── ตัวช่วยร่วมของทุกหน้า ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => Number(n).toLocaleString('en-US');
+const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
+const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
+const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
+const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+const TOTAL_ALL = 3842, NEW_30 = 78;   /* ยอดรวมทั้งฐานข้อมูล (แสดง 18 รายที่ใช้งานล่าสุด) */
+
+const p = o => ({tags:[], bal:0, plans:[], alerts:[], tooth:{tx:[],pl:[],ms:[]}, ...o});
+
+const PT = [
+  p({hn:'HN 24-882', n:'ธนภัทร ศรีวิไล', tel:'081-244-7781', age:32, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2567-03-11', last:'2569-08-12', next:null, tags:['emg'],
+     tooth:{tx:[18,19],pl:[30],ms:[]},
+     hist:[['2569-08-12','อุดฟัน 2 ซี่ (36, 37)','ทพญ.นภา',2400],
+           ['2569-03-03','ขูดหินปูน + ตรวจฟัน','ทพญ.นภา',1200],
+           ['2568-09-14','ถอนฟัน ซี่ 48','ทพ.ประวิทย์',3500]]}),
+  p({hn:'HN 24-118', n:'ศิริพร ดำรงค์', tel:'089-771-2204', age:35, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2569-02-02', last:'2569-08-14', next:'2569-08-24 13:00', bal:54000,
+     tags:['plan'], plans:['วีเนียร์ 6 ซี่ (13–23) · 108,000 ฿ · จ่ายแล้วครึ่งแรก'],
+     tooth:{tx:[4,5,6,7,8,9],pl:[],ms:[]},
+     hist:[['2569-08-14','พิมพ์ปาก ส่งแล็บ (วีเนียร์ 6 ซี่)','ทพญ.นภา',54000],
+           ['2569-08-02','ปรึกษา + ถ่ายภาพวางแผน','ทพญ.นภา',0],
+           ['2569-05-19','ฟอกสีฟันที่คลินิก','ทพญ.นภา',8900]]}),
+  p({hn:'HN 24-771', n:'อธิป วัฒนกุล', tel:'086-559-0127', age:47, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2569-08-13', last:'2569-08-13', next:'2569-08-19 11:00',
+     tags:['new','plan'], plans:['รากเทียม 2 ซี่ + ครอบฟันเซรามิก · 148,000 ฿ · รอตอบรับ 4 วัน'],
+     alerts:['ความดันโลหิตสูง — ควบคุมด้วยยา Amlodipine 5 มก.'],
+     tooth:{tx:[],pl:[],ms:[19,20]},
+     hist:[['2569-08-13','CT scan + ปรึกษาวางแผนรากเทียม','ทพ.ประวิทย์',3500]]}),
+  p({hn:'HN 22-701', n:'วีรภัทร สุขใจ', tel:'062-118-3390', age:19, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2565-06-20', last:'2569-08-17', next:'2569-09-14 09:30', bal:6500,
+     tags:['ortho'], plans:['จัดฟันโลหะ · เดือนที่ 14 จาก 24 · ผ่อนเดือนละ 3,500 ฿'],
+     tooth:{tx:[0,1,2,3,4,5,6,7,8,9,10,11],pl:[],ms:[]},
+     hist:[['2569-08-17','ปรับเครื่องมือจัดฟัน ครั้งที่ 14','ทพ.กิตติ',3500],
+           ['2569-07-17','ปรับเครื่องมือจัดฟัน ครั้งที่ 13','ทพ.กิตติ',3500],
+           ['2569-06-19','ปรับเครื่องมือจัดฟัน ครั้งที่ 12','ทพ.กิตติ',3500]]}),
+  p({hn:'HN 24-772', n:'ปรียา สงวนศักดิ์', tel:'084-220-7745', age:24, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2569-08-01', last:'2569-08-08', next:null,
+     tags:['new','plan'], plans:['จัดฟันใส Invisalign · 135,000 ฿ · รอตอบรับ 9 วัน'],
+     tooth:{tx:[],pl:[13,14],ms:[]},
+     hist:[['2569-08-08','สแกนช่องปาก + เสนอแผน','ทพ.กิตติ',0],
+           ['2569-08-01','ปรึกษาครั้งแรก','ทพ.กิตติ',500]]}),
+  p({hn:'HN 23-556', n:'กัลยา ปิ่นทอง', tel:'081-909-4412', age:38, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.นภา', since:'2566-02-20', last:'2569-08-17', next:'2570-02-17 10:00',
+     tags:['sso'], tooth:{tx:[26],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน + ตรวจฟัน (สิทธิ ปกส.)','ทพญ.นภา',0],
+           ['2569-02-20','อุดฟัน ซี่ 36','ทพญ.นภา',1800]]}),
+  p({hn:'HN 22-455', n:'ประเสริฐ ทองดี', tel:'02-448-2210', age:54, sex:'ช', right:'ประกันกลุ่ม AIA',
+     doc:'ทพ.ประวิทย์', since:'2565-01-08', last:'2569-08-17', next:'2569-09-02 10:00',
+     tooth:{tx:[2],pl:[],ms:[]},
+     alerts:['แพ้ยา Penicillin — ใช้ Clindamycin แทน'],
+     hist:[['2569-08-17','ใส่ครอบฟัน ซี่ 16','ทพ.ประวิทย์',18000],
+           ['2569-07-22','รักษารากฟัน ครั้งที่ 3','ทพ.ประวิทย์',9000],
+           ['2569-07-01','รักษารากฟัน ครั้งที่ 1–2','ทพ.ประวิทย์',9000]]}),
+  p({hn:'HN 24-460', n:'นภัสวรรณ อินทร์แก้ว', tel:'095-330-1182', age:61, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2569-04-12', last:'2569-08-17', next:'2569-08-18 14:00', bal:12000,
+     tags:['lab'], plans:['ฟันปลอมถอดได้ (บนบางส่วน) · 24,000 ฿ · ค้างงวดที่ 2'],
+     tooth:{tx:[],pl:[],ms:[1,2,3,12,13]},
+     hist:[['2569-08-17','ลองฟันปลอมถอดได้','ทพ.ประวิทย์',0],
+           ['2569-08-08','พิมพ์ปาก ส่งแล็บ','ทพ.ประวิทย์',12000]]}),
+  p({hn:'HN 23-330', n:'สุชาติ พูลทรัพย์', tel:'080-772-9931', age:45, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2566-11-02', last:'2569-08-17', next:'2569-08-25 14:00',
+     tags:['lab'], tooth:{tx:[],pl:[24,25],ms:[]},
+     hist:[['2569-08-17','พิมพ์ปากทำเฝือกสบฟัน','ทพญ.อรอนงค์',2000],
+           ['2569-06-10','ตรวจฟัน + ขูดหินปูน','ทพญ.อรอนงค์',1200]]}),
+  p({hn:'HN 24-201', n:'อรวรรณ กิจเจริญ', tel:'083-441-2098', age:41, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2569-01-18', last:'2569-08-17', next:'2569-08-20 09:30', bal:4500,
+     tooth:{tx:[],pl:[],ms:[14]},
+     hist:[['2569-08-17','ตรวจฟัน + ขูดหินปูน','ทพญ.อรอนงค์',1200],
+           ['2569-08-06','ถอนฟัน ซี่ 26','ทพญ.อรอนงค์',4500]]}),
+  p({hn:'HN 23-119', n:'สุพรรษา ใจงาม', tel:'088-220-5567', age:28, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.นภา', since:'2566-09-09', last:'2569-08-17', next:null, tags:['sso','recall'],
+     tooth:{tx:[22],pl:[],ms:[]},
+     hist:[['2569-08-17','อุดฟัน 1 ซี่ (สิทธิ ปกส.)','ทพญ.นภา',0],
+           ['2569-02-14','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.นภา',0]]}),
+  p({hn:'HN 24-733', n:'พิมพ์ชนก วงศ์ทอง', tel:'091-337-8820', age:26, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2569-06-30', last:'2569-08-17', next:'2569-08-24 15:00', bal:6500,
+     tags:['new'], tooth:{tx:[],pl:[],ms:[31]},
+     hist:[['2569-08-17','ถอนฟันคุด ซี่ 48','ทพญ.อรอนงค์',6500],
+           ['2569-06-30','ตรวจฟัน + เอกซเรย์','ทพญ.อรอนงค์',800]]}),
+  p({hn:'HN 22-904', n:'กฤตย์ ทองสุข', tel:'065-118-2245', age:22, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2565-05-14', last:'2569-08-17', next:'2569-09-01 16:00',
+     tags:['ortho'], plans:['ถอดเครื่องมือแล้ว · ติดตามรีเทนเนอร์ 6 เดือน'],
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ตรวจติดตามหลังจัดฟัน','ทพ.กิตติ',0],
+           ['2569-08-06','รับรีเทนเนอร์ Essix','ทพ.กิตติ',6000]]}),
+  p({hn:'HN 22-556', n:'มานพ เจริญสุข', tel:'081-556-3321', age:50, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2565-03-30', last:'2569-08-12', next:'2569-08-21 10:30', bal:18000,
+     tags:['lab','plan'], plans:['ครอบฟัน 3 ซี่ + รักษาราก · 62,000 ฿ · รอตอบรับ 12 วัน'],
+     tooth:{tx:[2,29,30],pl:[],ms:[]},
+     hist:[['2569-08-12','พิมพ์ปากครอบฟัน ซี่ 46','ทพญ.อรอนงค์',18000],
+           ['2569-07-28','รักษาราก ซี่ 46','ทพญ.อรอนงค์',9000]]}),
+  p({hn:'HN 24-052', n:'ชลธิชา รุ่งเรือง', tel:'092-004-7718', age:33, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2569-01-05', last:'2569-08-17', next:'2569-08-21 11:30', bal:18000,
+     tags:['lab'], tooth:{tx:[10],pl:[],ms:[]},
+     hist:[['2569-08-17','ลองครอบฟัน ซี่ 26 (แก้สี ครั้งที่ 2)','ทพญ.นภา',0],
+           ['2569-07-28','พิมพ์ปากครอบฟัน ซี่ 26','ทพญ.นภา',18000]]}),
+  p({hn:'HN 21-774', n:'วิชัย ประดิษฐ์', tel:'081-220-6654', age:58, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2564-08-19', last:'2569-08-17', next:null, tags:['recall'],
+     tooth:{tx:[3,28],pl:[],ms:[16]},
+     hist:[['2569-08-17','ตรวจฟันประจำปี','ทพญ.นภา',800],
+           ['2568-08-20','ตรวจฟันประจำปี + ขูดหินปูน','ทพญ.นภา',1200]]}),
+  p({hn:'HN 23-441', n:'เบญจวรรณ ศรีสุข', tel:'087-119-4432', age:36, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.อรอนงค์', since:'2566-07-11', last:'2569-08-17', next:null, tags:['sso'],
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.อรอนงค์',0]]}),
+  p({hn:'HN 23-208', n:'ปิยะพงษ์ ทวีทรัพย์', tel:'094-556-1123', age:44, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2566-04-25', last:'2569-08-17', next:null, bal:3200,
+     tooth:{tx:[],pl:[],ms:[1]},
+     hist:[['2569-08-17','ถอนฟัน ซี่ 17','ทพ.กิตติ',3200]]}),
+];
+
+const TAGLBL = {
+  new:   ['คนไข้ใหม่','#7A5AF0'],
+  plan:  ['มีแผนค้าง','#2E6BE6'],
+  ortho: ['จัดฟัน','#199FB4'],
+  sso:   ['สิทธิ ปกส.','#2E9E63'],
+  lab:   ['รองานแล็บ','#E0951E'],
+  recall:['ถึงกำหนดตรวจ','#D2504B'],
+  emg:   ['เคยเคสฉุกเฉิน','#65787F'],
+};
+
+const S = {f:'all', q:'', sel:null, tab:'info'};
+const FILTERS = {
+  all: () => true,
+  new: x => x.tags.includes('new'),
+  appt: x => !!x.next,
+  owe: x => x.bal > 0,
+  recall: x => x.tags.includes('recall'),
+  ortho: x => x.tags.includes('ortho'),
+};
+const hit = x => !S.q || (x.n + ' ' + x.hn + ' ' + x.tel).toLowerCase().includes(S.q.toLowerCase());
+const rows = () => PT.filter(x => FILTERS[S.f](x) && hit(x));
+
+/* ── การ์ดสรุป ── */
+function renderSum(){
+  const owe = PT.reduce((a,x) => a + x.bal, 0);
+  const appt = PT.filter(x => x.next).length;
+  const cards = [
+    ['คนไข้ทั้งหมด', money(TOTAL_ALL), 'ราย', 'เคลื่อนไหวล่าสุด ' + PT.length + ' ราย', '#2E6BE6',
+     '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'],
+    ['คนไข้ใหม่เดือนนี้', NEW_30, 'ราย', 'จากช่องทางออนไลน์ 61%', '#7A5AF0',
+     '<path d="M12 5v14M5 12h14"/>'],
+    ['มีนัดล่วงหน้า', appt, 'ราย', 'ในอีก 30 วันข้างหน้า', '#2E9E63',
+     '<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/>'],
+    ['ยอดค้างชำระรวม', money(owe), '฿', PT.filter(x => x.bal > 0).length + ' รายที่ต้องติดตาม', '#D2504B',
+     '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/>'],
+  ];
+  $('#sum').innerHTML = cards.map(([lab,val,unit,sub,c,ico]) => `
+    <div class="card kpi">
+      <div class="row"><div class="ico" style="background:${c}1A;color:${c}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ico}</svg></div>
+        <div><div class="lab">${lab}</div></div></div>
+      <div class="val">${val}<small>${unit}</small></div>
+      <div class="delta flat">${sub}</div>
+    </div>`).join('');
+}
+
+/* ── ตาราง ── */
+function renderTable(){
+  const r = rows();
+  $('#count').textContent = r.length + ' ราย';
+  $('#sub').textContent = `ทะเบียนคนไข้สาขาอารีย์ · ทั้งหมด ${money(TOTAL_ALL)} ราย · แสดงที่เคลื่อนไหวล่าสุด ${PT.length} ราย`;
+  $('#tbody').innerHTML = r.length ? r.map(x => `
+    <tr data-hn="${x.hn}">
+      <td class="mono" style="font-size:12.5px">${esc(x.hn)}</td>
+      <td><div class="who"><div class="ini">${esc(initial(x.n))}</div>
+        <div><b>${esc(x.n)}</b><span class="tel">${esc(x.tel)}</span></div></div></td>
+      <td>${x.age} ${x.sex === 'ช' ? 'ช' : 'ญ'}</td>
+      <td>${esc(x.right)}</td>
+      <td class="num">${thDate(x.last)}</td>
+      <td class="num">${x.next ? thDate(x.next.split(' ')[0]) + ' <span style="color:var(--muted)">' + x.next.split(' ')[1] + '</span>' : '<span style="color:var(--faint)">—</span>'}</td>
+      <td class="right num">${x.bal ? '<span class="owe">' + money(x.bal) + '</span>' : '<span style="color:var(--faint)">—</span>'}</td>
+      <td>${x.tags.map(t => `<span class="chip" style="background:${TAGLBL[t][1]}1A;color:${TAGLBL[t][1]}">${TAGLBL[t][0]}</span>`).join(' ') || '<span style="color:var(--faint);font-size:12px">ปกติ</span>'}</td>
+    </tr>`).join('') : '<tr><td colspan="8" class="empty">ไม่พบคนไข้ตามเงื่อนไขนี้</td></tr>';
+
+  $$('#tbody tr[data-hn]').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.hn));
+}
+
+/* ── แผนภาพฟัน 32 ซี่ ── */
+function toothchart(t){
+  const cls = i => t.tx.includes(i) ? ' class="tx"' : t.pl.includes(i) ? ' class="pl"' : t.ms.includes(i) ? ' class="ms"' : '';
+  const row = (a,b) => `<div class="rw">${Array.from({length:8},(_,k) => `<i${cls(a+k)}></i>`).join('')}<span class="gap"></span>${Array.from({length:8},(_,k) => `<i${cls(b+k)}></i>`).join('')}</div>`;
+  return `<div class="tcwrap">
+    <div class="arch">${row(0,8)}${row(16,24)}</div>
+    <div class="tcleg">
+      <div><i class="tx"></i>เคยรักษา / อุด–ครอบ</div>
+      <div><i class="pl"></i>อยู่ในแผนรักษา</div>
+      <div><i class="ms"></i>ไม่มีฟัน / ถอนแล้ว</div>
+      <div><i></i>ปกติ</div>
+    </div>
+  </div>`;
+}
+
+/* ── ลิ้นชักประวัติคนไข้ ── */
+function openDrawer(hn){
+  const x = PT.find(i => i.hn === hn); if (!x) return;
+  S.sel = hn; S.tab = 'info';
+  const spent = x.hist.reduce((a,h) => a + h[3], 0);
+
+  $('#drawer').innerHTML = `
+    <div class="dhead">
+      <button class="x" id="dx" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="ini" style="width:44px;height:44px;border-radius:13px;font-size:16px">${esc(initial(x.n))}</div>
+        <div><b style="font-size:16px;font-weight:600;letter-spacing:-.01em">${esc(x.n)}</b>
+          <div class="mono" style="font-size:12px;color:var(--muted)">${esc(x.hn)} · ${esc(x.tel)}</div></div>
+      </div>
+      <div style="margin-top:11px;display:flex;gap:6px;flex-wrap:wrap">
+        ${x.tags.map(t => `<span class="chip" style="background:${TAGLBL[t][1]}1A;color:${TAGLBL[t][1]}">${TAGLBL[t][0]}</span>`).join('')}
+      </div>
+    </div>
+    <div class="dtabs" id="dtabs">
+      <button class="on" data-t="info">ข้อมูล</button>
+      <button data-t="hist">ประวัติการรักษา</button>
+      <button data-t="money">การเงิน</button>
+    </div>
+    <div class="dbody">
+      <div class="dpane on" data-p="info">
+        ${x.alerts.length ? x.alerts.map(a => `<div class="alertbox">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <div><b>ข้อควรระวัง</b><br>${esc(a)}</div></div>`).join('') : ''}
+        <div class="drow"><span class="k">อายุ / เพศ</span><span class="v">${x.age} ปี · ${x.sex === 'ช' ? 'ชาย' : 'หญิง'}</span></div>
+        <div class="drow"><span class="k">สิทธิการรักษา</span><span class="v">${esc(x.right)}</span></div>
+        <div class="drow"><span class="k">แพทย์ประจำ</span><span class="v">${esc(x.doc)}</span></div>
+        <div class="drow"><span class="k">คนไข้ตั้งแต่</span><span class="v">${thDate(x.since)}</span></div>
+        <div class="drow"><span class="k">มาครั้งล่าสุด</span><span class="v">${thDate(x.last)}</span></div>
+        <div class="drow"><span class="k">นัดถัดไป</span><span class="v">${x.next ? '<b>' + thDate(x.next.split(' ')[0]) + ' ' + x.next.split(' ')[1] + ' น.</b>' : '<span style="color:var(--faint)">ยังไม่มีนัด</span>'}</span></div>
+        <div style="margin-top:16px">
+          <div style="font-size:12.5px;color:var(--muted);margin-bottom:9px">สภาพช่องปาก</div>
+          ${toothchart(x.tooth)}
+        </div>
+      </div>
+
+      <div class="dpane" data-p="hist">
+        <div class="tline">${x.hist.map(h => `<div class="it">
+          <span class="dt">${thDate(h[0])}</span>
+          <div><b>${esc(h[1])}</b><span>${esc(h[2])}</span></div>
+          <span class="amt">${h[3] ? money(h[3]) + ' ฿' : '<span style="color:var(--green)">สิทธิ/ไม่มีค่าใช้จ่าย</span>'}</span>
+        </div>`).join('')}</div>
+        <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6">
+          มาคลินิกทั้งหมด <b style="color:var(--text)">${x.hist.length} ครั้ง</b> ·
+          มูลค่าการรักษาสะสม <b style="color:var(--text)">${money(spent)} ฿</b>
+        </p>
+      </div>
+
+      <div class="dpane" data-p="money">
+        <div class="drow"><span class="k">ยอดค้างชำระ</span><span class="v mono">${x.bal ? '<b class="owe">' + money(x.bal) + ' ฿</b>' : '<span class="paid">ไม่มียอดค้าง</span>'}</span></div>
+        <div class="drow"><span class="k">ยอดสะสม</span><span class="v mono">${money(spent)} ฿</span></div>
+        ${x.plans.length ? `<div style="margin-top:14px">
+          <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px">แผน / แพ็กเกจที่เกี่ยวข้อง</div>
+          ${x.plans.map(pl => `<div class="alertbox" style="background:rgba(46,107,230,.06);border-color:rgba(46,107,230,.28);color:var(--text)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E6BE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5"/></svg>
+            <div>${esc(pl)}</div></div>`).join('')}
+        </div>` : '<p style="margin-top:14px;font-size:12.5px;color:var(--faint)">ยังไม่มีแผนการรักษาที่ค้างอยู่</p>'}
+      </div>
+    </div>
+    <div class="dfoot">
+      <div class="pair">
+        <button class="btn solid" id="dbook">จองนัดหมาย</button>
+        <button class="btn" id="dchat">เปิดแชท</button>
+      </div>
+      <button class="btn wide" id="dplan">สร้างแผนการรักษา</button>
+    </div>`;
+
+  $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
+  $('#dx').onclick = closeDrawer;
+  $$('#dtabs button').forEach(b => b.onclick = () => {
+    $$('#dtabs button').forEach(o => o.classList.toggle('on', o === b));
+    $$('.dpane').forEach(p => p.classList.toggle('on', p.dataset.p === b.dataset.t));
+  });
+  $('#dbook').onclick = () => { location.href = 'schedule.html'; };
+  $('#dchat').onclick = () => { location.href = 'inbox.html'; };
+  $('#dplan').onclick = () => { location.href = 'treatment-plans.html'; };
+}
+function closeDrawer(){ $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); }
+$('#scrim').onclick = closeDrawer;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+$$('.bar-row .fchip').forEach(b => b.onclick = () => {
+  $$('.bar-row .fchip').forEach(o => o.classList.toggle('on', o === b));
+  S.f = b.dataset.f; renderTable();
+});
+$('#q').oninput = e => { S.q = e.target.value.trim(); renderTable(); };
+$('#bell').onclick = () => toast(PT.filter(x => x.tags.includes('recall')).length + ' รายถึงกำหนดตรวจ 6 เดือน');
+$('#addPat').onclick = () => toast('เปิดฟอร์มลงทะเบียนคนไข้ใหม่ — เดโม');
+
+renderSum(); renderTable();
+</script>
+</body>
+</html>
+
