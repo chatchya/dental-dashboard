@@ -820,6 +820,399 @@ body{
   border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
 }
 
+/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
+.sheet{
+  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
+.sbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.sbox.wide{max-width:720px}
+.sheet.on .sbox{transform:none}
+.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.shead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.shead .x:hover{border-color:var(--rose);color:var(--rose)}
+.sbody{padding:18px 22px;overflow-y:auto;flex:1}
+.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
+.sfoot .grow{flex:1}
+.sfoot .note{font-size:12px;color:var(--muted)}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sgrid .full{grid-column:1/-1}
+.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
+.sf input,.sf select,.sf textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
+.sf select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.sf input:focus,.sf select:focus,.sf textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
+.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
+.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.sf.bad .err{display:block}
+.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:20px 0 11px}
+.ssec:first-child{margin-top:0}
+.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
+.srow .v{flex:1}
+.stotal{
+  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
+  background:var(--paper);border-radius:12px;
+}
+.stotal .k{font-size:12.5px;color:var(--muted)}
+.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
+.spick{display:flex;gap:7px;flex-wrap:wrap}
+.spick button{
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
+  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
+}
+.spick button:hover{border-color:var(--faint);color:var(--text)}
+.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
+@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
+.sheet{
+  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
+.sbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.sbox.wide{max-width:720px}
+.sheet.on .sbox{transform:none}
+.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.shead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.shead .x:hover{border-color:var(--rose);color:var(--rose)}
+.sbody{padding:18px 22px;overflow-y:auto;flex:1}
+.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
+.sfoot .grow{flex:1}
+.sfoot .note{font-size:12px;color:var(--muted)}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sgrid .full{grid-column:1/-1}
+.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
+.sf input,.sf select,.sf textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
+.sf select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.sf input:focus,.sf select:focus,.sf textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
+.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
+.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.sf.bad .err{display:block}
+.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:20px 0 11px}
+.ssec:first-child{margin-top:0}
+.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
+.srow .v{flex:1}
+.stotal{
+  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
+  background:var(--paper);border-radius:12px;
+}
+.stotal .k{font-size:12.5px;color:var(--muted)}
+.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
+.spick{display:flex;gap:7px;flex-wrap:wrap}
+.spick button{
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
+  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
+}
+.spick button:hover{border-color:var(--faint);color:var(--text)}
+.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
+@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
+.sheet{
+  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
+.sbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.sbox.wide{max-width:720px}
+.sheet.on .sbox{transform:none}
+.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.shead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.shead .x:hover{border-color:var(--rose);color:var(--rose)}
+.sbody{padding:18px 22px;overflow-y:auto;flex:1}
+.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
+.sfoot .grow{flex:1}
+.sfoot .note{font-size:12px;color:var(--muted)}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sgrid .full{grid-column:1/-1}
+.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
+.sf input,.sf select,.sf textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
+.sf select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.sf input:focus,.sf select:focus,.sf textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
+.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
+.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.sf.bad .err{display:block}
+.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:20px 0 11px}
+.ssec:first-child{margin-top:0}
+.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
+.srow .v{flex:1}
+.stotal{
+  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
+  background:var(--paper);border-radius:12px;
+}
+.stotal .k{font-size:12.5px;color:var(--muted)}
+.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
+.spick{display:flex;gap:7px;flex-wrap:wrap}
+.spick button{
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
+  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
+}
+.spick button:hover{border-color:var(--faint);color:var(--text)}
+.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
+@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
+
 /* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
 .side .nav a{cursor:pointer}
 .toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
@@ -1126,6 +1519,49 @@ function toast(msg, undo){
   setTimeout(() => el.remove(), undo ? 7000 : 3000);
 }
 
+/* ── ตัวสร้างหน้าจอย่อยที่ใช้ร่วมกัน ── */
+function sheet(o){
+  const el = document.createElement('div');
+  el.className = 'sheet';
+  el.innerHTML = `<div class="sbg" data-x></div>
+    <div class="sbox${o.wide ? ' wide' : ''}" role="dialog" aria-modal="true">
+      <div class="shead">
+        <button class="x" data-x aria-label="ปิด"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        <h2>${o.title}</h2>${o.sub ? `<p>${o.sub}</p>` : ''}
+      </div>
+      <div class="sbody">${o.body || ''}</div>
+      <div class="sfoot">${o.note ? `<span class="note">${o.note}</span>` : ''}<span class="grow"></span>
+        ${(o.foot || []).map((f,i) => `<button class="btn ${f.cls || ''}" data-f="${i}">${f.label}</button>`).join('')}
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  const close = () => { el.classList.remove('on'); setTimeout(() => el.remove(), 220); };
+  el.querySelectorAll('[data-x]').forEach(b => b.onclick = close);
+  (o.foot || []).forEach((f,i) => {
+    el.querySelector(`[data-f="${i}"]`).onclick = () => { if (f.on ? f.on(el, close) !== false : true) if (f.close !== false) close(); };
+  });
+  const esc = e => { if (e.key === 'Escape'){ close(); document.removeEventListener('keydown', esc); } };
+  document.addEventListener('keydown', esc);
+  requestAnimationFrame(() => el.classList.add('on'));
+  if (o.ready) o.ready(el);
+  const first = el.querySelector('input,select,textarea');
+  if (first) setTimeout(() => first.focus(), 180);
+  return {el, close};
+}
+
+/* ดาวน์โหลดไฟล์จริง (CSV / ข้อความ) */
+function download(name, text, mime){
+  if (!(window.URL && URL.createObjectURL)){ toast('เบราว์เซอร์นี้ไม่รองรับการดาวน์โหลดไฟล์'); return false; }
+  const blob = new Blob(['\ufeff' + text], {type: (mime || 'text/csv') + ';charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const csvCell = v => `"${String(v).replace(/"/g, '""')}"`;
+const csv = rows => rows.map(r => r.map(csvCell).join(',')).join('\n');
+
 const PM = {
   cash:  {n:'เงินสด',        c:'#2E9E63'},
   card:  {n:'บัตรเครดิต',    c:'#2E6BE6'},
@@ -1394,6 +1830,141 @@ function renderIns(){
   }).join('');
 }
 
+/* ═══════════════ หน้าจอรับชำระเงิน ═══════════════ */
+const PM_LIST = Object.entries(PM).map(([k, v]) => [k, v.n]);
+
+function payScreen(bill){
+  const waiting = BILLS.filter(x => x.amt > x.paid);
+  const pre = bill || waiting[0];
+  sheet({
+    title: 'รับชำระเงิน',
+    sub: BRANCHES[BRANCH].n + ' · ' + waiting.length + ' รายการที่ยังค้างชำระ',
+    body: `
+      <div class="sf full" style="margin-bottom:16px">
+        <label for="pBill">รายการที่จะรับชำระ</label>
+        <select id="pBill">${waiting.map(x =>
+          `<option value="${x.id}"${pre && x.id === pre.id ? ' selected' : ''}>${esc(x.pat)} · ${esc(x.tx)} · ค้าง ${money(x.amt - x.paid)} ฿</option>`).join('')
+          || '<option value="">ไม่มีรายการค้างชำระ</option>'}</select>
+      </div>
+      <div id="pInfo"></div>
+      <div class="ssec">รับเงิน</div>
+      <div class="sgrid">
+        <div class="sf"><label for="pAmt">จำนวนเงินที่รับ <i>*</i></label>
+          <input id="pAmt" type="text" inputmode="numeric">
+          <div class="err">จำนวนเงินต้องมากกว่า 0 และไม่เกินยอดค้าง</div>
+          <div class="hint" id="pLeft"></div></div>
+        <div class="sf"><label for="pPm">ช่องทาง</label>
+          <select id="pPm">${PM_LIST.map(([k, n]) => `<option value="${k}">${n}</option>`).join('')}</select></div>
+        <div class="sf full"><label>รับเต็มจำนวน หรือแบ่งชำระ</label>
+          <div class="spick" id="pQuick"></div></div>
+        <div class="sf full"><label for="pNote">หมายเหตุ</label>
+          <input id="pNote" type="text" placeholder="เช่น รับมัดจำงวดแรก"></div>
+      </div>
+      <div class="stotal"><span class="k">ยอดที่จะบันทึก</span><span class="v" id="pSum">0 ฿</span></div>`,
+    foot: [
+      {label:'ยกเลิก'},
+      {label:'รับชำระและออกใบเสร็จ', cls:'solid', on:(el, close) => {
+        const x = BILLS.find(b => b.id === el.querySelector('#pBill').value);
+        if (!x) return false;
+        const amt = Number(String(el.querySelector('#pAmt').value).replace(/[^\d]/g, ''));
+        const left = x.amt - x.paid;
+        if (!amt || amt > left){ el.querySelector('#pAmt').closest('.sf').classList.add('bad'); return false; }
+        const snap = {...x};
+        x.paid += amt;
+        x.pm = el.querySelector('#pPm').value;
+        x.st = x.paid >= x.amt ? 'paid' : 'part';
+        render();
+        close();
+        receiptScreen(x, amt);
+        toast('รับชำระ ' + money(amt) + ' ฿ จาก ' + x.pat, () => { Object.assign(x, snap); render(); });
+        return false;
+      }},
+    ],
+    ready: el => {
+      const sel = el.querySelector('#pBill');
+      const sync = () => {
+        const x = BILLS.find(b => b.id === sel.value);
+        if (!x) return;
+        const left = x.amt - x.paid;
+        el.querySelector('#pInfo').innerHTML = `
+          <div class="srow"><span class="k">คนไข้</span><span class="v"><b>${esc(x.pat)}</b> · ${esc(x.hn)}</span></div>
+          <div class="srow"><span class="k">รายการ</span><span class="v">${esc(x.tx)}</span></div>
+          <div class="srow"><span class="k">ยอดเต็ม / ชำระแล้ว</span><span class="v mono">${money(x.amt)} ฿ / <span class="paid">${money(x.paid)} ฿</span></span></div>`;
+        el.querySelector('#pLeft').textContent = 'ยอดค้างทั้งหมด ' + money(left) + ' ฿';
+        el.querySelector('#pQuick').innerHTML = [
+          ['เต็มจำนวน', left], ['ครึ่งหนึ่ง', Math.round(left / 2)], ['30%', Math.round(left * .3)],
+        ].map(([lb, v]) => `<button type="button" data-v="${v}">${lb} · ${money(v)} ฿</button>`).join('');
+        el.querySelectorAll('#pQuick button').forEach(b => b.onclick = () => {
+          el.querySelectorAll('#pQuick button').forEach(o => o.classList.toggle('on', o === b));
+          el.querySelector('#pAmt').value = money(Number(b.dataset.v));
+          el.querySelector('#pAmt').dispatchEvent(new Event('input'));
+        });
+        el.querySelector('#pAmt').value = money(left);
+        el.querySelector('#pAmt').dispatchEvent(new Event('input'));
+      };
+      el.querySelector('#pAmt').oninput = e => {
+        const n = Number(String(e.target.value).replace(/[^\d]/g, ''));
+        e.target.value = n ? money(n) : '';
+        e.target.closest('.sf').classList.remove('bad');
+        el.querySelector('#pSum').textContent = money(n) + ' ฿';
+      };
+      sel.onchange = sync;
+      sync();
+    },
+  });
+}
+
+/* ═══════════════ ใบเสร็จรับเงิน ═══════════════ */
+function receiptScreen(x, amt){
+  const paid = amt !== undefined ? amt : x.paid;
+  const vat = Math.round(paid * 7 / 107);
+  const no = 'RC-69-' + String(Math.floor(Math.random() * 9000) + 1000);
+  sheet({
+    title: 'ใบเสร็จรับเงิน',
+    sub: 'เลขที่ ' + no + ' · 17 สิงหาคม 2569',
+    body: `
+      <div style="border:1px solid var(--border);border-radius:12px;padding:18px 20px">
+        <div style="display:flex;align-items:flex-start;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--border)">
+          <div>
+            <b style="font-size:15px;font-weight:600">คลินิกทันตกรรม Zentr ${esc(BRANCHES[BRANCH].n.replace('สาขา',''))}</b>
+            <div style="font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:4px">
+              ${BRANCH === 'aree'
+                ? '88/12 ซอยอารีย์ 4 พหลโยธิน พญาไท กรุงเทพฯ 10400<br>โทร 02-115-8899 · เลขประจำตัวผู้เสียภาษี 0105565008841'
+                : '12 ถนนนิมมานเหมินท์ ซอย 9 เมือง เชียงใหม่ 50200<br>โทร 053-218-990 · เลขประจำตัวผู้เสียภาษี 0105565008841'}
+            </div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div class="mono" style="font-size:12px;color:var(--muted)">${no}</div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:3px">17 ส.ค. 2569</div>
+          </div>
+        </div>
+
+        <div class="srow" style="margin-top:12px"><span class="k">ผู้รับบริการ</span>
+          <span class="v"><b>${esc(x.pat)}</b> · ${esc(x.hn)}</span></div>
+        <div class="srow"><span class="k">รายการ</span><span class="v">${esc(x.tx)}</span></div>
+        <div class="srow"><span class="k">ช่องทางชำระ</span><span class="v">${PM[x.pm].n}</span></div>
+
+        <table class="tbl" style="margin-top:14px">
+          <thead><tr><th>รายละเอียด</th><th class="right">จำนวนเงิน</th></tr></thead>
+          <tbody>
+            <tr><td>${esc(x.tx)}</td><td class="right num">${money(paid - vat)}</td></tr>
+            <tr><td style="color:var(--muted)">ภาษีมูลค่าเพิ่ม 7%</td><td class="right num" style="color:var(--muted)">${money(vat)}</td></tr>
+          </tbody>
+        </table>
+        <div class="stotal"><span class="k">รวมเป็นเงินทั้งสิ้น</span><span class="v">${money(paid)} ฿</span></div>
+        ${x.amt > x.paid ? `<p style="margin-top:12px;font-size:12.5px;color:var(--rose)">คงเหลือค้างชำระ ${money(x.amt - x.paid)} ฿</p>` : ''}
+        <p style="margin-top:14px;font-size:11.5px;color:var(--faint);line-height:1.6">
+          เอกสารนี้ออกโดยระบบอัตโนมัติ · ผู้รับเงิน: ชัชชญา ธนกิจ
+        </p>
+      </div>`,
+    foot: [
+      {label:'ปิด'},
+      {label:'ส่งทางไลน์', on:() => { toast('ส่งใบเสร็จให้ ' + x.pat + ' ทางไลน์แล้ว'); }},
+      {label:'พิมพ์ / บันทึก PDF', cls:'solid', close:false, on:() => { window.print(); return false; }},
+    ],
+  });
+}
+
 /* ── ลิ้นชักบิล ── */
 function openBill(id){
   const x = BILLS.find(i => i.id === id); if (!x) return;
@@ -1421,13 +1992,8 @@ function openBill(id){
     </div>`;
   $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
   $('#dx').onclick = closeDrawer;
-  if ($('#dpay')) $('#dpay').onclick = () => {
-    const snap = {...x};
-    x.paid = x.amt; x.st = 'paid';
-    closeDrawer(); render();
-    toast('รับชำระ ' + money(remain) + ' ฿ จาก ' + x.pat, () => { Object.assign(x, snap); render(); });
-  };
-  $('#drc').onclick = () => toast('ส่งใบเสร็จเข้าเครื่องพิมพ์ — เดโม');
+  if ($('#dpay')) $('#dpay').onclick = () => { closeDrawer(); payScreen(x); };
+  $('#drc').onclick = () => { closeDrawer(); receiptScreen(x); };
   $('#dsend').onclick = () => toast('ส่งใบเสร็จให้ ' + x.pat + ' ทางไลน์แล้ว');
 }
 function closeDrawer(){ $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); }
@@ -1448,7 +2014,7 @@ $$('.bar-row .fchip').forEach(b => b.onclick = () => {
 });
 $('#q').oninput = e => { S.q = e.target.value.trim(); renderBills(); };
 $('#bell').onclick = () => toast('มียอดค้างเกินกำหนด ' + DUES.filter(x => x.days > 7).length + ' ราย');
-$('#newBill').onclick = () => toast('เปิดหน้าจอรับชำระเงิน — เดโม');
+$('#newBill').onclick = () => payScreen(null);
 
 function render(){ renderSum(); renderBills(); renderDue(); renderIns(); }
 render();

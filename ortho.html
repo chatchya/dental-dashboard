@@ -820,6 +820,399 @@ body{
   border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
 }
 
+/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
+.sheet{
+  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
+.sbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.sbox.wide{max-width:720px}
+.sheet.on .sbox{transform:none}
+.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.shead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.shead .x:hover{border-color:var(--rose);color:var(--rose)}
+.sbody{padding:18px 22px;overflow-y:auto;flex:1}
+.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
+.sfoot .grow{flex:1}
+.sfoot .note{font-size:12px;color:var(--muted)}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sgrid .full{grid-column:1/-1}
+.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
+.sf input,.sf select,.sf textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
+.sf select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.sf input:focus,.sf select:focus,.sf textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
+.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
+.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.sf.bad .err{display:block}
+.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:20px 0 11px}
+.ssec:first-child{margin-top:0}
+.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
+.srow .v{flex:1}
+.stotal{
+  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
+  background:var(--paper);border-radius:12px;
+}
+.stotal .k{font-size:12.5px;color:var(--muted)}
+.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
+.spick{display:flex;gap:7px;flex-wrap:wrap}
+.spick button{
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
+  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
+}
+.spick button:hover{border-color:var(--faint);color:var(--text)}
+.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
+@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
+.sheet{
+  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
+.sbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.sbox.wide{max-width:720px}
+.sheet.on .sbox{transform:none}
+.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.shead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.shead .x:hover{border-color:var(--rose);color:var(--rose)}
+.sbody{padding:18px 22px;overflow-y:auto;flex:1}
+.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
+.sfoot .grow{flex:1}
+.sfoot .note{font-size:12px;color:var(--muted)}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sgrid .full{grid-column:1/-1}
+.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
+.sf input,.sf select,.sf textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
+.sf select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.sf input:focus,.sf select:focus,.sf textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
+.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
+.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.sf.bad .err{display:block}
+.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:20px 0 11px}
+.ssec:first-child{margin-top:0}
+.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
+.srow .v{flex:1}
+.stotal{
+  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
+  background:var(--paper);border-radius:12px;
+}
+.stotal .k{font-size:12.5px;color:var(--muted)}
+.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
+.spick{display:flex;gap:7px;flex-wrap:wrap}
+.spick button{
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
+  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
+}
+.spick button:hover{border-color:var(--faint);color:var(--text)}
+.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
+@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
+.sheet{
+  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
+.sbox{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
+}
+.sbox.wide{max-width:720px}
+.sheet.on .sbox{transform:none}
+.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.shead .x{
+  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
+}
+.shead .x:hover{border-color:var(--rose);color:var(--rose)}
+.sbody{padding:18px 22px;overflow-y:auto;flex:1}
+.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
+.sfoot .grow{flex:1}
+.sfoot .note{font-size:12px;color:var(--muted)}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sgrid .full{grid-column:1/-1}
+.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
+.sf input,.sf select,.sf textarea{
+  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
+  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
+.sf select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.sf input:focus,.sf select:focus,.sf textarea:focus{
+  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
+.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
+.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
+.sf.bad .err{display:block}
+.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:20px 0 11px}
+.ssec:first-child{margin-top:0}
+.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
+.srow .v{flex:1}
+.stotal{
+  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
+  background:var(--paper);border-radius:12px;
+}
+.stotal .k{font-size:12.5px;color:var(--muted)}
+.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
+.spick{display:flex;gap:7px;flex-wrap:wrap}
+.spick button{
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
+  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
+}
+.spick button:hover{border-color:var(--faint);color:var(--text)}
+.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
+@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
+
 /* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
 .side .nav a{cursor:pointer}
 .toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
@@ -1013,6 +1406,215 @@ body{
       </details>
     </div>
   </aside>
+<script>
+/* ── ทะเบียนคนไข้ที่ใช้ร่วมกับฟอร์มนัดหมาย · ต้นทางเดียวกันทั้งสองหน้า ── */
+(function(){
+var p = o => ({tags:[], bal:0, plans:[], alerts:[], tooth:{tx:[],pl:[],ms:[]}, ...o});
+
+var REG = {
+ /* ══════════ สาขาอารีย์ ══════════ */
+ aree: [
+  p({hn:'HN 24-882', n:'ธนภัทร ศรีวิไล', tel:'081-244-7781', age:32, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2567-03-11', last:'2569-08-12', next:null, tags:['emg'],
+     tooth:{tx:[18,19],pl:[30],ms:[]},
+     hist:[['2569-08-12','อุดฟัน 2 ซี่ (36, 37)','ทพญ.นภา',2400],
+           ['2569-03-03','ขูดหินปูน + ตรวจฟัน','ทพญ.นภา',1200],
+           ['2568-09-14','ถอนฟัน ซี่ 48','ทพ.ประวิทย์',3500]]}),
+  p({hn:'HN 24-118', n:'ศิริพร ดำรงค์', tel:'089-771-2204', age:35, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2569-02-02', last:'2569-08-14', next:'2569-08-24 13:00', bal:54000,
+     tags:['plan'], plans:['วีเนียร์ 6 ซี่ (13–23) · 108,000 ฿ · จ่ายแล้วครึ่งแรก'],
+     tooth:{tx:[4,5,6,7,8,9],pl:[],ms:[]},
+     hist:[['2569-08-14','พิมพ์ปาก ส่งแล็บ (วีเนียร์ 6 ซี่)','ทพญ.นภา',54000],
+           ['2569-08-02','ปรึกษา + ถ่ายภาพวางแผน','ทพญ.นภา',0],
+           ['2569-05-19','ฟอกสีฟันที่คลินิก','ทพญ.นภา',8900]]}),
+  p({hn:'HN 24-771', n:'อธิป วัฒนกุล', tel:'086-559-0127', age:47, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2569-08-13', last:'2569-08-13', next:'2569-08-19 11:00',
+     tags:['new','plan'], plans:['รากเทียม 2 ซี่ + ครอบฟันเซรามิก · 148,000 ฿ · รอตอบรับ 4 วัน'],
+     alerts:['ความดันโลหิตสูง — ควบคุมด้วยยา Amlodipine 5 มก.'],
+     tooth:{tx:[],pl:[],ms:[19,20]},
+     hist:[['2569-08-13','CT scan + ปรึกษาวางแผนรากเทียม','ทพ.ประวิทย์',3500]]}),
+  p({hn:'HN 22-701', n:'วีรภัทร สุขใจ', tel:'062-118-3390', age:19, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2565-06-20', last:'2569-08-17', next:'2569-09-14 09:30', bal:6500,
+     tags:['ortho'], plans:['จัดฟันโลหะ · เดือนที่ 14 จาก 24 · ผ่อนเดือนละ 3,500 ฿'],
+     tooth:{tx:[0,1,2,3,4,5,6,7,8,9,10,11],pl:[],ms:[]},
+     hist:[['2569-08-17','ปรับเครื่องมือจัดฟัน ครั้งที่ 14','ทพ.กิตติ',3500],
+           ['2569-07-17','ปรับเครื่องมือจัดฟัน ครั้งที่ 13','ทพ.กิตติ',3500],
+           ['2569-06-19','ปรับเครื่องมือจัดฟัน ครั้งที่ 12','ทพ.กิตติ',3500]]}),
+  p({hn:'HN 24-772', n:'ปรียา สงวนศักดิ์', tel:'084-220-7745', age:24, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2569-08-01', last:'2569-08-08', next:null,
+     tags:['new','plan'], plans:['จัดฟันใส Invisalign · 135,000 ฿ · รอตอบรับ 9 วัน'],
+     tooth:{tx:[],pl:[13,14],ms:[]},
+     hist:[['2569-08-08','สแกนช่องปาก + เสนอแผน','ทพ.กิตติ',0],
+           ['2569-08-01','ปรึกษาครั้งแรก','ทพ.กิตติ',500]]}),
+  p({hn:'HN 23-556', n:'กัลยา ปิ่นทอง', tel:'081-909-4412', age:38, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.นภา', since:'2566-02-20', last:'2569-08-17', next:'2570-02-17 10:00',
+     tags:['sso'], tooth:{tx:[26],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน + ตรวจฟัน (สิทธิ ปกส.)','ทพญ.นภา',0],
+           ['2569-02-20','อุดฟัน ซี่ 36','ทพญ.นภา',1800]]}),
+  p({hn:'HN 22-455', n:'ประเสริฐ ทองดี', tel:'02-448-2210', age:54, sex:'ช', right:'ประกันกลุ่ม AIA',
+     doc:'ทพ.ประวิทย์', since:'2565-01-08', last:'2569-08-17', next:'2569-09-02 10:00',
+     tooth:{tx:[2],pl:[],ms:[]},
+     alerts:['แพ้ยา Penicillin — ใช้ Clindamycin แทน'],
+     hist:[['2569-08-17','ใส่ครอบฟัน ซี่ 16','ทพ.ประวิทย์',18000],
+           ['2569-07-22','รักษารากฟัน ครั้งที่ 3','ทพ.ประวิทย์',9000],
+           ['2569-07-01','รักษารากฟัน ครั้งที่ 1–2','ทพ.ประวิทย์',9000]]}),
+  p({hn:'HN 24-460', n:'นภัสวรรณ อินทร์แก้ว', tel:'095-330-1182', age:61, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2569-04-12', last:'2569-08-17', next:'2569-08-18 14:00', bal:12000,
+     tags:['lab'], plans:['ฟันปลอมถอดได้ (บนบางส่วน) · 24,000 ฿ · ค้างงวดที่ 2'],
+     tooth:{tx:[],pl:[],ms:[1,2,3,12,13]},
+     hist:[['2569-08-17','ลองฟันปลอมถอดได้','ทพ.ประวิทย์',0],
+           ['2569-08-08','พิมพ์ปาก ส่งแล็บ','ทพ.ประวิทย์',12000]]}),
+  p({hn:'HN 23-330', n:'สุชาติ พูลทรัพย์', tel:'080-772-9931', age:45, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2566-11-02', last:'2569-08-17', next:'2569-08-25 14:00',
+     tags:['lab'], tooth:{tx:[],pl:[24,25],ms:[]},
+     hist:[['2569-08-17','พิมพ์ปากทำเฝือกสบฟัน','ทพญ.อรอนงค์',2000],
+           ['2569-06-10','ตรวจฟัน + ขูดหินปูน','ทพญ.อรอนงค์',1200]]}),
+  p({hn:'HN 24-201', n:'อรวรรณ กิจเจริญ', tel:'083-441-2098', age:41, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2569-01-18', last:'2569-08-17', next:'2569-08-20 09:30', bal:4500,
+     tooth:{tx:[],pl:[],ms:[14]},
+     hist:[['2569-08-17','ตรวจฟัน + ขูดหินปูน','ทพญ.อรอนงค์',1200],
+           ['2569-08-06','ถอนฟัน ซี่ 26','ทพญ.อรอนงค์',4500]]}),
+  p({hn:'HN 23-119', n:'สุพรรษา ใจงาม', tel:'088-220-5567', age:28, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.นภา', since:'2566-09-09', last:'2569-08-17', next:null, tags:['sso','recall'],
+     tooth:{tx:[22],pl:[],ms:[]},
+     hist:[['2569-08-17','อุดฟัน 1 ซี่ (สิทธิ ปกส.)','ทพญ.นภา',0],
+           ['2569-02-14','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.นภา',0]]}),
+  p({hn:'HN 24-733', n:'พิมพ์ชนก วงศ์ทอง', tel:'091-337-8820', age:26, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2569-06-30', last:'2569-08-17', next:'2569-08-24 15:00', bal:6500,
+     tags:['new'], tooth:{tx:[],pl:[],ms:[31]},
+     hist:[['2569-08-17','ถอนฟันคุด ซี่ 48','ทพญ.อรอนงค์',6500],
+           ['2569-06-30','ตรวจฟัน + เอกซเรย์','ทพญ.อรอนงค์',800]]}),
+  p({hn:'HN 22-904', n:'กฤตย์ ทองสุข', tel:'065-118-2245', age:22, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2565-05-14', last:'2569-08-17', next:'2569-09-01 16:00',
+     tags:['ortho'], plans:['ถอดเครื่องมือแล้ว · ติดตามรีเทนเนอร์ 6 เดือน'],
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ตรวจติดตามหลังจัดฟัน','ทพ.กิตติ',0],
+           ['2569-08-06','รับรีเทนเนอร์ Essix','ทพ.กิตติ',6000]]}),
+  p({hn:'HN 22-556', n:'มานพ เจริญสุข', tel:'081-556-3321', age:50, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2565-03-30', last:'2569-08-12', next:'2569-08-21 10:30', bal:18000,
+     tags:['lab','plan'], plans:['ครอบฟัน 3 ซี่ + รักษาราก · 62,000 ฿ · รอตอบรับ 12 วัน'],
+     tooth:{tx:[2,29,30],pl:[],ms:[]},
+     hist:[['2569-08-12','พิมพ์ปากครอบฟัน ซี่ 46','ทพญ.อรอนงค์',18000],
+           ['2569-07-28','รักษาราก ซี่ 46','ทพญ.อรอนงค์',9000]]}),
+  p({hn:'HN 24-052', n:'ชลธิชา รุ่งเรือง', tel:'092-004-7718', age:33, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2569-01-05', last:'2569-08-17', next:'2569-08-21 11:30', bal:18000,
+     tags:['lab'], tooth:{tx:[10],pl:[],ms:[]},
+     hist:[['2569-08-17','ลองครอบฟัน ซี่ 26 (แก้สี ครั้งที่ 2)','ทพญ.นภา',0],
+           ['2569-07-28','พิมพ์ปากครอบฟัน ซี่ 26','ทพญ.นภา',18000]]}),
+  p({hn:'HN 21-774', n:'วิชัย ประดิษฐ์', tel:'081-220-6654', age:58, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2564-08-19', last:'2569-08-17', next:null, tags:['recall'],
+     tooth:{tx:[3,28],pl:[],ms:[16]},
+     hist:[['2569-08-17','ตรวจฟันประจำปี','ทพญ.นภา',800],
+           ['2568-08-20','ตรวจฟันประจำปี + ขูดหินปูน','ทพญ.นภา',1200]]}),
+  p({hn:'HN 23-441', n:'เบญจวรรณ ศรีสุข', tel:'087-119-4432', age:36, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.อรอนงค์', since:'2566-07-11', last:'2569-08-17', next:null, tags:['sso'],
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.อรอนงค์',0]]}),
+  p({hn:'HN 23-208', n:'ปิยะพงษ์ ทวีทรัพย์', tel:'094-556-1123', age:44, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2566-04-25', last:'2569-08-17', next:null, bal:3200,
+     tooth:{tx:[],pl:[],ms:[1]},
+     hist:[['2569-08-17','ถอนฟัน ซี่ 17','ทพ.กิตติ',3200]]}),
+ ],
+
+ /* ══════════ สาขานิมมาน เชียงใหม่ — เปิด พ.ค. 2569 ══════════ */
+ nimman: [
+  p({hn:'CM 68-072', n:'ณัฐริกา อินทวงศ์', tel:'081-882-4471', age:34, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2568-11-14', last:'2569-08-17', next:'2570-02-17 10:30', tags:['sso'],
+     tooth:{tx:[22],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน + ตรวจฟัน (สิทธิ ปกส.)','ทพญ.พิมพ์ลภัส',0],
+           ['2569-02-08','อุดฟัน ซี่ 37','ทพญ.พิมพ์ลภัส',1800]]}),
+  p({hn:'CM 69-030', n:'Mr. James Whitfield', tel:'062-440-1188', age:52, sex:'ช', right:'ประกันเดินทาง Allianz',
+     doc:'ทพ.ธนกฤต', since:'2569-06-02', last:'2569-08-17', next:'2569-08-19 11:00', bal:0,
+     tags:['new','plan'], plans:['รากเทียม ซี่ 36 + ครอบฟัน · 45,000 ฿ · รอตอบรับ 5 วัน'],
+     alerts:['สื่อสารภาษาอังกฤษ — จัดผู้ช่วยที่พูดอังกฤษได้ทุกครั้ง'],
+     tooth:{tx:[18,19],pl:[],ms:[26]},
+     hist:[['2569-08-17','อุดฟัน 2 ซี่','ทพ.ธนกฤต',4400],
+           ['2569-08-12','ปรึกษารากเทียม + เอกซเรย์','ทพ.ธนกฤต',800],
+           ['2569-06-02','ตรวจฟันครั้งแรก','ทพ.ธนกฤต',500]]}),
+  p({hn:'CM 68-115', n:'สมชาย ปันคำ', tel:'089-553-2094', age:47, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2568-08-20', last:'2569-08-17', next:null, bal:3200,
+     tooth:{tx:[],pl:[],ms:[14]},
+     hist:[['2569-08-17','ถอนฟัน ซี่ 26','ทพ.ธนกฤต',3200],
+           ['2569-05-11','ตรวจฟัน + เอกซเรย์','ทพ.ธนกฤต',800]]}),
+  p({hn:'CM 69-041', n:'พิมพา ไชยวงค์', tel:'094-118-7723', age:29, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-07-08', last:'2569-08-17', next:null, tags:['new','sso'],
+     tooth:{tx:[19],pl:[],ms:[]},
+     hist:[['2569-08-17','อุดฟัน 1 ซี่ (ซี่ 36)','ทพญ.พิมพ์ลภัส',0],
+           ['2569-07-08','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.พิมพ์ลภัส',0]]}),
+  p({hn:'CM 68-204', n:'ศิวกร แก้วมูล', tel:'086-771-3390', age:21, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2568-09-30', last:'2569-08-17', next:'2569-09-13 13:00', bal:0,
+     tags:['ortho'], plans:['จัดฟันโลหะ · เดือนที่ 10 จาก 22 · ผ่อนเดือนละ 3,000 ฿'],
+     tooth:{tx:[0,1,2,3,4,5,6,7,8,9,10,11],pl:[],ms:[]},
+     hist:[['2569-08-17','รับรีเทนเนอร์ Essix','ทพ.กิตติ',6000],
+           ['2569-07-19','ปรับเครื่องมือ ครั้งที่ 9','ทพ.กิตติ',3000]]}),
+  p({hn:'CM 69-016', n:'อัญชลี ดวงแก้ว', tel:'082-004-5561', age:31, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-06-18', last:'2569-08-17', next:null,
+     tags:['new','plan'], plans:['ฟอกสีฟัน + วีเนียร์ 1 ซี่ · 15,000 ฿ · รอตอบรับ 6 วัน'],
+     tooth:{tx:[],pl:[8],ms:[]},
+     hist:[['2569-08-17','ปรึกษาฟอกสีฟัน','ทพญ.พิมพ์ลภัส',0],
+           ['2569-06-18','ตรวจฟัน + ขูดหินปูน','ทพญ.พิมพ์ลภัส',1200]]}),
+  p({hn:'CM 68-019', n:'จันทร์เพ็ญ ต๊ะวัน', tel:'080-229-6614', age:58, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2568-06-02', last:'2569-08-17', next:null, tags:['recall'],
+     tooth:{tx:[3,28],pl:[],ms:[16]},
+     hist:[['2569-08-17','ตรวจฟันประจำปี','ทพญ.พิมพ์ลภัส',800],
+           ['2568-08-14','ตรวจฟัน + ขูดหินปูน','ทพญ.พิมพ์ลภัส',1200]]}),
+  p({hn:'CM 68-133', n:'ปฏิภาณ จอมแปง', tel:'065-337-8890', age:26, sex:'ช', right:'ประกันสังคม',
+     doc:'ทพ.ธนกฤต', since:'2568-10-05', last:'2569-08-17', next:null, tags:['sso','recall'],
+     tooth:{tx:[26],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน (สิทธิ ปกส.)','ทพ.ธนกฤต',0]]}),
+  p({hn:'CM 69-052', n:'ธีรภัทร ขัติยะ', tel:'092-660-1174', age:43, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2569-07-25', last:'2569-08-15', next:'2569-08-27 14:00', bal:18000,
+     tags:['new','lab','plan'], plans:['ครอบฟันเซรามิก 2 ซี่ · 36,000 ฿ · รอตอบรับ 2 วัน'],
+     tooth:{tx:[18],pl:[19],ms:[]},
+     hist:[['2569-08-15','พิมพ์ปากครอบฟัน ซี่ 36 ส่งแล็บ','ทพ.ธนกฤต',18000],
+           ['2569-07-25','รักษาราก ซี่ 36','ทพ.ธนกฤต',9000]]}),
+  p({hn:'CM 68-088', n:'นงลักษณ์ ปัญโญ', tel:'084-556-2201', age:64, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2568-07-16', last:'2569-08-14', next:'2569-08-25 10:30', bal:9800,
+     tags:['lab'], plans:['ฟันปลอมถอดได้ (ล่าง) · 19,600 ฿ · ค้างงวดที่ 2'],
+     tooth:{tx:[],pl:[],ms:[24,25,26,30,31]},
+     hist:[['2569-08-14','พิมพ์ปากฟันปลอม ส่งแล็บ','ทพ.ธนกฤต',9800]]}),
+  p({hn:'CM 69-061', n:'Ms. Hannah Berg', tel:'061-229-4480', age:28, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-08-03', last:'2569-08-03', next:'2569-08-17 13:00',
+     tags:['new'], tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-03','ตรวจฟัน + ปรึกษาฟอกสีฟัน','ทพญ.พิมพ์ลภัส',500]]}),
+  p({hn:'CM 69-008', n:'ก้องภพ ศรีวิชัย', tel:'088-114-9902', age:36, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-05-21', last:'2569-08-17', next:null,
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ตรวจฟัน + เอกซเรย์','ทพญ.พิมพ์ลภัส',800],
+           ['2569-05-21','ขูดหินปูน + ตรวจฟัน','ทพญ.พิมพ์ลภัส',1200]]}),
+ ],
+};
+
+  var KEY = 'zentr.newPatients.';
+  function stored(br){
+    try { return JSON.parse(localStorage.getItem(KEY + br) || '[]'); } catch (e) { return []; }
+  }
+  /* ทะเบียนของสาขา = คนไข้ที่เพิ่งลงทะเบียน (บนสุด) + ทะเบียนตั้งต้น */
+  window.zentrPatients = function(br){
+    return stored(br).map(function(x){ return p(x); }).concat(REG[br] || REG.aree);
+  };
+  window.zentrAddPatient = function(br, rec){
+    try { var c = stored(br); c.unshift(rec); localStorage.setItem(KEY + br, JSON.stringify(c)); } catch (e) {}
+  };
+  window.zentrRemovePatient = function(br, hn){
+    try {
+      localStorage.setItem(KEY + br,
+        JSON.stringify(stored(br).filter(function(x){ return x.hn !== hn; })));
+    } catch (e) {}
+  };
+  /* ค้นด้วย HN เบอร์โทร หรือชื่อ — ตัดขีดและเว้นวรรคก่อนเทียบ */
+  window.zentrFindPatients = function(br, q, limit){
+    q = String(q || '').trim().toLowerCase();
+    if (q.length < 2) return [];
+    var bare = q.replace(/[\s-]/g, '');
+    return window.zentrPatients(br).filter(function(x){
+      return String(x.hn).toLowerCase().replace(/[\s-]/g, '').indexOf(bare) >= 0 ||
+             String(x.tel).replace(/[\s-]/g, '').indexOf(bare) >= 0 ||
+             String(x.n).toLowerCase().indexOf(q) >= 0;
+    }).slice(0, limit || 6);
+  };
+})();
+</script>
   <main>
     <header class="top">
       <div><h1>จัดฟัน</h1><div class="sub" id="sub">ติดตามคนไข้จัดฟันทุกรายและรอบปรับเครื่องมือ</div></div>
@@ -1088,6 +1690,49 @@ function toast(msg, undo){
   $('#toasts').appendChild(el);
   setTimeout(() => el.remove(), undo ? 7000 : 3000);
 }
+
+/* ── ตัวสร้างหน้าจอย่อยที่ใช้ร่วมกัน ── */
+function sheet(o){
+  const el = document.createElement('div');
+  el.className = 'sheet';
+  el.innerHTML = `<div class="sbg" data-x></div>
+    <div class="sbox${o.wide ? ' wide' : ''}" role="dialog" aria-modal="true">
+      <div class="shead">
+        <button class="x" data-x aria-label="ปิด"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        <h2>${o.title}</h2>${o.sub ? `<p>${o.sub}</p>` : ''}
+      </div>
+      <div class="sbody">${o.body || ''}</div>
+      <div class="sfoot">${o.note ? `<span class="note">${o.note}</span>` : ''}<span class="grow"></span>
+        ${(o.foot || []).map((f,i) => `<button class="btn ${f.cls || ''}" data-f="${i}">${f.label}</button>`).join('')}
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  const close = () => { el.classList.remove('on'); setTimeout(() => el.remove(), 220); };
+  el.querySelectorAll('[data-x]').forEach(b => b.onclick = close);
+  (o.foot || []).forEach((f,i) => {
+    el.querySelector(`[data-f="${i}"]`).onclick = () => { if (f.on ? f.on(el, close) !== false : true) if (f.close !== false) close(); };
+  });
+  const esc = e => { if (e.key === 'Escape'){ close(); document.removeEventListener('keydown', esc); } };
+  document.addEventListener('keydown', esc);
+  requestAnimationFrame(() => el.classList.add('on'));
+  if (o.ready) o.ready(el);
+  const first = el.querySelector('input,select,textarea');
+  if (first) setTimeout(() => first.focus(), 180);
+  return {el, close};
+}
+
+/* ดาวน์โหลดไฟล์จริง (CSV / ข้อความ) */
+function download(name, text, mime){
+  if (!(window.URL && URL.createObjectURL)){ toast('เบราว์เซอร์นี้ไม่รองรับการดาวน์โหลดไฟล์'); return false; }
+  const blob = new Blob(['\ufeff' + text], {type: (mime || 'text/csv') + ';charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const csvCell = v => `"${String(v).replace(/"/g, '""')}"`;
+const csv = rows => rows.map(r => r.map(csvCell).join(',')).join('\n');
 
 const KIND = {
   metal:  {n:'จัดฟันโลหะ',    c:'#2E6BE6'},
@@ -1283,6 +1928,93 @@ function renderRail(){
     </div>`).join('');
 }
 
+/* ═══════════════ หน้าจอเริ่มเคสจัดฟันใหม่ ═══════════════ */
+const ORTHO_DOCS = pick({aree:['ทพ.กิตติ','ทพญ.อรอนงค์'], nimman:['ทพ.กิตติ (เสาร์)','ทพญ.พิมพ์ลภัส']});
+const KIND_FEE = {metal:85000, damon:92000, clear:128000, lingual:165000, retain:6000};
+
+function caseScreen(){
+  const dir = () => (window.zentrPatients ? zentrPatients(BRANCH) : []);
+  sheet({
+    wide: true,
+    title: 'เริ่มเคสจัดฟันใหม่',
+    sub: BRANCHES[BRANCH].n + ' · ระบบจะสร้างรอบนัดปรับเครื่องมือให้อัตโนมัติ',
+    body: `
+      <div class="sgrid">
+        <div class="sf"><label for="cPat">คนไข้ <i>*</i></label>
+          <select id="cPat"><option value="">— เลือกคนไข้ —</option>
+            ${dir().map(x => `<option value="${esc(x.hn)}">${esc(x.n)} · ${esc(x.hn)}</option>`).join('')}</select>
+          <div class="err">กรุณาเลือกคนไข้</div></div>
+        <div class="sf"><label for="cDoc">ทันตแพทย์จัดฟัน</label>
+          <select id="cDoc">${ORTHO_DOCS.map(d => `<option>${d}</option>`).join('')}</select></div>
+        <div class="sf"><label for="cKind">ชนิดเครื่องมือ</label>
+          <select id="cKind">${Object.entries(KIND).filter(([k]) => k !== 'retain')
+            .map(([k, v]) => `<option value="${k}">${v.n}</option>`).join('')}</select></div>
+        <div class="sf"><label for="cPlan">ระยะเวลาที่วางแผน</label>
+          <select id="cPlan">${[16,18,20,22,24,26,28,30].map(m => `<option${m === 22 ? ' selected' : ''}>${m}</option>`).join('')}</select>
+          <div class="hint">เดือน</div></div>
+        <div class="sf"><label for="cFee">ค่ารักษาทั้งเคส</label>
+          <input id="cFee" type="text" inputmode="numeric"></div>
+        <div class="sf"><label for="cPer">ผ่อนเดือนละ</label>
+          <input id="cPer" type="text" inputmode="numeric" value="3,500"></div>
+        <div class="sf"><label for="cStart">วันติดเครื่องมือ</label>
+          <input id="cStart" type="date" value="2026-08-24"></div>
+        <div class="sf"><label for="cTray">จำนวนชุด (เฉพาะจัดฟันใส)</label>
+          <input id="cTray" type="text" inputmode="numeric" value="18" disabled></div>
+        <div class="sf full"><label for="cNote">บันทึกแผนการรักษา</label>
+          <textarea id="cNote" placeholder="เช่น ต้องถอนฟันกรามน้อย 2 ซี่ก่อนติดเครื่องมือ"></textarea></div>
+      </div>
+      <div class="stotal"><span class="k">ยอดผ่อนโดยประมาณ</span><span class="v" id="cCalc">—</span></div>`,
+    foot: [
+      {label:'ยกเลิก'},
+      {label:'เริ่มเคส', cls:'solid', on:(el, close) => {
+        const hn = el.querySelector('#cPat').value;
+        if (!hn){ el.querySelector('#cPat').closest('.sf').classList.add('bad'); return false; }
+        const pat = dir().find(x => x.hn === hn);
+        const kind = el.querySelector('#cKind').value;
+        const fee = Number(String(el.querySelector('#cFee').value).replace(/[^\d]/g, '')) || 0;
+        const per = Number(String(el.querySelector('#cPer').value).replace(/[^\d]/g, '')) || 0;
+        const plan = Number(el.querySelector('#cPlan').value);
+        const rec = o({
+          pat: pat.n, hn, doc: el.querySelector('#cDoc').value, kind,
+          start:'2569-08-24', month:0, plan, visit:0,
+          next:'2569-09-21', last:null, fee, paid:0, per,
+          trays: kind === 'clear' ? [1, Number(String(el.querySelector('#cTray').value).replace(/[^\d]/g, '')) || 18] : undefined,
+          note: el.querySelector('#cNote').value.trim() || 'เริ่มเคสใหม่ · ยังไม่ติดเครื่องมือ',
+        });
+        CASES.unshift(rec);
+        S.f = 'all';
+        $$('.bar-row .fchip').forEach(b => b.classList.toggle('on', b.dataset.f === 'all'));
+        render(); close();
+        openDrawer(rec.id);
+        toast('เริ่มเคสจัดฟันของ ' + rec.pat + ' แล้ว', () => {
+          CASES.splice(CASES.indexOf(rec), 1); closeDrawer(); render();
+        });
+        return false;
+      }},
+    ],
+    ready: el => {
+      const kind = el.querySelector('#cKind'), fee = el.querySelector('#cFee');
+      const sync = () => {
+        fee.value = money(KIND_FEE[kind.value] || 85000);
+        el.querySelector('#cTray').disabled = kind.value !== 'clear';
+        recalc();
+      };
+      const recalc = () => {
+        const f = Number(String(fee.value).replace(/[^\d]/g, '')) || 0;
+        const per = Number(String(el.querySelector('#cPer').value).replace(/[^\d]/g, '')) || 0;
+        el.querySelector('#cCalc').textContent = per
+          ? money(per) + ' ฿ × ' + Math.ceil(f / per) + ' งวด'
+          : money(f) + ' ฿';
+      };
+      kind.onchange = sync;
+      fee.oninput = recalc;
+      el.querySelector('#cPer').oninput = recalc;
+      el.querySelector('#cPat').onchange = e => e.target.closest('.sf').classList.remove('bad');
+      sync();
+    },
+  });
+}
+
 /* ── ลิ้นชัก ── */
 function openDrawer(id){
   const x = CASES.find(i => i.id === id); if (!x) return;
@@ -1351,7 +2083,7 @@ $$('.bar-row .fchip').forEach(b => b.onclick = () => {
 });
 $('#q').oninput = e => { S.q = e.target.value.trim(); renderCases(); };
 $('#bell').onclick = () => toast('เลยรอบปรับเครื่องมือ ' + CASES.filter(OVER).length + ' ราย');
-$('#addCase').onclick = () => toast('เปิดฟอร์มเริ่มเคสจัดฟันใหม่ — เดโม');
+$('#addCase').onclick = caseScreen;
 
 function render(){ renderSum(); renderCases(); renderRail(); }
 render();
