@@ -1156,6 +1156,7 @@ var REG = {
       <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
       <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
       <a href="schedule.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="availability.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/><path d="M3.5 6.5 6 4M20.5 6.5 18 4"/></svg>เวลาว่างถัดไป</a>
       <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
     </nav></div>
     <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
@@ -1360,7 +1361,7 @@ const OPEN = CFG.open, CLOSE = CFG.close, PXMIN = 64/60;      // 09:00–20:00, 
 const pad = n => String(n).padStart(2,'0');
 const hhmm = m => pad(Math.floor(m/60)) + ':' + pad(m%60);
 const toMin = s => (+s.slice(0,2))*60 + (+s.slice(3));
-const key = d => d.toISOString().slice(0,10);
+const key = d => d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());  // เวลาท้องถิ่น ไม่ใช่ UTC
 const TODAY = new Date(2026,7,17);                     // 17 ส.ค. 2569
 const TH_DAY = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
 const TH_DAY_S = ['อา','จ','อ','พ','พฤ','ศ','ส'];
@@ -2119,6 +2120,25 @@ function findSlot(){
 $('#mFind').onclick = findSlot;
 
 
+
+/* เปิดฟอร์มจองต่อจากหน้าเวลาว่างถัดไป */
+(function(){
+  var q = new URLSearchParams(location.search);
+  if (!q.get('book')) return;
+  var d = q.get('book').split('-').map(Number);
+  S.date = new Date(d[0], d[1] - 1, d[2]);
+  S.view = 'day';
+  render();
+  openModal(null);
+  if (q.get('proc')) $('#fProc').value = q.get('proc');
+  if (q.get('chair')) $('#fChair').value = q.get('chair');
+  if (q.get('doc')) $('#fDoc').value = q.get('doc');
+  $('#fDate').value = key(S.date);
+  $('#fTime').value = q.get('t');
+  if (q.get('dur')) $('#fDur').value = q.get('dur');
+  $('#mSub').textContent = 'เลือกช่วงเวลามาจากหน้าเวลาว่างถัดไป — ค้นหาคนไข้แล้วกดบันทึกได้เลย';
+  setTimeout(function(){ $('#fSearch').focus(); }, 80);
+})();
 </script>
 </body>
 </html>
