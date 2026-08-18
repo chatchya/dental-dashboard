@@ -1805,7 +1805,7 @@ function renderCtx(){
   $('#ctx').innerHTML = card('ข้อมูลคนไข้', icoUser, who) + card('ทำต่อได้เลย', icoBolt, acts) + hist;
 
   $$('#ctx .qa button').forEach(b => b.onclick = () => toast(b.dataset.a + ' — เดโม'));
-  if ($('#linkPat')) $('#linkPat').onclick = () => toast('เปิดฟอร์มสร้างประวัติคนไข้ — เดโม');
+  if ($('#linkPat')) $('#linkPat').onclick = () => location.assign('patients.html?new=1&b=' + BRANCH);
 }
 
 /* ── สรุปหัวหน้าจอ ── */

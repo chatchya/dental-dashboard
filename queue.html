@@ -1068,6 +1068,7 @@ body{
         <div class="bar-row" style="margin-bottom:11px">
           <h2 style="font-size:15px;font-weight:600;letter-spacing:-.01em">สถานะเก้าอี้</h2>
           <div class="grow"></div>
+          <button class="btn" id="regPat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ลงทะเบียนคนไข้ใหม่</button>
           <button class="btn" id="addWalkin"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>เพิ่มคิว Walk-in</button>
         </div>
         <section class="chairs" id="chairs"></section>
@@ -1371,6 +1372,7 @@ $('#q').oninput = e => {
   });
 };
 $('#bell').onclick = () => toast('มีคิวเลยเวลานัด ' + Q.filter(late).length + ' ราย');
+$('#regPat').onclick = () => location.assign('patients.html?new=1&b=' + BRANCH);
 $('#addWalkin').onclick = () => {
   const x = q({n:'คนไข้ Walk-in', hn:'HN ใหม่', tx:'ตรวจฟัน (ยังไม่ระบุ)', doc:'ทพญ.นภา',
                appt:hhmm(NOW), in:hhmm(NOW), st:'wait', tags:['Walk-in']});

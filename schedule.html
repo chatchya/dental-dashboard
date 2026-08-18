@@ -845,6 +845,58 @@ body{
   flex:none;font-style:normal;font-size:10px;color:#61818B;
   border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
 }
+
+/* ═══ ค้นหาคนไข้เดิมในฟอร์มนัดหมาย ═══ */
+.lookup{position:relative}
+.lookup > input{padding-left:38px !important}
+.lookup .mag{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  color:var(--faint);pointer-events:none;
+}
+.lkres{
+  position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:6;
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  box-shadow:0 18px 38px -18px rgba(6,35,44,.55);
+  overflow:hidden auto;max-height:266px;display:none;
+}
+.lkres.on{display:block}
+.lkitem{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;transition:background .12s}
+.lkitem+.lkitem{border-top:1px solid var(--border)}
+.lkitem:hover,.lkitem.sel{background:rgba(46,107,230,.07)}
+.lkitem .ini{
+  width:32px;height:32px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12px;font-weight:600;
+}
+.lkitem .bd{flex:1;min-width:0}
+.lkitem .bd b{display:block;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lkitem .bd span{
+  display:block;font-size:11.5px;color:var(--muted);margin-top:1px;
+  font-family:"IBM Plex Mono",monospace;
+}
+.lkitem .meta{flex:none;text-align:right;font-size:11px;color:var(--faint);line-height:1.5}
+.lkitem .meta b{display:block;color:var(--muted);font-weight:500}
+.lkitem mark{background:rgba(245,178,63,.38);color:inherit;border-radius:2px;padding:0 1px}
+.lkfoot{padding:10px 12px;border-top:1px solid var(--border);background:#FAFBFC;font-size:12px;color:var(--muted)}
+.lkfoot a{color:var(--brand);font-weight:500;text-decoration:none}
+.lkfoot a:hover{text-decoration:underline;text-underline-offset:3px}
+
+.picked{
+  display:flex;align-items:center;gap:10px;margin-top:9px;padding:9px 11px;
+  border:1.5px solid rgba(46,107,230,.42);background:rgba(46,107,230,.05);border-radius:11px;
+}
+.picked .ini{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  background:#fff;color:var(--brand);font-size:12px;font-weight:600;
+}
+.picked .bd{flex:1;min-width:0}
+.picked .bd b{display:block;font-size:13px;font-weight:600}
+.picked .bd span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+.picked .x{
+  width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:8px;
+  border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;
+}
+.picked .x:hover{border-color:var(--rose);color:var(--rose)}
+.picked .warn{color:var(--rose);font-weight:500}
 </style>
 <script>
 /* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
@@ -882,6 +934,215 @@ body{
       if (h.indexOf('?') < 0) a.setAttribute('href', h + '?b=' + br);
     });
   });
+})();
+</script>
+<script>
+/* ── ทะเบียนคนไข้ที่ใช้ร่วมกับฟอร์มนัดหมาย · ต้นทางเดียวกันทั้งสองหน้า ── */
+(function(){
+var p = o => ({tags:[], bal:0, plans:[], alerts:[], tooth:{tx:[],pl:[],ms:[]}, ...o});
+
+var REG = {
+ /* ══════════ สาขาอารีย์ ══════════ */
+ aree: [
+  p({hn:'HN 24-882', n:'ธนภัทร ศรีวิไล', tel:'081-244-7781', age:32, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2567-03-11', last:'2569-08-12', next:null, tags:['emg'],
+     tooth:{tx:[18,19],pl:[30],ms:[]},
+     hist:[['2569-08-12','อุดฟัน 2 ซี่ (36, 37)','ทพญ.นภา',2400],
+           ['2569-03-03','ขูดหินปูน + ตรวจฟัน','ทพญ.นภา',1200],
+           ['2568-09-14','ถอนฟัน ซี่ 48','ทพ.ประวิทย์',3500]]}),
+  p({hn:'HN 24-118', n:'ศิริพร ดำรงค์', tel:'089-771-2204', age:35, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2569-02-02', last:'2569-08-14', next:'2569-08-24 13:00', bal:54000,
+     tags:['plan'], plans:['วีเนียร์ 6 ซี่ (13–23) · 108,000 ฿ · จ่ายแล้วครึ่งแรก'],
+     tooth:{tx:[4,5,6,7,8,9],pl:[],ms:[]},
+     hist:[['2569-08-14','พิมพ์ปาก ส่งแล็บ (วีเนียร์ 6 ซี่)','ทพญ.นภา',54000],
+           ['2569-08-02','ปรึกษา + ถ่ายภาพวางแผน','ทพญ.นภา',0],
+           ['2569-05-19','ฟอกสีฟันที่คลินิก','ทพญ.นภา',8900]]}),
+  p({hn:'HN 24-771', n:'อธิป วัฒนกุล', tel:'086-559-0127', age:47, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2569-08-13', last:'2569-08-13', next:'2569-08-19 11:00',
+     tags:['new','plan'], plans:['รากเทียม 2 ซี่ + ครอบฟันเซรามิก · 148,000 ฿ · รอตอบรับ 4 วัน'],
+     alerts:['ความดันโลหิตสูง — ควบคุมด้วยยา Amlodipine 5 มก.'],
+     tooth:{tx:[],pl:[],ms:[19,20]},
+     hist:[['2569-08-13','CT scan + ปรึกษาวางแผนรากเทียม','ทพ.ประวิทย์',3500]]}),
+  p({hn:'HN 22-701', n:'วีรภัทร สุขใจ', tel:'062-118-3390', age:19, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2565-06-20', last:'2569-08-17', next:'2569-09-14 09:30', bal:6500,
+     tags:['ortho'], plans:['จัดฟันโลหะ · เดือนที่ 14 จาก 24 · ผ่อนเดือนละ 3,500 ฿'],
+     tooth:{tx:[0,1,2,3,4,5,6,7,8,9,10,11],pl:[],ms:[]},
+     hist:[['2569-08-17','ปรับเครื่องมือจัดฟัน ครั้งที่ 14','ทพ.กิตติ',3500],
+           ['2569-07-17','ปรับเครื่องมือจัดฟัน ครั้งที่ 13','ทพ.กิตติ',3500],
+           ['2569-06-19','ปรับเครื่องมือจัดฟัน ครั้งที่ 12','ทพ.กิตติ',3500]]}),
+  p({hn:'HN 24-772', n:'ปรียา สงวนศักดิ์', tel:'084-220-7745', age:24, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2569-08-01', last:'2569-08-08', next:null,
+     tags:['new','plan'], plans:['จัดฟันใส Invisalign · 135,000 ฿ · รอตอบรับ 9 วัน'],
+     tooth:{tx:[],pl:[13,14],ms:[]},
+     hist:[['2569-08-08','สแกนช่องปาก + เสนอแผน','ทพ.กิตติ',0],
+           ['2569-08-01','ปรึกษาครั้งแรก','ทพ.กิตติ',500]]}),
+  p({hn:'HN 23-556', n:'กัลยา ปิ่นทอง', tel:'081-909-4412', age:38, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.นภา', since:'2566-02-20', last:'2569-08-17', next:'2570-02-17 10:00',
+     tags:['sso'], tooth:{tx:[26],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน + ตรวจฟัน (สิทธิ ปกส.)','ทพญ.นภา',0],
+           ['2569-02-20','อุดฟัน ซี่ 36','ทพญ.นภา',1800]]}),
+  p({hn:'HN 22-455', n:'ประเสริฐ ทองดี', tel:'02-448-2210', age:54, sex:'ช', right:'ประกันกลุ่ม AIA',
+     doc:'ทพ.ประวิทย์', since:'2565-01-08', last:'2569-08-17', next:'2569-09-02 10:00',
+     tooth:{tx:[2],pl:[],ms:[]},
+     alerts:['แพ้ยา Penicillin — ใช้ Clindamycin แทน'],
+     hist:[['2569-08-17','ใส่ครอบฟัน ซี่ 16','ทพ.ประวิทย์',18000],
+           ['2569-07-22','รักษารากฟัน ครั้งที่ 3','ทพ.ประวิทย์',9000],
+           ['2569-07-01','รักษารากฟัน ครั้งที่ 1–2','ทพ.ประวิทย์',9000]]}),
+  p({hn:'HN 24-460', n:'นภัสวรรณ อินทร์แก้ว', tel:'095-330-1182', age:61, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.ประวิทย์', since:'2569-04-12', last:'2569-08-17', next:'2569-08-18 14:00', bal:12000,
+     tags:['lab'], plans:['ฟันปลอมถอดได้ (บนบางส่วน) · 24,000 ฿ · ค้างงวดที่ 2'],
+     tooth:{tx:[],pl:[],ms:[1,2,3,12,13]},
+     hist:[['2569-08-17','ลองฟันปลอมถอดได้','ทพ.ประวิทย์',0],
+           ['2569-08-08','พิมพ์ปาก ส่งแล็บ','ทพ.ประวิทย์',12000]]}),
+  p({hn:'HN 23-330', n:'สุชาติ พูลทรัพย์', tel:'080-772-9931', age:45, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2566-11-02', last:'2569-08-17', next:'2569-08-25 14:00',
+     tags:['lab'], tooth:{tx:[],pl:[24,25],ms:[]},
+     hist:[['2569-08-17','พิมพ์ปากทำเฝือกสบฟัน','ทพญ.อรอนงค์',2000],
+           ['2569-06-10','ตรวจฟัน + ขูดหินปูน','ทพญ.อรอนงค์',1200]]}),
+  p({hn:'HN 24-201', n:'อรวรรณ กิจเจริญ', tel:'083-441-2098', age:41, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2569-01-18', last:'2569-08-17', next:'2569-08-20 09:30', bal:4500,
+     tooth:{tx:[],pl:[],ms:[14]},
+     hist:[['2569-08-17','ตรวจฟัน + ขูดหินปูน','ทพญ.อรอนงค์',1200],
+           ['2569-08-06','ถอนฟัน ซี่ 26','ทพญ.อรอนงค์',4500]]}),
+  p({hn:'HN 23-119', n:'สุพรรษา ใจงาม', tel:'088-220-5567', age:28, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.นภา', since:'2566-09-09', last:'2569-08-17', next:null, tags:['sso','recall'],
+     tooth:{tx:[22],pl:[],ms:[]},
+     hist:[['2569-08-17','อุดฟัน 1 ซี่ (สิทธิ ปกส.)','ทพญ.นภา',0],
+           ['2569-02-14','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.นภา',0]]}),
+  p({hn:'HN 24-733', n:'พิมพ์ชนก วงศ์ทอง', tel:'091-337-8820', age:26, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2569-06-30', last:'2569-08-17', next:'2569-08-24 15:00', bal:6500,
+     tags:['new'], tooth:{tx:[],pl:[],ms:[31]},
+     hist:[['2569-08-17','ถอนฟันคุด ซี่ 48','ทพญ.อรอนงค์',6500],
+           ['2569-06-30','ตรวจฟัน + เอกซเรย์','ทพญ.อรอนงค์',800]]}),
+  p({hn:'HN 22-904', n:'กฤตย์ ทองสุข', tel:'065-118-2245', age:22, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2565-05-14', last:'2569-08-17', next:'2569-09-01 16:00',
+     tags:['ortho'], plans:['ถอดเครื่องมือแล้ว · ติดตามรีเทนเนอร์ 6 เดือน'],
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ตรวจติดตามหลังจัดฟัน','ทพ.กิตติ',0],
+           ['2569-08-06','รับรีเทนเนอร์ Essix','ทพ.กิตติ',6000]]}),
+  p({hn:'HN 22-556', n:'มานพ เจริญสุข', tel:'081-556-3321', age:50, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.อรอนงค์', since:'2565-03-30', last:'2569-08-12', next:'2569-08-21 10:30', bal:18000,
+     tags:['lab','plan'], plans:['ครอบฟัน 3 ซี่ + รักษาราก · 62,000 ฿ · รอตอบรับ 12 วัน'],
+     tooth:{tx:[2,29,30],pl:[],ms:[]},
+     hist:[['2569-08-12','พิมพ์ปากครอบฟัน ซี่ 46','ทพญ.อรอนงค์',18000],
+           ['2569-07-28','รักษาราก ซี่ 46','ทพญ.อรอนงค์',9000]]}),
+  p({hn:'HN 24-052', n:'ชลธิชา รุ่งเรือง', tel:'092-004-7718', age:33, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2569-01-05', last:'2569-08-17', next:'2569-08-21 11:30', bal:18000,
+     tags:['lab'], tooth:{tx:[10],pl:[],ms:[]},
+     hist:[['2569-08-17','ลองครอบฟัน ซี่ 26 (แก้สี ครั้งที่ 2)','ทพญ.นภา',0],
+           ['2569-07-28','พิมพ์ปากครอบฟัน ซี่ 26','ทพญ.นภา',18000]]}),
+  p({hn:'HN 21-774', n:'วิชัย ประดิษฐ์', tel:'081-220-6654', age:58, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.นภา', since:'2564-08-19', last:'2569-08-17', next:null, tags:['recall'],
+     tooth:{tx:[3,28],pl:[],ms:[16]},
+     hist:[['2569-08-17','ตรวจฟันประจำปี','ทพญ.นภา',800],
+           ['2568-08-20','ตรวจฟันประจำปี + ขูดหินปูน','ทพญ.นภา',1200]]}),
+  p({hn:'HN 23-441', n:'เบญจวรรณ ศรีสุข', tel:'087-119-4432', age:36, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.อรอนงค์', since:'2566-07-11', last:'2569-08-17', next:null, tags:['sso'],
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.อรอนงค์',0]]}),
+  p({hn:'HN 23-208', n:'ปิยะพงษ์ ทวีทรัพย์', tel:'094-556-1123', age:44, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2566-04-25', last:'2569-08-17', next:null, bal:3200,
+     tooth:{tx:[],pl:[],ms:[1]},
+     hist:[['2569-08-17','ถอนฟัน ซี่ 17','ทพ.กิตติ',3200]]}),
+ ],
+
+ /* ══════════ สาขานิมมาน เชียงใหม่ — เปิด พ.ค. 2569 ══════════ */
+ nimman: [
+  p({hn:'CM 68-072', n:'ณัฐริกา อินทวงศ์', tel:'081-882-4471', age:34, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2568-11-14', last:'2569-08-17', next:'2570-02-17 10:30', tags:['sso'],
+     tooth:{tx:[22],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน + ตรวจฟัน (สิทธิ ปกส.)','ทพญ.พิมพ์ลภัส',0],
+           ['2569-02-08','อุดฟัน ซี่ 37','ทพญ.พิมพ์ลภัส',1800]]}),
+  p({hn:'CM 69-030', n:'Mr. James Whitfield', tel:'062-440-1188', age:52, sex:'ช', right:'ประกันเดินทาง Allianz',
+     doc:'ทพ.ธนกฤต', since:'2569-06-02', last:'2569-08-17', next:'2569-08-19 11:00', bal:0,
+     tags:['new','plan'], plans:['รากเทียม ซี่ 36 + ครอบฟัน · 45,000 ฿ · รอตอบรับ 5 วัน'],
+     alerts:['สื่อสารภาษาอังกฤษ — จัดผู้ช่วยที่พูดอังกฤษได้ทุกครั้ง'],
+     tooth:{tx:[18,19],pl:[],ms:[26]},
+     hist:[['2569-08-17','อุดฟัน 2 ซี่','ทพ.ธนกฤต',4400],
+           ['2569-08-12','ปรึกษารากเทียม + เอกซเรย์','ทพ.ธนกฤต',800],
+           ['2569-06-02','ตรวจฟันครั้งแรก','ทพ.ธนกฤต',500]]}),
+  p({hn:'CM 68-115', n:'สมชาย ปันคำ', tel:'089-553-2094', age:47, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2568-08-20', last:'2569-08-17', next:null, bal:3200,
+     tooth:{tx:[],pl:[],ms:[14]},
+     hist:[['2569-08-17','ถอนฟัน ซี่ 26','ทพ.ธนกฤต',3200],
+           ['2569-05-11','ตรวจฟัน + เอกซเรย์','ทพ.ธนกฤต',800]]}),
+  p({hn:'CM 69-041', n:'พิมพา ไชยวงค์', tel:'094-118-7723', age:29, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-07-08', last:'2569-08-17', next:null, tags:['new','sso'],
+     tooth:{tx:[19],pl:[],ms:[]},
+     hist:[['2569-08-17','อุดฟัน 1 ซี่ (ซี่ 36)','ทพญ.พิมพ์ลภัส',0],
+           ['2569-07-08','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.พิมพ์ลภัส',0]]}),
+  p({hn:'CM 68-204', n:'ศิวกร แก้วมูล', tel:'086-771-3390', age:21, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2568-09-30', last:'2569-08-17', next:'2569-09-13 13:00', bal:0,
+     tags:['ortho'], plans:['จัดฟันโลหะ · เดือนที่ 10 จาก 22 · ผ่อนเดือนละ 3,000 ฿'],
+     tooth:{tx:[0,1,2,3,4,5,6,7,8,9,10,11],pl:[],ms:[]},
+     hist:[['2569-08-17','รับรีเทนเนอร์ Essix','ทพ.กิตติ',6000],
+           ['2569-07-19','ปรับเครื่องมือ ครั้งที่ 9','ทพ.กิตติ',3000]]}),
+  p({hn:'CM 69-016', n:'อัญชลี ดวงแก้ว', tel:'082-004-5561', age:31, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-06-18', last:'2569-08-17', next:null,
+     tags:['new','plan'], plans:['ฟอกสีฟัน + วีเนียร์ 1 ซี่ · 15,000 ฿ · รอตอบรับ 6 วัน'],
+     tooth:{tx:[],pl:[8],ms:[]},
+     hist:[['2569-08-17','ปรึกษาฟอกสีฟัน','ทพญ.พิมพ์ลภัส',0],
+           ['2569-06-18','ตรวจฟัน + ขูดหินปูน','ทพญ.พิมพ์ลภัส',1200]]}),
+  p({hn:'CM 68-019', n:'จันทร์เพ็ญ ต๊ะวัน', tel:'080-229-6614', age:58, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2568-06-02', last:'2569-08-17', next:null, tags:['recall'],
+     tooth:{tx:[3,28],pl:[],ms:[16]},
+     hist:[['2569-08-17','ตรวจฟันประจำปี','ทพญ.พิมพ์ลภัส',800],
+           ['2568-08-14','ตรวจฟัน + ขูดหินปูน','ทพญ.พิมพ์ลภัส',1200]]}),
+  p({hn:'CM 68-133', n:'ปฏิภาณ จอมแปง', tel:'065-337-8890', age:26, sex:'ช', right:'ประกันสังคม',
+     doc:'ทพ.ธนกฤต', since:'2568-10-05', last:'2569-08-17', next:null, tags:['sso','recall'],
+     tooth:{tx:[26],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน (สิทธิ ปกส.)','ทพ.ธนกฤต',0]]}),
+  p({hn:'CM 69-052', n:'ธีรภัทร ขัติยะ', tel:'092-660-1174', age:43, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2569-07-25', last:'2569-08-15', next:'2569-08-27 14:00', bal:18000,
+     tags:['new','lab','plan'], plans:['ครอบฟันเซรามิก 2 ซี่ · 36,000 ฿ · รอตอบรับ 2 วัน'],
+     tooth:{tx:[18],pl:[19],ms:[]},
+     hist:[['2569-08-15','พิมพ์ปากครอบฟัน ซี่ 36 ส่งแล็บ','ทพ.ธนกฤต',18000],
+           ['2569-07-25','รักษาราก ซี่ 36','ทพ.ธนกฤต',9000]]}),
+  p({hn:'CM 68-088', n:'นงลักษณ์ ปัญโญ', tel:'084-556-2201', age:64, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2568-07-16', last:'2569-08-14', next:'2569-08-25 10:30', bal:9800,
+     tags:['lab'], plans:['ฟันปลอมถอดได้ (ล่าง) · 19,600 ฿ · ค้างงวดที่ 2'],
+     tooth:{tx:[],pl:[],ms:[24,25,26,30,31]},
+     hist:[['2569-08-14','พิมพ์ปากฟันปลอม ส่งแล็บ','ทพ.ธนกฤต',9800]]}),
+  p({hn:'CM 69-061', n:'Ms. Hannah Berg', tel:'061-229-4480', age:28, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-08-03', last:'2569-08-03', next:'2569-08-17 13:00',
+     tags:['new'], tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-03','ตรวจฟัน + ปรึกษาฟอกสีฟัน','ทพญ.พิมพ์ลภัส',500]]}),
+  p({hn:'CM 69-008', n:'ก้องภพ ศรีวิชัย', tel:'088-114-9902', age:36, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-05-21', last:'2569-08-17', next:null,
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ตรวจฟัน + เอกซเรย์','ทพญ.พิมพ์ลภัส',800],
+           ['2569-05-21','ขูดหินปูน + ตรวจฟัน','ทพญ.พิมพ์ลภัส',1200]]}),
+ ],
+};
+
+  var KEY = 'zentr.newPatients.';
+  function stored(br){
+    try { return JSON.parse(localStorage.getItem(KEY + br) || '[]'); } catch (e) { return []; }
+  }
+  /* ทะเบียนของสาขา = คนไข้ที่เพิ่งลงทะเบียน (บนสุด) + ทะเบียนตั้งต้น */
+  window.zentrPatients = function(br){
+    return stored(br).map(function(x){ return p(x); }).concat(REG[br] || REG.aree);
+  };
+  window.zentrAddPatient = function(br, rec){
+    try { var c = stored(br); c.unshift(rec); localStorage.setItem(KEY + br, JSON.stringify(c)); } catch (e) {}
+  };
+  window.zentrRemovePatient = function(br, hn){
+    try {
+      localStorage.setItem(KEY + br,
+        JSON.stringify(stored(br).filter(function(x){ return x.hn !== hn; })));
+    } catch (e) {}
+  };
+  /* ค้นด้วย HN เบอร์โทร หรือชื่อ — ตัดขีดและเว้นวรรคก่อนเทียบ */
+  window.zentrFindPatients = function(br, q, limit){
+    q = String(q || '').trim().toLowerCase();
+    if (q.length < 2) return [];
+    var bare = q.replace(/[\s-]/g, '');
+    return window.zentrPatients(br).filter(function(x){
+      return String(x.hn).toLowerCase().replace(/[\s-]/g, '').indexOf(bare) >= 0 ||
+             String(x.tel).replace(/[\s-]/g, '').indexOf(bare) >= 0 ||
+             String(x.n).toLowerCase().indexOf(q) >= 0;
+    }).slice(0, limit || 6);
+  };
 })();
 </script>
 </head>
@@ -994,6 +1255,15 @@ body{
     </div>
     <div class="mbody">
       <div class="fgrid">
+        <div class="fld full">
+          <label for="fSearch">ค้นหาคนไข้เดิม</label>
+          <div class="lookup">
+            <span class="mag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+            <input id="fSearch" type="text" autocomplete="off" placeholder="พิมพ์ HN เบอร์โทร หรือชื่อคนไข้">
+            <div class="lkres" id="fRes" role="listbox"></div>
+          </div>
+          <div id="fPicked"></div>
+        </div>
         <div class="fld"><label for="fName">ชื่อคนไข้ <i>*</i></label>
           <input id="fName" type="text" placeholder="เช่น สมชาย ใจดี"><div class="fmsg">กรุณากรอกชื่อคนไข้</div></div>
         <div class="fld"><label for="fHn">HN / เบอร์โทร</label>
@@ -1559,6 +1829,118 @@ function fillSelects(){
   $('#fDur').innerHTML = [15,30,45,60,75,90,120].map(m => `<option value="${m}">${m} นาที</option>`).join('');
 }
 
+/* ═══════════════ ค้นหาคนไข้เดิมในฟอร์มนัดหมาย ═══════════════ */
+const BR = window.BRANCH || 'aree';
+let pickedPat = null;      // คนไข้เดิมที่เลือกไว้ (null = คนไข้ใหม่ / Walk-in)
+let lkList = [], lkAt = -1;
+
+const lkHit = s => String(s || '').replace(/[\s-]/g, '').toLowerCase();
+
+function hl(text, q){
+  const bare = lkHit(q);
+  if (!bare) return esc2(text);
+  const plain = String(text);
+  const i = lkHit(plain).indexOf(bare);
+  if (i < 0) return esc2(plain);
+  // เทียบตำแหน่งกลับไปยังข้อความจริง (ที่ยังมีขีดอยู่)
+  let seen = 0, from = -1, to = -1;
+  for (let k = 0; k < plain.length; k++){
+    if (/[\s-]/.test(plain[k])) continue;
+    if (seen === i && from < 0) from = k;
+    if (seen === i + bare.length - 1){ to = k + 1; break; }
+    seen++;
+  }
+  if (from < 0) return esc2(plain);
+  if (to < 0) to = plain.length;
+  return esc2(plain.slice(0, from)) + '<mark>' + esc2(plain.slice(from, to)) + '</mark>' + esc2(plain.slice(to));
+}
+const esc2 = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lkInitial = n => { const s = String(n).replace(/^(คุณ|Mr\.|Ms\.)\s*/, ''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+function renderLookup(q){
+  const box = $('#fRes');
+  lkList = (window.zentrFindPatients ? zentrFindPatients(BR, q, 6) : []);
+  lkAt = -1;
+  if (String(q).trim().length < 2){ box.classList.remove('on'); box.innerHTML = ''; return; }
+
+  const rows = lkList.map((x, i) => `
+    <div class="lkitem" data-i="${i}" role="option">
+      <span class="ini">${esc2(lkInitial(x.n))}</span>
+      <span class="bd"><b>${hl(x.n, q)}</b><span>${hl(x.hn, q)} · ${hl(x.tel, q)}</span></span>
+      <span class="meta"><b>${esc2(x.doc || '—')}</b>${x.next ? 'มีนัด ' + esc2(String(x.next).split(' ')[0]) : 'ไม่มีนัดค้าง'}</span>
+    </div>`).join('');
+
+  box.innerHTML = (rows || `<div class="lkfoot" style="border-top:0">ไม่พบคนไข้ที่ตรงกับ “${esc2(q)}”</div>`) +
+    `<div class="lkfoot">ไม่พบคนไข้ที่ต้องการ? กรอกชื่อในช่องด้านล่างเพื่อจองเป็น Walk-in
+      หรือ <a href="patients.html?new=1&b=${BR}">ลงทะเบียนคนไข้ใหม่</a></div>`;
+  box.classList.add('on');
+
+  $$('#fRes .lkitem').forEach(el => {
+    el.onmousedown = e => { e.preventDefault(); choose(+el.dataset.i); };
+  });
+}
+
+function choose(i){
+  const x = lkList[i]; if (!x) return;
+  pickedPat = x;
+  $('#fName').value = x.n;
+  $('#fHn').value = x.hn;
+  $('#fSearch').value = '';
+  $('#fRes').classList.remove('on');
+  $('#fName').closest('.fld').classList.remove('bad');
+  // ถ้าคนไข้มีแพทย์ประจำและแพทย์ท่านนั้นลงเวรอยู่ ให้เลือกให้เลย
+  const d = DOCS.find(o => x.doc && x.doc.indexOf(o.name) === 0);
+  if (d){ $('#fDoc').value = d.id; if (!d.chairs.includes($('#fChair').value)) $('#fChair').value = d.chairs[0]; }
+  renderPicked();
+}
+
+function renderPicked(){
+  const host = $('#fPicked');
+  if (!pickedPat){ host.innerHTML = ''; return; }
+  const x = pickedPat;
+  const warn = (x.alerts && x.alerts.length) ? x.alerts[0] : '';
+  host.innerHTML = `
+    <div class="picked">
+      <span class="ini">${esc2(lkInitial(x.n))}</span>
+      <span class="bd"><b>${esc2(x.n)}</b>
+        <span>${esc2(x.hn)} · ${esc2(x.tel)} · ${esc2(x.right || '')}</span>
+        ${warn ? `<span class="warn">⚠ ${esc2(warn)}</span>` : ''}</span>
+      <button type="button" class="x" id="fUnpick" aria-label="ยกเลิกการเลือกคนไข้">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>`;
+  $('#fUnpick').onclick = () => { pickedPat = null; renderPicked(); $('#fSearch').focus(); };
+}
+
+function resetLookup(appt){
+  pickedPat = null;
+  $('#fSearch').value = '';
+  $('#fRes').classList.remove('on');
+  $('#fRes').innerHTML = '';
+  // แก้ไขนัดเดิม: ถ้า HN ตรงกับคนไข้ในทะเบียน ให้แสดงการ์ดคนไข้ด้วย
+  if (appt && appt.hn && window.zentrPatients){
+    pickedPat = zentrPatients(BR).find(x => lkHit(x.hn) === lkHit(appt.hn)) || null;
+  }
+  renderPicked();
+}
+
+$('#fSearch').oninput = e => renderLookup(e.target.value);
+$('#fSearch').onfocus = e => { if (e.target.value.trim().length >= 2) renderLookup(e.target.value); };
+$('#fSearch').onblur = () => setTimeout(() => $('#fRes').classList.remove('on'), 120);
+$('#fSearch').onkeydown = e => {
+  const box = $('#fRes');
+  if (!box.classList.contains('on') || !lkList.length) return;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+    e.preventDefault();
+    lkAt = (lkAt + (e.key === 'ArrowDown' ? 1 : lkList.length - 1)) % lkList.length;
+    $$('#fRes .lkitem').forEach((el,i) => el.classList.toggle('sel', i === lkAt));
+  } else if (e.key === 'Enter'){
+    e.preventDefault();
+    choose(lkAt >= 0 ? lkAt : 0);
+  } else if (e.key === 'Escape'){
+    box.classList.remove('on');
+  }
+};
+
 function openModal(appt){
   editing = appt || null;
   $('#mTitle').textContent = appt ? 'แก้ไขนัดหมาย' : 'นัดหมายใหม่';
@@ -1577,8 +1959,9 @@ function openModal(appt){
   $('#fDur').value   = appt ? String(Math.max(15, appt.end - appt.start)) : '45';
   $('#fCh').value    = appt ? appt.channel : 'LINE';
 
+  resetLookup(appt);
   $('#apptModal').classList.add('on');
-  setTimeout(() => $('#fName').focus(), 60);
+  setTimeout(() => $(appt ? '#fName' : '#fSearch').focus(), 60);
 }
 function closeModal(){ $('#apptModal').classList.remove('on'); editing = null; }
 
