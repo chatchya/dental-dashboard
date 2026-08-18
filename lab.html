@@ -946,7 +946,50 @@ body{
 }
 .branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
 .branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
 </style>
+<script>
+/* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
+(function(){
+  var B = {
+    aree:{n:'สาขาอารีย์',h:'เปิด 09:00 – 20:00',d:1},
+    thonglor:{n:'สาขาทองหล่อ',h:'เปิด 10:00 – 20:00',d:0},
+    ratchada:{n:'สาขารัชดา',h:'เปิด 09:00 – 20:00',d:0},
+    bangna:{n:'สาขาบางนา',h:'เปิด 09:00 – 19:00',d:0},
+    nimman:{n:'สาขานิมมาน เชียงใหม่',h:'เปิด 10:00 – 19:00',d:1}
+  };
+  var qs = new URLSearchParams(location.search).get('b');
+  var br = (qs && B[qs] && B[qs].d) ? qs : null;
+  if (!br) { try { br = localStorage.getItem('zentr.branch'); } catch (e) {} }
+  if (!br || !B[br] || !B[br].d) br = 'aree';
+  try { localStorage.setItem('zentr.branch', br); } catch (e) {}
+
+  window.BRANCH = br;
+  window.BRANCHES = B;
+  window.pick = function(o){ return o[br] !== undefined ? o[br] : o['aree']; };
+  document.documentElement.setAttribute('data-branch', br);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var now = document.getElementById('brNow');
+    if (now) now.innerHTML = '<b>' + B[br].n + '</b><span>' + B[br].h + '</span>';
+    document.querySelectorAll('.branchmenu a[data-b]').forEach(function(a){
+      var on = a.getAttribute('data-b') === br;
+      a.classList.toggle('cur', on);
+      var ck = a.querySelector('.ck');
+      if (ck) ck.style.visibility = on ? 'visible' : 'hidden';
+    });
+    if (br === 'aree') return;
+    document.querySelectorAll('a[href$=".html"]').forEach(function(a){
+      var h = a.getAttribute('href');
+      if (h.indexOf('?') < 0) a.setAttribute('href', h + '?b=' + br);
+    });
+  });
+})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -975,16 +1018,16 @@ body{
     <div class="side-foot">
       <details class="branchsel">
         <summary class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
+          <div id="brNow"><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
           <svg class="cv" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="branchmenu">
           <h6>สลับสาขาที่กำลังดูแล</h6>
-        <a href="index.html" class="cur"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
-        <a href="branches.html?b=thonglor"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span></a>
-        <a href="branches.html?b=ratchada"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span></a>
-        <a href="branches.html?b=bangna"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span></a>
-        <a href="branches.html?b=nimman"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span></a>
+        <a href="index.html?b=aree" data-b="aree" data-d="1"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
+        <a href="branches.html?open=thonglor" data-b="thonglor" data-d="0"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=ratchada" data-b="ratchada" data-d="0"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=bangna" data-b="bangna" data-d="0"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span><em>ดูสรุป</em></a>
+        <a href="index.html?b=nimman" data-b="nimman" data-d="1"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
           <a href="branches.html" class="all">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>
             ภาพรวมทุกสาขา</a>
@@ -1114,6 +1157,7 @@ const LABS = [
   {id:'l1', name:'เดนทัลอาร์ต แล็บ',  tel:'02-115-8890', ontime:94, remake:3,  lead:'7–10 วัน'},
   {id:'l2', name:'สยามเซรามิก แล็บ',  tel:'02-448-2211', ontime:81, remake:11, lead:'10–14 วัน'},
   {id:'l3', name:'ออร์โธเทค แล็บ',    tel:'02-970-3344', ontime:97, remake:2,  lead:'5–7 วัน'},
+  {id:'l4', name:'ล้านนาเดนทัล แล็บ', tel:'053-224-119', ontime:92, remake:4,  lead:'7–10 วัน'},
 ];
 const LNAME = Object.fromEntries(LABS.map(l=>[l.id,l.name]));
 
@@ -1129,7 +1173,7 @@ const TYPES = {
 let SEQ = 380;
 const c = o => ({id:'LAB-'+(++SEQ), remakes:0, ...o});
 
-const L = [
+const L_AREE = [
   c({pat:'มานพ เจริญสุข', hn:'HN 23-556', type:'crown', tooth:'46', shade:'A2', lab:'l1',
     doc:'ทพญ.อรอนงค์', sent:'2569-08-12', due:'2569-08-20', seat:'2569-08-21',
     stage:'transit', cost:3200, charge:18000, note:'เซรามิกล้วน (E-max)'}),
@@ -1161,6 +1205,25 @@ const L = [
     doc:'ทพญ.อรอนงค์', sent:'2569-07-20', due:'2569-07-30', seat:'2569-08-01',
     stage:'done', cost:3200, charge:18000, note:''}),
 ];
+
+const ALL_L = {
+ aree: L_AREE,
+ nimman: [
+  c({pat:'ธีรภัทร ขัติยะ', hn:'CM 69-052', type:'crown', tooth:'36', shade:'A2', lab:'l4',
+    doc:'ทพ.ธนกฤต', sent:'2569-08-15', due:'2569-08-25', seat:'2569-08-27',
+    stage:'making', cost:3000, charge:18000, note:'เซรามิกล้วน · ซี่ที่ 2 รอคนไข้ยืนยัน'}),
+  c({pat:'นงลักษณ์ ปัญโญ', hn:'CM 68-088', type:'denture', tooth:'ล่างบางส่วน', shade:'A3', lab:'l4',
+    doc:'ทพ.ธนกฤต', sent:'2569-08-14', due:'2569-08-23', seat:'2569-08-25',
+    stage:'sent', cost:4800, charge:19600, note:'ฐานอะคริลิก · คนไข้สูงอายุ ระวังฐานกดทับ'}),
+  c({pat:'สุพัตรา ใจกลม', hn:'CM 69-044', type:'aligner', tooth:'ชุดที่ 1–6', shade:'—', lab:'l3',
+    doc:'ทพ.กิตติ', sent:'2569-08-09', due:'2569-08-30', seat:'2569-09-06',
+    stage:'making', cost:24000, charge:96000, note:'ส่งผลิตที่กรุงเทพฯ · ขนส่งข้ามจังหวัด +2 วัน'}),
+  c({pat:'พงษ์พัฒน์ อุ่นเรือน', hn:'CM 68-097', type:'retain', tooth:'บน–ล่าง', shade:'—', lab:'l3',
+    doc:'ทพ.กิตติ', sent:'2569-08-04', due:'2569-08-13', seat:'2569-08-17',
+    stage:'done', cost:1400, charge:6000, note:''}),
+ ],
+};
+const L = pick(ALL_L);
 
 const S={q:'', filter:'all', sel:null, tab:'info'};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];

@@ -588,6 +588,52 @@ body{
 }
 .branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
 .branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
 
 /* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
 .side .nav a{cursor:pointer}
@@ -629,6 +675,197 @@ body{
 .btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
 
 .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
 .sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
 @keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
@@ -674,6 +911,44 @@ body{
 .tline span{font-size:11.5px;color:var(--muted)}
 .tline .amt{margin-left:auto;font-size:12.5px;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
 </style>
+<script>
+/* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
+(function(){
+  var B = {
+    aree:{n:'สาขาอารีย์',h:'เปิด 09:00 – 20:00',d:1},
+    thonglor:{n:'สาขาทองหล่อ',h:'เปิด 10:00 – 20:00',d:0},
+    ratchada:{n:'สาขารัชดา',h:'เปิด 09:00 – 20:00',d:0},
+    bangna:{n:'สาขาบางนา',h:'เปิด 09:00 – 19:00',d:0},
+    nimman:{n:'สาขานิมมาน เชียงใหม่',h:'เปิด 10:00 – 19:00',d:1}
+  };
+  var qs = new URLSearchParams(location.search).get('b');
+  var br = (qs && B[qs] && B[qs].d) ? qs : null;
+  if (!br) { try { br = localStorage.getItem('zentr.branch'); } catch (e) {} }
+  if (!br || !B[br] || !B[br].d) br = 'aree';
+  try { localStorage.setItem('zentr.branch', br); } catch (e) {}
+
+  window.BRANCH = br;
+  window.BRANCHES = B;
+  window.pick = function(o){ return o[br] !== undefined ? o[br] : o['aree']; };
+  document.documentElement.setAttribute('data-branch', br);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var now = document.getElementById('brNow');
+    if (now) now.innerHTML = '<b>' + B[br].n + '</b><span>' + B[br].h + '</span>';
+    document.querySelectorAll('.branchmenu a[data-b]').forEach(function(a){
+      var on = a.getAttribute('data-b') === br;
+      a.classList.toggle('cur', on);
+      var ck = a.querySelector('.ck');
+      if (ck) ck.style.visibility = on ? 'visible' : 'hidden';
+    });
+    if (br === 'aree') return;
+    document.querySelectorAll('a[href$=".html"]').forEach(function(a){
+      var h = a.getAttribute('href');
+      if (h.indexOf('?') < 0) a.setAttribute('href', h + '?b=' + br);
+    });
+  });
+})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -702,16 +977,16 @@ body{
     <div class="side-foot">
       <details class="branchsel">
         <summary class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
+          <div id="brNow"><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
           <svg class="cv" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="branchmenu">
           <h6>สลับสาขาที่กำลังดูแล</h6>
-        <a href="index.html" class="cur"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
-        <a href="branches.html?b=thonglor"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span></a>
-        <a href="branches.html?b=ratchada"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span></a>
-        <a href="branches.html?b=bangna"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span></a>
-        <a href="branches.html?b=nimman"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span></a>
+        <a href="index.html?b=aree" data-b="aree" data-d="1"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
+        <a href="branches.html?open=thonglor" data-b="thonglor" data-d="0"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=ratchada" data-b="ratchada" data-d="0"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=bangna" data-b="bangna" data-d="0"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span><em>ดูสรุป</em></a>
+        <a href="index.html?b=nimman" data-b="nimman" data-d="1"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
           <a href="branches.html" class="all">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>
             ภาพรวมทุกสาขา</a>
@@ -721,7 +996,7 @@ body{
   </aside>
   <main>
     <header class="top">
-      <div><h1>คนไข้</h1><div class="sub" id="sub">ทะเบียนคนไข้ทั้งหมดของสาขาอารีย์</div></div>
+      <div><h1>คนไข้</h1><div class="sub" id="sub">ทะเบียนคนไข้ทั้งหมดของคลินิก</div></div>
       <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input id="q" type="search" placeholder="ค้นหาชื่อ HN หรือเบอร์โทร"></div>
       <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
@@ -781,11 +1056,17 @@ function toast(msg, undo){
   setTimeout(() => el.remove(), undo ? 7000 : 3000);
 }
 
-const TOTAL_ALL = 3842, NEW_30 = 78;   /* ยอดรวมทั้งฐานข้อมูล (แสดง 18 รายที่ใช้งานล่าสุด) */
+const META = {
+  aree:   {total:3842, new30:78},
+  nimman: {total:486,  new30:38},   /* สาขาใหม่ เปิด พ.ค. 2569 */
+};
+const TOTAL_ALL = pick(META).total, NEW_30 = pick(META).new30;
 
 const p = o => ({tags:[], bal:0, plans:[], alerts:[], tooth:{tx:[],pl:[],ms:[]}, ...o});
 
-const PT = [
+const REG = {
+ /* ══════════ สาขาอารีย์ ══════════ */
+ aree: [
   p({hn:'HN 24-882', n:'ธนภัทร ศรีวิไล', tel:'081-244-7781', age:32, sex:'ช', right:'เงินสด',
      doc:'ทพ.ประวิทย์', since:'2567-03-11', last:'2569-08-12', next:null, tags:['emg'],
      tooth:{tx:[18,19],pl:[30],ms:[]},
@@ -886,7 +1167,77 @@ const PT = [
      doc:'ทพ.กิตติ', since:'2566-04-25', last:'2569-08-17', next:null, bal:3200,
      tooth:{tx:[],pl:[],ms:[1]},
      hist:[['2569-08-17','ถอนฟัน ซี่ 17','ทพ.กิตติ',3200]]}),
-];
+ ],
+
+ /* ══════════ สาขานิมมาน เชียงใหม่ — เปิด พ.ค. 2569 ══════════ */
+ nimman: [
+  p({hn:'CM 68-072', n:'ณัฐริกา อินทวงศ์', tel:'081-882-4471', age:34, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2568-11-14', last:'2569-08-17', next:'2570-02-17 10:30', tags:['sso'],
+     tooth:{tx:[22],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน + ตรวจฟัน (สิทธิ ปกส.)','ทพญ.พิมพ์ลภัส',0],
+           ['2569-02-08','อุดฟัน ซี่ 37','ทพญ.พิมพ์ลภัส',1800]]}),
+  p({hn:'CM 69-030', n:'Mr. James Whitfield', tel:'062-440-1188', age:52, sex:'ช', right:'ประกันเดินทาง Allianz',
+     doc:'ทพ.ธนกฤต', since:'2569-06-02', last:'2569-08-17', next:'2569-08-19 11:00', bal:0,
+     tags:['new','plan'], plans:['รากเทียม ซี่ 36 + ครอบฟัน · 45,000 ฿ · รอตอบรับ 5 วัน'],
+     alerts:['สื่อสารภาษาอังกฤษ — จัดผู้ช่วยที่พูดอังกฤษได้ทุกครั้ง'],
+     tooth:{tx:[18,19],pl:[],ms:[26]},
+     hist:[['2569-08-17','อุดฟัน 2 ซี่','ทพ.ธนกฤต',4400],
+           ['2569-08-12','ปรึกษารากเทียม + เอกซเรย์','ทพ.ธนกฤต',800],
+           ['2569-06-02','ตรวจฟันครั้งแรก','ทพ.ธนกฤต',500]]}),
+  p({hn:'CM 68-115', n:'สมชาย ปันคำ', tel:'089-553-2094', age:47, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2568-08-20', last:'2569-08-17', next:null, bal:3200,
+     tooth:{tx:[],pl:[],ms:[14]},
+     hist:[['2569-08-17','ถอนฟัน ซี่ 26','ทพ.ธนกฤต',3200],
+           ['2569-05-11','ตรวจฟัน + เอกซเรย์','ทพ.ธนกฤต',800]]}),
+  p({hn:'CM 69-041', n:'พิมพา ไชยวงค์', tel:'094-118-7723', age:29, sex:'ญ', right:'ประกันสังคม',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-07-08', last:'2569-08-17', next:null, tags:['new','sso'],
+     tooth:{tx:[19],pl:[],ms:[]},
+     hist:[['2569-08-17','อุดฟัน 1 ซี่ (ซี่ 36)','ทพญ.พิมพ์ลภัส',0],
+           ['2569-07-08','ขูดหินปูน (สิทธิ ปกส.)','ทพญ.พิมพ์ลภัส',0]]}),
+  p({hn:'CM 68-204', n:'ศิวกร แก้วมูล', tel:'086-771-3390', age:21, sex:'ช', right:'เงินสด',
+     doc:'ทพ.กิตติ', since:'2568-09-30', last:'2569-08-17', next:'2569-09-13 13:00', bal:0,
+     tags:['ortho'], plans:['จัดฟันโลหะ · เดือนที่ 10 จาก 22 · ผ่อนเดือนละ 3,000 ฿'],
+     tooth:{tx:[0,1,2,3,4,5,6,7,8,9,10,11],pl:[],ms:[]},
+     hist:[['2569-08-17','รับรีเทนเนอร์ Essix','ทพ.กิตติ',6000],
+           ['2569-07-19','ปรับเครื่องมือ ครั้งที่ 9','ทพ.กิตติ',3000]]}),
+  p({hn:'CM 69-016', n:'อัญชลี ดวงแก้ว', tel:'082-004-5561', age:31, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-06-18', last:'2569-08-17', next:null,
+     tags:['new','plan'], plans:['ฟอกสีฟัน + วีเนียร์ 1 ซี่ · 15,000 ฿ · รอตอบรับ 6 วัน'],
+     tooth:{tx:[],pl:[8],ms:[]},
+     hist:[['2569-08-17','ปรึกษาฟอกสีฟัน','ทพญ.พิมพ์ลภัส',0],
+           ['2569-06-18','ตรวจฟัน + ขูดหินปูน','ทพญ.พิมพ์ลภัส',1200]]}),
+  p({hn:'CM 68-019', n:'จันทร์เพ็ญ ต๊ะวัน', tel:'080-229-6614', age:58, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2568-06-02', last:'2569-08-17', next:null, tags:['recall'],
+     tooth:{tx:[3,28],pl:[],ms:[16]},
+     hist:[['2569-08-17','ตรวจฟันประจำปี','ทพญ.พิมพ์ลภัส',800],
+           ['2568-08-14','ตรวจฟัน + ขูดหินปูน','ทพญ.พิมพ์ลภัส',1200]]}),
+  p({hn:'CM 68-133', n:'ปฏิภาณ จอมแปง', tel:'065-337-8890', age:26, sex:'ช', right:'ประกันสังคม',
+     doc:'ทพ.ธนกฤต', since:'2568-10-05', last:'2569-08-17', next:null, tags:['sso','recall'],
+     tooth:{tx:[26],pl:[],ms:[]},
+     hist:[['2569-08-17','ขูดหินปูน (สิทธิ ปกส.)','ทพ.ธนกฤต',0]]}),
+  p({hn:'CM 69-052', n:'ธีรภัทร ขัติยะ', tel:'092-660-1174', age:43, sex:'ช', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2569-07-25', last:'2569-08-15', next:'2569-08-27 14:00', bal:18000,
+     tags:['new','lab','plan'], plans:['ครอบฟันเซรามิก 2 ซี่ · 36,000 ฿ · รอตอบรับ 2 วัน'],
+     tooth:{tx:[18],pl:[19],ms:[]},
+     hist:[['2569-08-15','พิมพ์ปากครอบฟัน ซี่ 36 ส่งแล็บ','ทพ.ธนกฤต',18000],
+           ['2569-07-25','รักษาราก ซี่ 36','ทพ.ธนกฤต',9000]]}),
+  p({hn:'CM 68-088', n:'นงลักษณ์ ปัญโญ', tel:'084-556-2201', age:64, sex:'ญ', right:'เงินสด',
+     doc:'ทพ.ธนกฤต', since:'2568-07-16', last:'2569-08-14', next:'2569-08-25 10:30', bal:9800,
+     tags:['lab'], plans:['ฟันปลอมถอดได้ (ล่าง) · 19,600 ฿ · ค้างงวดที่ 2'],
+     tooth:{tx:[],pl:[],ms:[24,25,26,30,31]},
+     hist:[['2569-08-14','พิมพ์ปากฟันปลอม ส่งแล็บ','ทพ.ธนกฤต',9800]]}),
+  p({hn:'CM 69-061', n:'Ms. Hannah Berg', tel:'061-229-4480', age:28, sex:'ญ', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-08-03', last:'2569-08-03', next:'2569-08-17 13:00',
+     tags:['new'], tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-03','ตรวจฟัน + ปรึกษาฟอกสีฟัน','ทพญ.พิมพ์ลภัส',500]]}),
+  p({hn:'CM 69-008', n:'ก้องภพ ศรีวิชัย', tel:'088-114-9902', age:36, sex:'ช', right:'เงินสด',
+     doc:'ทพญ.พิมพ์ลภัส', since:'2569-05-21', last:'2569-08-17', next:null,
+     tooth:{tx:[],pl:[],ms:[]},
+     hist:[['2569-08-17','ตรวจฟัน + เอกซเรย์','ทพญ.พิมพ์ลภัส',800],
+           ['2569-05-21','ขูดหินปูน + ตรวจฟัน','ทพญ.พิมพ์ลภัส',1200]]}),
+ ],
+};
+const PT = pick(REG);
 
 const TAGLBL = {
   new:   ['คนไข้ใหม่','#7A5AF0'],
@@ -938,7 +1289,7 @@ function renderSum(){
 function renderTable(){
   const r = rows();
   $('#count').textContent = r.length + ' ราย';
-  $('#sub').textContent = `ทะเบียนคนไข้สาขาอารีย์ · ทั้งหมด ${money(TOTAL_ALL)} ราย · แสดงที่เคลื่อนไหวล่าสุด ${PT.length} ราย`;
+  $('#sub').textContent = `ทะเบียนคนไข้${BRANCHES[BRANCH].n} · ทั้งหมด ${money(TOTAL_ALL)} ราย · แสดงที่เคลื่อนไหวล่าสุด ${PT.length} ราย`;
   $('#tbody').innerHTML = r.length ? r.map(x => `
     <tr data-hn="${x.hn}">
       <td class="mono" style="font-size:12.5px">${esc(x.hn)}</td>

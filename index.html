@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ภาพรวมคลินิก · Zentr Clinic</title>
+<title>ภาพรวมคลินิก · Zentr Dental</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -588,7 +588,235 @@ body{
 }
 .branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
 .branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
 </style>
+<script>
+/* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
+(function(){
+  var B = {
+    aree:{n:'สาขาอารีย์',h:'เปิด 09:00 – 20:00',d:1},
+    thonglor:{n:'สาขาทองหล่อ',h:'เปิด 10:00 – 20:00',d:0},
+    ratchada:{n:'สาขารัชดา',h:'เปิด 09:00 – 20:00',d:0},
+    bangna:{n:'สาขาบางนา',h:'เปิด 09:00 – 19:00',d:0},
+    nimman:{n:'สาขานิมมาน เชียงใหม่',h:'เปิด 10:00 – 19:00',d:1}
+  };
+  var qs = new URLSearchParams(location.search).get('b');
+  var br = (qs && B[qs] && B[qs].d) ? qs : null;
+  if (!br) { try { br = localStorage.getItem('zentr.branch'); } catch (e) {} }
+  if (!br || !B[br] || !B[br].d) br = 'aree';
+  try { localStorage.setItem('zentr.branch', br); } catch (e) {}
+
+  window.BRANCH = br;
+  window.BRANCHES = B;
+  window.pick = function(o){ return o[br] !== undefined ? o[br] : o['aree']; };
+  document.documentElement.setAttribute('data-branch', br);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var now = document.getElementById('brNow');
+    if (now) now.innerHTML = '<b>' + B[br].n + '</b><span>' + B[br].h + '</span>';
+    document.querySelectorAll('.branchmenu a[data-b]').forEach(function(a){
+      var on = a.getAttribute('data-b') === br;
+      a.classList.toggle('cur', on);
+      var ck = a.querySelector('.ck');
+      if (ck) ck.style.visibility = on ? 'visible' : 'hidden';
+    });
+    if (br === 'aree') return;
+    document.querySelectorAll('a[href$=".html"]').forEach(function(a){
+      var h = a.getAttribute('href');
+      if (h.indexOf('?') < 0) a.setAttribute('href', h + '?b=' + br);
+    });
+  });
+})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -617,16 +845,16 @@ body{
     <div class="side-foot">
       <details class="branchsel">
         <summary class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
+          <div id="brNow"><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
           <svg class="cv" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="branchmenu">
           <h6>สลับสาขาที่กำลังดูแล</h6>
-        <a href="index.html" class="cur"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
-        <a href="branches.html?b=thonglor"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span></a>
-        <a href="branches.html?b=ratchada"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span></a>
-        <a href="branches.html?b=bangna"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span></a>
-        <a href="branches.html?b=nimman"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span></a>
+        <a href="index.html?b=aree" data-b="aree" data-d="1"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
+        <a href="branches.html?open=thonglor" data-b="thonglor" data-d="0"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=ratchada" data-b="ratchada" data-d="0"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=bangna" data-b="bangna" data-d="0"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span><em>ดูสรุป</em></a>
+        <a href="index.html?b=nimman" data-b="nimman" data-d="1"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
           <a href="branches.html" class="all">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>
             ภาพรวมทุกสาขา</a>
@@ -636,161 +864,291 @@ body{
   </aside>
   <main>
     <header class="top">
-      <div><h1>สวัสดีตอนสาย คุณชัช</h1><div class="sub">จันทร์ที่ 17 สิงหาคม 2569 · วันนี้มี 34 คิว · ทันตแพทย์เข้าเวร 4 ท่าน</div></div>
+      <div><h1 id="hello">สวัสดีตอนสาย คุณชัช</h1><div class="sub" id="sub"></div></div>
       <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="ค้นหาคนไข้ เบอร์โทร หรือ HN"></div>
-      <button class="iconbtn" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
       <div class="avatar">ชช</div>
     </header>
     <div class="wrap">
-      <section class="kpis">
-      <div class="card kpi">
-        <div class="row"><div class="ico" style="background:rgba(46,107,230,.10);color:#2E6BE6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg></div>
-        <div><div class="lab">นัดหมายวันนี้</div></div></div>
-        <div class="val">34<small>คิว</small></div>
-        <div class="delta flat">ยกเลิกกะทันหัน 2 ราย</div>
-        <svg class="spark" width="110" height="26" viewBox="0 0 110 26" fill="none"><defs><linearGradient id="s2E6BE6" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2E6BE6" stop-opacity=".22"/><stop offset="1" stop-color="#2E6BE6" stop-opacity="0"/></linearGradient></defs><path d="M0.0 24.0 L18.3 16.5 L36.7 21.5 L55.0 11.5 L73.3 14.0 L91.7 6.5 L110.0 4.0 L110 26 L0 26 Z" fill="url(#s2E6BE6)"/><path d="M0.0 24.0 L18.3 16.5 L36.7 21.5 L55.0 11.5 L73.3 14.0 L91.7 6.5 L110.0 4.0" stroke="#2E6BE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="card kpi">
-        <div class="row"><div class="ico" style="background:rgba(122,90,240,.11);color:#7A5AF0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg></div>
-        <div><div class="lab">แผนรักษาที่ตอบรับ</div></div></div>
-        <div class="val">62<small>%</small></div>
-        <div class="delta flat">ค้างตัดสินใจ 6 แผน · 418,000 ฿</div>
-        <svg class="spark" width="110" height="26" viewBox="0 0 110 26" fill="none"><defs><linearGradient id="s7A5AF0" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7A5AF0" stop-opacity=".22"/><stop offset="1" stop-color="#7A5AF0" stop-opacity="0"/></linearGradient></defs><path d="M0.0 24.0 L18.3 16.5 L36.7 21.5 L55.0 11.5 L73.3 14.0 L91.7 9.0 L110.0 4.0 L110 26 L0 26 Z" fill="url(#s7A5AF0)"/><path d="M0.0 24.0 L18.3 16.5 L36.7 21.5 L55.0 11.5 L73.3 14.0 L91.7 9.0 L110.0 4.0" stroke="#7A5AF0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="card kpi">
-        <div class="row"><div class="ico" style="background:rgba(210,80,75,.10);color:#D2504B"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg></div>
-        <div><div class="lab">ข้อความรอตอบ</div></div></div>
-        <div class="val">14<small>แชท</small></div>
-        <div class="delta down"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>ค้างนานสุด 21 นาที</div>
-        <svg class="spark" width="110" height="26" viewBox="0 0 110 26" fill="none"><defs><linearGradient id="sD2504B" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#D2504B" stop-opacity=".22"/><stop offset="1" stop-color="#D2504B" stop-opacity="0"/></linearGradient></defs><path d="M0.0 24.0 L18.3 17.3 L36.7 21.8 L55.0 6.2 L73.3 12.9 L91.7 4.0 L110.0 10.7 L110 26 L0 26 Z" fill="url(#sD2504B)"/><path d="M0.0 24.0 L18.3 17.3 L36.7 21.8 L55.0 6.2 L73.3 12.9 L91.7 4.0 L110.0 10.7" stroke="#D2504B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="card kpi">
-        <div class="row"><div class="ico" style="background:rgba(46,158,99,.10);color:#2E9E63"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg></div>
-        <div><div class="lab">รายได้วันนี้</div></div></div>
-        <div class="val">246,800<small>฿</small></div>
-        <div class="delta up"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>+9% จากค่าเฉลี่ยวันจันทร์</div>
-        <svg class="spark" width="110" height="26" viewBox="0 0 110 26" fill="none"><defs><linearGradient id="s2E9E63" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2E9E63" stop-opacity=".22"/><stop offset="1" stop-color="#2E9E63" stop-opacity="0"/></linearGradient></defs><path d="M0.0 24.0 L18.3 16.5 L36.7 20.4 L55.0 11.8 L73.3 15.0 L91.7 8.5 L110.0 4.0 L110 26 L0 26 Z" fill="url(#s2E9E63)"/><path d="M0.0 24.0 L18.3 16.5 L36.7 20.4 L55.0 11.8 L73.3 15.0 L91.7 8.5 L110.0 4.0" stroke="#2E9E63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      </section>
+      <section class="kpis" id="kpis"></section>
 
       <section class="cols">
         <div class="stack">
           <div class="card">
-            <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg><h2>ตารางวันนี้</h2><a class="act" href="schedule.html">ดูทั้งหมด 34 คิว →</a></header>
-        <div class="slot">
-          <div class="t mono">09:00</div><div class="bar"></div><div><div class="appt"><div class="ini">ก</div>
-            <div class="who"><b>กัลยา ป.</b><span>ขูดหินปูน + ตรวจฟัน · ทพญ.นภา</span></div>
-            <div class="rm"><span class="tag t-course">สิทธิ ปกส.</span><br>เก้าอี้ 1</div></div></div></div>
-        <div class="slot">
-          <div class="t mono">09:30</div><div class="bar"></div><div><div class="appt"><div class="ini">ว</div>
-            <div class="who"><b>วีรภัทร ส.</b><span>ปรับเครื่องมือจัดฟัน ครั้งที่ 14 · ทพ.กิตติ</span></div>
-            <div class="rm"><span class="tag t-fu">จัดฟัน</span><br>เก้าอี้ 3</div></div></div></div>
-        <div class="slot">
-          <div class="t mono">10:00</div><div class="bar"></div><div><div class="appt"><div class="ini">ธ</div>
-            <div class="who"><b>ธัญญา ม.</b><span>ผ่าฟันคุด ซี่ 38 · ทพ.ประวิทย์</span></div>
-            <div class="rm"><span class="tag t-new">ผ่าตัด</span><br>เก้าอี้ 2</div></div><div class="appt"><div class="ini">ณ</div>
-            <div class="who"><b>ณัฐพล ค.</b><span>อุดฟัน 2 ซี่ · ทพญ.นภา</span></div>
-            <div class="rm">เก้าอี้ 1</div></div></div></div>
-        <div class="slot now">
-          <div class="t mono">10:30</div><div class="bar"></div><div><div class="appt"><div class="ini">ส</div>
-            <div class="who"><b>สุดารัตน์ ท.</b><span>รักษารากฟัน ครั้งที่ 2/3 · ทพ.ประวิทย์</span></div>
-            <div class="rm"><span class="tag t-course">แผนต่อเนื่อง</span><br>เก้าอี้ 4</div></div></div></div>
-        <div class="now-line mono">10:42 ตอนนี้</div>
-        <div class="slot">
-          <div class="t mono">11:00</div><div class="bar"></div><div><div class="appt"><div class="ini">อ</div>
-            <div class="who"><b>อธิป ว.</b><span>ปรึกษารากเทียม ครั้งแรก · ทพ.ประวิทย์</span></div>
-            <div class="rm"><span class="tag t-new">คนไข้ใหม่</span><br>เก้าอี้ 2</div></div></div></div>
+            <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg><h2>ตารางวันนี้</h2><a class="act" href="schedule.html" id="schAct"></a></header>
+            <div id="today"></div>
           </div>
 
           <div class="card">
-            <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg><h2>แผนการรักษารอตอบรับ</h2><a class="act" href="treatment-plans.html">ทั้งหมด 6 แผน →</a></header>
-        <div class="lrow">
-          <div class="ini">อ</div>
-          <div class="bd"><b>อธิป วัฒนกุล</b><span>รากเทียม 2 ซี่ + ครอบฟันเซรามิก</span>
-            <span style="font-size:11.5px;color:var(--faint)">เสนอเมื่อ 4 วันก่อน · ยังไม่ตัดสินใจ</span></div>
-          <div style="text-align:right"><b class="mono" style="font-size:13.5px">148,000 ฿</b>
-            <button class="mini solid" style="display:block;margin-top:6px">ติดตาม</button></div>
-        </div>        <div class="lrow">
-          <div class="ini">ป</div>
-          <div class="bd"><b>ปรียา สงวนศักดิ์</b><span>จัดฟันใส Invisalign</span>
-            <span style="font-size:11.5px;color:var(--faint)">เสนอเมื่อ 9 วันก่อน · ขอปรึกษาครอบครัว</span></div>
-          <div style="text-align:right"><b class="mono" style="font-size:13.5px">135,000 ฿</b>
-            <button class="mini solid" style="display:block;margin-top:6px">ติดตาม</button></div>
-        </div>        <div class="lrow">
-          <div class="ini">ม</div>
-          <div class="bd"><b>มานพ เจริญสุข</b><span>ครอบฟัน 3 ซี่ + รักษาราก</span>
-            <span style="font-size:11.5px;color:var(--faint)">เสนอเมื่อ 12 วันก่อน · รอเทียบราคาที่อื่น</span></div>
-          <div style="text-align:right"><b class="mono" style="font-size:13.5px">62,000 ฿</b>
-            <button class="mini solid" style="display:block;margin-top:6px">ติดตาม</button></div>
-        </div>
-            <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6">
-              รวมมูลค่าที่ยังไม่ตัดสินใจ <b style="color:var(--text)">418,000 ฿</b> —
-              แผนที่เสนอเกิน 14 วันแล้วมีโอกาสปิดได้ต่ำลงมาก ควรติดตามภายในสัปดาห์นี้
-            </p>
+            <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg><h2>แผนการรักษารอตอบรับ</h2><a class="act" href="treatment-plans.html" id="planAct"></a></header>
+            <div id="plans"></div>
+            <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6" id="planNote"></p>
           </div>
         </div>
 
         <div class="stack">
           <div class="card">
             <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg><h2>กล่องข้อความรวม</h2><a class="act" href="inbox.html">เปิดกล่องข้อความ →</a></header>
-        <div class="msg"><div class="ch line">LINE</div>
-          <div class="bd"><div class="hd"><b>คุณเบส</b><time class="mono">3 นาที</time></div>
-          <div class="tx">ปวดฟันกรามล่างขวามากตั้งแต่เมื่อคืน วันนี้เข้าได้ไหมครับ</div>
-          <div class="need"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>เคสปวดฉุกเฉิน · ส่งต่อให้เจ้าหน้าที่แล้ว</div>
-          </div></div>        <div class="msg"><div class="ch ig">IG</div>
-          <div class="bd"><div class="hd"><b>@ploy_dent</b><time class="mono">11 นาที</time></div>
-          <div class="tx">จัดฟันใสราคาเท่าไหร่คะ ผ่อนได้ไหม</div>
-          <div class="ai"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg><b>AI ส่งตารางราคาและเงื่อนไขผ่อนแล้ว</b></div>
-          </div></div>        <div class="msg"><div class="ch line">LINE</div>
-          <div class="bd"><div class="hd"><b>คุณกัลยา</b><time class="mono">18 นาที</time></div>
-          <div class="tx">ใช้สิทธิประกันสังคมขูดหินปูนต้องเตรียมอะไรบ้างคะ</div>
-          <div class="ai"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg><b>AI อธิบายสิทธิ 900 บาท/ปี แล้ว</b></div>
-          </div></div>        <div class="msg"><div class="ch fb">FB</div>
-          <div class="bd"><div class="hd"><b>วีรภัทร สุขใจ</b><time class="mono">25 นาที</time></div>
-          <div class="tx">ขอเลื่อนนัดปรับเครื่องมือเป็นสัปดาห์หน้าได้ไหมครับ</div>
-          <div class="ai"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg><b>AI เสนอเวลาใหม่ 2 ช่วง · รอยืนยัน</b></div>
-          </div></div>
+            <div id="msgs"></div>
           </div>
 
           <div class="card">
             <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg><h2>งานแล็บ</h2><a class="act" href="lab.html">ทั้งหมด →</a></header>
-        <div class="lrow"><div class="ini">ม</div>
-          <div class="bd"><b>มานพ เจริญสุข</b><span>ครอบฟันเซรามิก ซี่ 46</span>
-          <span style="font-size:11.5px;color:var(--green)">แล็บส่งกลับแล้ว</span></div>
-        </div>        <div class="lrow"><div class="ini">ศ</div>
-          <div class="bd"><b>ศิริพร ดำรงค์</b><span>วีเนียร์ 6 ซี่ หน้าบน</span>
-          <span style="font-size:11.5px;color:var(--faint)">อยู่ระหว่างผลิต</span></div>
-        </div>        <div class="lrow"><div class="ini">ก</div>
-          <div class="bd"><b>เกรียงไกร ม.</b><span>รีเทนเนอร์ใส</span>
-          <span style="font-size:11.5px;color:var(--faint)">อยู่ระหว่างผลิต</span></div>
-        </div>        <div class="lrow"><div class="ini">น</div>
-          <div class="bd"><b>นภัสวรรณ อ.</b><span>ฟันปลอมถอดได้บางส่วน</span>
-          <span style="font-size:11.5px;color:var(--rose)">เลยกำหนด 2 วัน</span></div>
-        </div>
+            <div id="labs"></div>
           </div>
 
           <div class="card">
             <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><h2>สัดส่วนช่องทาง</h2></header>
-            <svg width="140" height="140" viewBox="0 0 140 140" style="margin:0 auto 14px;display:block">
-          <circle cx="70" cy="70" r="54" fill="none" stroke="#EDF1F7" stroke-width="17"/><circle cx="70" cy="70" r="54" fill="none" stroke="#06C755" stroke-width="17" stroke-linecap="round" stroke-dasharray="220.9 118.4" stroke-dashoffset="0.0" transform="rotate(-90 70 70)"/><circle cx="70" cy="70" r="54" fill="none" stroke="#1877F2" stroke-width="17" stroke-linecap="round" stroke-dasharray="68.3 271.0" stroke-dashoffset="-223.9" transform="rotate(-90 70 70)"/><circle cx="70" cy="70" r="54" fill="none" stroke="#E1306C" stroke-width="17" stroke-linecap="round" stroke-dasharray="41.1 298.2" stroke-dashoffset="-295.2" transform="rotate(-90 70 70)"/>
-          <text x="70" y="66" text-anchor="middle" font-family="IBM Plex Sans Thai" font-size="25" font-weight="600" fill="#11222A">503</text>
-          <text x="70" y="85" text-anchor="middle" font-family="IBM Plex Sans Thai" font-size="11" fill="#65787F">แชทสัปดาห์นี้</text></svg><div class="legend"><div><span class="sw" style="background:#06C755"></span>LINE<b>66%</b></div><div><span class="sw" style="background:#1877F2"></span>Facebook<b>21%</b></div><div><span class="sw" style="background:#E1306C"></span>Instagram<b>13%</b></div></div>
+            <div id="donut"></div>
           </div>
 
           <div class="card">
             <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/></svg><h2>ถึงกำหนดตรวจ 6 เดือน</h2><a class="act" href="patients.html">ดูทั้งหมด →</a></header>
-        <div class="lrow"><div class="ini">ก</div>
-          <div class="bd"><b>กฤษณะ พูลผล</b><span>ครบ 6 เดือน · ขูดหินปูน + ตรวจฟัน</span></div>
-          <button class="mini solid">ทัก LINE</button></div>        <div class="lrow"><div class="ini">ธ</div>
-          <div class="bd"><b>ธนิดา แสงทอง</b><span>ครบ 6 เดือน · ยังมีสิทธิ ปกส. 900 ฿</span></div>
-          <button class="mini solid">ทัก LINE</button></div>        <div class="lrow"><div class="ini">ช</div>
-          <div class="bd"><b>ชัยวัฒน์ ภู่ระหงษ์</b><span>ไม่ได้มา 14 เดือน · เคยมีฟันผุ 2 ซี่</span></div>
-          <button class="mini solid">ทัก FB</button></div>
+            <div id="recall"></div>
           </div>
         </div>
       </section>
     </div>
   </main>
 </div>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ ภาพรวมคลินิก ═══════════════ */
+
+/* ── ตัวช่วยร่วมของทุกหน้า ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => Number(n).toLocaleString('en-US');
+const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
+const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
+const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
+const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+const DATA = {
+  /* ══════════ สาขาอารีย์ ══════════ */
+  aree: {
+    sub: 'จันทร์ที่ 17 สิงหาคม 2569 · วันนี้มี 34 คิว · ทันตแพทย์เข้าเวร 4 ท่าน',
+    kpi: [
+      {lab:'นัดหมายวันนี้', val:'34', unit:'คิว', delta:['flat','ยกเลิกกะทันหัน 2 ราย'],
+       c:'#2E6BE6', ico:'cal', spark:[24,16.5,21.5,11.5,14,6.5,4]},
+      {lab:'แผนรักษาที่ตอบรับ', val:'62', unit:'%', delta:['flat','ค้างตัดสินใจ 6 แผน · 418,000 ฿'],
+       c:'#7A5AF0', ico:'doc', spark:[24,16.5,21.5,11.5,14,9,4]},
+      {lab:'ข้อความรอตอบ', val:'14', unit:'แชท', delta:['down','ค้างนานสุด 21 นาที'],
+       c:'#D2504B', ico:'chat', spark:[24,17.3,21.8,6.2,12.9,4,10.7]},
+      {lab:'รายได้วันนี้', val:'246,800', unit:'฿', delta:['up','+9% จากค่าเฉลี่ยวันจันทร์'],
+       c:'#2E9E63', ico:'card', spark:[24,16.5,20.4,11.8,15,8.5,4]},
+    ],
+    schAct: 'ดูทั้งหมด 34 คิว →',
+    today: [
+      {t:'09:00', appts:[{n:'กัลยา ป.', d:'ขูดหินปูน + ตรวจฟัน · ทพญ.นภา', tag:['t-course','สิทธิ ปกส.'], rm:'เก้าอี้ 1'}]},
+      {t:'09:30', appts:[{n:'วีรภัทร ส.', d:'ปรับเครื่องมือจัดฟัน ครั้งที่ 14 · ทพ.กิตติ', tag:['t-fu','จัดฟัน'], rm:'เก้าอี้ 3'}]},
+      {t:'10:00', appts:[
+        {n:'ธัญญา ม.', d:'ผ่าฟันคุด ซี่ 38 · ทพ.ประวิทย์', tag:['t-new','ผ่าตัด'], rm:'เก้าอี้ 2'},
+        {n:'ณัฐพล ค.', d:'อุดฟัน 2 ซี่ · ทพญ.นภา', tag:null, rm:'เก้าอี้ 1'}]},
+      {t:'10:30', now:1, appts:[{n:'สุดารัตน์ ท.', d:'รักษารากฟัน ครั้งที่ 2/3 · ทพ.ประวิทย์', tag:['t-course','แผนต่อเนื่อง'], rm:'เก้าอี้ 4'}]},
+      {nowline:'10:42 ตอนนี้'},
+      {t:'11:00', appts:[{n:'อธิป ว.', d:'ปรึกษารากเทียม ครั้งแรก · ทพ.ประวิทย์', tag:['t-new','คนไข้ใหม่'], rm:'เก้าอี้ 2'}]},
+    ],
+    planAct: 'ทั้งหมด 6 แผน →',
+    plans: [
+      {n:'อธิป วัฒนกุล', d:'รากเทียม 2 ซี่ + ครอบฟันเซรามิก', age:'เสนอเมื่อ 4 วันก่อน · ยังไม่ตัดสินใจ', v:'148,000 ฿'},
+      {n:'ปรียา สงวนศักดิ์', d:'จัดฟันใส Invisalign', age:'เสนอเมื่อ 9 วันก่อน · ขอปรึกษาครอบครัว', v:'135,000 ฿'},
+      {n:'มานพ เจริญสุข', d:'ครอบฟัน 3 ซี่ + รักษาราก', age:'เสนอเมื่อ 12 วันก่อน · รอเทียบราคาที่อื่น', v:'62,000 ฿'},
+    ],
+    planNote: 'รวมมูลค่าที่ยังไม่ตัดสินใจ <b style="color:var(--text)">418,000 ฿</b> — แผนที่เสนอเกิน 14 วันแล้วมีโอกาสปิดได้ต่ำลงมาก ควรติดตามภายในสัปดาห์นี้',
+    msgs: [
+      {ch:'line', who:'คุณเบส', t:'3 นาที', tx:'ปวดฟันกรามล่างขวามากตั้งแต่เมื่อคืน วันนี้เข้าได้ไหมครับ',
+       need:'เคสปวดฉุกเฉิน · ส่งต่อให้เจ้าหน้าที่แล้ว'},
+      {ch:'ig', who:'@ploy_dent', t:'11 นาที', tx:'จัดฟันใสราคาเท่าไหร่คะ ผ่อนได้ไหม',
+       ai:'AI ส่งตารางราคาและเงื่อนไขผ่อนแล้ว'},
+      {ch:'line', who:'คุณกัลยา', t:'18 นาที', tx:'ใช้สิทธิประกันสังคมขูดหินปูนต้องเตรียมอะไรบ้างคะ',
+       ai:'AI อธิบายสิทธิ 900 บาท/ปี แล้ว'},
+      {ch:'fb', who:'วีรภัทร สุขใจ', t:'25 นาที', tx:'ขอเลื่อนนัดปรับเครื่องมือเป็นสัปดาห์หน้าได้ไหมครับ',
+       ai:'AI เสนอเวลาใหม่ 2 ช่วง · รอยืนยัน'},
+    ],
+    labs: [
+      {n:'มานพ เจริญสุข', d:'ครอบฟันเซรามิก ซี่ 46', st:['green','แล็บส่งกลับแล้ว']},
+      {n:'ศิริพร ดำรงค์', d:'วีเนียร์ 6 ซี่ หน้าบน', st:['faint','อยู่ระหว่างผลิต']},
+      {n:'เกรียงไกร ม.', d:'รีเทนเนอร์ใส', st:['faint','อยู่ระหว่างผลิต']},
+      {n:'นภัสวรรณ อ.', d:'ฟันปลอมถอดได้บางส่วน', st:['rose','เลยกำหนด 2 วัน']},
+    ],
+    donut: {total:'503', cap:'แชทสัปดาห์นี้',
+      parts:[['LINE','#06C755',66],['Facebook','#1877F2',21],['Instagram','#E1306C',13]]},
+    recall: [
+      {n:'กฤษณะ พูลผล', d:'ครบ 6 เดือน · ขูดหินปูน + ตรวจฟัน', btn:'ทัก LINE'},
+      {n:'ธนิดา แสงทอง', d:'ครบ 6 เดือน · ยังมีสิทธิ ปกส. 900 ฿', btn:'ทัก LINE'},
+      {n:'ชัยวัฒน์ ภู่ระหงษ์', d:'ไม่ได้มา 14 เดือน · เคยมีฟันผุ 2 ซี่', btn:'ทัก FB'},
+    ],
+  },
+
+  /* ══════════ สาขานิมมาน เชียงใหม่ ══════════ */
+  nimman: {
+    sub: 'จันทร์ที่ 17 สิงหาคม 2569 · วันนี้มี 17 คิว · ทันตแพทย์เข้าเวร 2 ท่าน',
+    kpi: [
+      {lab:'นัดหมายวันนี้', val:'17', unit:'คิว', delta:['flat','เก้าอี้ว่างช่วงบ่าย 3 ช่วง'],
+       c:'#2E6BE6', ico:'cal', spark:[22,19,20,14,16,11,9]},
+      {lab:'แผนรักษาที่ตอบรับ', val:'71', unit:'%', delta:['up','สูงสุดในเครือ · ค้าง 3 แผน 96,000 ฿'],
+       c:'#7A5AF0', ico:'doc', spark:[24,20,17,14,10,7,4]},
+      {lab:'ข้อความรอตอบ', val:'7', unit:'แชท', delta:['flat','ค้างนานสุด 9 นาที'],
+       c:'#D2504B', ico:'chat', spark:[20,15,18,9,13,7,10]},
+      {lab:'รายได้วันนี้', val:'76,900', unit:'฿', delta:['down','−15% จากเป้าหมายวันละ 90,000 ฿'],
+       c:'#2E9E63', ico:'card', spark:[24,20,22,15,18,12,14]},
+    ],
+    schAct: 'ดูทั้งหมด 17 คิว →',
+    today: [
+      {t:'10:00', appts:[{n:'ณัฐริกา อ.', d:'ขูดหินปูน + ตรวจฟัน · ทพญ.พิมพ์ลภัส', tag:['t-course','สิทธิ ปกส.'], rm:'เก้าอี้ 1'}]},
+      {t:'10:30', now:1, appts:[
+        {n:'James W.', d:'Filling 2 teeth · ทพ.ธนกฤต', tag:['t-new','ชาวต่างชาติ'], rm:'เก้าอี้ 2'},
+        {n:'ก้องภพ ศ.', d:'ตรวจฟัน + เอกซเรย์ · ทพญ.พิมพ์ลภัส', tag:null, rm:'เก้าอี้ 1'}]},
+      {nowline:'10:42 ตอนนี้'},
+      {t:'11:00', appts:[{n:'พิมพา ไ.', d:'อุดฟัน 1 ซี่ · ทพญ.พิมพ์ลภัส', tag:null, rm:'เก้าอี้ 1'}]},
+      {t:'11:30', appts:[{n:'สมชาย ป.', d:'ถอนฟัน ซี่ 26 · ทพ.ธนกฤต', tag:['t-wait','ศัลยกรรม'], rm:'เก้าอี้ 2'}]},
+      {t:'13:00', appts:[{n:'Hannah B.', d:'Teeth whitening · ทพญ.พิมพ์ลภัส', tag:['t-new','ชาวต่างชาติ'], rm:'เก้าอี้ 3'}]},
+    ],
+    planAct: 'ทั้งหมด 3 แผน →',
+    plans: [
+      {n:'ธีรภัทร ขัติยะ', d:'ครอบฟันเซรามิก 2 ซี่', age:'เสนอเมื่อ 2 วันก่อน · ยังไม่ตัดสินใจ', v:'36,000 ฿'},
+      {n:'Mr. James Whitfield', d:'รากเทียม 1 ซี่ + ครอบฟัน', age:'เสนอเมื่อ 5 วันก่อน · รอกลับจากต่างประเทศ', v:'45,000 ฿'},
+      {n:'อัญชลี ดวงแก้ว', d:'ฟอกสีฟัน + วีเนียร์ 1 ซี่', age:'เสนอเมื่อ 6 วันก่อน · ขอดูราคาโปรโมชัน', v:'15,000 ฿'},
+    ],
+    planNote: 'รวมมูลค่าที่ยังไม่ตัดสินใจ <b style="color:var(--text)">96,000 ฿</b> — อัตราตอบรับ 71% สูงสุดในเครือ เพราะเสนอแผนไม่เกิน 3 รายการต่อครั้ง',
+    msgs: [
+      {ch:'ig', who:'@bee.cnx', t:'9 นาที', tx:'ฟอกสีฟันที่นิมมานจองคิวเสาร์นี้ได้ไหมคะ',
+       need:'รอเจ้าหน้าที่ยืนยันคิวเสาร์'},
+      {ch:'web', who:'Emily Carter', t:'6 นาที', tx:'Do you have an English-speaking dentist available this week?',
+       ai:'AI ตอบเป็นภาษาอังกฤษ · เสนอคิว พุธ 14:00'},
+      {ch:'line', who:'คุณสมชาย', t:'4 นาที', tx:'หลังถอนฟันวันนี้กินข้าวได้เลยไหมครับ',
+       ai:'AI ส่งคำแนะนำหลังถอนฟันแล้ว'},
+      {ch:'line', who:'คุณนงลักษณ์', t:'2 นาที', tx:'ขอเลื่อนนัดพฤหัสเป็นสัปดาห์หน้าค่ะ',
+       ai:'AI เสนอเวลาใหม่ 2 ช่วง · รอยืนยัน'},
+    ],
+    labs: [
+      {n:'ธีรภัทร ขัติยะ', d:'ครอบฟันเซรามิก ซี่ 36', st:['faint','อยู่ระหว่างผลิต']},
+      {n:'ศิวกร แก้วมูล', d:'รีเทนเนอร์ Essix', st:['green','ถึงคลินิกแล้ว']},
+      {n:'นงลักษณ์ ปัญโญ', d:'ฟันปลอมถอดได้ (ล่าง)', st:['faint','ส่งแล็บแล้ว']},
+    ],
+    donut: {total:'168', cap:'แชทสัปดาห์นี้',
+      parts:[['LINE','#06C755',44],['Instagram','#E1306C',31],['Google Maps','#E0951E',25]]},
+    recall: [
+      {n:'จันทร์เพ็ญ ต๊ะวัน', d:'ครบ 6 เดือน · ขูดหินปูน + ตรวจฟัน', btn:'ทัก LINE'},
+      {n:'ปฏิภาณ จอมแปง', d:'ครบ 6 เดือน · ยังมีสิทธิ ปกส. 900 ฿', btn:'ทัก LINE'},
+    ],
+  },
+};
+
+const D = pick(DATA);
+const ICO = {
+  cal:  '<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/>',
+  doc:  '<path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/>',
+  chat: '<path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/>',
+  card: '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/>',
+};
+const ARROW = {
+  up:   '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
+  down: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>',
+  flat: '',
+};
+
+$('#sub').textContent = D.sub;
+$('#schAct').textContent = D.schAct;
+$('#planAct').textContent = D.planAct;
+
+/* ── การ์ด KPI ── */
+$('#kpis').innerHTML = D.kpi.map(k => {
+  const id = 's' + k.c.slice(1);
+  const pts = k.spark.map((y,i) => `${(i * 110 / 6).toFixed(1)} ${y}`).join(' L ');
+  return `<div class="card kpi">
+    <div class="row"><div class="ico" style="background:${k.c}1A;color:${k.c}">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICO[k.ico]}</svg></div>
+      <div><div class="lab">${k.lab}</div></div></div>
+    <div class="val">${k.val}<small>${k.unit}</small></div>
+    <div class="delta ${k.delta[0]}">${ARROW[k.delta[0]]}${k.delta[1]}</div>
+    <svg class="spark" width="110" height="26" viewBox="0 0 110 26" fill="none">
+      <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-color="${k.c}" stop-opacity=".22"/><stop offset="1" stop-color="${k.c}" stop-opacity="0"/></linearGradient></defs>
+      <path d="M ${pts} L 110 26 L 0 26 Z" fill="url(#${id})"/>
+      <path d="M ${pts}" stroke="${k.c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>`;
+}).join('');
+
+/* ── ตารางวันนี้ ── */
+$('#today').innerHTML = D.today.map(s => {
+  if (s.nowline) return `<div class="now-line mono">${esc(s.nowline)}</div>`;
+  const appts = s.appts.map(a => `<div class="appt"><div class="ini">${esc(initial(a.n))}</div>
+    <div class="who"><b>${esc(a.n)}</b><span>${esc(a.d)}</span></div>
+    <div class="rm">${a.tag ? `<span class="tag ${a.tag[0]}">${esc(a.tag[1])}</span><br>` : ''}${esc(a.rm)}</div></div>`).join('');
+  return `<div class="slot${s.now ? ' now' : ''}">
+    <div class="t mono">${s.t}</div><div class="bar"></div><div>${appts}</div></div>`;
+}).join('');
+
+/* ── แผนรอตอบรับ ── */
+$('#plans').innerHTML = D.plans.map(p => `<div class="lrow">
+  <div class="ini">${esc(initial(p.n))}</div>
+  <div class="bd"><b>${esc(p.n)}</b><span>${esc(p.d)}</span>
+    <span style="font-size:11.5px;color:var(--faint)">${esc(p.age)}</span></div>
+  <div style="text-align:right"><b class="mono" style="font-size:13.5px">${esc(p.v)}</b>
+    <button class="mini solid" style="display:block;margin-top:6px" data-follow="${esc(p.n)}">ติดตาม</button></div>
+</div>`).join('');
+$('#planNote').innerHTML = D.planNote;
+$$('[data-follow]').forEach(b => b.onclick = () => toast('ส่งข้อความติดตาม ' + b.dataset.follow + ' แล้ว'));
+
+/* ── กล่องข้อความ ── */
+const CHL = {line:'LINE', fb:'FB', ig:'IG', web:'WEB'};
+$('#msgs').innerHTML = D.msgs.map(m => `<div class="msg"><div class="ch ${m.ch}">${CHL[m.ch]}</div>
+  <div class="bd"><div class="hd"><b>${esc(m.who)}</b><time class="mono">${esc(m.t)}</time></div>
+  <div class="tx">${esc(m.tx)}</div>
+  ${m.need ? `<div class="need"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>${esc(m.need)}</div>` : ''}
+  ${m.ai ? `<div class="ai"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg><b>${esc(m.ai)}</b></div>` : ''}
+  </div></div>`).join('');
+
+/* ── งานแล็บ ── */
+const STC = {green:'var(--green)', rose:'var(--rose)', faint:'var(--faint)'};
+$('#labs').innerHTML = D.labs.map(l => `<div class="lrow"><div class="ini">${esc(initial(l.n))}</div>
+  <div class="bd"><b>${esc(l.n)}</b><span>${esc(l.d)}</span>
+  <span style="font-size:11.5px;color:${STC[l.st[0]]}">${esc(l.st[1])}</span></div>
+</div>`).join('');
+
+/* ── โดนัทสัดส่วนช่องทาง ── */
+(function(){
+  const R = 54, C = 2 * Math.PI * R;
+  let off = 0;
+  const rings = D.donut.parts.map(([, color, pct]) => {
+    const len = C * pct / 100 - 4;
+    const s = `<circle cx="70" cy="70" r="${R}" fill="none" stroke="${color}" stroke-width="17" stroke-linecap="round"
+      stroke-dasharray="${len.toFixed(1)} ${(C - len).toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 70 70)"/>`;
+    off += C * pct / 100;
+    return s;
+  }).join('');
+  $('#donut').innerHTML = `<svg width="140" height="140" viewBox="0 0 140 140" style="margin:0 auto 14px;display:block">
+      <circle cx="70" cy="70" r="${R}" fill="none" stroke="#EDF1F7" stroke-width="17"/>${rings}
+      <text x="70" y="66" text-anchor="middle" font-family="IBM Plex Sans Thai" font-size="25" font-weight="600" fill="#11222A">${D.donut.total}</text>
+      <text x="70" y="85" text-anchor="middle" font-family="IBM Plex Sans Thai" font-size="11" fill="#65787F">${D.donut.cap}</text></svg>
+    <div class="legend">${D.donut.parts.map(([n,c,p]) =>
+      `<div><span class="sw" style="background:${c}"></span>${n}<b>${p}%</b></div>`).join('')}</div>`;
+})();
+
+/* ── ถึงกำหนดตรวจ ── */
+$('#recall').innerHTML = D.recall.map(r => `<div class="lrow"><div class="ini">${esc(initial(r.n))}</div>
+  <div class="bd"><b>${esc(r.n)}</b><span>${esc(r.d)}</span></div>
+  <button class="mini solid" data-ping="${esc(r.n)}">${esc(r.btn)}</button></div>`).join('');
+$$('[data-ping]').forEach(b => b.onclick = () => toast('ส่งข้อความถึง ' + b.dataset.ping + ' แล้ว'));
+
+/* ── คำทักทายตามสาขา ── */
+$('#hello').textContent = BRANCH === 'aree' ? 'สวัสดีตอนสาย คุณชัช' : 'ภาพรวม ' + BRANCHES[BRANCH].n;
+$('#bell').onclick = () => toast('มีข้อความรอตอบ ' + D.kpi[2].val + ' รายการ');
+</script>
 </body>
 </html>
+

@@ -319,7 +319,7 @@ body{
 .board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
 
 .res-head{
-  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  display:grid;grid-template-columns:58px repeat(var(--nchairs,4),minmax(0,1fr));
   border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
 }
 .res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
@@ -331,7 +331,7 @@ body{
 }
 .res-head .load i{display:block;height:100%;border-radius:2px}
 
-.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.grid-body{display:grid;grid-template-columns:58px repeat(var(--nchairs,4),minmax(0,1fr));position:relative}
 .gutter{position:relative}
 .gutter .hr{
   height:64px;border-top:1px solid var(--border);
@@ -406,7 +406,7 @@ body{
   .toolbar{top:0;position:static;padding:12px 16px}
   .res-head{position:static}
   .sched{padding:14px 16px 32px}
-  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(var(--nchairs,4),minmax(110px,1fr));min-width:560px}
   .board{overflow-x:auto}
   .filters{margin-left:0;width:100%}
 }
@@ -840,7 +840,50 @@ body{
 }
 .branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
 .branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
 </style>
+<script>
+/* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
+(function(){
+  var B = {
+    aree:{n:'สาขาอารีย์',h:'เปิด 09:00 – 20:00',d:1},
+    thonglor:{n:'สาขาทองหล่อ',h:'เปิด 10:00 – 20:00',d:0},
+    ratchada:{n:'สาขารัชดา',h:'เปิด 09:00 – 20:00',d:0},
+    bangna:{n:'สาขาบางนา',h:'เปิด 09:00 – 19:00',d:0},
+    nimman:{n:'สาขานิมมาน เชียงใหม่',h:'เปิด 10:00 – 19:00',d:1}
+  };
+  var qs = new URLSearchParams(location.search).get('b');
+  var br = (qs && B[qs] && B[qs].d) ? qs : null;
+  if (!br) { try { br = localStorage.getItem('zentr.branch'); } catch (e) {} }
+  if (!br || !B[br] || !B[br].d) br = 'aree';
+  try { localStorage.setItem('zentr.branch', br); } catch (e) {}
+
+  window.BRANCH = br;
+  window.BRANCHES = B;
+  window.pick = function(o){ return o[br] !== undefined ? o[br] : o['aree']; };
+  document.documentElement.setAttribute('data-branch', br);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var now = document.getElementById('brNow');
+    if (now) now.innerHTML = '<b>' + B[br].n + '</b><span>' + B[br].h + '</span>';
+    document.querySelectorAll('.branchmenu a[data-b]').forEach(function(a){
+      var on = a.getAttribute('data-b') === br;
+      a.classList.toggle('cur', on);
+      var ck = a.querySelector('.ck');
+      if (ck) ck.style.visibility = on ? 'visible' : 'hidden';
+    });
+    if (br === 'aree') return;
+    document.querySelectorAll('a[href$=".html"]').forEach(function(a){
+      var h = a.getAttribute('href');
+      if (h.indexOf('?') < 0) a.setAttribute('href', h + '?b=' + br);
+    });
+  });
+})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -869,16 +912,16 @@ body{
     <div class="side-foot">
       <details class="branchsel">
         <summary class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
+          <div id="brNow"><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
           <svg class="cv" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="branchmenu">
           <h6>สลับสาขาที่กำลังดูแล</h6>
-        <a href="index.html" class="cur"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
-        <a href="branches.html?b=thonglor"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span></a>
-        <a href="branches.html?b=ratchada"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span></a>
-        <a href="branches.html?b=bangna"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span></a>
-        <a href="branches.html?b=nimman"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span></a>
+        <a href="index.html?b=aree" data-b="aree" data-d="1"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
+        <a href="branches.html?open=thonglor" data-b="thonglor" data-d="0"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=ratchada" data-b="ratchada" data-d="0"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=bangna" data-b="bangna" data-d="0"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span><em>ดูสรุป</em></a>
+        <a href="index.html?b=nimman" data-b="nimman" data-d="1"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
           <a href="branches.html" class="all">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>
             ภาพรวมทุกสาขา</a>
@@ -982,18 +1025,55 @@ body{
 <script>
 const IC={bell:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>`,chart:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>`,braces:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>`};
 /* ═══════════════ ข้อมูลตั้งต้น ═══════════════ */
-const CHAIRS = [
-  {id:'c1', name:'เก้าอี้ 1', kind:'ทันตกรรมทั่วไป',     color:'#2E6BE6', cls:'e-blue'},
-  {id:'c2', name:'เก้าอี้ 2', kind:'ศัลยกรรม / รากเทียม', color:'#D2504B', cls:'e-rose'},
-  {id:'c3', name:'เก้าอี้ 3', kind:'จัดฟัน',              color:'#7A5AF0', cls:'e-violet'},
-  {id:'c4', name:'เก้าอี้ 4', kind:'รักษาราก / ปริทันต์',  color:'#2E9E63', cls:'e-green'},
-];
-const DOCS = [
-  {id:'d1', name:'ทพญ.นภา',     color:'#2E6BE6', cls:'e-blue',   chairs:['c1']},
-  {id:'d2', name:'ทพ.ประวิทย์', color:'#D2504B', cls:'e-rose',   chairs:['c2','c4']},
-  {id:'d3', name:'ทพ.กิตติ',    color:'#7A5AF0', cls:'e-violet', chairs:['c3']},
-  {id:'d4', name:'ทพญ.อรอนงค์', color:'#2E9E63', cls:'e-green',  chairs:['c4']},
-];
+/* ── ค่าตั้งต้นตามสาขา ── */
+const BR_CFG = {
+  aree: {
+    open: 9*60, close: 20*60,
+    chairs: [
+      {id:'c1', name:'เก้าอี้ 1', kind:'ทันตกรรมทั่วไป',     color:'#2E6BE6', cls:'e-blue'},
+      {id:'c2', name:'เก้าอี้ 2', kind:'ศัลยกรรม / รากเทียม', color:'#D2504B', cls:'e-rose'},
+      {id:'c3', name:'เก้าอี้ 3', kind:'จัดฟัน',              color:'#7A5AF0', cls:'e-violet'},
+      {id:'c4', name:'เก้าอี้ 4', kind:'รักษาราก / ปริทันต์',  color:'#2E9E63', cls:'e-green'},
+    ],
+    docs: [
+      {id:'d1', name:'ทพญ.นภา',     color:'#2E6BE6', cls:'e-blue',   chairs:['c1']},
+      {id:'d2', name:'ทพ.ประวิทย์', color:'#D2504B', cls:'e-rose',   chairs:['c2','c4']},
+      {id:'d3', name:'ทพ.กิตติ',    color:'#7A5AF0', cls:'e-violet', chairs:['c3']},
+      {id:'d4', name:'ทพญ.อรอนงค์', color:'#2E9E63', cls:'e-green',  chairs:['c4']},
+    ],
+    first: ['กัลยา','ณัฐพล','ธัญญา','สุดารัตน์','อธิป','วีรภัทร','ณิชา','กฤตย์','ปรียา','มานพ',
+      'พิมพ์ชนก','สมหญิง','ธนิดา','ปิยะ','สุชาติ','นภัสวรรณ','อารยา','ชนกันต์','เกรียงไกร','ธีรดา',
+      'พัชรี','ภาณุพงศ์','จารุวรรณ','เอกชัย','วรรณดี','กฤษณะ','ชัยวัฒน์','ศิริพร','เบส','ญาดา'],
+    last: ['ปัญญาดี','คงทอง','มงคลชัย','ทองสุข','วัฒนกุล','สุขใจ','บุญมั่น','เจริญสุข','ระวีวรรณ','ศรีสุข',
+      'แสงทอง','ภู่ระหงษ์','ดำรงค์','อินทร์แก้ว','พูลผล','สงวนศักดิ์'],
+    hn: 'HN ',
+  },
+  nimman: {
+    open: 10*60, close: 19*60,
+    chairs: [
+      {id:'c1', name:'เก้าอี้ 1', kind:'ทันตกรรมทั่วไป',    color:'#2E6BE6', cls:'e-blue'},
+      {id:'c2', name:'เก้าอี้ 2', kind:'ศัลยกรรม / ครอบฟัน', color:'#D2504B', cls:'e-rose'},
+      {id:'c3', name:'เก้าอี้ 3', kind:'จัดฟัน / ความงาม',   color:'#7A5AF0', cls:'e-violet'},
+    ],
+    docs: [
+      {id:'d1', name:'ทพญ.พิมพ์ลภัส', color:'#2E6BE6', cls:'e-blue',   chairs:['c1','c3']},
+      {id:'d2', name:'ทพ.ธนกฤต',     color:'#D2504B', cls:'e-rose',   chairs:['c2']},
+      {id:'d3', name:'ทพ.กิตติ (เสาร์)', color:'#7A5AF0', cls:'e-violet', chairs:['c3']},
+    ],
+    first: ['ณัฐริกา','ก้องภพ','พิมพา','สมชาย','จันทร์เพ็ญ','ศิวกร','นงลักษณ์','อัญชลี','ปฏิภาณ','ธีรภัทร',
+      'สุพัตรา','ธนดล','พงษ์พัฒน์','มาลี','อารีรัตน์','ชัยวัฒน์','James','Hannah','Emily','ณัฐวุฒิ',
+      'กชกร','ภูริช','ดวงดาว','วิไลวรรณ'],
+    last: ['อินทวงศ์','ศรีวิชัย','ไชยวงค์','ปันคำ','ต๊ะวัน','แก้วมูล','ปัญโญ','ดวงแก้ว','จอมแปง','ขัติยะ',
+      'ใจกลม','ไชยเดช','อุ่นเรือน','ศรีนวล','สุขคำ','ปินตา','คำมูล','ธนันชัย'],
+    hn: 'CM ',
+  },
+};
+const CFG = (window.pick ? pick(BR_CFG) : BR_CFG.aree);
+document.documentElement.style.setProperty('--nchairs', CFG.chairs.length);
+const CHAIRS = CFG.chairs;
+const DOCS = CFG.docs;
+const FIRST = CFG.first;
+const LAST = CFG.last;
 const PROCS = {
   c1:[['ขูดหินปูน + ตรวจฟัน',45,'ปกส.'],['อุดฟัน 2 ซี่',45,''],['ฟอกสีฟัน',60,''],
       ['เคลือบฟลูออไรด์ (เด็ก)',30,''],['ตรวจฟัน + X-ray',45,''],['ขูดหินปูน',45,'ปกส.']],
@@ -1004,14 +1084,9 @@ const PROCS = {
   c4:[['รักษารากฟัน 1/3',75,''],['รักษารากฟัน 2/3',75,''],['รักษารากฟัน 3/3',60,''],
       ['เกลารากฟัน ปริทันต์',60,''],['ครอบฟันเซรามิก',60,''],['ตรวจติดตามหลังรักษาราก',30,'']],
 };
-const FIRST = ['กัลยา','ณัฐพล','ธัญญา','สุดารัตน์','อธิป','วีรภัทร','ณิชา','กฤตย์','ปรียา','มานพ',
-  'พิมพ์ชนก','สมหญิง','ธนิดา','ปิยะ','สุชาติ','นภัสวรรณ','อารยา','ชนกันต์','เกรียงไกร','ธีรดา',
-  'พัชรี','ภาณุพงศ์','จารุวรรณ','เอกชัย','วรรณดี','กฤษณะ','ชัยวัฒน์','ศิริพร','เบส','ญาดา'];
-const LAST = ['ปัญญาดี','คงทอง','มงคลชัย','ทองสุข','วัฒนกุล','สุขใจ','บุญมั่น','เจริญสุข','ระวีวรรณ','ศรีสุข',
-  'แสงทอง','ภู่ระหงษ์','ดำรงค์','อินทร์แก้ว','พูลผล','สงวนศักดิ์'];
 
 /* ═══════════════ เครื่องมือช่วย ═══════════════ */
-const OPEN = 9*60, CLOSE = 20*60, PXMIN = 64/60;      // 09:00–20:00, 64px ต่อชั่วโมง
+const OPEN = CFG.open, CLOSE = CFG.close, PXMIN = 64/60;      // 09:00–20:00, 64px ต่อชั่วโมง
 const pad = n => String(n).padStart(2,'0');
 const hhmm = m => pad(Math.floor(m/60)) + ':' + pad(m%60);
 const toMin = s => (+s.slice(0,2))*60 + (+s.slice(3));
@@ -1043,7 +1118,7 @@ function buildDay(date){
 
   const r = rng(hash(k));
   for (const chair of CHAIRS){
-    const pool = PROCS[chair.id];
+    const pool = PROCS[chair.id] || PROCS.c1;
     let t = OPEN + Math.floor(r()*3)*15;
 
     // พักกลางวัน 12:00–13:00
@@ -1066,7 +1141,7 @@ function buildDay(date){
       list.push({
         id: 'a'+(SEQ++), date:k, chair:chair.id, doctor:doc.id,
         patient: pt,
-        hn: 'HN ' + (22 + Math.floor(r()*3)) + '-' + pad(Math.floor(r()*900)+100),
+        hn: CFG.hn + (22 + Math.floor(r()*3)) + '-' + pad(Math.floor(r()*900)+100),
         phone: '08' + Math.floor(r()*9) + '-' + (1000+Math.floor(r()*8999)) + '-' + Math.floor(r()*90+10),
         proc: name, start: t, end: t+mins, note,
         status: roll < 0.12 ? 'pending' : 'confirmed',

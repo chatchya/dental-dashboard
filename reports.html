@@ -588,6 +588,52 @@ body{
 }
 .branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
 .branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
 
 /* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
 .side .nav a{cursor:pointer}
@@ -629,6 +675,197 @@ body{
 .btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
 
 .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
+.branchmenu a em{
+  flex:none;font-style:normal;font-size:10px;color:#61818B;
+  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
+}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.ch.web{background:var(--ink-700)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
 .sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
 @keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
@@ -700,6 +937,44 @@ body{
   .tbl{min-width:720px}
 }
 </style>
+<script>
+/* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
+(function(){
+  var B = {
+    aree:{n:'สาขาอารีย์',h:'เปิด 09:00 – 20:00',d:1},
+    thonglor:{n:'สาขาทองหล่อ',h:'เปิด 10:00 – 20:00',d:0},
+    ratchada:{n:'สาขารัชดา',h:'เปิด 09:00 – 20:00',d:0},
+    bangna:{n:'สาขาบางนา',h:'เปิด 09:00 – 19:00',d:0},
+    nimman:{n:'สาขานิมมาน เชียงใหม่',h:'เปิด 10:00 – 19:00',d:1}
+  };
+  var qs = new URLSearchParams(location.search).get('b');
+  var br = (qs && B[qs] && B[qs].d) ? qs : null;
+  if (!br) { try { br = localStorage.getItem('zentr.branch'); } catch (e) {} }
+  if (!br || !B[br] || !B[br].d) br = 'aree';
+  try { localStorage.setItem('zentr.branch', br); } catch (e) {}
+
+  window.BRANCH = br;
+  window.BRANCHES = B;
+  window.pick = function(o){ return o[br] !== undefined ? o[br] : o['aree']; };
+  document.documentElement.setAttribute('data-branch', br);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var now = document.getElementById('brNow');
+    if (now) now.innerHTML = '<b>' + B[br].n + '</b><span>' + B[br].h + '</span>';
+    document.querySelectorAll('.branchmenu a[data-b]').forEach(function(a){
+      var on = a.getAttribute('data-b') === br;
+      a.classList.toggle('cur', on);
+      var ck = a.querySelector('.ck');
+      if (ck) ck.style.visibility = on ? 'visible' : 'hidden';
+    });
+    if (br === 'aree') return;
+    document.querySelectorAll('a[href$=".html"]').forEach(function(a){
+      var h = a.getAttribute('href');
+      if (h.indexOf('?') < 0) a.setAttribute('href', h + '?b=' + br);
+    });
+  });
+})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -728,16 +1003,16 @@ body{
     <div class="side-foot">
       <details class="branchsel">
         <summary class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
+          <div id="brNow"><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
           <svg class="cv" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="branchmenu">
           <h6>สลับสาขาที่กำลังดูแล</h6>
-        <a href="index.html" class="cur"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
-        <a href="branches.html?b=thonglor"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span></a>
-        <a href="branches.html?b=ratchada"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span></a>
-        <a href="branches.html?b=bangna"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span></a>
-        <a href="branches.html?b=nimman"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span></a>
+        <a href="index.html?b=aree" data-b="aree" data-d="1"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
+        <a href="branches.html?open=thonglor" data-b="thonglor" data-d="0"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=ratchada" data-b="ratchada" data-d="0"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span><em>ดูสรุป</em></a>
+        <a href="branches.html?open=bangna" data-b="bangna" data-d="0"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span><em>ดูสรุป</em></a>
+        <a href="index.html?b=nimman" data-b="nimman" data-d="1"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span><svg class="ck" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
           <a href="branches.html" class="all">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>
             ภาพรวมทุกสาขา</a>
@@ -810,7 +1085,7 @@ body{
             <h2>การใช้เก้าอี้ทำฟัน</h2></header>
           <div class="hb" id="chairUse"></div>
           <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6">
-            คิดจากชั่วโมงที่มีคนไข้จริงเทียบกับชั่วโมงเปิดทำการ (11 ชม./วัน × 90 วัน)
+            <span id="chairNote"></span>
           </p>
         </div>
 
@@ -875,35 +1150,53 @@ function toast(msg, undo){
 /* ลำดับสีสำหรับข้อมูลเชิงหมวดหมู่ — ผ่านการตรวจ CVD แล้ว ห้ามสลับลำดับ */
 const CAT = ['#2E6BE6','#2E9E63','#7A5AF0','#E0951E','#199FB4','#D2504B'];
 
-const REV = [
-  ['ก.ย. 68',3920000],['ต.ค. 68',4100000],['พ.ย. 68',4280000],['ธ.ค. 68',4650000],
-  ['ม.ค. 69',4420000],['ก.พ. 69',4580000],['มี.ค. 69',4860000],['เม.ย. 69',4210000],
-  ['พ.ค. 69',4740000],['มิ.ย. 69',5020000],['ก.ค. 69',5280000],['ส.ค. 69',3050000],
-];
-const ACC  = [['มี.ค.',54],['เม.ย.',57],['พ.ค.',59],['มิ.ย.',61],['ก.ค.',60],['ส.ค.',62]];
-const NS   = [['มี.ค.',8.4],['เม.ย.',7.9],['พ.ค.',7.2],['มิ.ย.',6.8],['ก.ค.',7.1],['ส.ค.',6.2]];
-const CATS = [['จัดฟัน',4180000],['ครอบฟัน / สะพานฟัน',3260000],['รากเทียม',2740000],
-              ['ทันตกรรมทั่วไป',1980000],['ศัลยกรรมช่องปาก',1240000],['ทันตกรรมความงาม',890000]];
-const CHS  = [['LINE OA',62,'#06C755'],['แนะนำบอกต่อ',55,'#2E6BE6'],['Facebook',38,'#1877F2'],
-              ['Instagram',34,'#E1306C'],['Walk-in',27,'#65787F'],['Google Maps',18,'#E0951E']];
-const CHAIR = [['เก้าอี้ 1',78],['เก้าอี้ 2',71],['เก้าอี้ 3',84],['เก้าอี้ 4',63]];
-const LABQ = [['เดนทัลอาร์ต แล็บ',94,3],['สยามเซรามิก แล็บ',81,11],['ออร์โธเทค แล็บ',97,2]];
-const DOCS = [
-  ['ทพญ.นภา',    412, 486, 3820000, 62],
-  ['ทพ.ประวิทย์', 336, 452, 4260000, 58],
-  ['ทพ.กิตติ',   298, 428, 3510000, 71],
-  ['ทพญ.อรอนงค์', 354, 441, 2700000, 55],
-];
-const TXS = [
-  ['จัดฟัน (ค่างวด + เริ่มเคส)', 268, 4180000],
-  ['ครอบฟันเซรามิก', 132, 2376000],
-  ['รากเทียม', 46, 2740000],
-  ['อุดฟัน', 388, 892000],
-  ['ขูดหินปูน / ขัดฟัน', 522, 736000],
-  ['ผ่าฟันคุด / ถอนฟัน', 174, 1010000],
-  ['รักษารากฟัน', 78, 702000],
-  ['ฟอกสีฟัน / วีเนียร์', 62, 890000],
-];
+const R = pick({
+ /* ══════════ สาขาอารีย์ ══════════ */
+ aree: {
+  rev: [['ก.ย. 68',3920000],['ต.ค. 68',4100000],['พ.ย. 68',4280000],['ธ.ค. 68',4650000],
+        ['ม.ค. 69',4420000],['ก.พ. 69',4580000],['มี.ค. 69',4860000],['เม.ย. 69',4210000],
+        ['พ.ค. 69',4740000],['มิ.ย. 69',5020000],['ก.ค. 69',5280000],['ส.ค. 69',3050000]],
+  growth: 4.8,
+  acc: [['มี.ค.',54],['เม.ย.',57],['พ.ค.',59],['มิ.ย.',61],['ก.ค.',60],['ส.ค.',62]],
+  ns:  [['มี.ค.',8.4],['เม.ย.',7.9],['พ.ค.',7.2],['มิ.ย.',6.8],['ก.ค.',7.1],['ส.ค.',6.2]],
+  cats: [['จัดฟัน',4180000],['ครอบฟัน / สะพานฟัน',3260000],['รากเทียม',2740000],
+         ['ทันตกรรมทั่วไป',1980000],['ศัลยกรรมช่องปาก',1240000],['ทันตกรรมความงาม',890000]],
+  chs: [['LINE OA',62,'#06C755'],['แนะนำบอกต่อ',55,'#2E6BE6'],['Facebook',38,'#1877F2'],
+        ['Instagram',34,'#E1306C'],['Walk-in',27,'#65787F'],['Google Maps',18,'#E0951E']],
+  chair: [['เก้าอี้ 1',78],['เก้าอี้ 2',71],['เก้าอี้ 3',84],['เก้าอี้ 4',63]],
+  labq: [['เดนทัลอาร์ต แล็บ',94,3],['สยามเซรามิก แล็บ',81,11],['ออร์โธเทค แล็บ',97,2]],
+  labNote: 'ตัวเลขคืออัตราส่งงานตรงเวลา — <b style="color:var(--text)">สยามเซรามิก แล็บ</b> ต่ำกว่าเกณฑ์ทั้งเรื่องตรงเวลาและอัตราแก้งาน ควรทบทวนสัดส่วนงานที่ส่ง',
+  docs: [['ทพญ.นภา',412,486,3820000,62],['ทพ.ประวิทย์',336,452,4260000,58],
+         ['ทพ.กิตติ',298,428,3510000,71],['ทพญ.อรอนงค์',354,441,2700000,55]],
+  txs: [['จัดฟัน (ค่างวด + เริ่มเคส)',268,4180000],['ครอบฟันเซรามิก',132,2376000],
+        ['รากเทียม',46,2740000],['อุดฟัน',388,892000],['ขูดหินปูน / ขัดฟัน',522,736000],
+        ['ผ่าฟันคุด / ถอนฟัน',174,1010000],['รักษารากฟัน',78,702000],['ฟอกสีฟัน / วีเนียร์',62,890000]],
+  chairNote: 'คิดจากชั่วโมงที่มีคนไข้จริงเทียบกับชั่วโมงเปิดทำการ (11 ชม./วัน × 90 วัน)',
+ },
+
+ /* ══════════ สาขานิมมาน เชียงใหม่ — เปิด พ.ค. 2569 มีข้อมูลเพียง 4 เดือน ══════════ */
+ nimman: {
+  rev: [['พ.ค. 69',420000],['มิ.ย. 69',710000],['ก.ค. 69',1020000],['ส.ค. 69',890000]],
+  growth: 43.7,
+  acc: [['พ.ค.',58],['มิ.ย.',64],['ก.ค.',68],['ส.ค.',71]],
+  ns:  [['พ.ค.',6.1],['มิ.ย.',5.4],['ก.ค.',5.0],['ส.ค.',4.6]],
+  cats: [['จัดฟัน',780000],['ทันตกรรมทั่วไป',610000],['ครอบฟัน / สะพานฟัน',520000],
+         ['ทันตกรรมความงาม',340000],['ศัลยกรรมช่องปาก',230000],['รากเทียม',140000]],
+  chs: [['Google Maps',34,'#E0951E'],['Instagram',26,'#E1306C'],['LINE OA',20,'#06C755'],
+        ['แนะนำบอกต่อ',14,'#2E6BE6'],['Walk-in',12,'#65787F'],['Facebook',8,'#1877F2']],
+  chair: [['เก้าอี้ 1',52],['เก้าอี้ 2',44],['เก้าอี้ 3',36]],
+  labq: [['ล้านนาเดนทัล แล็บ',92,4],['ออร์โธเทค แล็บ',97,2]],
+  labNote: 'ยังไม่มีงานเลยกำหนดตั้งแต่เปิดสาขา — <b style="color:var(--text)">ล้านนาเดนทัล แล็บ</b> อยู่ห่างคลินิก 2 กม. รับส่งงานเองได้ทุกวัน',
+  docs: [['ทพญ.พิมพ์ลภัส',268,372,1180000,74],['ทพ.ธนกฤต',241,358,1120000,69],
+         ['ทพ.กิตติ (เสาร์)',46,78,320000,71]],
+  txs: [['ทันตกรรมทั่วไป (ตรวจ/อุด/ขูด)',412,610000],['จัดฟัน (ค่างวด + เริ่มเคส)',86,780000],
+        ['ครอบฟันเซรามิก',34,520000],['ฟอกสีฟัน / วีเนียร์',41,340000],
+        ['ผ่าฟันคุด / ถอนฟัน',58,230000],['รากเทียม',4,140000]],
+  chairNote: 'คิดจากชั่วโมงที่มีคนไข้จริงเทียบกับชั่วโมงเปิดทำการ (9 ชม./วัน × 90 วัน) — สาขาเพิ่งเปิด 3 เดือน',
+ },
+});
+const REV = R.rev, ACC = R.acc, NS = R.ns, CATS = R.cats, CHS = R.chs,
+      CHAIR = R.chair, LABQ = R.labq, DOCS = R.docs, TXS = R.txs;
 
 const mB = n => (n / 1000000).toFixed(2) + ' ล้าน';
 
@@ -998,18 +1291,17 @@ function hbars(host, rows, opt){
 }
 
 /* ── สรุปหัวรายงาน ── */
-const y0 = REV.slice(-4, -1).reduce((a,r) => a + r[1], 0);          /* พ.ค.–ก.ค. */
-const yPrev = REV.slice(-7, -4).reduce((a,r) => a + r[1], 0);       /* ก.พ.–เม.ย. */
-const growth = Math.round((y0 - yPrev) / yPrev * 1000) / 10;
+const y0 = REV.slice(-4, -1).reduce((a,r) => a + r[1], 0);   /* 3 เดือนเต็มล่าสุด */
+const growth = R.growth;
 
 const cards = [
-  ['รายได้ 90 วัน', mB(y0), '฿', (growth >= 0 ? '+' : '') + growth + '% เทียบ 90 วันก่อนหน้า', '#2E6BE6',
+  ['รายได้ 90 วัน', mB(y0), '฿', (growth >= 0 ? '+' : '') + growth + (BRANCH === 'aree' ? '% เทียบ 90 วันก่อนหน้า' : '% เติบโตต่อเดือนตั้งแต่เปิดสาขา'), '#2E6BE6',
    '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/>', growth >= 0 ? 'up' : 'down'],
-  ['คนไข้ใหม่', CHS.reduce((a,c) => a + c[1], 0), 'ราย', 'จาก 6 ช่องทาง · LINE นำ 27%', '#7A5AF0',
+  ['คนไข้ใหม่', CHS.reduce((a,c) => a + c[1], 0), 'ราย', 'จาก 6 ช่องทาง · ' + CHS[0][0] + ' นำ ' + Math.round(CHS[0][1] / CHS.reduce((a,c) => a + c[1], 0) * 100) + '%', '#7A5AF0',
    '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>', 'flat'],
-  ['อัตราตอบรับแผน', ACC[ACC.length-1][1], '%', 'ดีขึ้นจาก 54% เมื่อ 6 เดือนก่อน', '#2E9E63',
+  ['อัตราตอบรับแผน', ACC[ACC.length-1][1], '%', 'ดีขึ้นจาก ' + ACC[0][1] + '% เมื่อ ' + ACC.length + ' เดือนก่อน', '#2E9E63',
    '<path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/>', 'up'],
-  ['ไม่มาตามนัด', NS[NS.length-1][1], '%', 'ยังสูงกว่าเป้าหมาย 5%', '#D2504B',
+  ['ไม่มาตามนัด', NS[NS.length-1][1], '%', (NS[NS.length-1][1] > 5 ? 'ยังสูงกว่าเป้าหมาย 5%' : 'ต่ำกว่าเป้าหมาย 5% แล้ว'), '#D2504B',
    '<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/>', 'down'],
 ];
 $('#sum').innerHTML = cards.map(([lab,val,unit,sub,c,ico,dir]) => `
@@ -1023,11 +1315,12 @@ $('#sum').innerHTML = cards.map(([lab,val,unit,sub,c,ico,dir]) => `
 
 /* รายได้ */
 const rev12 = REV.reduce((a,r) => a + r[1], 0);
-$('#revHero').innerHTML = `<div class="n">${mB(REV[REV.length-2][1])}<small>฿ (ก.ค. 69)</small></div>
-  <div class="d up">+${Math.round((REV[10][1] - REV[9][1]) / REV[9][1] * 1000) / 10}% จากเดือนก่อน</div>`;
-$('#revNote').textContent = 'รวม 12 เดือน ' + mB(rev12) + ' ฿';
+const last = REV.length - 2, prev = REV[last - 1] ? REV[last - 1][1] : REV[last][1];
+$('#revHero').innerHTML = `<div class="n">${mB(REV[last][1])}<small>฿ (${REV[last][0]})</small></div>
+  <div class="d up">+${Math.round((REV[last][1] - prev) / prev * 1000) / 10}% จากเดือนก่อน</div>`;
+$('#revNote').textContent = 'รวม ' + REV.length + ' เดือน ' + mB(rev12) + ' ฿';
 barChart($('#revChart'), REV, (v, axis) => axis ? (v / 1000000).toFixed(1) + 'ล' : money(Math.round(v)) + ' ฿');
-$('#note').textContent = 'ข้อมูลถึง 17 ส.ค. 2569 10:42 น. · ส.ค. เป็นตัวเลขระหว่างเดือน';
+$('#note').textContent = BRANCHES[BRANCH].n + ' · ข้อมูลถึง 17 ส.ค. 2569 10:42 น. · ส.ค. เป็นตัวเลขระหว่างเดือน';
 
 /* กลุ่มหัตถการ */
 hbars($('#byCat'), CATS.map(([lb,v],i) => ({lb, v, c:CAT[i % CAT.length]})), {fmt:v => mB(v), share:true});
@@ -1048,7 +1341,8 @@ hbars($('#chairUse'), CHAIR.map(([lb,v]) => ({lb, v, c: v >= 80 ? '#D2504B' : v 
 /* คุณภาพงานแล็บ */
 hbars($('#labQ'), LABQ.map(([lb,ontime,remake]) => ({lb, v:ontime, c: ontime >= 90 ? '#2E9E63' : '#E0951E',
   sub:'แก้งาน ' + remake + '%'})), {fmt:v => v + '%'});
-$('#labNote').innerHTML = 'ตัวเลขคืออัตราส่งงานตรงเวลา — <b style="color:var(--text)">สยามเซรามิก แล็บ</b> ต่ำกว่าเกณฑ์ทั้งเรื่องตรงเวลาและอัตราแก้งาน ควรทบทวนสัดส่วนงานที่ส่ง';
+$('#labNote').innerHTML = R.labNote;
+$('#chairNote').textContent = R.chairNote;
 
 /* ผลงานทันตแพทย์ */
 $('#docBody').innerHTML = DOCS.map(([n,pat,hr,rev,acc]) => `
