@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ทุกสาขา · Zentr Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#06232C;
+  --ink-800:#0B3040;
+  --ink-700:#12414F;
+  --brand:#2E6BE6;
+  --brand-dark:#2054C4;
+  --aqua:#38C6DC;
+  --paper:#EDF1F7;
+  --white:#FFFFFF;
+  --amber:#F5B23F;
+  --green:#2E9E63;
+  --rose:#D2504B;
+  --violet:#7A5AF0;
+  --line:#06C755;
+  --fb:#1877F2;
+  --ig:#E1306C;
+  --text:#11222A;
+  --muted:#65787F;
+  --faint:#93A5AC;
+  --border:#DBE3E6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--paper);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ═══ layout ═══ */
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100dvh}
+
+/* ═══ sidebar ═══ */
+.side{
+  position:sticky;top:0;height:100dvh;
+  display:flex;flex-direction:column;
+  padding:22px 16px 18px;
+  background:
+    radial-gradient(600px 400px at 20% 4%, rgba(56,198,220,.13), transparent 60%),
+    linear-gradient(170deg,var(--ink-900),#0A2833);
+  color:#DCE9EC;overflow:hidden;
+}
+.side::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(400px 400px at 20% 10%,#000,transparent 75%);
+  pointer-events:none;
+}
+.side>*{position:relative;z-index:1}
+.brandbar{display:flex;align-items:center;gap:9px;padding:0 8px 4px}
+.brandbar .mark{height:32px;width:auto;display:block}
+.brandbar .wordmark{height:19px;width:auto;display:block}
+.edition{
+  margin:12px 8px 20px;padding:5px 9px;
+  border:1px solid rgba(56,198,220,.3);border-radius:6px;
+  background:rgba(56,198,220,.09);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua);
+  display:inline-block;
+}
+.navgrp{margin-bottom:16px}
+.navgrp h6{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:#61818B;padding:0 10px;margin-bottom:6px;font-weight:500;
+}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 10px;margin-bottom:2px;border-radius:9px;
+  color:#B6CBD1;text-decoration:none;font-size:14px;
+  transition:background .15s,color .15s;
+}
+.nav a svg{flex:none;opacity:.85}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.on{background:rgba(46,107,230,.26);color:#fff;box-shadow:inset 0 0 0 1px rgba(56,198,220,.28)}
+.nav a .pill{
+  margin-left:auto;min-width:20px;height:19px;padding:0 6px;
+  display:grid;place-items:center;border-radius:99px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:600;
+}
+.nav a .pill.q{background:rgba(255,255,255,.16)}
+
+.side-foot{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.09)}
+.branch{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;
+  background:rgba(255,255,255,.06);cursor:pointer;
+}
+.branch b{display:block;font-size:13px;color:#fff;font-weight:500}
+.branch span{font-size:11px;color:#7F9BA3}
+
+/* ═══ topbar ═══ */
+.top{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 26px;
+  background:rgba(237,241,247,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.top .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.search{
+  margin-left:auto;position:relative;width:250px;
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 36px;
+  font:inherit;font-size:13.5px;color:var(--text);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.search input::placeholder{color:#AFBFC5}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.iconbtn{
+  position:relative;width:38px;height:38px;flex:none;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.iconbtn:hover{color:var(--text);border-color:var(--faint)}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{
+  width:38px;height:38px;border-radius:11px;flex:none;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--aqua),var(--brand));
+  color:#04212A;font-weight:600;font-size:13px;cursor:pointer;
+}
+
+/* ═══ content grid ═══ */
+.wrap{padding:22px 26px 40px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;
+}
+.card>header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.card header .act{
+  margin-left:auto;font-size:12.5px;color:var(--brand);
+  text-decoration:none;font-weight:500;
+}
+.card header .act:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* KPI */
+.kpi .row{display:flex;align-items:flex-start;gap:10px}
+.kpi .ico{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+}
+.kpi .lab{font-size:12.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.kpi .val small{font-size:14px;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi .delta{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px}
+.up{color:var(--green)}.down{color:var(--rose)}.flat{color:var(--muted)}
+.spark{margin-top:10px;display:block}
+
+/* schedule timeline */
+.slot{
+  display:grid;grid-template-columns:56px 3px 1fr;gap:12px;align-items:stretch;
+}
+.slot+.slot{margin-top:2px}
+.slot .t{font-size:12px;color:var(--muted);padding-top:11px;text-align:right}
+.slot .bar{background:var(--border);border-radius:2px}
+.slot.now .bar{background:linear-gradient(180deg,var(--aqua),var(--brand))}
+.appt{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;margin:3px 0;
+  border:1px solid var(--border);border-radius:12px;
+  transition:border-color .15s,transform .12s;
+  cursor:pointer;background:#fff;
+}
+.appt:hover{border-color:var(--brand);transform:translateX(2px)}
+.appt .who b{display:block;font-size:13.5px;font-weight:500}
+.appt .who span{font-size:12px;color:var(--muted)}
+.appt .rm{
+  margin-left:auto;text-align:right;font-size:11.5px;color:var(--muted);white-space:nowrap;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;
+}
+.t-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.t-course{background:rgba(46,158,99,.11);color:var(--green)}
+.t-fu{background:rgba(245,178,63,.15);color:#A9761B}
+.t-wait{background:rgba(210,80,75,.10);color:var(--rose)}
+.ini{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:var(--paper);color:var(--ink-700);font-size:12.5px;font-weight:600;
+}
+.now-line{
+  display:flex;align-items:center;gap:9px;margin:8px 0 8px 68px;
+  font-size:11px;color:var(--brand);font-weight:500;
+}
+.now-line::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--brand),transparent)}
+.now-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(46,107,230,.18)}
+
+/* inbox */
+.msg{
+  display:flex;gap:11px;padding:11px 10px;border-radius:12px;cursor:pointer;
+  transition:background .15s;
+}
+.msg:hover{background:#F7F9FA}
+.msg+.msg{border-top:1px solid var(--border)}
+.ch{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  color:#fff;font-size:11px;font-weight:600;
+}
+.ch.line{background:var(--line)}
+.ch.fb{background:var(--fb)}
+.ch.ig{background:linear-gradient(140deg,#F9CE34,#EE2A7B,#6228D7)}
+.msg .bd{min-width:0;flex:1}
+.msg .hd{display:flex;align-items:baseline;gap:8px}
+.msg .hd b{font-size:13.5px;font-weight:500}
+.msg .hd time{margin-left:auto;font-size:11px;color:var(--faint);flex:none}
+.msg .tx{
+  font-size:12.5px;color:var(--muted);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ai{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:11px;color:var(--aqua);
+}
+.ai b{color:var(--brand);font-weight:500}
+.need{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:11px;color:var(--rose);font-weight:500;
+}
+
+/* course / follow-up lists */
+.lrow{display:flex;align-items:center;gap:11px;padding:11px 0}
+.lrow+.lrow{border-top:1px solid var(--border)}
+.lrow .bd{flex:1;min-width:0}
+.lrow b{font-size:13.5px;font-weight:500;display:block}
+.lrow span{font-size:12px;color:var(--muted)}
+.prog{height:5px;border-radius:3px;background:var(--paper);margin-top:7px;overflow:hidden}
+.prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--brand))}
+.prog i.warn{background:linear-gradient(90deg,var(--amber),#E08A1E)}
+.mini{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;font:inherit;font-size:12px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.mini:hover{border-color:var(--brand);color:var(--brand)}
+.mini.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.mini.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* channel donut legend */
+.legend{display:grid;gap:9px;margin-top:4px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.legend b{margin-left:auto;color:var(--text);font-weight:600}
+.sw{width:9px;height:9px;border-radius:3px;flex:none}
+
+.empty{font-size:12.5px;color:var(--faint);padding:14px 0;text-align:center}
+
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .search{width:auto;flex:1}
+  .top{padding:12px 16px}
+  .wrap{padding:16px 16px 32px}
+  .kpis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ═══ scheduler page ═══ */
+.toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.datenav{display:flex;align-items:center;gap:4px}
+.navbtn{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--border);border-radius:9px;
+  color:var(--muted);cursor:pointer;transition:.15s;
+}
+.navbtn:hover{border-color:var(--brand);color:var(--brand)}
+.today-lbl{padding:0 10px}
+.today-lbl b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.today-lbl span{display:block;font-size:11.5px;color:var(--muted)}
+
+.seg{display:flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  padding:6px 14px;border:0;border-radius:8px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.seg button.on{background:#fff;color:var(--text);font-weight:500;box-shadow:0 1px 3px rgba(6,35,44,.10)}
+.seg button:not(.on):hover{color:var(--text)}
+
+.filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+.fchip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.fchip:hover{border-color:var(--faint);color:var(--text)}
+.fchip.on{border-color:var(--brand);background:rgba(46,107,230,.07);color:var(--brand);font-weight:500}
+.fchip .sw{width:8px;height:8px;border-radius:50%}
+
+/* ── resource grid ── */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;padding:18px 26px 40px;align-items:start}
+.board{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+
+.res-head{
+  display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--border);position:sticky;top:132px;background:#fff;z-index:12;
+}
+.res-head .rh{padding:11px 12px;border-left:1px solid var(--border)}
+.res-head .rh:first-child{border-left:0}
+.res-head b{display:block;font-size:13px;font-weight:600}
+.res-head span{font-size:11.5px;color:var(--muted)}
+.res-head .load{
+  height:3px;border-radius:2px;background:var(--paper);margin-top:7px;overflow:hidden;
+}
+.res-head .load i{display:block;height:100%;border-radius:2px}
+
+.grid-body{display:grid;grid-template-columns:58px repeat(4,minmax(0,1fr));position:relative}
+.gutter{position:relative}
+.gutter .hr{
+  height:64px;border-top:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);
+  padding:3px 8px 0 0;text-align:right;
+}
+.gutter .hr:first-child{border-top:0}
+.col{position:relative;border-left:1px solid var(--border)}
+.col .hr{height:64px;border-top:1px solid var(--border)}
+.col .hr:first-child{border-top:0}
+.col .half{position:absolute;left:0;right:0;border-top:1px dashed #EEF1F3;pointer-events:none}
+
+.ev{
+  position:absolute;left:5px;right:5px;
+  border-radius:10px;padding:7px 9px;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+  transition:transform .12s,box-shadow .15s;
+  font-size:12px;line-height:1.4;
+}
+.ev:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(6,35,44,.45);z-index:5}
+.ev b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev span{display:block;color:inherit;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .tm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;opacity:.7;margin-top:2px}
+
+.e-blue{background:rgba(46,107,230,.10);border-color:#2E6BE6;color:#1B3F7A}
+.e-green{background:rgba(46,158,99,.11);border-color:#2E9E63;color:#1C5E3C}
+.e-violet{background:rgba(122,90,240,.11);border-color:#7A5AF0;color:#4A338F}
+.e-amber{background:rgba(245,178,63,.16);border-color:#E0951E;color:#7A5410}
+.e-rose{background:rgba(210,80,75,.10);border-color:#D2504B;color:#7E2B28}
+.e-hold{
+  background:repeating-linear-gradient(135deg,#F4F6F7,#F4F6F7 6px,#EAEEF0 6px,#EAEEF0 12px);
+  border-color:#C2CDD2;color:#65787F;
+}
+
+.nowbar{position:absolute;left:58px;right:0;height:0;z-index:8;pointer-events:none}
+.nowbar::before{
+  content:"";position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
+  background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.20);
+}
+.nowbar::after{content:"";position:absolute;left:0;right:0;top:0;border-top:1.5px solid var(--brand);opacity:.55}
+
+/* ── right rail ── */
+.rail{display:grid;gap:16px;position:sticky;top:148px}
+.pend{
+  display:flex;gap:10px;padding:11px 0;align-items:flex-start;
+}
+.pend+.pend{border-top:1px solid var(--border)}
+.pend .bd{flex:1;min-width:0}
+.pend b{display:block;font-size:13px;font-weight:500}
+.pend span{font-size:11.5px;color:var(--muted);display:block;margin-top:1px}
+.pend .btns{display:flex;gap:6px;margin-top:8px}
+.tiny{
+  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
+}
+.tiny:hover{border-color:var(--brand);color:var(--brand)}
+.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
+.tiny.ok:hover{background:var(--brand-dark);color:#fff}
+
+.util{display:grid;gap:11px}
+.util .u{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.util .u span{color:var(--muted);width:58px;flex:none}
+.util .u .bar{flex:1;height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.util .u .bar i{display:block;height:100%;border-radius:3px}
+.util .u b{font-size:12px;width:34px;text-align:right}
+
+@media (max-width:1180px){
+  .sched{grid-template-columns:1fr}
+  .rail{position:static}
+}
+@media (max-width:900px){
+  .toolbar{top:0;position:static;padding:12px 16px}
+  .res-head{position:static}
+  .sched{padding:14px 16px 32px}
+  .res-head,.grid-body{grid-template-columns:44px repeat(4,minmax(110px,1fr));min-width:560px}
+  .board{overflow-x:auto}
+  .filters{margin-left:0;width:100%}
+}
+
+/* ═══ courses & packages ═══ */
+.tabs{
+  display:flex;gap:2px;padding:0 26px;background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.tabs button{
+  padding:13px 16px;border:0;background:none;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:500}
+.tabs .n{
+  margin-left:6px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);
+}
+.tabs button.on .n{background:rgba(46,107,230,.12);color:var(--brand)}
+
+.pane{display:none}
+.pane.on{display:grid;gap:16px}
+
+.bar-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.bar-row .grow{flex:1}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:10px;
+  border:1px solid var(--border);background:#fff;
+  font:inherit;font-size:13.5px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:.15s;
+}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.btn.solid{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.solid:hover{background:var(--brand-dark);color:#fff}
+
+/* ── package catalog ── */
+.pkgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.pkg{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .15s,transform .12s;
+}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .hd{display:flex;align-items:flex-start;gap:11px}
+.pkg .ico{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center}
+.pkg h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.pkg .cat{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;gap:8px}
+.pkg .price b{font-size:23px;font-weight:600;letter-spacing:-.02em}
+.pkg .price s{font-size:13px;color:var(--faint)}
+.pkg .price .per{font-size:12px;color:var(--muted)}
+.pkg .facts{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.pkg .facts div{display:flex;align-items:center;gap:7px}
+.pkg .facts b{color:var(--text);font-weight:500}
+.pkg .ft{
+  display:flex;align-items:center;gap:8px;margin-top:auto;
+  padding-top:12px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.pkg .ft b{color:var(--text);font-weight:600}
+.badge{
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+}
+.b-hot{background:rgba(210,80,75,.10);color:var(--rose)}
+.b-new{background:rgba(122,90,240,.11);color:var(--violet)}
+.b-off{background:var(--paper);color:var(--muted)}
+
+/* ── data table ── */
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{
+  text-align:left;padding:0 12px 11px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;white-space:nowrap;
+}
+.tbl tbody tr{border-top:1px solid var(--border);transition:background .15s}
+.tbl tbody tr:hover{background:#F7F9FA}
+.tbl td{padding:13px 12px;font-size:13.5px;vertical-align:middle}
+.tbl .who{display:flex;align-items:center;gap:11px}
+.tbl .who b{font-weight:500;display:block}
+.tbl .who span{font-size:11.5px;color:var(--muted)}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.tbl .right{text-align:right}
+.usebar{width:110px}
+.usebar .prog{margin-top:0}
+.usebar span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:5px}
+.exp{font-size:12.5px;white-space:nowrap}
+.exp.warn{color:#A9761B;font-weight:500}
+.exp.bad{color:var(--rose);font-weight:500}
+
+/* ── expiry alert strip ── */
+.alert{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:rgba(245,178,63,.10);border:1px solid rgba(245,178,63,.35);
+}
+.alert .ic{color:#A9761B;flex:none;margin-top:1px}
+.alert b{display:block;font-size:13.5px;font-weight:600;color:#7A5410}
+.alert p{font-size:12.5px;color:#8A6420;line-height:1.6;margin-top:3px}
+.alert .btn{margin-left:auto;flex:none;height:34px}
+
+/* ── deferred revenue mini chart ── */
+.dr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:center}
+@media (max-width:900px){
+  .dr{grid-template-columns:1fr}
+  .tabs{padding:0 16px;overflow-x:auto;top:0;position:static}
+  .board-pad{overflow-x:auto}
+  .tbl{min-width:760px}
+}
+
+/* ═══ dental extras ═══ */
+.stage{display:flex;align-items:center;gap:0;margin-top:9px}
+.stage .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.stage .st .n{
+  width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border);font-size:10px;font-weight:600;background:#fff;
+}
+.stage .st.done{color:var(--green)}
+.stage .st.done .n{background:var(--green);border-color:var(--green);color:#fff}
+.stage .st.cur{color:var(--brand);font-weight:500}
+.stage .st.cur .n{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.13)}
+.stage .ln{flex:1;height:1.5px;background:var(--border);margin:0 7px;min-width:12px}
+.stage .ln.done{background:var(--green)}
+
+.ssoc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;
+  background:rgba(46,158,99,.11);color:var(--green);
+}
+.owe{color:var(--rose);font-weight:600}
+.paid{color:var(--green);font-weight:500}
+
+.toothchart{display:flex;gap:2px;flex-wrap:wrap;max-width:210px}
+.toothchart i{
+  width:13px;height:16px;border-radius:3px 3px 5px 5px;
+  background:var(--paper);border:1px solid var(--border);display:block;
+}
+.toothchart i.tx{background:rgba(46,107,230,.22);border-color:#2E6BE6}
+.toothchart i.pl{background:rgba(245,178,63,.30);border-color:#E0951E}
+.toothchart i.ms{background:repeating-linear-gradient(135deg,#EEF1F3,#EEF1F3 3px,#DDE3E6 3px,#DDE3E6 6px)}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+
+/* ═══ ตัวสลับสาขา ═══ */
+.branchsel{position:relative}
+.branchsel>summary{list-style:none;cursor:pointer}
+.branchsel>summary::-webkit-details-marker{display:none}
+.branchsel .branch{transition:background .15s}
+.branchsel[open] .branch{background:rgba(255,255,255,.12)}
+.branchsel[open] .cv{transform:rotate(180deg)}
+.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
+.branchmenu{
+  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
+  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
+  animation:bpop .16s ease-out;
+}
+@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.branchmenu h6{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#61818B;padding:6px 9px 5px;font-weight:500;
+}
+.branchmenu a{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
+}
+.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
+.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
+.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
+.branchmenu a span{flex:1;min-width:0}
+.branchmenu a.cur{color:#fff}
+.branchmenu a.cur svg{color:var(--aqua);flex:none}
+.branchmenu a.all{
+  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
+}
+.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
+.branchmenu a.all.on{background:rgba(56,198,220,.14)}
+
+/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
+.side .nav a{cursor:pointer}
+.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
+  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
+  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
+  animation:pop .3s cubic-bezier(.2,.9,.3,1);
+}
+.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
+  background:#fff;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
+  z-index:41;display:flex;flex-direction:column;
+}
+.drawer.on{transform:none}
+.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
+.dhead .x{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
+  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+}
+.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
+.dbody{padding:18px 22px;overflow-y:auto;flex:1}
+.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
+.drow:first-child{border-top:0}
+.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
+.drow .v{flex:1}
+.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
+.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.wide{width:100%;justify-content:center}
+.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
+.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.chcount{
+  margin-left:5px;padding:1px 6px;border-radius:99px;
+  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
+}
+.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
+@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.sum{grid-template-columns:1fr}}
+
+/* ═══ บริหารหลายสาขา ═══ */
+.wrap{padding:20px 26px 34px;display:grid;gap:16px}
+.btop{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px 26px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:67px;z-index:15;
+}
+.btop .note{font-size:12px;color:var(--muted);margin-left:auto;display:flex;align-items:center;gap:7px}
+
+/* การ์ดสาขา */
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.bcard{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:16px 17px;cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color .15s,transform .12s,box-shadow .15s;
+}
+.bcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bc)}
+.bcard:hover{border-color:var(--bc);transform:translateY(-2px);box-shadow:0 12px 26px -16px rgba(6,35,44,.55)}
+.bcard.flag{background:linear-gradient(180deg,rgba(210,80,75,.045),transparent 60%)}
+.bcard .hd{display:flex;align-items:flex-start;gap:11px}
+.bcard .hd h3{font-size:15px;font-weight:600;letter-spacing:-.015em}
+.bcard .hd .sub{font-size:11.5px;color:var(--muted);margin-top:3px}
+.bcard .hd .st{margin-left:auto;flex:none;text-align:right}
+.openst{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500}
+.openst i{width:7px;height:7px;border-radius:50%;display:block}
+.openst.open{color:var(--green)}
+.openst.shut{color:var(--faint)}
+
+.bmoney{display:flex;align-items:flex-end;gap:9px;margin-top:14px}
+.bmoney .n{font-size:23px;font-weight:600;letter-spacing:-.025em;line-height:1}
+.bmoney .n small{font-size:12px;font-weight:400;color:var(--muted);margin-left:3px}
+.bmoney .d{font-size:11.5px;padding-bottom:2px}
+
+.tgtbar{height:6px;border-radius:3px;background:var(--paper);overflow:hidden;margin-top:9px;position:relative}
+.tgtbar i{display:block;height:100%;border-radius:3px;background:var(--bc)}
+.tgtbar .goal{position:absolute;top:-3px;width:2px;height:12px;background:var(--ink-700);opacity:.4}
+.tgtlbl{display:flex;font-size:11px;color:var(--muted);margin-top:6px}
+.tgtlbl .r{margin-left:auto;font-family:"IBM Plex Mono",monospace}
+
+.bstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.bstat{background:var(--paper);border-radius:10px;padding:9px 10px}
+.bstat b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.bstat span{font-size:10.5px;color:var(--muted)}
+.bstat.warn b{color:var(--rose)}
+.bstat.good b{color:var(--green)}
+
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}
+.flagchip{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:6px;
+  font-size:11px;font-weight:500;background:rgba(210,80,75,.10);color:var(--rose);
+}
+.flagchip.ok{background:rgba(46,158,99,.11);color:var(--green)}
+.flagchip.warn{background:rgba(245,178,63,.16);color:#A9761B}
+
+/* ตารางเปรียบเทียบ */
+.tblwrap{overflow-x:auto}
+.tbl th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+.tbl th.sortable:hover{color:var(--brand)}
+.tbl th .ar{opacity:.45;font-size:9px}
+.tbl th.on{color:var(--brand)}
+.tbl th.on .ar{opacity:1}
+.bname{display:flex;align-items:center;gap:9px}
+.bname i{width:9px;height:9px;border-radius:3px;flex:none;display:block}
+.bname b{font-weight:500}
+.cell-bar{display:flex;align-items:center;gap:8px}
+.cell-bar .tr{width:56px;height:6px;border-radius:3px;background:var(--paper);overflow:hidden;flex:none}
+.cell-bar .tr i{display:block;height:100%;border-radius:3px}
+
+/* กราฟ */
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.gridline{stroke:var(--border);stroke-width:1}
+.axtx{font-size:10.5px;fill:var(--faint);font-family:"IBM Plex Mono",monospace}
+.axlb{font-size:11px;fill:var(--muted)}
+.dot{stroke:#fff;stroke-width:2}
+.tip{
+  position:absolute;pointer-events:none;opacity:0;transition:opacity .12s;
+  background:var(--ink-900);color:#EAF3F5;border-radius:9px;padding:8px 11px;
+  font-size:12px;line-height:1.55;white-space:nowrap;z-index:5;
+  box-shadow:0 10px 24px -12px rgba(6,35,44,.8);transform:translate(-50%,-118%);
+}
+.tip.on{opacity:1}
+.tip b{font-family:"IBM Plex Mono",monospace;font-weight:600}
+.tip .k{display:flex;align-items:center;gap:6px}
+.tip .k i{width:7px;height:7px;border-radius:2px;display:block}
+.legendrow{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--muted)}
+.legendrow div{display:flex;align-items:center;gap:6px}
+.legendrow i{width:9px;height:9px;border-radius:3px;display:block}
+
+.hb{display:grid;gap:11px}
+.hb .row{display:grid;grid-template-columns:132px minmax(0,1fr) 104px;gap:11px;align-items:center;font-size:12.5px}
+.hb .row .lb{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb .row .tr{height:9px;border-radius:5px;background:var(--paper);overflow:hidden}
+.hb .row .tr i{display:block;height:100%;border-radius:5px}
+.hb .row .vv{text-align:right;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px}
+.hb .row .vv small{display:block;font-size:10.5px;font-weight:400;color:var(--muted);font-family:"IBM Plex Sans Thai",sans-serif}
+
+/* ตารางเวรแพทย์ข้ามสาขา */
+.rota{width:100%;border-collapse:collapse}
+.rota th{
+  padding:0 6px 10px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;text-align:center;
+}
+.rota th:first-child{text-align:left;padding-left:0}
+.rota td{padding:9px 6px;border-top:1px solid var(--border);text-align:center;font-size:12px}
+.rota td:first-child{text-align:left;padding-left:0}
+.rota .who b{font-size:13px;font-weight:500;display:block}
+.rota .who span{font-size:11px;color:var(--muted)}
+.bp{
+  display:inline-block;padding:3px 7px;border-radius:6px;
+  font-size:10.5px;font-weight:600;color:#fff;white-space:nowrap;
+}
+.rota .off{color:var(--faint);font-size:11px}
+
+/* รายการแจ้งเตือนข้ามสาขา */
+.alerts{display:grid;gap:0}
+.alerts .a{display:flex;gap:11px;padding:12px 0;align-items:flex-start}
+.alerts .a+.a{border-top:1px solid var(--border)}
+.alerts .ic{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center}
+.alerts .bd{flex:1;min-width:0}
+.alerts .bd b{display:block;font-size:13px;font-weight:500}
+.alerts .bd span{display:block;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5}
+.alerts .go{flex:none}
+
+@media (max-width:1180px){.c2{grid-template-columns:1fr}}
+.c2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media (max-width:900px){
+  .btop{position:static;padding:11px 16px}
+  .wrap{padding:16px 16px 28px}
+  .bstats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tbl,.rota{min-width:760px}
+  .hb .row{grid-template-columns:104px minmax(0,1fr) 88px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brandbar"><img class="mark" src="assets/zentr-mark.png" alt=""><img class="wordmark" src="assets/zentr-wordmark.png" alt="Zentr"></div>
+    <span class="edition">Dental Edition</span>
+
+    <div class="navgrp"><h6>งานประจำวัน</h6><nav class="nav">
+      <a href="index.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>ภาพรวม</a>
+      <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
+      <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+    </nav></div>
+    <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
+      <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
+      <a href="treatment-plans.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2.5v5h5M9 13h6M9 17h4"/></svg>แผนการรักษา<span class="pill">6</span></a>
+      <a href="ortho.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18"/><rect x="6" y="6.5" width="4" height="4" rx="1"/><rect x="14" y="6.5" width="4" height="4" rx="1"/><rect x="6" y="13.5" width="4" height="4" rx="1"/><rect x="14" y="13.5" width="4" height="4" rx="1"/></svg>จัดฟัน</a>
+      <a href="lab.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.3 18a2 2 0 0 0 1.7 3h12a2 2 0 0 0 1.7-3l-5.2-8.8V3"/><path d="M8.2 3h7.6M7.4 14.5h9.2"/></svg>งานแล็บ<span class="pill q">4</span></a>
+      <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
+    </nav></div>
+    <div class="navgrp"><h6>บริหาร</h6><nav class="nav">
+      <a href="branches.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M10 21v-5h4v5"/></svg>ทุกสาขา<span class="pill q">5</span></a>
+      <a href="reports.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
+      <a href="settings.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
+    </nav></div>
+    <div class="side-foot">
+      <details class="branchsel">
+        <summary class="branch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <div><b>สาขาอารีย์</b><span>เปิด 09:00 – 20:00</span></div>
+          <svg class="cv" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="branchmenu">
+          <h6>สลับสาขาที่กำลังดูแล</h6>
+        <a href="index.html" class="cur"><span><b>สาขาอารีย์</b><i>เปิด 09:00 – 20:00</i></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></a>
+        <a href="branches.html?b=thonglor"><span><b>สาขาทองหล่อ</b><i>เปิด 10:00 – 20:00</i></span></a>
+        <a href="branches.html?b=ratchada"><span><b>สาขารัชดา</b><i>เปิด 09:00 – 20:00</i></span></a>
+        <a href="branches.html?b=bangna"><span><b>สาขาบางนา</b><i>เปิด 09:00 – 19:00</i></span></a>
+        <a href="branches.html?b=nimman"><span><b>สาขานิมมาน เชียงใหม่</b><i>เปิด 10:00 – 19:00</i></span></a>
+          <a href="branches.html" class="all" class="on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>
+            ภาพรวมทุกสาขา</a>
+        </div>
+      </details>
+    </div>
+  </aside>
+  <main>
+    <header class="top">
+      <div><h1>ทุกสาขา</h1><div class="sub" id="sub">ภาพรวมการดำเนินงานของทั้ง 5 สาขาในเครือ</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="ค้นหาสาขา หรือทันตแพทย์"></div>
+      <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+      <div class="avatar">ชช</div>
+    </header>
+    <div class="btop">
+      <div class="seg" id="range">
+        <button class="on" data-r="today">วันนี้</button>
+        <button data-r="mtd">เดือนนี้</button>
+        <button data-r="q">ไตรมาสนี้</button>
+      </div>
+      <div class="filters" style="margin-left:4px" id="regions">
+        <button class="fchip on" data-g="all">ทุกภูมิภาค</button>
+        <button class="fchip" data-g="bkk">กรุงเทพฯ<span class="chcount">4</span></button>
+        <button class="fchip" data-g="up">ต่างจังหวัด<span class="chcount">1</span></button>
+      </div>
+      <span class="note"><span class="livedot"></span>ข้อมูลสด ณ 17 ส.ค. 2569 10:42 น.</span>
+    </div>
+
+    <div class="wrap">
+      <section class="sum" id="sum"></section>
+
+      <section class="bgrid" id="cards"></section>
+
+      <div class="card">
+        <header>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <h2>เรื่องที่ต้องตัดสินใจข้ามสาขา</h2><span class="act" style="cursor:default" id="alertN"></span>
+        </header>
+        <div class="alerts" id="alerts"></div>
+      </div>
+
+      <div class="card">
+        <header>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          <h2>เปรียบเทียบทุกสาขา</h2>
+          <span class="act" style="cursor:default">คลิกหัวคอลัมน์เพื่อเรียงลำดับ</span>
+        </header>
+        <div class="tblwrap">
+          <table class="tbl" id="cmp">
+            <thead><tr>
+              <th class="sortable" data-k="name">สาขา</th>
+              <th class="sortable right" data-k="revToday">รายได้วันนี้</th>
+              <th class="sortable right" data-k="revMtd">รายได้เดือนนี้</th>
+              <th class="sortable right" data-k="queue">คิววันนี้</th>
+              <th class="sortable right" data-k="chairs">เก้าอี้</th>
+              <th class="sortable" data-k="util">การใช้เก้าอี้</th>
+              <th class="sortable right" data-k="acc">ตอบรับแผน</th>
+              <th class="sortable right" data-k="ns">ไม่มาตามนัด</th>
+              <th class="sortable right" data-k="due">ยอดค้าง</th>
+            </tr></thead>
+            <tbody id="cmpBody"></tbody>
+            <tfoot id="cmpFoot"></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <section class="c2">
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+            <h2>รายได้ 6 เดือนแยกสาขา</h2></header>
+          <div class="chart" id="trend"><div class="tip"></div></div>
+          <div class="legendrow" id="trendLeg"></div>
+        </div>
+
+        <div class="card">
+          <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h2>รายได้ต่อเก้าอี้ต่อวัน</h2></header>
+          <div class="hb" id="perChair"></div>
+          <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6" id="perChairNote"></p>
+        </div>
+      </section>
+
+      <div class="card">
+        <header><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>
+          <h2>ตารางเวรทันตแพทย์ข้ามสาขา</h2><span class="act" style="cursor:default">สัปดาห์นี้</span></header>
+        <div class="tblwrap">
+          <table class="rota" id="rota"></table>
+        </div>
+        <p style="margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.6">
+          ทันตแพทย์เฉพาะทางหมุนเวียนระหว่างสาขา — กดที่ชื่อเพื่อดูตารางเต็มในหน้านัดหมาย
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══════════════ บริหารหลายสาขา ═══════════════ */
+
+/* ── ตัวช่วยร่วมของทุกหน้า ── */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
+const money = n => Number(n).toLocaleString('en-US');
+const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
+const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
+const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
+const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
+
+let tSeq = 0;
+function toast(msg, undo){
+  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
+  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
+  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
+  $('#toasts').appendChild(el);
+  setTimeout(() => el.remove(), undo ? 7000 : 3000);
+}
+
+/* ลำดับสีประจำสาขา — ชุดเดียวกับที่ผ่านการตรวจ CVD ในหน้ารายงาน */
+const B = [
+  {id:'aree', name:'สาขาอารีย์', c:'#2E6BE6', region:'bkk', flag:1,
+   addr:'88/12 ซอยอารีย์ 4 พหลโยธิน พญาไท กทม.', tel:'02-115-8899', mgr:'ชัชชญา ธนกิจ',
+   since:'2565', hours:'09:00–20:00', open:1, chairs:4, docs:4, staff:9,
+   revToday:246800, target:240000, revMtd:3050000, queue:34, waiting:9, msg:14,
+   util:74, acc:62, ns:6.2, due:128500, labLate:1, newPat:78,
+   note:'สาขาแรกและเป็นศูนย์ฝึกอบรมของเครือ · สัดส่วนงานทันตกรรมทั่วไปสูง'},
+  {id:'thonglor', name:'สาขาทองหล่อ', c:'#2E9E63', region:'bkk',
+   addr:'55 ซอยทองหล่อ 13 สุขุมวิท วัฒนา กทม.', tel:'02-712-4400', mgr:'ณัฐริกา เพ็ญศรี',
+   since:'2566', hours:'10:00–20:00', open:1, chairs:5, docs:6, staff:12,
+   revToday:412500, target:360000, revMtd:4820000, queue:41, waiting:6, msg:22,
+   util:86, acc:68, ns:5.1, due:264000, labLate:3, newPat:104,
+   note:'ทำรายได้สูงสุดในเครือ · เน้นวีเนียร์ จัดฟันใส และรากเทียม'},
+  {id:'ratchada', name:'สาขารัชดา', c:'#7A5AF0', region:'bkk',
+   addr:'199 ถนนรัชดาภิเษก ดินแดง กทม.', tel:'02-641-7788', mgr:'พงศธร วิริยะ',
+   since:'2564', hours:'09:00–20:00', open:1, chairs:3, docs:3, staff:7,
+   revToday:128400, target:150000, revMtd:1640000, queue:38, waiting:14, msg:9,
+   util:91, acc:48, ns:9.4, due:82000, labLate:0, newPat:61,
+   note:'คนไข้ต่อวันสูงสุด แต่รายได้ต่อหัวต่ำ · สิทธิประกันสังคมกว่า 60%'},
+  {id:'bangna', name:'สาขาบางนา', c:'#E0951E', region:'bkk',
+   addr:'333 ถนนบางนา–ตราด กม.3 บางนา กทม.', tel:'02-398-2255', mgr:'สุภาวดี คงมั่น',
+   since:'2567', hours:'09:00–19:00', open:1, chairs:4, docs:4, staff:8,
+   revToday:184200, target:180000, revMtd:2280000, queue:29, waiting:5, msg:11,
+   util:68, acc:57, ns:7.8, due:96500, labLate:2, newPat:52,
+   note:'ฐานคนไข้ครอบครัวและเด็ก · มีคลินิกทันตกรรมเด็กแยกห้อง'},
+  {id:'nimman', name:'สาขานิมมาน เชียงใหม่', c:'#199FB4', region:'up',
+   addr:'12 ถนนนิมมานเหมินท์ ซอย 9 เมือง เชียงใหม่', tel:'053-218-990', mgr:'ธนกฤต แสนคำ',
+   since:'พ.ค. 2569', hours:'10:00–19:00', open:1, chairs:3, docs:2, staff:5,
+   revToday:76900, target:90000, revMtd:890000, queue:17, waiting:2, msg:7,
+   util:44, acc:71, ns:4.6, due:31000, labLate:0, newPat:38,
+   note:'สาขาใหม่ เปิดมา 3 เดือน · ยังรับคิวเพิ่มได้อีกมาก'},
+];
+const byId = id => B.find(x => x.id === id);
+
+/* รายได้ 6 เดือน (ล้านบาท) — ส.ค. เป็นตัวเลขระหว่างเดือน */
+const MONTHS = ['มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.'];
+const TREND = {
+  aree:     [4.86, 4.21, 4.74, 5.02, 5.28, 3.05],
+  thonglor: [6.20, 5.84, 6.42, 6.88, 7.15, 4.82],
+  ratchada: [2.35, 2.18, 2.42, 2.51, 2.66, 1.64],
+  bangna:   [3.10, 2.94, 3.28, 3.42, 3.61, 2.28],
+  nimman:   [null, null, 0.42, 0.71, 1.02, 0.89],
+};
+
+const ROTA = [
+  ['ทพ.กิตติ อารีย์วงศ์','จัดฟัน', ['aree','thonglor','aree','thonglor','aree','nimman',null]],
+  ['ทพ.ประวิทย์ สุขสันต์','ศัลยกรรม / รากเทียม', ['aree','aree','aree','bangna','bangna','ratchada',null]],
+  ['ทพญ.นภา ชูเกียรติ','ทันตกรรมทั่วไป', ['aree','aree','aree','aree','aree',null,null]],
+  ['ทพญ.อรอนงค์ พิพัฒน์','ทันตกรรมประดิษฐ์', ['aree','aree','bangna','aree','aree','aree',null]],
+  ['ทพญ.ณัฐชา ศรีสมบูรณ์','ทันตกรรมความงาม', ['thonglor','thonglor',null,'thonglor','thonglor','thonglor','thonglor']],
+  ['ทพ.วรุตม์ เกียรติกุล','ทันตกรรมเด็ก', [null,'bangna','bangna','bangna','bangna','bangna',null]],
+];
+const DAYS = ['จ','อ','พ','พฤ','ศ','ส','อา'];
+
+const ALERTS = [
+  {b:'ratchada', lv:'bad', t:'คิวรอเฉลี่ย 24 นาที — เกินเกณฑ์ของเครือ (15 นาที)',
+   d:'ใช้เก้าอี้ 91% ด้วยแพทย์เพียง 3 ท่าน · พิจารณาเพิ่มเก้าอี้ที่ 4 หรือย้ายคิวบางส่วนไปสาขาใกล้เคียง'},
+  {b:'thonglor', lv:'bad', t:'ยอดค้างชำระ 264,000 ฿ — สูงสุดในเครือ',
+   d:'ส่วนใหญ่เป็นงวดของเคสวีเนียร์และจัดฟันใส · ควรทบทวนเงื่อนไขมัดจำขั้นต่ำ'},
+  {b:'ratchada', lv:'warn', t:'อัตราตอบรับแผน 48% — ต่ำกว่าเป้าหมาย 70%',
+   d:'ต่ำกว่าค่าเฉลี่ยเครือ 13 จุด · แนะนำให้ทีมอารีย์ช่วยอบรมการนำเสนอแผน'},
+  {b:'thonglor', lv:'warn', t:'งานแล็บเลยกำหนดรับ 3 ชิ้น',
+   d:'ทั้ง 3 ชิ้นเป็นงานจากสยามเซรามิก แล็บ ซึ่งส่งตรงเวลาเพียง 81%'},
+  {b:'nimman', lv:'ok', t:'ใช้เก้าอี้เพียง 44% — ยังรับคิวได้อีกมาก',
+   d:'สาขาใหม่ 3 เดือน · เพิ่มงบโฆษณาในพื้นที่หรือจัดโปรตรวจฟันเปิดสาขาได้'},
+];
+
+const S = {sort:'revToday', dir:-1, region:'all', range:'today'};
+const shown = () => B.filter(x => S.region === 'all' || x.region === S.region);
+const mB = n => (n / 1000000).toFixed(2) + ' ล้าน';
+
+/* ── สรุปรวมเครือ ── */
+function renderSum(){
+  const r = shown();
+  const rev = r.reduce((a,x) => a + x.revToday, 0);
+  const mtd = r.reduce((a,x) => a + x.revMtd, 0);
+  const q = r.reduce((a,x) => a + x.queue, 0);
+  const due = r.reduce((a,x) => a + x.due, 0);
+  const chairs = r.reduce((a,x) => a + x.chairs, 0);
+  const util = Math.round(r.reduce((a,x) => a + x.util * x.chairs, 0) / chairs);
+  const newP = r.reduce((a,x) => a + x.newPat, 0);
+  const tgt = r.reduce((a,x) => a + x.target, 0);
+  const diff = Math.round((rev - tgt) / tgt * 1000) / 10;
+
+  const cards = [
+    ['รายได้รวมวันนี้', money(rev), '฿', (diff >= 0 ? '+' : '') + diff + '% เทียบเป้าหมายรวม ' + money(tgt), '#2E6BE6',
+     '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/>', diff >= 0 ? 'up' : 'down'],
+    ['คิววันนี้ทั้งเครือ', q, 'คิว', r.reduce((a,x) => a + x.waiting, 0) + ' คิวกำลังรออยู่ · ' + chairs + ' เก้าอี้', '#7A5AF0',
+     '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>', 'flat'],
+    ['คนไข้ใหม่เดือนนี้', newP, 'ราย', 'รายได้สะสมเดือนนี้ ' + mB(mtd) + ' ฿', '#2E9E63',
+     '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>', 'up'],
+    ['ยอดค้างชำระรวม', money(due), '฿', 'ใช้เก้าอี้เฉลี่ยทั้งเครือ ' + util + '%', '#D2504B',
+     '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>', 'flat'],
+  ];
+  $('#sum').innerHTML = cards.map(([lab,val,unit,sub,c,ico,dir]) => `
+    <div class="card kpi">
+      <div class="row"><div class="ico" style="background:${c}1A;color:${c}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ico}</svg></div>
+        <div><div class="lab">${lab}</div></div></div>
+      <div class="val">${val}<small>${unit}</small></div>
+      <div class="delta ${dir}">${sub}</div>
+    </div>`).join('');
+
+  $('#sub').textContent = `${r.length} สาขา · รายได้วันนี้รวม ${money(rev)} ฿ · คิว ${q} · ข้อความค้างตอบ ${r.reduce((a,x) => a + x.msg, 0)}`;
+}
+
+/* ── การ์ดรายสาขา ── */
+function flags(x){
+  const f = [];
+  if (x.waiting >= 12) f.push(['bad', 'คิวล้น ' + x.waiting + ' คิว']);
+  if (x.util >= 88) f.push(['bad', 'เก้าอี้เต็ม ' + x.util + '%']);
+  if (x.util < 55) f.push(['warn', 'เก้าอี้ว่าง ' + (100 - x.util) + '%']);
+  if (x.acc < 55) f.push(['warn', 'ตอบรับแผน ' + x.acc + '%']);
+  if (x.ns > 8) f.push(['warn', 'ไม่มาตามนัด ' + x.ns + '%']);
+  if (x.labLate) f.push(['bad', 'แล็บเลยกำหนด ' + x.labLate]);
+  if (!f.length) f.push(['ok', 'ทุกตัวชี้วัดปกติ']);
+  return f;
+}
+
+function renderCards(){
+  $('#cards').innerHTML = shown().map(x => {
+    const pct = Math.min(140, Math.round(x.revToday / x.target * 100));
+    const diff = Math.round((x.revToday - x.target) / x.target * 1000) / 10;
+    return `<div class="bcard${flags(x)[0][0] === 'bad' ? ' flag' : ''}" data-id="${x.id}" style="--bc:${x.c}">
+      <div class="hd">
+        <div>
+          <h3>${esc(x.name)}${x.flag ? ' <span class="chip" style="background:rgba(46,107,230,.10);color:var(--brand);font-size:10px">สาขาหลัก</span>' : ''}</h3>
+          <div class="sub">${x.chairs} เก้าอี้ · ทันตแพทย์ ${x.docs} ท่าน · ทีมงาน ${x.staff} คน</div>
+        </div>
+        <div class="st"><span class="openst ${x.open ? 'open' : 'shut'}"><i style="background:${x.open ? 'var(--green)' : 'var(--border)'}"></i>${x.open ? 'เปิดอยู่' : 'ปิด'}</span>
+          <div style="font-size:11px;color:var(--faint);margin-top:3px">${x.hours}</div></div>
+      </div>
+
+      <div class="bmoney">
+        <span class="n">${money(x.revToday)}<small>฿</small></span>
+        <span class="d ${diff >= 0 ? 'up' : 'down'}">${diff >= 0 ? '+' : ''}${diff}%</span>
+      </div>
+      <div class="tgtbar"><i style="width:${Math.min(100, pct)}%"></i><span class="goal" style="left:${100 / 1.4}%"></span></div>
+      <div class="tgtlbl">เทียบเป้าหมายวันนี้<span class="r">${money(x.target)} ฿</span></div>
+
+      <div class="bstats">
+        <div class="bstat"><b>${x.queue}</b><span>คิววันนี้</span></div>
+        <div class="bstat${x.waiting >= 12 ? ' warn' : ''}"><b>${x.waiting}</b><span>กำลังรอ</span></div>
+        <div class="bstat${x.util >= 88 ? ' warn' : x.util < 55 ? '' : ' good'}"><b>${x.util}%</b><span>ใช้เก้าอี้</span></div>
+      </div>
+
+      <div class="chips">${flags(x).map(([lv,t]) => `<span class="flagchip ${lv === 'bad' ? '' : lv}">${esc(t)}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+  $$('#cards .bcard').forEach(el => el.onclick = () => openDrawer(el.dataset.id));
+}
+
+/* ── ตารางเปรียบเทียบ ── */
+const COLS = {
+  revToday: x => x.revToday, revMtd: x => x.revMtd, queue: x => x.queue,
+  chairs: x => x.chairs, util: x => x.util, acc: x => x.acc, ns: x => x.ns,
+  due: x => x.due, name: x => x.name,
+};
+function renderCmp(){
+  const r = [...shown()].sort((a,b) => {
+    const va = COLS[S.sort](a), vb = COLS[S.sort](b);
+    return (typeof va === 'string' ? va.localeCompare(vb, 'th') : va - vb) * S.dir;
+  });
+  $$('#cmp th').forEach(th => {
+    const on = th.dataset.k === S.sort;
+    th.classList.toggle('on', on);
+    th.innerHTML = th.innerHTML.replace(/\s*<span class="ar">.*<\/span>/, '') +
+      (on ? ` <span class="ar">${S.dir < 0 ? '▼' : '▲'}</span>` : ' <span class="ar">↕</span>');
+  });
+
+  $('#cmpBody').innerHTML = r.map(x => `
+    <tr data-id="${x.id}" style="cursor:pointer">
+      <td><span class="bname"><i style="background:${x.c}"></i><b>${esc(x.name)}</b></span></td>
+      <td class="right num"><b>${money(x.revToday)}</b></td>
+      <td class="right num">${mB(x.revMtd)}</td>
+      <td class="right num">${x.queue}</td>
+      <td class="right num">${x.chairs}</td>
+      <td><span class="cell-bar"><span class="tr"><i style="width:${x.util}%;background:${x.util >= 88 ? 'var(--rose)' : x.util >= 65 ? 'var(--green)' : 'var(--amber)'}"></i></span>
+        <span class="num" style="font-size:12px">${x.util}%</span></span></td>
+      <td class="right num ${x.acc < 55 ? 'owe' : ''}">${x.acc}%</td>
+      <td class="right num ${x.ns > 8 ? 'owe' : ''}">${x.ns}%</td>
+      <td class="right num">${money(x.due)}</td>
+    </tr>`).join('');
+
+  const t = shown();
+  $('#cmpFoot').innerHTML = `<tr style="border-top:1.5px solid var(--border)">
+    <td style="font-weight:600">รวมทั้งเครือ</td>
+    <td class="right num"><b>${money(t.reduce((a,x) => a + x.revToday, 0))}</b></td>
+    <td class="right num">${mB(t.reduce((a,x) => a + x.revMtd, 0))}</td>
+    <td class="right num">${t.reduce((a,x) => a + x.queue, 0)}</td>
+    <td class="right num">${t.reduce((a,x) => a + x.chairs, 0)}</td>
+    <td class="num" style="font-size:12px">เฉลี่ย ${Math.round(t.reduce((a,x) => a + x.util * x.chairs, 0) / t.reduce((a,x) => a + x.chairs, 0))}%</td>
+    <td class="right num">${Math.round(t.reduce((a,x) => a + x.acc, 0) / t.length)}%</td>
+    <td class="right num">${(t.reduce((a,x) => a + x.ns, 0) / t.length).toFixed(1)}%</td>
+    <td class="right num">${money(t.reduce((a,x) => a + x.due, 0))}</td>
+  </tr>`;
+
+  $$('#cmpBody tr[data-id]').forEach(tr => tr.onclick = () => openDrawer(tr.dataset.id));
+}
+$$('#cmp th.sortable').forEach(th => th.onclick = () => {
+  if (S.sort === th.dataset.k) S.dir *= -1;
+  else { S.sort = th.dataset.k; S.dir = th.dataset.k === 'name' ? 1 : -1; }
+  renderCmp();
+});
+
+/* ── กราฟเส้นหลายสาขา ── */
+function renderTrend(){
+  const host = $('#trend'), r = shown();
+  const W = 560, H = 220, PL = 40, PR = 18, PT = 14, PB = 26;
+  const iw = W - PL - PR, ih = H - PT - PB;
+  const hi = Math.ceil(Math.max(...r.flatMap(b => TREND[b.id].filter(v => v != null)))) + 1;
+  const X = i => PL + iw * i / (MONTHS.length - 1);
+  const Y = v => PT + ih - ih * v / hi;
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="รายได้ 6 เดือนแยกสาขา">`;
+  for (let i = 0; i <= 4; i++){
+    const v = hi * i / 4, y = Y(v);
+    s += `<line class="gridline" x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" opacity="${i ? .55 : 1}"/>`;
+    s += `<text class="axtx" x="${PL - 8}" y="${y + 3.5}" text-anchor="end">${v.toFixed(0)}ล</text>`;
+  }
+  MONTHS.forEach((m,i) => {
+    s += `<text class="axlb" x="${X(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${m}</text>`;
+  });
+  r.forEach(b => {
+    const d = TREND[b.id];
+    const pts = d.map((v,i) => v == null ? null : `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).filter(Boolean).join(' ');
+    s += `<polyline points="${pts}" fill="none" stroke="${b.c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    d.forEach((v,i) => {
+      if (v == null) return;
+      s += `<circle class="dot" cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" fill="${b.c}"
+             data-b="${b.id}" data-i="${i}"><title>${esc(b.name)} ${MONTHS[i]}: ${v} ล้าน</title></circle>`;
+    });
+  });
+  s += '</svg>';
+  host.innerHTML = '<div class="tip"></div>' + s;
+
+  const tip = host.querySelector('.tip');
+  host.querySelectorAll('#trend [data-b]').forEach(c => {
+    c.addEventListener('mouseenter', () => {
+      const b = byId(c.dataset.b), i = +c.dataset.i;
+      const box = c.getBoundingClientRect(), h = host.getBoundingClientRect();
+      tip.innerHTML = `<span class="k"><i style="background:${b.c}"></i>${esc(b.name)}</span>${MONTHS[i]} · <b>${TREND[b.id][i]} ล้าน ฿</b>`;
+      tip.style.left = (box.left - h.left + box.width / 2) + 'px';
+      tip.style.top = (box.top - h.top) + 'px';
+      tip.classList.add('on');
+    });
+    c.addEventListener('mouseleave', () => tip.classList.remove('on'));
+  });
+
+  $('#trendLeg').innerHTML = r.map(b => `<div><i style="background:${b.c}"></i>${esc(b.name)}</div>`).join('');
+}
+
+/* ── รายได้ต่อเก้าอี้ ── */
+function renderPerChair(){
+  const r = [...shown()].map(x => ({...x, per: Math.round(x.revToday / x.chairs)}))
+    .sort((a,b) => b.per - a.per);
+  const mx = Math.max(...r.map(x => x.per));
+  $('#perChair').innerHTML = r.map(x => `
+    <div class="row" title="${esc(x.name)}: ${money(x.per)} ฿ ต่อเก้าอี้">
+      <span class="lb">${esc(x.name.replace('สาขา',''))}</span>
+      <span class="tr"><i style="width:${Math.round(x.per / mx * 100)}%;background:${x.c}"></i></span>
+      <span class="vv">${money(x.per)}<small>${x.chairs} เก้าอี้</small></span>
+    </div>`).join('');
+  const best = r[0], worst = r[r.length - 1];
+  $('#perChairNote').innerHTML =
+    `<b style="color:var(--text)">${esc(best.name)}</b> ทำรายได้ต่อเก้าอี้สูงกว่า <b style="color:var(--text)">${esc(worst.name)}</b> ` +
+    `${(best.per / worst.per).toFixed(1)} เท่า — ตัวเลขนี้บอกประสิทธิภาพได้ตรงกว่ารายได้รวม เพราะตัดขนาดสาขาออกไปแล้ว`;
+}
+
+/* ── ตารางเวรแพทย์ ── */
+function renderRota(){
+  $('#rota').innerHTML = `
+    <thead><tr><th>ทันตแพทย์</th>${DAYS.map(d => `<th>${d}</th>`).join('')}</tr></thead>
+    <tbody>${ROTA.map(([n,sp,days]) => `<tr>
+      <td class="who"><b>${esc(n)}</b><span>${esc(sp)}</span></td>
+      ${days.map(d => d ? `<td><span class="bp" style="background:${byId(d).c}">${esc(byId(d).name.replace('สาขา','').replace(' เชียงใหม่',''))}</span></td>`
+                        : '<td class="off">หยุด</td>').join('')}
+    </tr>`).join('')}</tbody>`;
+}
+
+/* ── แจ้งเตือนข้ามสาขา ── */
+function renderAlerts(){
+  const list = ALERTS.filter(a => S.region === 'all' || byId(a.b).region === S.region);
+  $('#alertN').textContent = list.filter(a => a.lv !== 'ok').length + ' เรื่องต้องจัดการ';
+  const ICO = {
+    bad:  ['rgba(210,80,75,.11)', 'var(--rose)', '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>'],
+    warn: ['rgba(245,178,63,.18)', '#A9761B', '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>'],
+    ok:   ['rgba(46,158,99,.11)', 'var(--green)', '<path d="M12 2.5 20 6v6c0 5-3.4 8.4-8 9.5C7.4 20.4 4 17 4 12V6Z"/><path d="m9 12 2 2 4-4"/>'],
+  };
+  $('#alerts').innerHTML = list.map((a,i) => {
+    const b = byId(a.b), [bg,fg,ico] = ICO[a.lv];
+    return `<div class="a">
+      <div class="ic" style="background:${bg};color:${fg}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ico}</svg></div>
+      <div class="bd"><b>${esc(a.t)}</b><span><span class="bname" style="display:inline-flex"><i style="background:${b.c}"></i>${esc(b.name)}</span> — ${esc(a.d)}</span></div>
+      <button class="mini go" data-b="${a.b}">ดูสาขา</button>
+    </div>`;
+  }).join('');
+  $$('#alerts .go').forEach(btn => btn.onclick = () => openDrawer(btn.dataset.b));
+}
+
+/* ── ลิ้นชักรายละเอียดสาขา ── */
+function openDrawer(id){
+  const x = byId(id); if (!x) return;
+  const diff = Math.round((x.revToday - x.target) / x.target * 1000) / 10;
+  $('#drawer').innerHTML = `
+    <div class="dhead">
+      <button class="x" id="dx" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="width:10px;height:10px;border-radius:3px;background:${x.c};display:block;flex:none"></span>
+        <b style="font-size:17px;font-weight:600;letter-spacing:-.015em">${esc(x.name)}</b>
+      </div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5">${esc(x.addr)}</div>
+      <div style="margin-top:10px;display:flex;gap:7px;flex-wrap:wrap">
+        <span class="openst ${x.open ? 'open' : 'shut'}"><i style="background:${x.open ? 'var(--green)' : 'var(--border)'}"></i>${x.open ? 'เปิดอยู่' : 'ปิด'} · ${x.hours}</span>
+      </div>
+    </div>
+    <div class="dbody">
+      <div class="bstats" style="grid-template-columns:repeat(3,1fr);margin:0 0 16px">
+        <div class="bstat"><b>${money(x.revToday)}</b><span>รายได้วันนี้ (฿)</span></div>
+        <div class="bstat"><b>${x.queue}</b><span>คิววันนี้</span></div>
+        <div class="bstat${x.util >= 88 ? ' warn' : ' good'}"><b>${x.util}%</b><span>ใช้เก้าอี้</span></div>
+      </div>
+
+      <div class="drow"><span class="k">ผู้จัดการสาขา</span><span class="v">${esc(x.mgr)}</span></div>
+      <div class="drow"><span class="k">โทรศัพท์</span><span class="v mono">${esc(x.tel)}</span></div>
+      <div class="drow"><span class="k">เปิดสาขาเมื่อ</span><span class="v">${esc(x.since)}</span></div>
+      <div class="drow"><span class="k">ทีมงาน</span><span class="v">ทันตแพทย์ ${x.docs} ท่าน · ทีมงาน ${x.staff} คน · ${x.chairs} เก้าอี้</span></div>
+      <div class="drow"><span class="k">เทียบเป้าหมาย</span><span class="v mono ${diff >= 0 ? 'paid' : 'owe'}">${diff >= 0 ? '+' : ''}${diff}% (เป้า ${money(x.target)} ฿)</span></div>
+      <div class="drow"><span class="k">รายได้เดือนนี้</span><span class="v mono">${mB(x.revMtd)} ฿</span></div>
+      <div class="drow"><span class="k">คนไข้ใหม่</span><span class="v">${x.newPat} ราย เดือนนี้</span></div>
+      <div class="drow"><span class="k">ตอบรับแผน</span><span class="v ${x.acc < 55 ? 'owe' : ''}">${x.acc}%</span></div>
+      <div class="drow"><span class="k">ไม่มาตามนัด</span><span class="v ${x.ns > 8 ? 'owe' : ''}">${x.ns}%</span></div>
+      <div class="drow"><span class="k">ข้อความค้างตอบ</span><span class="v">${x.msg} แชท</span></div>
+      <div class="drow"><span class="k">ยอดค้างชำระ</span><span class="v mono owe">${money(x.due)} ฿</span></div>
+
+      <div style="margin-top:16px">
+        <div style="font-size:12.5px;color:var(--muted);margin-bottom:7px">สิ่งที่ต้องดู</div>
+        <div class="chips" style="margin-top:0">${flags(x).map(([lv,t]) => `<span class="flagchip ${lv === 'bad' ? '' : lv}">${esc(t)}</span>`).join('')}</div>
+      </div>
+
+      <p style="margin-top:16px;font-size:13px;line-height:1.65;color:var(--text)">${esc(x.note)}</p>
+    </div>
+    <div class="dfoot">
+      <button class="btn solid wide" id="denter">เข้าใช้งานสาขานี้</button>
+      <div class="pair">
+        <button class="btn" id="drep">รายงานสาขา</button>
+        <button class="btn" id="dcall">โทรหาผู้จัดการ</button>
+      </div>
+    </div>`;
+  $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
+  $('#dx').onclick = closeDrawer;
+  $('#denter').onclick = () => {
+    if (x.id === 'aree') return location.assign('index.html');
+    toast('สลับไปดูแล ' + x.name + ' — เดโมยังมีข้อมูลจริงเฉพาะสาขาอารีย์');
+  };
+  $('#drep').onclick = () => location.assign('reports.html');
+  $('#dcall').onclick = () => toast('โทรหา ' + x.mgr + ' · ' + x.tel);
+}
+function closeDrawer(){ $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); }
+$('#scrim').onclick = closeDrawer;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+/* ── ตัวกรอง ── */
+$$('#regions .fchip').forEach(b => b.onclick = () => {
+  $$('#regions .fchip').forEach(o => o.classList.toggle('on', o === b));
+  S.region = b.dataset.g; render();
+});
+$$('#range button').forEach(b => b.onclick = () => {
+  $$('#range button').forEach(o => o.classList.toggle('on', o === b));
+  S.range = b.dataset.r;
+  toast('ตัวเลขอ้างอิงช่วง ' + b.textContent + ' — เดโม');
+});
+$('#q').oninput = e => {
+  const v = e.target.value.trim().toLowerCase();
+  $$('#cards .bcard').forEach(el => {
+    const x = byId(el.dataset.id);
+    el.style.display = !v || (x.name + ' ' + x.mgr + ' ' + x.addr).toLowerCase().includes(v) ? '' : 'none';
+  });
+};
+$('#bell').onclick = () => toast(ALERTS.filter(a => a.lv !== 'ok').length + ' เรื่องข้ามสาขารอการตัดสินใจ');
+
+/* เปิดลิ้นชักสาขาที่ระบุมาทาง ?b= (มาจากตัวสลับสาขาในเมนู) */
+function render(){ renderSum(); renderCards(); renderCmp(); renderTrend(); renderPerChair(); renderRota(); renderAlerts(); }
+render();
+
+const qb = new URLSearchParams(location.search).get('b');
+if (qb && byId(qb)) openDrawer(qb);
+</script>
+</body>
+</html>
+
