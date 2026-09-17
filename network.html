@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>คิววันนี้ · Zentr Dental</title>
+<title>ภาพรวมเครือคลินิก · Zentr Dental</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1102,252 +1102,6 @@ body{
 @keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
 @media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.sum{grid-template-columns:1fr}}
-
-/* ═══ ตัวสลับสาขา ═══ */
-.branchsel{position:relative}
-.branchsel>summary{list-style:none;cursor:pointer}
-.branchsel>summary::-webkit-details-marker{display:none}
-.branchsel .branch{transition:background .15s}
-.branchsel[open] .branch{background:rgba(255,255,255,.12)}
-.branchsel[open] .cv{transform:rotate(180deg)}
-.branch .cv{transition:transform .18s;margin-left:auto;flex:none}
-.branchmenu{
-  position:absolute;left:0;right:0;bottom:calc(100% + 8px);
-  background:#0E3341;border:1px solid rgba(255,255,255,.14);border-radius:12px;
-  padding:7px;box-shadow:0 18px 40px -16px rgba(0,0,0,.75);
-  animation:bpop .16s ease-out;
-}
-@keyframes bpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.branchmenu h6{
-  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
-  color:#61818B;padding:6px 9px 5px;font-weight:500;
-}
-.branchmenu a{
-  display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
-  color:#B6CBD1;text-decoration:none;font-size:13px;transition:background .13s,color .13s;
-}
-.branchmenu a:hover{background:rgba(255,255,255,.08);color:#fff}
-.branchmenu a b{display:block;font-size:12.5px;font-weight:500}
-.branchmenu a i{display:block;font-style:normal;font-size:10.5px;color:#7F9BA3;margin-top:1px}
-.branchmenu a span{flex:1;min-width:0}
-.branchmenu a.cur{color:#fff}
-.branchmenu a.cur svg{color:var(--aqua);flex:none}
-.branchmenu a.all{
-  margin-top:5px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
-  border-radius:0 0 8px 8px;color:var(--aqua);font-weight:500;
-}
-.branchmenu a.all:hover{background:rgba(56,198,220,.12);color:var(--aqua)}
-.branchmenu a.all.on{background:rgba(56,198,220,.14)}
-.branchmenu a .ck{visibility:hidden;flex:none;color:var(--aqua)}
-.branchmenu a em{
-  flex:none;font-style:normal;font-size:10px;color:#61818B;
-  border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:1px 5px;
-}
-
-/* ═══ หน้าจอย่อย (modal) ที่ใช้ร่วมกันทุกหน้า ═══ */
-.sheet{
-  position:fixed;inset:0;z-index:55;display:grid;place-items:center;padding:20px;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-}
-.sheet.on{opacity:1;pointer-events:auto}
-.sheet .sbg{position:absolute;inset:0;background:rgba(6,35,44,.42)}
-.sbox{
-  position:relative;width:100%;max-width:560px;max-height:92dvh;
-  background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);
-  display:flex;flex-direction:column;overflow:hidden;
-  transform:translateY(12px) scale(.985);transition:transform .22s cubic-bezier(.3,.9,.3,1);
-}
-.sbox.wide{max-width:720px}
-.sheet.on .sbox{transform:none}
-.shead{padding:18px 22px 15px;border-bottom:1px solid var(--border);position:relative;flex:none}
-.shead h2{font-size:17px;font-weight:600;letter-spacing:-.015em}
-.shead p{font-size:12.5px;color:var(--muted);margin-top:3px}
-.shead .x{
-  position:absolute;top:15px;right:16px;width:31px;height:31px;display:grid;place-items:center;
-  border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--muted);cursor:pointer;
-}
-.shead .x:hover{border-color:var(--rose);color:var(--rose)}
-.sbody{padding:18px 22px;overflow-y:auto;flex:1}
-.sfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none}
-.sfoot .grow{flex:1}
-.sfoot .note{font-size:12px;color:var(--muted)}
-
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.sgrid .full{grid-column:1/-1}
-.sf label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
-.sf label i{color:var(--rose);font-style:normal;margin-left:2px}
-.sf input,.sf select,.sf textarea{
-  width:100%;height:42px;padding:0 12px;font:inherit;font-size:14px;color:var(--text);
-  background:#FBFCFC;border:1.5px solid var(--border);border-radius:10px;
-  transition:border-color .15s,box-shadow .15s,background .15s;
-}
-.sf textarea{height:78px;padding:10px 12px;resize:vertical;line-height:1.55}
-.sf select{cursor:pointer;appearance:none;
-  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2365787F' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
-.sf input:focus,.sf select:focus,.sf textarea:focus{
-  outline:none;background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.12)}
-.sf.bad input,.sf.bad select,.sf.bad textarea{border-color:var(--rose)}
-.sf .hint{margin-top:6px;font-size:11.5px;color:var(--faint)}
-.sf .err{margin-top:6px;font-size:12px;color:var(--rose);display:none}
-.sf.bad .err{display:block}
-.ssec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
-  font-weight:600;margin:20px 0 11px}
-.ssec:first-child{margin-top:0}
-.srow{display:flex;gap:12px;padding:10px 0;font-size:13px;border-top:1px solid var(--border)}
-.srow:first-child{border-top:0}
-.srow .k{color:var(--muted);width:118px;flex:none;font-size:12.5px}
-.srow .v{flex:1}
-.stotal{
-  display:flex;align-items:baseline;gap:10px;padding:13px 15px;margin-top:14px;
-  background:var(--paper);border-radius:12px;
-}
-.stotal .k{font-size:12.5px;color:var(--muted)}
-.stotal .v{margin-left:auto;font-size:20px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:-.02em}
-.spick{display:flex;gap:7px;flex-wrap:wrap}
-.spick button{
-  padding:8px 13px;border:1.5px solid var(--border);border-radius:10px;background:#FBFCFC;
-  font:inherit;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.14s;
-}
-.spick button:hover{border-color:var(--faint);color:var(--text)}
-.spick button.on{border-color:var(--brand);background:rgba(46,107,230,.08);color:var(--brand);font-weight:500}
-@media (max-width:640px){.sgrid{grid-template-columns:1fr}}
-
-/* ═══ ส่วนร่วมของหน้าใหม่ ═══ */
-.side .nav a{cursor:pointer}
-.toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center}
-.toast{
-  display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:11px;
-  background:var(--ink-900);color:#EAF3F5;font-size:13.5px;
-  box-shadow:0 12px 30px -12px rgba(6,35,44,.8);
-  animation:pop .3s cubic-bezier(.2,.9,.3,1);
-}
-.toast button{background:none;border:0;color:var(--aqua);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0 0 0 4px}
-@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
-.scrim{position:fixed;inset:0;background:rgba(6,35,44,.34);opacity:0;pointer-events:none;transition:opacity .22s;z-index:40}
-.scrim.on{opacity:1;pointer-events:auto}
-.drawer{
-  position:fixed;top:0;right:0;height:100dvh;width:400px;max-width:94vw;
-  background:#fff;border-left:1px solid var(--border);
-  transform:translateX(100%);transition:transform .26s cubic-bezier(.3,.9,.3,1);
-  z-index:41;display:flex;flex-direction:column;
-}
-.drawer.on{transform:none}
-.dhead{padding:20px 22px 16px;border-bottom:1px solid var(--border);position:relative;flex:none}
-.dhead .x{
-  position:absolute;top:16px;right:16px;width:32px;height:32px;
-  display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;
-  background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
-}
-.dhead .x:hover{border-color:var(--rose);color:var(--rose)}
-.dbody{padding:18px 22px;overflow-y:auto;flex:1}
-.drow{display:flex;gap:12px;padding:11px 0;font-size:13.5px;border-top:1px solid var(--border)}
-.drow:first-child{border-top:0}
-.drow .k{color:var(--muted);width:100px;flex:none;font-size:12.5px}
-.drow .v{flex:1}
-.dfoot{padding:16px 22px;border-top:1px solid var(--border);display:grid;gap:8px;flex:none}
-.dfoot .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btn.wide{width:100%;justify-content:center}
-.btn.danger{border-color:rgba(210,80,75,.4);color:var(--rose)}
-.btn.danger:hover{background:rgba(210,80,75,.07);border-color:var(--rose);color:var(--rose)}
-
-.ch.web{background:var(--ink-700)}
-.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
-.chcount{
-  margin-left:5px;padding:1px 6px;border-radius:99px;
-  background:var(--paper);font-size:11px;color:var(--muted);font-weight:500;
-}
-.fchip.on .chcount{background:rgba(46,107,230,.14);color:var(--brand)}
-.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.livedot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:blip 2s ease-in-out infinite}
-@keyframes blip{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,158,99,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(46,158,99,0)}}
-@media (max-width:1180px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:900px){.sum{grid-template-columns:1fr}}
-
-/* ═══ คิววันนี้ ═══ */
-.qtop{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:12px 26px;background:#fff;border-bottom:1px solid var(--border);
-  position:sticky;top:67px;z-index:15;
-}
-.clock{display:flex;align-items:baseline;gap:8px;font-family:"IBM Plex Mono",monospace}
-.clock b{font-size:22px;font-weight:500;letter-spacing:-.01em}
-.clock span{font-size:11.5px;color:var(--muted)}
-.qstats{display:flex;gap:22px;padding-left:18px;border-left:1px solid var(--border);flex-wrap:wrap}
-.qstat b{display:block;font-size:19px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
-.qstat span{font-size:11.5px;color:var(--muted)}
-.qstat.warn b{color:var(--rose)}
-.qstat.good b{color:var(--green)}
-
-.board-wrap{padding:18px 26px 30px;display:grid;gap:16px}
-.cols5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;align-items:start}
-.qcol{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);display:flex;flex-direction:column;overflow:hidden}
-.qcol>h3{
-  display:flex;align-items:center;gap:8px;padding:12px 14px;
-  font-size:13px;font-weight:600;border-bottom:1px solid var(--border);
-}
-.qcol>h3 .dt{width:8px;height:8px;border-radius:50%;flex:none}
-.qcol>h3 .n{margin-left:auto;font-size:11.5px;color:var(--muted);font-weight:500}
-.qcol .stack{padding:11px;display:grid;gap:10px;min-height:88px}
-
-.qc{
-  border:1px solid var(--border);border-radius:13px;padding:11px 12px;
-  cursor:pointer;transition:border-color .15s,transform .12s,box-shadow .15s;background:#fff;
-}
-.qc:hover{border-color:var(--brand);transform:translateY(-1px);box-shadow:0 8px 18px -12px rgba(6,35,44,.5)}
-.qc.late{border-color:rgba(210,80,75,.5);background:rgba(210,80,75,.035)}
-.qc .r1{display:flex;align-items:center;gap:9px}
-.qc .ini{width:30px;height:30px;border-radius:9px;font-size:12px}
-.qc .nm{min-width:0;flex:1}
-.qc .nm b{display:block;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.qc .nm span{font-size:11px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
-.qc .tx{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
-.qc .r3{display:flex;align-items:center;gap:6px;margin-top:9px;flex-wrap:wrap}
-.qc .r4{display:flex;gap:6px;margin-top:10px}
-.qc .r4 .tiny{flex:1;justify-content:center;text-align:center}
-.slotchip{
-  display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:6px;
-  background:var(--paper);color:var(--muted);font-size:10.5px;font-weight:500;
-  font-family:"IBM Plex Mono",monospace;
-}
-.waited{
-  display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;
-  font-family:"IBM Plex Mono",monospace;margin-left:auto;
-}
-.waited.ok{color:var(--green)}
-.waited.warn{color:#A9761B}
-.waited.bad{color:var(--rose)}
-
-.tiny{
-  padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:#fff;
-  font:inherit;font-size:11.5px;font-weight:500;color:var(--text);cursor:pointer;transition:.15s;
-}
-.tiny:hover{border-color:var(--brand);color:var(--brand)}
-.tiny.ok{background:var(--brand);border-color:var(--brand);color:#fff}
-.tiny.ok:hover{background:var(--brand-dark);color:#fff}
-.colempty{padding:26px 8px;text-align:center;color:var(--faint);font-size:12px}
-.morenote{padding:0 11px 12px;font-size:11.5px;color:var(--faint);text-align:center}
-
-.chairs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.chair{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r-md);padding:13px 14px;
-}
-.chair.busy{border-color:rgba(46,107,230,.45);background:rgba(46,107,230,.045)}
-.chair h4{font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px}
-.chair h4 .dt{width:7px;height:7px;border-radius:50%;background:var(--border)}
-.chair.busy h4 .dt{background:var(--brand);box-shadow:0 0 0 3px rgba(46,107,230,.18)}
-.chair p{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.5}
-.chair b{color:var(--text);font-weight:600}
-.chair .free{color:var(--faint);font-size:12px;margin-top:7px}
-
-@media (max-width:1320px){.cols5{grid-template-columns:repeat(3,minmax(0,1fr))}.chairs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:900px){
-  .qtop{position:static;padding:11px 16px}
-  .board-wrap{padding:14px 16px 26px}
-  .cols5{grid-template-columns:1fr}
-  .chairs{grid-template-columns:1fr}
-}
 </style>
 <script>
 /* ── ชั้นสลับสาขา (ทำงานก่อนสคริปต์ของหน้า) ── */
@@ -1387,6 +1141,193 @@ body{
   });
 })();
 </script>
+<style>
+/* ═══ network / executive view — scoped under #nwroot ═══ */
+#nwroot{
+  --brand:#158066; --brand-deep:#0f5f4b; --brand-soft:#e2f1ec; --mint:#bfe0d6;
+  --navy:#16224c; --navy-2:#12414f;
+  --ink:#112b25; --ink-2:#2f463f; --muted:#66776f;
+  --surface:#ffffff; --surface-soft:#f4f8f6;
+  --warning:#a9781f; --warning-soft:#f8eed6;
+  --danger:#a9463d; --danger-soft:#f6e4e1;
+  --info:#43708f; --info-soft:#e9f0f5;
+  --c-collect:#0d8768; --c-out:#c8871a;
+  --border:#dbe5e0; --border-strong:#c6d4ce;
+  --shadow:0 18px 44px rgba(15,40,33,.09); --shadow-soft:0 6px 20px rgba(15,40,33,.06);
+  --radius-lg:16px; --radius-md:12px; --radius-sm:8px;
+  color:var(--ink); font-variant-numeric:tabular-nums; display:grid; gap:16px;
+}
+#nwroot h1,#nwroot h2,#nwroot h3,#nwroot p{margin-top:0}
+#nwroot h2{font-size:16px;line-height:1.25;letter-spacing:-.025em;margin-bottom:4px;font-weight:700}
+#nwroot h3{font-size:14px;margin-bottom:2px}
+#nwroot button,#nwroot input,#nwroot select{font:inherit}
+#nwroot button{cursor:pointer}
+
+/* hero band — reference-inspired navy + teal */
+#nwroot .nw-hero{position:relative;overflow:hidden;border-radius:18px;padding:24px 26px;color:#eaf5f1;
+  background:radial-gradient(560px 300px at 88% -20%,rgba(21,128,102,.55),transparent 60%),linear-gradient(118deg,var(--navy),var(--navy-2));
+  box-shadow:var(--shadow-soft)}
+#nwroot .nw-hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(420px 300px at 85% 0,#000,transparent 72%);pointer-events:none}
+#nwroot .nw-hero-in{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:22px;flex-wrap:wrap}
+#nwroot .nw-eyebrow{color:#7fe0c6;font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px}
+#nwroot .nw-hero h1{font-size:clamp(23px,2.6vw,31px);line-height:1.14;letter-spacing:-.03em;margin:9px 0 7px;color:#fff}
+#nwroot .nw-hero p{color:#bcd6cd;font-size:12.5px;max-width:560px}
+#nwroot .nw-hero-actions{display:flex;gap:8px;flex-wrap:wrap}
+#nwroot .nw-chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#eaf5f1;border-radius:99px;padding:6px 13px;font-size:11px;font-weight:700}
+#nwroot .nw-chip b{color:#7fe0c6}
+
+/* tabs */
+#nwroot .nw-tabs{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--border);background:var(--surface);border-radius:12px;box-shadow:var(--shadow-soft)}
+#nwroot .nw-tab{border:0;background:transparent;color:var(--muted);font-weight:700;font-size:13px;padding:8px 16px;border-radius:9px;display:inline-flex;align-items:center;gap:7px}
+#nwroot .nw-tab:hover{color:var(--ink);background:var(--surface-soft)}
+#nwroot .nw-tab.active{background:var(--navy);color:#fff}
+#nwroot [data-panel]{display:grid;gap:16px}
+#nwroot [data-panel][hidden]{display:none}
+
+/* buttons */
+#nwroot .primary-btn,#nwroot .secondary-btn{border:1px solid transparent;border-radius:10px;min-height:38px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;white-space:nowrap;font-weight:800;font-size:12.5px}
+#nwroot .primary-btn{background:var(--brand);color:#fff;box-shadow:0 6px 16px rgba(21,128,102,.18)}
+#nwroot .primary-btn:hover{background:var(--brand-deep)}
+#nwroot .secondary-btn{background:var(--surface);color:var(--ink-2);border-color:var(--border);font-weight:700}
+#nwroot .secondary-btn:hover{border-color:var(--brand);color:var(--brand-deep)}
+#nwroot .text-btn{background:transparent;color:var(--brand-deep);border:0;padding:0;font-weight:800;font-size:12px}
+#nwroot .text-btn:hover{color:var(--ink)}
+#nwroot .action-link{color:var(--brand-deep);font-size:12px;font-weight:800;border:0;background:transparent;padding:0;display:inline-flex;align-items:center;gap:5px}
+#nwroot .action-link:hover{color:var(--ink)}
+
+/* context banner + filter row */
+#nwroot .context-banner{display:flex;align-items:center;gap:10px;border:1px solid #c9e8dc;background:#effaf6;color:#286451;padding:10px 13px;border-radius:11px;font-size:12px}
+#nwroot .context-banner strong{font-weight:900}
+#nwroot .context-banner .context-meta{margin-left:auto;color:#5e8276;font-size:11px}
+#nwroot .status-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:0 0 8px}
+#nwroot .exec-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#nwroot .exec-toolbar-copy{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px}
+#nwroot .exec-toolbar-copy strong{color:var(--ink-2);font-size:12px}
+#nwroot .exec-toolbar-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#nwroot .filter-select{min-height:36px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--ink-2);padding:0 10px}
+#nwroot .updated{color:var(--muted);font-size:11px;display:inline-flex;align-items:center;gap:6px}
+
+/* metrics */
+#nwroot .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+#nwroot .metric-grid.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
+#nwroot .metric-card{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius-md);padding:16px;text-align:left;box-shadow:var(--shadow-soft);transition:border-color .18s,transform .18s,box-shadow .18s}
+#nwroot .metric-card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:var(--shadow)}
+#nwroot .metric-top{display:flex;justify-content:space-between;gap:8px;align-items:center;color:var(--muted);font-size:11px}
+#nwroot .metric-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;color:var(--brand);background:var(--brand-soft)}
+#nwroot .metric-value{font-size:27px;font-weight:900;letter-spacing:-.05em;line-height:1.05;margin:14px 0 5px}
+#nwroot .metric-note{color:var(--muted);font-size:11px;min-height:28px}
+#nwroot .metric-note strong{color:var(--brand-deep)}
+#nwroot .section-kicker{color:var(--muted);font-size:11px}
+
+/* cards + grids */
+#nwroot .grid-2{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:16px}
+#nwroot .grid-2.even{grid-template-columns:1fr 1fr}
+#nwroot .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft)}
+#nwroot .card-pad{padding:19px}
+#nwroot .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+#nwroot .card-head p{color:var(--muted);font-size:12px;margin:3px 0 0}
+#nwroot .exec-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+#nwroot .exec-card-head h2{margin:0;font-size:15px;letter-spacing:-.02em}
+#nwroot .exec-card-head p{margin:4px 0 0;color:var(--muted);font-size:10px}
+
+/* badge + status */
+#nwroot .badge,#nwroot .status{display:inline-flex;align-items:center;gap:5px;min-height:23px;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:800;white-space:nowrap}
+#nwroot .badge{background:var(--surface-soft);border:1px solid var(--border);color:var(--muted)}
+#nwroot .status.confirmed,#nwroot .status.done{color:#26715c;background:var(--brand-soft)}
+#nwroot .status.pending{color:#946619;background:var(--warning-soft)}
+#nwroot .status.risk{color:#a34444;background:var(--danger-soft)}
+#nwroot .pending-def{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:#3e6888;background:var(--info-soft);padding:2px 8px;border-radius:99px}
+#nwroot .fin-delta{font-size:11px;font-weight:800;padding:1px 7px;border-radius:99px}
+#nwroot .fin-delta.up{color:#26715c;background:var(--brand-soft)}
+#nwroot .fin-delta.down{color:#a34444;background:var(--danger-soft)}
+
+/* stacked chart + tooltip */
+#nwroot .zchart-wrap{position:relative;margin-top:6px}
+#nwroot .zchart{width:100%;height:auto;display:block}
+#nwroot .zcol{cursor:pointer}
+#nwroot .zcol:hover .zseg{filter:brightness(1.07)}
+#nwroot .ztip{position:absolute;pointer-events:none;opacity:0;transform:translate(-50%,-110%);background:var(--navy);color:#fff;border-radius:10px;padding:9px 12px;font-size:11px;min-width:158px;box-shadow:var(--shadow);z-index:6;transition:opacity .12s}
+#nwroot .ztip.show{opacity:1}
+#nwroot .ztip .zt-m{font-weight:800;margin-bottom:5px}
+#nwroot .ztip .zt-r{display:flex;justify-content:space-between;gap:14px;line-height:1.75}
+#nwroot .ztip .zt-r i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:6px}
+#nwroot .ztip .zt-sep{margin-top:4px;padding-top:5px;border-top:1px solid rgba(255,255,255,.2)}
+#nwroot .zlegend{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:2px;font-size:11px}
+#nwroot .zlegend span{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2)}
+#nwroot .zlegend i{width:11px;height:11px;border-radius:3px}
+#nwroot .exec-chart-note{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:var(--muted);font-size:10px}
+#nwroot .exec-chart-note strong{color:var(--ink-2);font-size:12px}
+
+/* decision list */
+#nwroot .exec-decision-list{display:grid;gap:3px}
+#nwroot .exec-decision{display:grid;grid-template-columns:29px minmax(0,1fr) auto;gap:9px;align-items:start;padding:11px 0;border-top:1px solid var(--border)}
+#nwroot .exec-decision:first-child{border-top:0;padding-top:0}
+#nwroot .exec-decision-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;color:var(--warning);background:var(--warning-soft)}
+#nwroot .exec-decision-icon.danger{color:var(--danger);background:var(--danger-soft)}
+#nwroot .exec-decision-icon.info{color:var(--info);background:var(--info-soft)}
+#nwroot .exec-decision strong{display:block;font-size:11px;line-height:1.35}
+#nwroot .exec-decision p{margin:3px 0 0;color:var(--muted);font-size:10px;line-height:1.4}
+
+/* branch comparison table */
+#nwroot .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:13px}
+#nwroot table{width:100%;border-collapse:collapse;min-width:900px}
+#nwroot th,#nwroot td{padding:11px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle}
+#nwroot th{color:var(--muted);font-size:10px;font-weight:900;background:var(--surface-soft);white-space:nowrap}
+#nwroot td{font-size:12px}
+#nwroot tr:last-child td{border-bottom:0}
+#nwroot tbody tr:hover{background:#fbfdfc}
+#nwroot .table-sub{color:var(--muted);font-size:10px}
+#nwroot .exec-branch-name{display:flex;align-items:center;gap:8px;white-space:nowrap;font-weight:700}
+#nwroot .branch-dot{width:9px;height:9px;border-radius:3px}
+#nwroot .exec-branch-health{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+#nwroot .exec-branch-health small{color:var(--muted);font-size:9px}
+#nwroot .exec-data-note{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-size:10px}
+
+/* funnel + risk */
+#nwroot .exec-funnel{display:grid;gap:11px}
+#nwroot .exec-funnel-row{display:grid;grid-template-columns:96px minmax(0,1fr) 36px;gap:9px;align-items:center;font-size:10px}
+#nwroot .exec-funnel-row>span:first-child{color:var(--muted)}
+#nwroot .exec-funnel-row strong{text-align:right;font-size:11px}
+#nwroot .exec-funnel-track{height:9px;background:var(--surface-soft);border-radius:99px;overflow:hidden}
+#nwroot .exec-funnel-track i{display:block;height:100%;border-radius:inherit;background:var(--brand)}
+#nwroot .exec-funnel-track i.alt{background:#4aa98f}
+#nwroot .exec-funnel-track i.warn{background:var(--warning)}
+#nwroot .exec-risk-list{display:grid;gap:9px}
+#nwroot .exec-risk-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding-bottom:9px;border-bottom:1px solid var(--border)}
+#nwroot .exec-risk-row:last-child{padding-bottom:0;border-bottom:0}
+#nwroot .exec-risk-row strong{display:block;font-size:11px}
+#nwroot .exec-risk-row span{display:block;margin-top:3px;color:var(--muted);font-size:10px}
+
+/* line chart + rank bars */
+#nwroot .rank-list .hbar-row{display:grid;grid-template-columns:150px 1fr 128px;align-items:center;gap:11px;margin-bottom:11px}
+#nwroot .rank-list .hbar-row:last-child{margin-bottom:0}
+#nwroot .hbar-lbl{font-size:12px;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px}
+#nwroot .hbar-track{height:10px;background:var(--surface-soft);border-radius:99px;overflow:hidden}
+#nwroot .hbar-track i{display:block;height:100%;border-radius:99px}
+#nwroot .hbar-row b{text-align:right;font-size:12px}
+
+/* heatmap */
+#nwroot .heat-scroll{overflow-x:auto}
+#nwroot .heat-grid{display:grid;grid-template-columns:52px repeat(7,minmax(34px,1fr));gap:3px;min-width:420px}
+#nwroot .heat-day{text-align:center;font-size:11px;font-weight:700;color:var(--ink-2);padding-bottom:2px}
+#nwroot .heat-hour{font-size:10px;color:var(--muted);display:flex;align-items:center}
+#nwroot .heat-cell{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;transition:transform .1s}
+#nwroot .heat-cell:hover{transform:scale(1.1);outline:2px solid var(--brand-deep);position:relative;z-index:2}
+#nwroot .heat-legend{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:11px;color:var(--muted)}
+#nwroot .heat-sw{width:20px;height:12px;border-radius:3px;display:inline-block}
+
+#nwroot .prototype-footer{color:var(--muted);font-size:10px;text-align:center;margin-top:8px}
+
+@media (max-width:1240px){
+  #nwroot .metric-grid,#nwroot .metric-grid.cols4{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #nwroot .grid-2,#nwroot .grid-2.even{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  #nwroot .metric-grid,#nwroot .metric-grid.cols4{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #nwroot .metric-value{font-size:22px}
+  #nwroot .nw-hero-in{align-items:flex-start}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1399,7 +1340,7 @@ body{
       <a href="inbox.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>กล่องข้อความ<span class="pill" id="navpill">14</span></a>
       <a href="schedule.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>ตารางนัดหมาย</a>
       <a href="availability.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/><path d="M3.5 6.5 6 4M20.5 6.5 18 4"/></svg>เวลาว่างถัดไป</a>
-      <a href="queue.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
+      <a href="queue.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>คิววันนี้<span class="pill q">9</span></a>
     </nav></div>
     <div class="navgrp"><h6>ข้อมูลคลินิก</h6><nav class="nav">
       <a href="patients.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>คนไข้</a>
@@ -1409,7 +1350,7 @@ body{
       <a href="payments.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>ชำระเงิน</a>
     </nav></div>
     <div class="navgrp"><h6>บริหาร</h6><nav class="nav">
-      <a href="network.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg>ภาพรวมเครือ<span class="pill q">8</span></a>
+      <a href="network.html" class="on"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg>ภาพรวมเครือ<span class="pill q">8</span></a>
       <a href="branches.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M10 21v-5h4v5"/></svg>ทุกสาขา<span class="pill q">5</span></a>
       <a href="reports.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>รายงาน</a>
       <a href="settings.html" class=""><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3.5 15h-.3a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 4.6 8.2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9.4a1.6 1.6 0 0 0 1-1.5v-.3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.5 1Z"/></svg>ตั้งค่า</a>
@@ -1436,429 +1377,227 @@ body{
   </aside>
   <main>
     <header class="top">
-      <div><h1>คิววันนี้</h1><div class="sub" id="sub">จันทร์ที่ 17 สิงหาคม 2569 · อัปเดตอัตโนมัติทุก 30 วินาที</div></div>
-      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="ค้นหาคนไข้ HN หรือหัตถการ"></div>
+      <div><h1>ภาพรวมเครือคลินิก</h1><div class="sub">มุมมองผู้บริหาร · รวมทุกสาขาในเครือ Zentr Dental</div></div>
+      <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="ค้นหาคนไข้ เบอร์โทร หรือ HN"></div>
       <button class="iconbtn" id="bell" aria-label="การแจ้งเตือน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
       <div class="avatar">ชช</div>
     </header>
-
-    <div class="qtop">
-      <span class="livedot"></span>
-      <div class="clock"><b id="clock">10:42</b><span id="brlbl">สาขาอารีย์</span></div>
-      <div class="qstats">
-        <div class="qstat"><b id="s-total">34</b><span>คิวทั้งวัน</span></div>
-        <div class="qstat"><b id="s-wait">9</b><span>รอเรียก</span></div>
-        <div class="qstat"><b id="s-avg">—</b><span>รอเฉลี่ย</span></div>
-        <div class="qstat warn"><b id="s-late">3</b><span>เลยเวลานัด</span></div>
-        <div class="qstat good"><b id="s-done">16</b><span>เสร็จแล้ว</span></div>
-      </div>
-      <div class="filters" id="docs"></div>
-    </div>
-
-    <div class="board-wrap">
-      <section class="cols5" id="board"></section>
-
-      <div>
-        <div class="bar-row" style="margin-bottom:11px">
-          <h2 style="font-size:15px;font-weight:600;letter-spacing:-.01em">สถานะเก้าอี้</h2>
-          <div class="grow"></div>
-          <button class="btn" id="regPat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ลงทะเบียนคนไข้ใหม่</button>
-          <button class="btn" id="addWalkin"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>เพิ่มคิว Walk-in</button>
-        </div>
-        <section class="chairs" id="chairs"></section>
-      </div>
+    <div class="wrap">
+      <div id="nwroot"></div>
     </div>
   </main>
 </div>
-
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer"></aside>
 <div class="toasts" id="toasts"></div>
-
 <script>
-/* ═══════════════ คิววันนี้ ═══════════════ */
-
-/* ── ตัวช่วยร่วมของทุกหน้า ── */
-const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-const esc = s => String(s).replace(/[&<>"]/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]));
-const money = n => Number(n).toLocaleString('en-US');
-const M_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-const thDate = s => { if (!s || s === '—') return '—'; const [y,m,d] = s.split('-').map(Number); return `${d} ${M_TH[m-1]} ${y}`; };
-const toJS = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y-543, m-1, d); };
-const daysTo = s => Math.round((toJS(s) - new Date(2026,7,17)) / 86400000);
-const initial = n => { const s = String(n).replace(/^(คุณ|@)/,''); return /^[เแโใไ]/.test(s) && s.length > 1 ? s[1] : s[0]; };
-
-let tSeq = 0;
-function toast(msg, undo){
-  const el = document.createElement('div'); el.className = 'toast'; el.id = 't' + (++tSeq);
-  el.innerHTML = esc(msg) + (undo ? ' <button type="button">เลิกทำ</button>' : '');
-  if (undo) el.querySelector('button').onclick = () => { undo(); el.remove(); };
-  $('#toasts').appendChild(el);
-  setTimeout(() => el.remove(), undo ? 7000 : 3000);
-}
-
-/* ── ตัวสร้างหน้าจอย่อยที่ใช้ร่วมกัน ── */
-function sheet(o){
-  const el = document.createElement('div');
-  el.className = 'sheet';
-  el.innerHTML = `<div class="sbg" data-x></div>
-    <div class="sbox${o.wide ? ' wide' : ''}" role="dialog" aria-modal="true">
-      <div class="shead">
-        <button class="x" data-x aria-label="ปิด"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-        <h2>${o.title}</h2>${o.sub ? `<p>${o.sub}</p>` : ''}
-      </div>
-      <div class="sbody">${o.body || ''}</div>
-      <div class="sfoot">${o.note ? `<span class="note">${o.note}</span>` : ''}<span class="grow"></span>
-        ${(o.foot || []).map((f,i) => `<button class="btn ${f.cls || ''}" data-f="${i}">${f.label}</button>`).join('')}
-      </div>
-    </div>`;
-  document.body.appendChild(el);
-  const close = () => { el.classList.remove('on'); setTimeout(() => el.remove(), 220); };
-  el.querySelectorAll('[data-x]').forEach(b => b.onclick = close);
-  (o.foot || []).forEach((f,i) => {
-    el.querySelector(`[data-f="${i}"]`).onclick = () => { if (f.on ? f.on(el, close) !== false : true) if (f.close !== false) close(); };
-  });
-  const esc = e => { if (e.key === 'Escape'){ close(); document.removeEventListener('keydown', esc); } };
-  document.addEventListener('keydown', esc);
-  requestAnimationFrame(() => el.classList.add('on'));
-  if (o.ready) o.ready(el);
-  const first = el.querySelector('input,select,textarea');
-  if (first) setTimeout(() => first.focus(), 180);
-  return {el, close};
-}
-
-/* ดาวน์โหลดไฟล์จริง (CSV / ข้อความ) */
-function download(name, text, mime){
-  if (!(window.URL && URL.createObjectURL)){ toast('เบราว์เซอร์นี้ไม่รองรับการดาวน์โหลดไฟล์'); return false; }
-  const blob = new Blob(['\ufeff' + text], {type: (mime || 'text/csv') + ';charset=utf-8'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = name;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-}
-const csvCell = v => `"${String(v).replace(/"/g, '""')}"`;
-const csv = rows => rows.map(r => r.map(csvCell).join(',')).join('\n');
-
-const NOW0 = 10*60 + 42;               /* 10:42 น. */
-let NOW = NOW0;
-
-const ST = [
-  {id:'wait',   name:'รอเรียก',      c:'#93A5AC', act:'เรียกคิว'},
-  {id:'called', name:'เรียกแล้ว',    c:'#E0951E', act:'ขึ้นเก้าอี้'},
-  {id:'chair',  name:'อยู่บนเก้าอี้', c:'#2E6BE6', act:'ส่งชำระเงิน'},
-  {id:'pay',    name:'รอชำระเงิน',   c:'#7A5AF0', act:'ปิดคิว'},
-  {id:'done',   name:'เสร็จสิ้น',    c:'#2E9E63', act:null},
-];
-const SI = Object.fromEntries(ST.map((s,i) => [s.id, i]));
-
-const CFG = {
-  aree:   {docs:['ทพญ.นภา','ทพ.ประวิทย์','ทพ.กิตติ','ทพญ.อรอนงค์'], chairs:[1,2,3,4], doneEarlier:10},
-  nimman: {docs:['ทพญ.พิมพ์ลภัส','ทพ.ธนกฤต'],                        chairs:[1,2,3],   doneEarlier:8},
-};
-const DOCS = pick(CFG).docs;
-const CHAIRS = pick(CFG).chairs;
-
-const hhmm = m => String(Math.floor(m/60)).padStart(2,'0') + ':' + String(m%60).padStart(2,'0');
-const mins = s => { const [h,m] = s.split(':').map(Number); return h*60 + m; };
-
-let seq = 0;
-const q = o => ({id:'Q' + (++seq), tags:[], chair:null, ...o});
-
-const QUEUES = {
- /* ══════════ สาขาอารีย์ ══════════ */
- aree: [
-  /* ── รอเรียก ── */
-  q({n:'ธัญญา มณีรัตน์',  hn:'HN 24-118', tx:'ผ่าฟันคุด ซี่ 38',        doc:'ทพ.ประวิทย์', appt:'10:00', in:'09:41', st:'wait', tags:['ผ่าตัด']}),
-  q({n:'ณัฐพล คำแหง',    hn:'HN 23-902', tx:'อุดฟัน 2 ซี่',            doc:'ทพญ.นภา',    appt:'10:00', in:'09:52', st:'wait'}),
-  q({n:'สุดารัตน์ ทองใบ', hn:'HN 22-330', tx:'รักษารากฟัน ครั้งที่ 2/3', doc:'ทพ.ประวิทย์', appt:'10:30', in:'10:12', st:'wait', tags:['แผนต่อเนื่อง']}),
-  q({n:'อธิป วัฒนกุล',   hn:'HN 24-771', tx:'ปรึกษารากเทียม',          doc:'ทพ.ประวิทย์', appt:'11:00', in:'10:28', st:'wait', tags:['คนไข้ใหม่']}),
-  q({n:'เบญจวรรณ ศรีสุข', hn:'HN 23-441', tx:'ขูดหินปูน',               doc:'ทพญ.อรอนงค์', appt:'11:00', in:'10:33', st:'wait', tags:['ปกส.']}),
-  q({n:'กิตติศักดิ์ พงษ์',hn:'HN 24-905', tx:'ตรวจฟัน + เอกซเรย์',      doc:'ทพญ.นภา',    appt:'11:00', in:'10:36', st:'wait', tags:['Walk-in']}),
-  q({n:'มานพ เจริญสุข',  hn:'HN 22-556', tx:'ลองครอบฟัน ซี่ 46',       doc:'ทพญ.อรอนงค์', appt:'11:30', in:'10:39', st:'wait', tags:['งานแล็บ']}),
-  q({n:'ชลธิชา รุ่งเรือง', hn:'HN 24-052', tx:'ใส่ครอบฟัน ซี่ 26',      doc:'ทพญ.นภา',    appt:'11:30', in:'10:40', st:'wait', tags:['งานแล็บ']}),
-  q({n:'ปิยะพงษ์ ทวี',    hn:'HN 23-208', tx:'ถอนฟัน ซี่ 17',           doc:'ทพ.กิตติ',   appt:'11:30', in:'10:41', st:'wait'}),
-
-  /* ── เรียกแล้ว ── */
-  q({n:'วิชัย ประดิษฐ์',  hn:'HN 21-774', tx:'ตรวจฟันประจำปี',          doc:'ทพญ.นภา',    appt:'10:15', in:'09:58', st:'called', call:'10:36'}),
-  q({n:'อารยา บุญมี',    hn:'HN 24-330', tx:'อุดฟันหน้า ซี่ 11',        doc:'ทพญ.อรอนงค์', appt:'10:30', in:'10:14', st:'called', call:'10:38'}),
-  q({n:'สมชาย เกษมสุข',  hn:'HN 22-118', tx:'ตัดไหมหลังผ่าฟันคุด',      doc:'ทพ.ประวิทย์', appt:'10:30', in:'10:20', st:'called', call:'10:41'}),
-
-  /* ── อยู่บนเก้าอี้ ── */
-  q({n:'กัลยา ปิ่นทอง',  hn:'HN 23-556', tx:'ขูดหินปูน + ตรวจฟัน',      doc:'ทพญ.นภา',    appt:'09:00', in:'08:48', st:'chair', chair:1, start:'10:20', tags:['ปกส.']}),
-  q({n:'วีรภัทร สุขใจ',  hn:'HN 22-701', tx:'ปรับเครื่องมือจัดฟัน #14', doc:'ทพ.กิตติ',   appt:'09:30', in:'09:22', st:'chair', chair:3, start:'10:05', tags:['จัดฟัน']}),
-  q({n:'ศิริพร ดำรงค์',  hn:'HN 24-118', tx:'ลองสีวีเนียร์ 6 ซี่',      doc:'ทพญ.นภา',    appt:'10:00', in:'09:47', st:'chair', chair:2, start:'10:12', tags:['งานแล็บ']}),
-  q({n:'นภัสวรรณ อินทร์แก้ว', hn:'HN 24-460', tx:'ลองฟันปลอมถอดได้',    doc:'ทพ.ประวิทย์', appt:'10:00', in:'09:55', st:'chair', chair:4, start:'10:26'}),
-
-  /* ── รอชำระเงิน ── */
-  q({n:'ประเสริฐ ทองดี', hn:'HN 22-455', tx:'ครอบฟัน ซี่ 16',           doc:'ทพ.ประวิทย์', appt:'09:00', in:'08:52', st:'pay', done:'10:24', bill:18000}),
-  q({n:'พิมพ์ชนก วงศ์ทอง',hn:'HN 24-733', tx:'ถอนฟันคุด ซี่ 48',        doc:'ทพญ.อรอนงค์', appt:'09:30', in:'09:18', st:'pay', done:'10:31', bill:6500}),
-
-  /* ── เสร็จสิ้น (แสดง 6 รายการล่าสุด) ── */
-  q({n:'สุชาติ พูลทรัพย์', hn:'HN 23-330', tx:'พิมพ์ปากทำเฝือกสบฟัน',   doc:'ทพญ.อรอนงค์', appt:'09:00', in:'08:50', st:'done', done:'09:58'}),
-  q({n:'อรวรรณ กิจเจริญ', hn:'HN 24-201', tx:'ตรวจฟัน + ขูดหินปูน',     doc:'ทพญ.อรอนงค์', appt:'09:00', in:'08:46', st:'done', done:'09:44'}),
-  q({n:'เกรียงไกร มณี',  hn:'HN 22-701', tx:'รับรีเทนเนอร์',            doc:'ทพ.กิตติ',   appt:'09:15', in:'09:05', st:'done', done:'09:39'}),
-  q({n:'สุพรรษา ใจงาม',  hn:'HN 23-119', tx:'อุดฟัน 1 ซี่',            doc:'ทพญ.นภา',    appt:'09:30', in:'09:20', st:'done', done:'10:08'}),
-  q({n:'ธนภัทร ศรีวิไล',  hn:'HN 24-882', tx:'ตรวจฟัน',                doc:'ทพ.ประวิทย์', appt:'09:30', in:'09:26', st:'done', done:'09:57'}),
-  q({n:'กฤตย์ ทองสุข',   hn:'HN 22-904', tx:'ตรวจติดตามหลังจัดฟัน',    doc:'ทพ.กิตติ',   appt:'10:00', in:'09:50', st:'done', done:'10:29'}),
- ],
-
- /* ══════════ สาขานิมมาน เชียงใหม่ — เปิด 10:00 คิวจึงเริ่มสายกว่า ══════════ */
- nimman: [
-  /* ── รอเรียก ── */
-  q({n:'พิมพา ไชยวงค์',   hn:'CM 69-041', tx:'อุดฟัน 1 ซี่ (ซี่ 36)',   doc:'ทพญ.พิมพ์ลภัส', appt:'11:00', in:'10:34', st:'wait'}),
-  q({n:'สมชาย ปันคำ',    hn:'CM 68-115', tx:'ถอนฟัน ซี่ 26',           doc:'ทพ.ธนกฤต',    appt:'11:30', in:'10:39', st:'wait', tags:['ศัลยกรรม']}),
-
-  /* ── เรียกแล้ว ── */
-  q({n:'ก้องภพ ศรีวิชัย',  hn:'CM 69-008', tx:'ตรวจฟัน + เอกซเรย์',      doc:'ทพญ.พิมพ์ลภัส', appt:'10:30', in:'10:18', st:'called', call:'10:40'}),
-
-  /* ── อยู่บนเก้าอี้ ── */
-  q({n:'ณัฐริกา อินทวงศ์', hn:'CM 68-072', tx:'ขูดหินปูน + ตรวจฟัน',     doc:'ทพญ.พิมพ์ลภัส', appt:'10:00', in:'09:52', st:'chair', chair:1, start:'10:06', tags:['ปกส.']}),
-  q({n:'Mr. James Whitfield', hn:'CM 69-030', tx:'อุดฟัน 2 ซี่ (สื่อสารอังกฤษ)', doc:'ทพ.ธนกฤต', appt:'10:30', in:'10:21', st:'chair', chair:2, start:'10:33', tags:['ชาวต่างชาติ']}),
-
-  /* ── รอชำระเงิน ── */
-  q({n:'ศิวกร แก้วมูล',   hn:'CM 68-204', tx:'รับรีเทนเนอร์ Essix',      doc:'ทพ.ธนกฤต',    appt:'10:00', in:'09:55', st:'pay', done:'10:36', bill:6000}),
-
-  /* ── เสร็จสิ้น (แสดง 3 รายการล่าสุด) ── */
-  q({n:'จันทร์เพ็ญ ต๊ะวัน', hn:'CM 68-019', tx:'ตรวจฟันประจำปี',         doc:'ทพญ.พิมพ์ลภัส', appt:'10:00', in:'09:48', st:'done', done:'10:24'}),
-  q({n:'อัญชลี ดวงแก้ว',  hn:'CM 69-016', tx:'ปรึกษาฟอกสีฟัน',          doc:'ทพญ.พิมพ์ลภัส', appt:'10:00', in:'09:50', st:'done', done:'10:18'}),
-  q({n:'ปฏิภาณ จอมแปง',  hn:'CM 68-133', tx:'ขูดหินปูน (สิทธิ ปกส.)',   doc:'ทพ.ธนกฤต',    appt:'10:00', in:'09:46', st:'done', done:'10:21', tags:['ปกส.']}),
- ],
-};
-const Q = pick(QUEUES);
-const DONE_EARLIER = pick(CFG).doneEarlier;   /* คิวที่ปิดไปก่อนหน้านี้ ไม่แสดงเป็นการ์ด */
-
-const S = {doc:'all', sel:null};
-
-const waited = x => x.st === 'wait' ? NOW - mins(x.in)
-                  : x.st === 'called' ? NOW - mins(x.call)
-                  : x.st === 'chair' ? NOW - mins(x.start) : 0;
-const late = x => x.st === 'wait' && NOW > mins(x.appt) + 10;
-const wcls = m => m >= 25 ? 'bad' : m >= 12 ? 'warn' : 'ok';
-const inDoc = x => S.doc === 'all' || x.doc === S.doc;
-
-/* ── การ์ดคิว ── */
-function card(x){
-  const w = waited(x), st = SI[x.st], nx = ST[st + 1];
-  const tags = x.tags.map(t => `<span class="tag ${t === 'ปกส.' ? 't-course' : t === 'Walk-in' ? 't-new' : t === 'ผ่าตัด' ? 't-wait' : 't-fu'}">${esc(t)}</span>`).join('');
-  return `<div class="qc${late(x) ? ' late' : ''}" data-id="${x.id}">
-    <div class="r1">
-      <div class="ini">${esc(initial(x.n))}</div>
-      <div class="nm"><b>${esc(x.n)}</b><span>${esc(x.hn)}</span></div>
-    </div>
-    <div class="tx">${esc(x.tx)}<br>${esc(x.doc)}${x.chair ? ' · เก้าอี้ ' + x.chair : ''}
-      ${x.note ? `<div style="margin-top:6px;color:#A9761B">📝 ${esc(x.note)}</div>` : ''}</div>
-    <div class="r3">
-      <span class="slotchip">นัด ${esc(x.appt)}</span>${tags}
-      ${x.st === 'done'
-        ? `<span class="waited ok">เสร็จ ${esc(x.done)}</span>`
-        : x.st === 'pay'
-          ? `<span class="waited warn">${money(x.bill)} ฿</span>`
-          : `<span class="waited ${wcls(w)}">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
-              ${w} น.</span>`}
-    </div>
-    ${nx ? `<div class="r4">
-      <button class="tiny ok" data-go="${x.id}">${nx.act}</button>
-      ${x.st === 'called' ? `<button class="tiny" data-recall="${x.id}">เรียกซ้ำ</button>` : ''}
-      ${x.st === 'wait' ? `<button class="tiny" data-skip="${x.id}">ข้ามคิว</button>` : ''}
-    </div>` : ''}
-  </div>`;
-}
-
-function renderBoard(){
-  $('#board').innerHTML = ST.map(s => {
-    const rows = Q.filter(x => x.st === s.id && inDoc(x));
-    const n = s.id === 'done' ? rows.length + DONE_EARLIER : rows.length;
-    return `<div class="qcol">
-      <h3><span class="dt" style="background:${s.c}"></span>${s.name}<span class="n">${n}</span></h3>
-      <div class="stack">${rows.length ? rows.map(card).join('') : '<div class="colempty">ไม่มีคิว</div>'}</div>
-      ${s.id === 'done' && DONE_EARLIER ? `<div class="morenote">+ ${DONE_EARLIER} คิวที่ปิดไปก่อนหน้านี้</div>` : ''}
-    </div>`;
-  }).join('');
-
-  $$('#board [data-go]').forEach(b => b.onclick = e => { e.stopPropagation(); advance(b.dataset.go); });
-  $$('#board [data-recall]').forEach(b => b.onclick = e => {
-    e.stopPropagation();
-    const x = Q.find(i => i.id === b.dataset.recall); x.call = hhmm(NOW);
-    render(); toast('เรียก ' + x.n + ' อีกครั้ง · ประกาศหน้าจอห้องรอแล้ว');
-  });
-  $$('#board [data-skip]').forEach(b => b.onclick = e => {
-    e.stopPropagation();
-    const x = Q.find(i => i.id === b.dataset.skip), old = x.in;
-    x.in = hhmm(NOW);
-    render(); toast('เลื่อน ' + x.n + ' ไปท้ายคิว', () => { x.in = old; render(); });
-  });
-  $$('#board .qc').forEach(el => el.onclick = () => openDrawer(el.dataset.id));
-}
-
-function advance(id){
-  const x = Q.find(i => i.id === id), from = x.st, i = SI[from];
-  const nx = ST[i + 1]; if (!nx) return;
-  const snap = {...x};
-  x.st = nx.id;
-  if (nx.id === 'called') x.call = hhmm(NOW);
-  if (nx.id === 'chair'){ x.start = hhmm(NOW); x.chair = freeChair() || x.chair; }
-  if (nx.id === 'pay'){ x.done = hhmm(NOW); x.bill = x.bill || estimate(x); x.chair = null; }
-  if (nx.id === 'done') x.done = hhmm(NOW);
-  render();
-  toast(x.n + ' → ' + nx.name, () => { Object.assign(x, snap); render(); });
-}
-function freeChair(){
-  const used = Q.filter(x => x.st === 'chair').map(x => x.chair);
-  return CHAIRS.find(c => !used.includes(c));
-}
-const estimate = x => /ครอบฟัน|วีเนียร์|รากเทียม/.test(x.tx) ? 18000
-                    : /ผ่า|ถอน/.test(x.tx) ? 6500
-                    : /ราก/.test(x.tx) ? 9000
-                    : /จัดฟัน/.test(x.tx) ? 2500 : 1200;
-
-/* ── เก้าอี้ ── */
-function renderChairs(){
-  $('#chairs').innerHTML = CHAIRS.map(c => {
-    const x = Q.find(i => i.st === 'chair' && i.chair === c);
-    return `<div class="chair${x ? ' busy' : ''}">
-      <h4><span class="dt"></span>เก้าอี้ ${c}</h4>
-      ${x ? `<p><b>${esc(x.n)}</b><br>${esc(x.tx)} · ${esc(x.doc)}<br>
-              เริ่ม ${esc(x.start)} · ผ่านไป ${waited(x)} นาที</p>`
-          : `<div class="free">ว่าง — พร้อมรับคิวถัดไป</div>`}
-    </div>`;
-  }).join('');
-}
-
-/* ── สถิติหัวหน้าจอ ── */
-function renderStats(){
-  const waits = Q.filter(x => x.st === 'wait');
-  const done = Q.filter(x => x.st === 'done').length + DONE_EARLIER;
-  const avg = waits.length ? Math.round(waits.reduce((a,x) => a + waited(x), 0) / waits.length) : 0;
-  $('#s-total').textContent = Q.length + DONE_EARLIER;
-  $('#s-wait').textContent = waits.length;
-  $('#s-avg').textContent = avg + ' น.';
-  $('#s-late').textContent = Q.filter(late).length;
-  $('#s-done').textContent = done;
-  const pill = $$('.nav a[href="queue.html"] .pill')[0];
-  if (pill) pill.textContent = waits.length;
-  $('#sub').textContent = `จันทร์ที่ 17 สิงหาคม 2569 · ${waits.length} คิวรอเรียก · รอเฉลี่ย ${avg} นาที`;
-}
-
-/* ── ลิ้นชักรายละเอียด ── */
-function openDrawer(id){
-  const x = Q.find(i => i.id === id); if (!x) return;
-  S.sel = id;
-  const w = waited(x), s = ST[SI[x.st]], nx = ST[SI[x.st] + 1];
-  $('#drawer').innerHTML = `
-    <div class="dhead">
-      <button class="x" id="dx" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="ini" style="width:42px;height:42px;border-radius:13px;font-size:15px">${esc(initial(x.n))}</div>
-        <div><b style="font-size:16px;font-weight:600;letter-spacing:-.01em">${esc(x.n)}</b>
-          <div class="mono" style="font-size:12px;color:var(--muted)">${esc(x.hn)}</div></div>
-      </div>
-      <div style="margin-top:12px;display:flex;gap:7px;flex-wrap:wrap">
-        <span class="chip" style="background:${s.c}1F;color:${s.c}">${s.name}</span>
-        ${late(x) ? '<span class="chip" style="background:rgba(210,80,75,.10);color:var(--rose)">เลยเวลานัด</span>' : ''}
-        ${x.tags.map(t => `<span class="chip" style="background:var(--paper);color:var(--muted)">${esc(t)}</span>`).join('')}
-      </div>
-    </div>
-    <div class="dbody">
-      <div class="drow"><span class="k">หัตถการ</span><span class="v">${esc(x.tx)}</span></div>
-      <div class="drow"><span class="k">ทันตแพทย์</span><span class="v">${esc(x.doc)}</span></div>
-      <div class="drow"><span class="k">เวลานัด</span><span class="v mono">${esc(x.appt)} น.</span></div>
-      <div class="drow"><span class="k">ถึงคลินิก</span><span class="v mono">${esc(x.in)} น.</span></div>
-      ${x.call ? `<div class="drow"><span class="k">เรียกคิว</span><span class="v mono">${esc(x.call)} น.</span></div>` : ''}
-      ${x.start ? `<div class="drow"><span class="k">ขึ้นเก้าอี้</span><span class="v mono">${esc(x.start)} น. · เก้าอี้ ${x.chair ?? '—'}</span></div>` : ''}
-      ${x.done ? `<div class="drow"><span class="k">เสร็จหัตถการ</span><span class="v mono">${esc(x.done)} น.</span></div>` : ''}
-      ${x.bill ? `<div class="drow"><span class="k">ยอดชำระ</span><span class="v mono"><b>${money(x.bill)} ฿</b></span></div>` : ''}
-      ${x.note ? `<div class="drow"><span class="k">หมายเหตุ</span><span class="v">${esc(x.note)}</span></div>` : ''}
-      ${x.st !== 'done' && x.st !== 'pay' ? `<div class="drow"><span class="k">รอมาแล้ว</span><span class="v mono ${w >= 25 ? 'owe' : ''}">${w} นาที</span></div>` : ''}
-    </div>
-    <div class="dfoot">
-      ${nx ? `<button class="btn solid wide" id="dgo">${nx.act}</button>` : ''}
-      <div class="pair">
-        <button class="btn" id="dnote">บันทึกหมายเหตุ</button>
-        <button class="btn danger" id="dcancel">ยกเลิกคิว</button>
-      </div>
-    </div>`;
-  $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
-  $('#dx').onclick = closeDrawer;
-  if ($('#dgo')) $('#dgo').onclick = () => { advance(id); closeDrawer(); };
-  $('#dnote').onclick = () => sheet({
-    title: 'บันทึกหมายเหตุคิว',
-    sub: x.n + ' · ' + x.hn + ' · ' + x.tx,
-    body: `
-      <div class="sf full"><label>หมายเหตุด่วน</label>
-        <div class="spick" id="qQuick">${['คนไข้มาสาย','ขอเปลี่ยนแพทย์','ต้องใช้ล่าม','มากับผู้ปกครอง',
-          'ขอใบรับรองแพทย์','แพ้ยาชา — ระวัง'].map(v => `<button type="button" data-v="${v}">${v}</button>`).join('')}</div></div>
-      <div class="sf full" style="margin-top:14px"><label for="qNote">รายละเอียด</label>
-        <textarea id="qNote" placeholder="พิมพ์หมายเหตุที่ทีมหน้าเคาน์เตอร์และห้องตรวจควรรู้">${esc(x.note || '')}</textarea></div>`,
-    foot: [
-      {label:'ยกเลิก'},
-      {label:'บันทึก', cls:'solid', on:(el) => {
-        const before = x.note || '';
-        x.note = el.querySelector('#qNote').value.trim();
-        render();
-        toast(x.note ? 'บันทึกหมายเหตุของ ' + x.n + ' แล้ว' : 'ลบหมายเหตุแล้ว',
-          () => { x.note = before; render(); });
-      }},
-    ],
-    ready: el => el.querySelectorAll('#qQuick button').forEach(b => b.onclick = () => {
-      b.classList.toggle('on');
-      const ta = el.querySelector('#qNote');
-      const cur = ta.value.split(' · ').filter(Boolean);
-      const at = cur.indexOf(b.dataset.v);
-      at >= 0 ? cur.splice(at, 1) : cur.push(b.dataset.v);
-      ta.value = cur.join(' · ');
-    }),
-  });
-  $('#dcancel').onclick = () => {
-    const i = Q.indexOf(x); Q.splice(i, 1); closeDrawer(); render();
-    toast('ยกเลิกคิว ' + x.n + ' แล้ว', () => { Q.splice(i, 0, x); render(); });
+/* ═══════════════ ภาพรวมเครือคลินิก + Analytics เชิงลึก ═══════════════ */
+/* ข้อมูลทั้งหมดเป็น synthetic demo — พอร์ตจาก Zentr Multi-Branch Console */
+(function(){
+  const MLAB6 = ["เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย."];
+  const iconPaths = {
+    finance:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/>',
+    calendar:'<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M7 2v4M17 2v4M3 9h18M7 13h3M7 17h3M14 13h3"/>',
+    shield:'<path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>',
+    lab:'<path d="M9 3v6l-5.3 8.6A2.3 2.3 0 0 0 5.7 21h12.6a2.3 2.3 0 0 0 2-3.4L15 9V3"/><path d="M8 3h8M7.2 16h9.6"/>',
+    patients:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0M17 5.5a3 3 0 0 1 0 5.8M16.5 15.2a5 5 0 0 1 4 4.8"/>',
+    reports:'<path d="M4 19V9M10 19V5M16 19v-8M22 19H2"/>',
+    analytics:'<path d="M4 20V4M4 20h16M8 16l4-5 3 3 5-7"/><circle cx="8" cy="16" r="1.3"/><circle cx="12" cy="11" r="1.3"/><circle cx="15" cy="14" r="1.3"/><circle cx="20" cy="7" r="1.3"/>',
+    arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+    globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/>'
   };
-}
-function closeDrawer(){
-  $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); S.sel = null;
-}
-$('#scrim').onclick = closeDrawer;
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+  const icon = (n, s=17) => `<svg aria-hidden="true" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconPaths[n]||""}</svg>`;
+  const status = (t, c) => `<span class="status ${c}"><span class="status-dot"></span>${t}</span>`;
+  const badge = t => `<span class="badge">${t}</span>`;
+  const fmtK = k => k >= 1000 ? `฿ ${(k/1000).toFixed(2)}M` : `฿ ${Math.round(k)}k`;
 
-/* ── ตัวกรองแพทย์ ── */
-$('#docs').innerHTML = `<button class="fchip on" data-d="all">ทุกท่าน</button>` +
-  DOCS.map(d => `<button class="fchip" data-d="${d}">${d}</button>`).join('');
-$$('#docs .fchip').forEach(b => b.onclick = () => {
-  $$('#docs .fchip').forEach(o => o.classList.toggle('on', o === b));
-  S.doc = b.dataset.d; renderBoard();
-});
+  /* ── chain-level synthetic data (5 สาขาจริงของเครือ) ── */
+  const CH = {
+    rev:[2380,2520,2660,2790,2900,3010],
+    col:[1680,1810,1930,2030,2110,2179],
+    revStr:"฿ 3.01M", colStr:"฿ 2.18M", rate:"72.4%", outStr:"฿ 79.9k",
+    appts:317, decision:"08", labRisk:"04"
+  };
+  const BR = [
+    {key:"aree",     label:"สาขาอารีย์",            color:"#158066", rev:920, col:"฿ 680k", out:"฿ 18.6k", appts:96, noShow:"3.1%", plans:31, lab:1, health:"สุขภาพดี", hc:"confirmed", sync:"09:41"},
+    {key:"thonglor", label:"สาขาทองหล่อ",           color:"#2f6f57", rev:740, col:"฿ 560k", out:"฿ 12.4k", appts:78, noShow:"4.2%", plans:24, lab:1, health:"สุขภาพดี", hc:"confirmed", sync:"09:40"},
+    {key:"ratchada", label:"สาขารัชดา",             color:"#46739a", rev:574, col:"฿ 438k", out:"฿ 7.2k",  appts:54, noShow:"5.6%", plans:19, lab:0, health:"ติดตาม",   hc:"pending",   sync:"09:39"},
+    {key:"bangna",   label:"สาขาบางนา",             color:"#7a5aa8", rev:430, col:"฿ 300k", out:"฿ 15.1k", appts:47, noShow:"6.4%", plans:14, lab:1, health:"ติดตาม",   hc:"pending",   sync:"09:37"},
+    {key:"nimman",   label:"สาขานิมมาน เชียงใหม่",  color:"#b7791f", rev:346, col:"฿ 201k", out:"฿ 26.6k", appts:42, noShow:"8.9%", plans:11, lab:1, health:"ต้องดู",   hc:"risk",      sync:"09:36"}
+  ];
 
-$('#q').oninput = e => {
-  const v = e.target.value.trim().toLowerCase();
-  $$('#board .qc').forEach(el => {
-    const x = Q.find(i => i.id === el.dataset.id);
-    const hit = !v || (x.n + ' ' + x.hn + ' ' + x.tx + ' ' + x.doc).toLowerCase().includes(v);
-    el.style.display = hit ? '' : 'none';
+  /* ── stacked column chart: รับชำระ (เขียว) + ยอดค้าง (เหลือง) = รายรับ ── */
+  const chartRegistry = {};
+  function stackedChart(id, rev, col){
+    const W=680,H=232,padL=42,padR=12,padT=14,padB=30;
+    const plotW=W-padL-padR, plotH=H-padT-padB, base=padT+plotH;
+    const maxV=Math.max(...rev), step=maxV>1000?500:200;
+    const niceMax=Math.max(step,Math.ceil(maxV/step)*step), inM=niceMax>=1000;
+    const y=v=>base-(v/niceMax)*plotH, band=plotW/rev.length, bw=Math.min(40,band*0.5);
+    chartRegistry[id]={rev,col,geo:{padL,padT,plotH,base,band,W,niceMax}};
+    let g="";
+    for(let t=0;t<=4;t++){const val=niceMax*t/4,yy=y(val);
+      g+=`<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="var(--border)" stroke-width="1"${t?"":' stroke-opacity="0"'}/>`;
+      g+=`<text x="${padL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--muted)">${inM?(val/1000).toFixed(1):val}</text>`;}
+    g+=`<text x="${padL-8}" y="${padT-3}" text-anchor="end" font-size="9" fill="var(--muted)">${inM?"ล้าน฿":"พัน฿"}</text>`;
+    for(let i=0;i<rev.length;i++){const cx=padL+band*i+band/2,x=cx-bw/2;
+      const yCol=y(col[i]),hCol=base-yCol,outTop=y(rev[i]),outBottom=yCol-2,hOut=Math.max(0,outBottom-outTop);
+      g+=`<g class="zcol" data-i="${i}"><rect x="${(padL+band*i).toFixed(1)}" y="${padT}" width="${band.toFixed(1)}" height="${plotH}" fill="transparent"/>`;
+      g+=`<rect class="zseg" x="${x.toFixed(1)}" y="${yCol.toFixed(1)}" width="${bw.toFixed(1)}" height="${hCol.toFixed(1)}" rx="2" fill="var(--c-collect)"/>`;
+      if(hOut>0.5) g+=`<rect class="zseg" x="${x.toFixed(1)}" y="${outTop.toFixed(1)}" width="${bw.toFixed(1)}" height="${hOut.toFixed(1)}" rx="4" fill="var(--c-out)"/>`;
+      g+=`</g><text x="${cx.toFixed(1)}" y="${base+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${MLAB6[i]}</text>`;}
+    return `<div class="zchart-wrap"><svg class="zchart" data-chart="${id}" viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟรายรับ รับชำระ และยอดค้าง 6 เดือน (ข้อมูลตัวอย่าง)">${g}</svg><div class="ztip" data-tip="${id}"></div></div>`;
+  }
+  function bindCharts(root){
+    Object.keys(chartRegistry).forEach(id=>{
+      const svg=root.querySelector(`.zchart[data-chart="${id}"]`); if(!svg) return;
+      const reg=chartRegistry[id],wrap=svg.closest(".zchart-wrap"),tip=wrap.querySelector(`.ztip[data-tip="${id}"]`);
+      svg.querySelectorAll(".zcol").forEach(gEl=>{
+        const i=Number(gEl.dataset.i),gg=reg.geo;
+        const move=()=>{const sr=svg.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),scale=sr.width/gg.W;
+          const cx=gg.padL+gg.band*i+gg.band/2,yTop=gg.base-(reg.rev[i]/gg.niceMax)*gg.plotH;
+          tip.style.left=`${(sr.left-wr.left)+cx*scale}px`; tip.style.top=`${(sr.top-wr.top)+yTop*scale}px`;
+          tip.innerHTML=`<div class="zt-m">${MLAB6[i]} 2569</div><div class="zt-r"><span><i style="background:var(--c-collect)"></i>รับชำระ</span><b>${fmtK(reg.col[i])}</b></div><div class="zt-r"><span><i style="background:var(--c-out)"></i>ยอดค้าง</span><b>${fmtK(reg.rev[i]-reg.col[i])}</b></div><div class="zt-r zt-sep"><span>รายรับรวม</span><b>${fmtK(reg.rev[i])}</b></div><div class="zt-r"><span>อัตราเก็บเงิน</span><b>${(reg.rev[i]?reg.col[i]/reg.rev[i]*100:0).toFixed(1)}%</b></div>`;
+          tip.classList.add("show");};
+        gEl.addEventListener("mousemove",move); gEl.addEventListener("mouseenter",move);
+        gEl.addEventListener("mouseleave",()=>tip.classList.remove("show"));
+      });
+    });
+  }
+  function lineChart(vals,labels,unit){
+    const W=680,H=210,padL=40,padR=16,padT=20,padB=28;
+    const plotW=W-padL-padR,plotH=H-padT-padB,base=padT+plotH;
+    const mn=Math.min(...vals),mx=Math.max(...vals);
+    const lo=Math.floor((mn-2)/5)*5,hi=Math.ceil((mx+2)/5)*5,rng=(hi-lo)||1,n=vals.length,dx=plotW/(n-1);
+    const y=v=>base-((v-lo)/rng)*plotH;
+    const pts=vals.map((v,i)=>[padL+dx*i,y(v)]);
+    const line=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+    const area=line+` L${(padL+plotW).toFixed(1)} ${base} L${padL} ${base} Z`;
+    let g="";
+    [lo,(lo+hi)/2,hi].forEach(val=>{const yy=y(val);g+=`<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="var(--border)" stroke-width="1"/><text x="${padL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--muted)">${val.toFixed(0)}${unit||""}</text>`;});
+    g+=`<path d="${area}" fill="var(--brand)" opacity="0.10"/><path d="${line}" fill="none" stroke="var(--brand)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+    pts.forEach((p,i)=>{g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i===n-1?4:3}" fill="var(--brand)"/>`;});
+    g+=`<text x="${pts[0][0].toFixed(1)}" y="${(pts[0][1]-9).toFixed(1)}" text-anchor="start" font-size="11" font-weight="700" fill="var(--brand-deep)">${vals[0].toFixed(1)}${unit||""}</text>`;
+    g+=`<text x="${pts[n-1][0].toFixed(1)}" y="${(pts[n-1][1]-9).toFixed(1)}" text-anchor="end" font-size="11" font-weight="700" fill="var(--brand-deep)">${vals[n-1].toFixed(1)}${unit||""}</text>`;
+    labels.forEach((l,i)=>{g+=`<text x="${pts[i][0].toFixed(1)}" y="${base+17}" text-anchor="middle" font-size="11" fill="var(--muted)">${l}</text>`;});
+    return `<div class="zchart-wrap"><svg class="zchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="แนวโน้ม (ข้อมูลตัวอย่าง)">${g}</svg></div>`;
+  }
+  function rankBars(items){
+    return `<div class="rank-list">${items.map(it=>`<div class="hbar-row"><span class="hbar-lbl">${it.label}${it.active?" ✓":""}</span><div class="hbar-track"><i style="width:${Math.max(3,it.val/it.max*100).toFixed(0)}%;background:${it.colorVar||"var(--brand)"}"></i></div><b>${it.valText}</b></div>`).join("")}</div>`;
+  }
+  const HEAT={
+    a:[[3,3,3,3,4,4,3],[5,4,5,5,6,6,5],[6,6,6,6,7,8,7],[4,4,4,4,5,6,6],[6,5,6,6,7,7,6],[7,7,7,7,8,8,7],[8,8,8,8,9,7,6],[9,9,9,9,10,6,5],[10,10,10,10,10,5,4],[9,9,9,9,10,4,2]],
+    b:[[4,4,5,4,5,3,2],[6,6,6,6,7,4,3],[7,7,7,7,8,5,3],[5,5,5,5,6,4,3],[6,6,7,6,7,5,3],[7,7,7,7,8,4,3],[6,6,6,6,7,3,2],[5,5,5,5,6,3,2],[4,4,4,4,5,2,1],[3,3,3,3,4,1,1]],
+    c:[[1,1,2,1,2,4,4],[2,2,2,2,3,6,6],[3,3,3,3,4,8,8],[2,2,2,2,3,7,7],[3,3,3,3,4,7,7],[4,3,4,4,5,8,7],[4,4,4,4,5,7,6],[5,4,5,5,6,6,5],[5,5,5,5,6,5,4],[4,4,4,4,5,4,3]]
+  };
+  function heatmap(){
+    const days=["จ","อ","พ","พฤ","ศ","ส","อา"], hours=["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"];
+    const M=HEAT.a.map((row,r)=>row.map((_,c)=>HEAT.a[r][c]+HEAT.b[r][c]+HEAT.c[r][c]));
+    const max=Math.max(...M.flat())||1;
+    const ramp=["var(--surface-soft)","#cfe7df","#93d0bb","#4fae92","#1f7d66","#0f4a3c"];
+    const bucket=v=>v<=0?0:Math.min(5,Math.ceil(v/max*5));
+    let cells=`<div class="heat-corner"></div>`+days.map(d=>`<div class="heat-day">${d}</div>`).join("");
+    hours.forEach((h,ri)=>{cells+=`<div class="heat-hour">${h}</div>`;
+      M[ri].forEach((v,ci)=>{const b=bucket(v);cells+=`<div class="heat-cell" style="background:${ramp[b]};color:${b>=3?"#fff":"var(--muted)"}" title="${days[ci]} ${h} · ${v} นัด/สัปดาห์">${v||""}</div>`;});});
+    const legend=ramp.map(c=>`<span class="heat-sw" style="background:${c}"></span>`).join("");
+    return `<div class="heat-scroll"><div class="heat-grid">${cells}</div></div><div class="heat-legend"><span>น้อย</span>${legend}<span>มาก</span></div>`;
+  }
+  function metricMini(label,value,ic,note,pending){
+    return `<article class="metric-card"><div class="metric-top"><span>${label}</span><span class="metric-icon">${icon(ic,16)}</span></div><div class="metric-value">${value}</div><div class="section-kicker">${pending?`<span class="pending-def">${icon("shield",11)}รอนิยาม</span> `:""}${note}</div></article>`;
+  }
+
+  const hero = `<section class="nw-hero"><div class="nw-hero-in">
+    <div>
+      <span class="nw-eyebrow">${icon("globe",14)} Executive Control Tower</span>
+      <h1>ภาพรวมเครือคลินิก · Zentr Dental</h1>
+      <p>ตัดสินใจจากสุขภาพรายรับ สาขา pipeline การรักษา และความเสี่ยงที่ต้องจัดการ — รวมทุกสาขาในมุมมองเดียว</p>
+    </div>
+    <div class="nw-hero-actions">
+      <span class="nw-chip">รายรับรวม <b>${CH.revStr}</b></span>
+      <span class="nw-chip">อัตราเก็บเงิน <b>${CH.rate}</b></span>
+      <span class="nw-chip">ต้องตัดสินใจ <b>${CH.decision}</b></span>
+    </div>
+  </div></section>`;
+
+  const tabs = `<div class="nw-tabs" role="tablist">
+    <button class="nw-tab active" data-tab="exec" role="tab">${icon("globe",15)}ภาพรวมเครือคลินิก</button>
+    <button class="nw-tab" data-tab="ana" role="tab">${icon("analytics",15)}Analytics เชิงลึก</button>
+  </div>`;
+
+  function renderExec(){
+    const rows = BR.map(b=>`<tr><td><div class="exec-branch-name"><span class="branch-dot" style="background:${b.color}"></span><strong>${b.label}</strong></div></td><td><strong>${fmtK(b.rev)}</strong></td><td>${b.col}</td><td>${b.out}</td><td>${b.appts}<br><span class="table-sub">no-show ${b.noShow}</span></td><td>${b.plans}</td><td>${b.lab===0?status("ปกติ","confirmed"):status(`${String(b.lab).padStart(2,"0")} เสี่ยง`,"risk")}</td><td><div class="exec-branch-health">${status(b.health,b.hc)}<small>sync ${b.sync}</small></div></td><td><a class="text-btn" href="branches.html?open=${b.key}">ดูสาขา</a></td></tr>`).join("");
+    return `
+    <div class="exec-toolbar"><div class="exec-toolbar-copy"><strong>ทุกสาขา</strong><span>·</span><span>มุมมองผู้บริหาร</span><span class="badge">ข้อมูลตัวอย่าง</span></div><div class="exec-toolbar-actions"><select class="filter-select" aria-label="เลือกช่วงเวลารายงาน"><option>เดือนนี้ · ก.ย. 2569</option><option>ไตรมาสนี้</option><option>ปีนี้</option></select><select class="filter-select" aria-label="เลือกวิธีเปรียบเทียบ"><option>เทียบช่วงก่อนหน้า</option><option>เทียบเป้าหมาย</option></select><span class="updated"><span class="status-dot" style="color:var(--brand)"></span>sync ล่าสุด 09:41</span></div></div>
+
+    <div class="metric-grid">
+      <article class="metric-card"><div class="metric-top"><span>รายรับรวม</span><span class="metric-icon">${icon("finance",16)}</span></div><div class="metric-value">${CH.revStr}</div><div class="metric-note"><strong>+3.8%</strong> เทียบเดือนก่อน</div></article>
+      <article class="metric-card"><div class="metric-top"><span>รับชำระแล้ว</span><span class="metric-icon">${icon("finance",16)}</span></div><div class="metric-value">${CH.colStr}</div><div class="metric-note"><strong>${CH.rate}</strong> ของรายรับในเครือ</div></article>
+      <article class="metric-card"><div class="metric-top"><span>ยอดค้าง / aging</span><span class="metric-icon" style="color:var(--warning);background:var(--warning-soft)">${icon("finance",16)}</span></div><div class="metric-value">${CH.outStr}</div><div class="metric-note"><strong>4 buckets</strong> · ดูสิทธิ์การเงิน</div></article>
+      <article class="metric-card"><div class="metric-top"><span>นัดหมายในช่วงนี้</span><span class="metric-icon">${icon("calendar",16)}</span></div><div class="metric-value">${CH.appts}</div><div class="metric-note"><strong>no-show 5.4%</strong> · ยกเลิก 4.1%</div></article>
+      <article class="metric-card"><div class="metric-top"><span>รายการต้องตัดสินใจ</span><span class="metric-icon" style="color:var(--danger);background:var(--danger-soft)">${icon("shield",16)}</span></div><div class="metric-value">${CH.decision}</div><div class="metric-note"><strong>lab ${CH.labRisk}</strong> · DF · recall</div></article>
+    </div>
+
+    <div class="grid-2">
+      <section class="card card-pad"><div class="exec-card-head"><div><h2>รายรับ · รับชำระ · ยอดค้าง</h2><p>แนวโน้ม 6 เดือน · รับชำระ + ยอดค้าง = รายรับ</p></div><span class="badge">ล้านบาท</span></div><div class="zlegend"><span><i style="background:var(--c-collect)"></i>รับชำระแล้ว</span><span><i style="background:var(--c-out)"></i>ยอดค้างในงวด</span><span style="margin-left:auto;color:var(--muted)">อัตราเก็บเงินเฉลี่ย <strong style="color:var(--brand-deep)">${CH.rate}</strong></span></div>${stackedChart("exec",CH.rev,CH.col)}<div class="exec-chart-note"><span>ก.ย. 2569 · ทุกสาขา</span><strong>รายรับ ${CH.revStr} · รับชำระ ${CH.colStr}</strong></div></section>
+      <section class="card card-pad"><div class="exec-card-head"><div><h2>รายการที่ผู้บริหารต้องตัดสินใจ</h2><p>เรียงตาม impact และความเร่งด่วน</p></div><span class="badge">${CH.decision} รายการ</span></div><div class="exec-decision-list"><div class="exec-decision"><div class="exec-decision-icon danger">${icon("lab",15)}</div><div><strong>Lab timeline ต้อง review</strong><p>04 รายการเสี่ยงในเครือ · ตรวจ buffer ก่อนวันนัดใส่ (อารีย์ · บางนา · นิมมาน)</p></div>${status("ต้องดู","risk")}</div><div class="exec-decision"><div class="exec-decision-icon">${icon("finance",15)}</div><div><strong>DF มี rule flag</strong><p>03 รายการรอตรวจสูตร ค่าแล็บ ส่วนลด และการแก้ย้อนหลัง</p></div><span class="status pending"><span class="status-dot"></span>รอ review</span></div><div class="exec-decision"><div class="exec-decision-icon info">${icon("patients",15)}</div><div><strong>นโยบายโอนเคสข้ามสาขา</strong><p>ต้องอนุมัติ scope, consent, provider และ audit ก่อนเปิดใช้</p></div><a class="action-link" href="settings.html">เปิด policy</a></div></div></section>
+    </div>
+
+    <section class="card"><div class="card-head card-pad" style="padding-bottom:13px"><div><h2>เปรียบเทียบสุขภาพรายสาขา</h2><p>ดู performance และสัญญาณผิดปกติในระดับที่ใช้คุยกับผู้จัดการสาขา</p></div><span class="exec-data-note"><span class="status-dot"></span>scope: ทุกสาขา</span></div><div class="table-wrap" style="border:0;border-radius:0"><table><thead><tr><th>สาขา</th><th>รายรับ</th><th>รับชำระ</th><th>ยอดค้าง</th><th>นัดหมาย / no-show</th><th>แผนกำลังรักษา</th><th>lab risk</th><th>สุขภาพสาขา</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></section>
+
+    <div class="grid-2 even">
+      <section class="card card-pad"><div class="exec-card-head"><div><h2>Patient → Treatment pipeline</h2><p>ดูคอขวดของแผนรักษาในเครือ</p></div><a class="action-link" href="treatment-plans.html">เปิด pipeline</a></div><div class="exec-funnel"><div class="exec-funnel-row"><span>ร่าง</span><div class="exec-funnel-track"><i style="width:46%"></i></div><strong>31</strong></div><div class="exec-funnel-row"><span>เสนอแล้ว</span><div class="exec-funnel-track"><i class="alt" style="width:68%"></i></div><strong>44</strong></div><div class="exec-funnel-row"><span>ตอบรับแล้ว</span><div class="exec-funnel-track"><i class="alt" style="width:38%"></i></div><strong>26</strong></div><div class="exec-funnel-row"><span>กำลังรักษา</span><div class="exec-funnel-track"><i style="width:100%"></i></div><strong>63</strong></div><div class="exec-funnel-row"><span>เสร็จสิ้น</span><div class="exec-funnel-track"><i class="warn" style="width:56%"></i></div><strong>38</strong></div></div></section>
+      <section class="card card-pad"><div class="exec-card-head"><div><h2>Risk signals</h2><p>รายการที่ควรดูต่อโดยเจ้าของงาน</p></div><a class="action-link" href="lab.html">ดู risk ทั้งหมด</a></div><div class="exec-risk-list"><div class="exec-risk-row"><div><strong>งานแล็บใกล้หลุด buffer</strong><span>4 รายการ · นัดใส่ใน 3 วัน</span></div>${status("ต้องดู","risk")}</div><div class="exec-risk-row"><div><strong>ยอดค้างที่ต้องติดตาม</strong><span>${CH.outStr} · ตามสิทธิ์ Finance</span></div><span class="status pending"><span class="status-dot"></span>ติดตาม</span></div><div class="exec-risk-row"><div><strong>Recall ยังไม่ได้นัด</strong><span>11 คนไข้ · ตรวจ owner และ channel</span></div><span class="status pending"><span class="status-dot"></span>ติดตาม</span></div></div></section>
+    </div>
+    <div class="prototype-footer">ข้อมูลทั้งหมดเป็น synthetic demo · metric, policy, สิทธิ์ และตัวเลขจริงต้องเชื่อม server และผ่านการอนุมัติก่อนใช้ production</div>`;
+  }
+
+  function renderAna(){
+    const rev6=CH.rev, col6=CH.col;
+    const rates=rev6.map((r,i)=>col6[i]/r*100);
+    const totalRev=rev6.reduce((a,c)=>a+c,0);
+    const growth=(rev6[5]-rev6[4])/rev6[4]*100;
+    const arpv=Math.round(rev6[5]*1000/CH.appts);
+    const revBranch=BR.map(b=>({label:b.label,val:b.rev,active:false})).sort((x,y)=>y.val-x.val);
+    const maxRev=Math.max(...revBranch.map(x=>x.val));
+    const mix=[["ทันตกรรมทั่วไป",34],["จัดฟัน",26],["ทันตกรรมประดิษฐ์ / แล็บ",18],["รากเทียม",14],["อื่น ๆ",8]];
+    const maxMix=Math.max(...mix.map(m=>m[1]));
+    const growthPill=`<span class="fin-delta ${growth>=0?"up":"down"}">${growth>=0?"▲":"▼"} ${Math.abs(growth).toFixed(1)}%</span>`;
+    return `
+    <div class="exec-toolbar"><div class="exec-toolbar-copy"><strong>Analytics เชิงลึก</strong><span>·</span><span>วิเคราะห์แนวโน้มและสัดส่วนทั้งเครือ</span><span class="badge">ข้อมูลตัวอย่าง</span></div><div class="exec-toolbar-actions"><button class="secondary-btn" type="button">${icon("shield",16)}Export ตามสิทธิ์</button><a class="primary-btn" href="reports.html">${icon("reports",16)}ไปที่รายงาน</a></div></div>
+
+    <div class="metric-grid cols4">
+      ${metricMini("รายรับสะสม 6 เดือน",fmtK(totalRev),"finance","รวมช่วงที่วิเคราะห์")}
+      ${metricMini("อัตราเก็บเงินเฉลี่ย",CH.rate,"finance","collection efficiency")}
+      ${metricMini("เติบโต MoM",(growth>=0?"+":"")+growth.toFixed(1)+"%","reports",growthPill+" เทียบเดือนก่อน")}
+      ${metricMini("มูลค่าเฉลี่ยต่อนัด","฿ "+arpv.toLocaleString("th-TH"),"patients","รายรับ ÷ จำนวนนัด")}
+    </div>
+
+    <div class="grid-2 even">
+      <section class="card card-pad"><div class="exec-card-head"><div><h2>รายรับ · รับชำระ · ยอดค้าง</h2><p>ทุกสาขา · 6 เดือนล่าสุด</p></div><span class="badge">ล้านบาท</span></div><div class="zlegend"><span><i style="background:var(--c-collect)"></i>รับชำระ</span><span><i style="background:var(--c-out)"></i>ยอดค้างในงวด</span></div>${stackedChart("ana",rev6,col6)}</section>
+      <section class="card card-pad"><div class="card-head"><div><h2>แนวโน้มอัตราเก็บเงิน</h2><p>collection rate 6 เดือน · ทุกสาขา</p></div><span class="badge">%</span></div>${lineChart(rates,MLAB6,"%")}<div class="section-kicker" style="margin-top:6px">อัตราเก็บเงิน = รับชำระ ÷ รายรับ ในงวดนั้น</div></section>
+    </div>
+
+    <div class="grid-2 even">
+      <section class="card card-pad"><div class="card-head"><div><h2>สัดส่วนรายรับตามสาขา</h2><p>เดือนนี้ · เรียงจากมากไปน้อย</p></div><span class="badge">source: payments</span></div>${rankBars(revBranch.map(b=>({label:b.label,val:b.val,max:maxRev,valText:fmtK(b.val)+" · "+(b.val/rev6[5]*100).toFixed(0)+"%",active:b.active})))}</section>
+      <section class="card card-pad"><div class="card-head"><div><h2>สัดส่วนตามกลุ่มบริการ</h2><p>ทั้งเครือ · ข้อมูลตัวอย่าง</p></div><span class="pending-def">${icon("shield",11)}รอนิยาม catalog</span></div>${rankBars(mix.map(m=>({label:m[0],val:m[1],max:maxMix,valText:m[1]+"%"})))}</section>
+    </div>
+
+    <section class="card card-pad"><div class="card-head"><div><h2>ความหนาแน่นนัดหมายตามวัน–เวลา</h2><p>ทุกสาขา · นัด/สัปดาห์ต่อช่วงเวลา · ข้อมูลตัวอย่าง</p></div><span class="pending-def">${icon("shield",11)}รอข้อมูลจริงจาก scheduling</span></div>${heatmap()}<div class="section-kicker" style="margin-top:10px">ใช้วางแผนกำลังคน/เก้าอี้และรอบโปรโมชัน — ช่วงเย็นวันธรรมดาและวันหยุดหนาแน่นที่สุดของเครือ</div></section>
+    <div class="prototype-footer">Analytics เป็น synthetic demo · นิยาม metric (return rate, service mix, ARPV) และ catalog กลุ่มบริการต้องอนุมัติก่อนใช้เป็น KPI จริง · Export ต้องมี watermark ของ scope และ timestamp</div>`;
+  }
+
+  const root = document.getElementById("nwroot");
+  root.innerHTML = hero + tabs +
+    `<div data-panel="exec">${renderExec()}</div>` +
+    `<div data-panel="ana" hidden>${renderAna()}</div>`;
+  bindCharts(root);
+
+  root.querySelectorAll(".nw-tab").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const t=btn.dataset.tab;
+      root.querySelectorAll(".nw-tab").forEach(b=>b.classList.toggle("active",b===btn));
+      root.querySelectorAll("[data-panel]").forEach(p=>p.hidden = p.getAttribute("data-panel")!==t);
+    });
   });
-};
-$('#bell').onclick = () => toast('มีคิวเลยเวลานัด ' + Q.filter(late).length + ' ราย');
-$('#regPat').onclick = () => location.assign('patients.html?new=1&b=' + BRANCH);
-$('#addWalkin').onclick = () => {
-  const x = q({n:'คนไข้ Walk-in', hn:'HN ใหม่', tx:'ตรวจฟัน (ยังไม่ระบุ)', doc:'ทพญ.นภา',
-               appt:hhmm(NOW), in:hhmm(NOW), st:'wait', tags:['Walk-in']});
-  Q.unshift(x); render();
-  toast('เพิ่มคิว Walk-in แล้ว', () => { Q.splice(Q.indexOf(x), 1); render(); });
-};
-
-$('#brlbl').textContent = BRANCHES[BRANCH].n;
-function render(){ renderStats(); renderBoard(); renderChairs(); }
-render();
-
-/* นาฬิกาเดินจริง — เวลารอเพิ่มขึ้นตามเวลาที่ผ่านไป */
-setInterval(() => {
-  NOW = NOW0 + Math.floor((Date.now() - T0) / 60000);
-  $('#clock').textContent = hhmm(NOW);
-  render();
-}, 30000);
-const T0 = Date.now();
+})();
 </script>
 </body>
 </html>
-
